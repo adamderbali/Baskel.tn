@@ -46,6 +46,10 @@ public class Reclamation {
     public Date getDate_rec() {
         return date_rec;
     }
+/////t3ada 
+    public void setDate_rec(Date date_rec) {
+        this.date_rec = date_rec;
+    }
 
     public String getEtat_rec() {
         return etat_rec;
