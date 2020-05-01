@@ -6,6 +6,7 @@
 package edu.baskel.gui;
 
 import com.jfoenix.controls.JFXButton;
+import edu.baskel.services.FacebookLog;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
@@ -65,6 +66,10 @@ public class SidentifierController implements Initializable {
     Connection cnx = null;
     PreparedStatement prep = null;
     ResultSet res = null;
+    @FXML
+    private Label lblpassoublié;
+    @FXML
+    private Button btnfb;
 
     public SidentifierController() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -179,6 +184,12 @@ public class SidentifierController implements Initializable {
         app_stage.setScene(redirection_scene);
         app_stage.show();
 
+    }
+
+    @FXML
+    public void FacebooLogin(ActionEvent event) {
+        FacebookLog fl = new FacebookLog();
+        fl.fb();
     }
 
 }

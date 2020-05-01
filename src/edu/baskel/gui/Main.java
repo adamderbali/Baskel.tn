@@ -5,7 +5,6 @@
  */
 package edu.baskel.gui;
 
-import edu.baskel.entities.Membre;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +35,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) throws Exception{
         launch(args);
+        
         
     }
         
