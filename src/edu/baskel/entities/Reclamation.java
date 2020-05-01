@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Reclamation {
     private String desc_r;
-    private String id_rec;
+    private int id_rec;
     private Date date_rec;
     private String etat_rec; 
 
@@ -23,6 +23,10 @@ public class Reclamation {
         this.etat_rec = etat_rec;
     }
 
+    public Reclamation() {
+    }
+
+   
     public String getDesc_r() {
         return desc_r;
     }
@@ -31,16 +35,20 @@ public class Reclamation {
         this.desc_r = desc_r;
     }
 
-    public String getId_rec() {
+    public int getId_rec() {
         return id_rec;
     }
 
-    public void setId_rec(String id_rec) {
+    public void setId_rec(int id_rec) {
         this.id_rec = id_rec;
     }
 
     public Date getDate_rec() {
         return date_rec;
+    }
+/////t3ada 
+    public void setDate_rec(Date date_rec) {
+        this.date_rec = date_rec;
     }
 
     public String getEtat_rec() {

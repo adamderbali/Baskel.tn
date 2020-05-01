@@ -1,4 +1,5 @@
 /dist/
+<<<<<<< HEAD
 build/built-jar.properties
 build/classes/edu/baskel/gui/Main.class
 build/classes/edu/baskel/gui/Sidentifier.fxml
@@ -7,3 +8,12 @@ build/classes/edu/baskel/services/FacebookLog.class
 build/classes/edu/baskel/services/MembreCRUD.class
 build/classes/ReinitialiséMPController.class
 chromedriver.exe
+=======
+/build/
+/nbproject/
+nbproject/project.properties
+nbproject/project.properties
+nbproject/project.properties
+build/built-jar.properties
+nbproject/private/private.xml
+>>>>>>> 391002fa5780c2536dca83a9877563882dca78ba
