@@ -61,11 +61,11 @@ public class MembreCRUD {
         return m;
     }
 
-    public void updateMembre(Membre m, int id) {
+    public void updateMembre(Membre m) {
         try {
             String requete = "UPDATE membre SET nom_u=?, prenom_u=?, adresse_u=?,email_u=?, sexe_u=?, date_u=?, mot_passe_u=?, num_tel_u=? WHERE id_u=? ";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(9, id);
+            pst.setInt(9, m.getId_u());
             pst.setString(1, m.getNom_u());
             pst.setString(2, m.getPrenom_u());
             pst.setString(3, m.getAdresse_u());
@@ -83,7 +83,7 @@ public class MembreCRUD {
         }
     }
 
-    public List<Membre> displayAll() {
+    public List<Membre> getlistMembre() {
         List<Membre> listeMembre = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
 
         try {

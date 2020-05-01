@@ -71,7 +71,7 @@ public class ReparateurCRUD {
         try {
             //Updete memebre
             MembreCRUD mcrd = new MembreCRUD();
-            mcrd.updateMembre(r, r.getId_u());
+            mcrd.updateMembre(r);
             //Update Reparateur
             String requete = "UPDATE reparateur SET adresse_loc=?, nom_local=?, num_pro=?,latitude=?, longitude=? WHERE id_u=? ";
             PreparedStatement pst = cnx.prepareStatement(requete);

@@ -162,7 +162,8 @@ public class ProfilPageController implements Initializable {
             MembreCRUD mrcc = new MembreCRUD();
             Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
                     profilmail.getText(), "homme", nvd, nvpass.getText(), profilteleph.getText());
-            mrcc.updateMembre(m1, iduser);
+            m1.setId_u(iduser);
+            mrcc.updateMembre(m1);
             System.out.println("modifie");
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
