@@ -20,6 +20,11 @@ public class Reparateur extends Membre {
     private String latitude;
     private String longitude;
 
+    public Reparateur() {
+        super();
+    }
+    
+
     public Reparateur(String adresse_lo, String num_pro, String nom_u, String prenom_u, String adresse_u, String email_u, String sexe_u, Date date_u, String mot_passe_u, String num_tel_u) {
         super(nom_u, prenom_u, adresse_u, email_u, sexe_u, date_u, mot_passe_u, num_tel_u);
         this.adresse_lo = adresse_lo;
