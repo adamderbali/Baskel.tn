@@ -5,11 +5,11 @@
  */
 package edu.baskel.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
- * @author Skander
+ * @author Hela
  */
 public class Velo {
     private int  num_serie;
@@ -18,28 +18,28 @@ public class Velo {
     private String type_v;
     private Date annee_sortie;
     private String status_v;
+    private int num_tel_v;
     private String etat_v;
     private String description_v;
+    private int id_u;
+    private String image_v;
+    private int id_av;
 
-    public Velo(int num_serie, String marque, String model, String type_v, Date annee_sortie, String status_v, String etat_v, String description_v) {
+    public Velo(int num_serie, String marque, String model, String type_v, Date annee_sortie, String status_v, int num_tel_v, String etat_v, String description_v, int id_u,String image_v) {
         this.num_serie = num_serie;
         this.marque = marque;
         this.model = model;
         this.type_v = type_v;
         this.annee_sortie = annee_sortie;
         this.status_v = status_v;
+        this.num_tel_v = num_tel_v;
         this.etat_v = etat_v;
         this.description_v = description_v;
+        this.id_u = id_u;
+        this.image_v=image_v;
     }
 
-    public Velo(String marque, String model, String type_v, Date annee_sortie, String status_v, String etat_v, String description_v) {
-        this.marque = marque;
-        this.model = model;
-        this.type_v = type_v;
-        this.annee_sortie = annee_sortie;
-        this.status_v = status_v;
-        this.etat_v = etat_v;
-        this.description_v = description_v;
+    public Velo() {
     }
 
     public int getNum_serie() {
@@ -90,6 +90,14 @@ public class Velo {
         this.status_v = status_v;
     }
 
+    public int getNum_tel_v() {
+        return num_tel_v;
+    }
+
+    public void setNum_tel_v(int num_tel_v) {
+        this.num_tel_v = num_tel_v;
+    }
+
     public String getEtat_v() {
         return etat_v;
     }
@@ -106,10 +114,47 @@ public class Velo {
         this.description_v = description_v;
     }
 
+    public int getId_u() {
+        return id_u;
+    }
+
+    public void setId_u(int id_u) {
+        this.id_u = id_u;
+    }
+
+    
+
+    public String getImage_v() {
+        return image_v;
+    }
+
+    public void setImage_v(String image_v) {
+        this.image_v = image_v;
+    }
+
+    public int getId_av() {
+        return id_av;
+    }
+
+    public void setId_av(int id_av) {
+        this.id_av = id_av;
+    }
+
     @Override
     public String toString() {
-        return "Velo{" + "num_serie=" + num_serie + ", marque=" + marque + ", model=" + model + ", type_v=" + type_v + ", annee_sortie=" + annee_sortie + ", status_v=" + status_v + ", etat_v=" + etat_v + ", description_v=" + description_v + '}';
+        return "Velo{" + "num_serie=" + num_serie + ", marque=" + marque + ", model=" + model + ", type_v=" + type_v + ", annee_sortie=" + annee_sortie + ", status_v=" + status_v + ", num_tel_v=" + num_tel_v + ", etat_v=" + etat_v + ", description_v=" + description_v + ", id_u=" + id_u + ", image_v=" + image_v + ", id_av=" + id_av + '}';
     }
+
+    
+
+    
+    
+    
+    
+    
+    
+
+    
     
 
 }

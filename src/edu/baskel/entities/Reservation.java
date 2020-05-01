@@ -5,16 +5,16 @@
  */
 package edu.baskel.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
- * @author Skander
+ * @author Hela
  */
 public class Reservation {
     private Membre membre;
     private Velo velo;
-    private Date date_r;
+    private String date_r;
     private int nbr_heure;
     private Date date_db_r;
     private int id_res;
@@ -22,13 +22,23 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Membre membre, Velo velo, Date date_r, int nbr_heure, Date date_db_r) {
+    public Reservation(Membre membre, Velo velo, String date_r, int nbr_heure) {
+        this.membre = membre;
+        this.velo = velo;
+        this.date_r = date_r;
+        this.nbr_heure = nbr_heure;
+        
+    }
+
+    public Reservation(Membre membre, Velo velo, String date_r, int nbr_heure, Date date_db_r) {
         this.membre = membre;
         this.velo = velo;
         this.date_r = date_r;
         this.nbr_heure = nbr_heure;
         this.date_db_r = date_db_r;
+        
     }
+    
 
     public Membre getMembre() {
         return membre;
@@ -46,11 +56,11 @@ public class Reservation {
         this.velo = velo;
     }
 
-    public Date getDate_r() {
+    public String getDate_r() {
         return date_r;
     }
 
-    public void setDate_r(Date date_r) {
+    public void setDate_r(String date_r) {
         this.date_r = date_r;
     }
 
@@ -70,6 +80,8 @@ public class Reservation {
         this.date_db_r = date_db_r;
     }
 
+    
+
     public int getId_res() {
         return id_res;
     }
@@ -78,10 +90,7 @@ public class Reservation {
         this.id_res = id_res;
     }
 
-    @Override
-    public String toString() {
-        return "Reservation{" + "membre=" + membre + ", velo=" + velo + ", date_r=" + date_r + ", nbr_heure=" + nbr_heure + ", date_db_r=" + date_db_r + ", id_res=" + id_res + '}';
-    }
+    
 
     
 }
