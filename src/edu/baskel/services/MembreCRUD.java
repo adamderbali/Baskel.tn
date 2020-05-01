@@ -165,7 +165,7 @@ public class MembreCRUD {
         if (user instanceof Reparateur) {
 
             ReparateurCRUD rc = new ReparateurCRUD();
-            rc.ajouteraparateue((Reparateur) user);
+            rc.ajouterReparateur((Reparateur) user);
         }
 
         return user;

@@ -26,7 +26,7 @@ public class ConnectionBD {
             cnx = DriverManager.getConnection(url, login, pwd);
             System.out.println("COnnected");
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
     
