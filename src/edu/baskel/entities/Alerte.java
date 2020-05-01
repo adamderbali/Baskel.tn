@@ -18,6 +18,10 @@ public class Alerte {
     private String longitude_a;
     private Date date_a;
 
+    public Alerte() {
+    }
+    
+
     public Alerte(String description_a, String latitude_a, String longitude_a, Date date_a) {
         this.description_a = description_a;
         this.latitude_a = latitude_a;

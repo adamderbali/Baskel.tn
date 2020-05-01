@@ -94,7 +94,7 @@ public class ReparateurCRUD {
         mcrd.supprimerMembre(id);
     }
 
-    public List<Reparateur> displayAllReparateur() {
+    public List<Reparateur> getListeReparateur() {
         List<Reparateur> listeMembre = new ArrayList<Reparateur>();
 
         try {
