@@ -30,6 +30,8 @@ public class MainTestCrd {
         r.setEmail_u("khaled.naili@esprit.tn");
         r.setMot_passe_u("0000");
         r.setDate_u(new Date(2000, 06, 03));
+        r.setLocal_nom("velotn");
+        r.setLatitude("");
         ReparateurCRUD rcrd = new ReparateurCRUD();
         rcrd.ajouterReparateur(r);
     }
