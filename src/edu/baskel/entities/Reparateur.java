@@ -88,6 +88,6 @@ public class Reparateur extends Membre {
 
     @Override
     public String toString() {
-        return "Reparateur{" + "adresse_lo=" + adresse_lo + ", local_nom=" + local_nom + ", num_pro=" + num_pro + ", latitude=" + latitude + ", longitude=" + longitude + '}';
+        return "Reparateur{" + "adresse_lo=" + adresse_lo + ", local_nom=" + local_nom + ", num_pro=" + num_pro + ", latitude=" + latitude + ", longitude=" + longitude + '}'+super.toString();
     }    
 }

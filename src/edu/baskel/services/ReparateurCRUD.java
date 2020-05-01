@@ -100,8 +100,9 @@ public class ReparateurCRUD {
 
         try {
             String requete = "SELECT* FROM reparateur";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(requete);
+            Statement pst = cnx.createStatement();
+            
+            ResultSet rs = pst.executeQuery(requete);
             while (rs.next()) {
                 Reparateur r = new Reparateur();
                 r.setId_u(rs.getInt(1));
@@ -124,25 +125,37 @@ public class ReparateurCRUD {
         return listeMembre;
 
     }
-    
+
     //retour un reparateur en passant l'id du reparateur
-    public Reparateur getReparateurById(int id){
-        
+    public Reparateur getReparateurById(int id) {
         Reparateur r = new Reparateur();
-        r.setNom_u("naili");
-        r.setPrenom_u("khaled");
-        r.setAdresse_u("rades");
-        r.setImage_u("photo.jpg");
-        r.setSexe_u("H");
-        r.setNum_tel_u("22795868");
-        r.setEmail_u("khaled.naili@esprit.tn");
-        r.setMot_passe_u("0000");
-        r.setDate_u(new Date(2000, 06, 03));
-        r.setLocal_nom("velotn");
-        r.setLatitude("12222");
-        r.setLongitude("1515155115");
-        r.setAdresse_lo("tunis centre ville");
-        r.setNum_pro("22795555");
+        try {
+            String requete = "SELECT * FROM `reparateur` r join membre m on r.id_u = m.id_u where r.id_u= ?";
+            PreparedStatement st = cnx.prepareStatement(requete);
+            st.setInt(1,id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                r.setId_u(rs.getInt(1));
+                r.setAdresse_lo(rs.getString(2));
+                r.setLocal_nom(rs.getString(3));
+                r.setNum_pro(rs.getString(4));
+                r.setLatitude(rs.getString(5));
+                r.setLongitude(rs.getString(6));
+                r.setNom_u(rs.getString(8));
+                r.setPrenom_u(rs.getString(9));
+                r.setAdresse_u(rs.getString(10));
+                r.setEmail_u(rs.getString(11));
+                r.setSexe_u(rs.getString(12));
+                r.setDate_u(rs.getDate(13));
+                r.setMot_passe_u(rs.getString(14));
+                r.setNum_tel_u(rs.getString(15));
+                r.setImage_u(rs.getString(16));
+                r.setType_u(rs.getString(17));
+                System.out.println(r.toString());
+            }
+
+        } catch (SQLException ex) {
+        }
         return r;
     }
 

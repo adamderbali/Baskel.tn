@@ -10,10 +10,6 @@ import java.sql.Date;
 
 public class MainTestCrd {
     
-   
-    
-    
-
     /**
      * @param args the command line arguments
      */
@@ -37,6 +33,9 @@ public class MainTestCrd {
         r.setNum_pro("22795555");
         ReparateurCRUD rcrd = new ReparateurCRUD();
         rcrd.ajouterReparateur(r);
+        Reparateur r2 = new Reparateur();
+        r2 = rcrd.getReparateurById(25);
+        System.out.println(r2.toString());
     }
         
 }
