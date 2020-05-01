@@ -33,6 +33,8 @@ public class MainTestCrd {
         r.setLocal_nom("velotn");
         r.setLatitude("12222");
         r.setLongitude("1515155115");
+        r.setAdresse_lo("tunis centre ville");
+        r.setNum_pro("22795555");
         ReparateurCRUD rcrd = new ReparateurCRUD();
         rcrd.ajouterReparateur(r);
     }
