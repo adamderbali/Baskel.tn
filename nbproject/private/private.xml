@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/gui/ProfilPageController.java</file>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/gui/SidentifierController.java</file>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/gui/InscriptionController.java</file>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/gui/Main.java</file>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/gui/NouveauMPController.java</file>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/services/MembreCRUD.java</file>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/entities/Membre.java</file>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/Baskel.tn/src/edu/baskel/gui/MotdepasseoubliéController.java</file>
+            <file>file:/C:/Users/dell/Desktop/Baskel.tn/src/edu/baskel/services/FacebookLog.java</file>
+            <file>file:/C:/Users/dell/Desktop/Baskel.tn/src/edu/baskel/services/MembreCRUD.java</file>
         </group>
     </open-files>
 </project-private>

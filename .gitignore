@@ -1,1 +1,9 @@
 /dist/
+build/built-jar.properties
+build/classes/edu/baskel/gui/Main.class
+build/classes/edu/baskel/gui/Sidentifier.fxml
+build/classes/edu/baskel/gui/SidentifierController.class
+build/classes/edu/baskel/services/FacebookLog.class
+build/classes/edu/baskel/services/MembreCRUD.class
+build/classes/ReinitialiséMPController.class
+chromedriver.exe
