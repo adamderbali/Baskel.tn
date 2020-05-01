@@ -155,6 +155,7 @@ public class ReparateurCRUD {
             }
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return r;
     }
