@@ -31,7 +31,8 @@ public class MainTestCrd {
         r.setMot_passe_u("0000");
         r.setDate_u(new Date(2000, 06, 03));
         r.setLocal_nom("velotn");
-        r.setLatitude("");
+        r.setLatitude("12222");
+        r.setLongitude("1515155115");
         ReparateurCRUD rcrd = new ReparateurCRUD();
         rcrd.ajouterReparateur(r);
     }

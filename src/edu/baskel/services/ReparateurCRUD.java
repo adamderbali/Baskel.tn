@@ -123,5 +123,13 @@ public class ReparateurCRUD {
         return listeMembre;
 
     }
+    
+    //retour un reparateur en passant l'id du reparateur
+    public Reparateur getReparateurById(int id){
+        
+        Reparateur r = new Reparateur();
+        
+        return r;
+    }
 
 }
