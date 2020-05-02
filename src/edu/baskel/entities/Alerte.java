@@ -5,28 +5,40 @@
  */
 package edu.baskel.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author Skander
  */
 public class Alerte {
+
     private int id_alert;
     private String description_a;
     private String latitude_a;
     private String longitude_a;
+    private String adresse_a;
     private Date date_a;
+    private Membre membre;
 
     public Alerte() {
+        membre = new Membre();
     }
-    
 
-    public Alerte(String description_a, String latitude_a, String longitude_a, Date date_a) {
+    public Alerte(String description_a, String latitude_a, String longitude_a, String adresse_a) {
         this.description_a = description_a;
         this.latitude_a = latitude_a;
         this.longitude_a = longitude_a;
-        this.date_a = new Date();
+        this.adresse_a = adresse_a;
+        this.date_a = new Date(120000);
+    }
+
+    public Alerte(String description_a, String latitude_a, String longitude_a, String adresse_a, Date date_a) {
+        this.description_a = description_a;
+        this.latitude_a = latitude_a;
+        this.longitude_a = longitude_a;
+        this.adresse_a = adresse_a;
+        this.date_a = new Date(120000);
     }
 
     public int getId_alert() {
@@ -65,10 +77,29 @@ public class Alerte {
         return date_a;
     }
 
-    @Override
-    public String toString() {
-        return "Alerte{" + "id_alert=" + id_alert + ", description_a=" + description_a + ", latitude_a=" + latitude_a + ", longitude_a=" + longitude_a + ", date_a=" + date_a + '}';
+    public Membre getMembre() {
+        return membre;
     }
 
-   
+    public void setDate_a(Date date_a) {
+        this.date_a = date_a;
     }
+
+    public void setMembre(Membre membre) {
+        this.membre = membre;
+    }
+
+    public String getAdresse_a() {
+        return adresse_a;
+    }
+
+    public void setAdresse_a(String adresse_a) {
+        this.adresse_a = adresse_a;
+    }
+
+    @Override
+    public String toString() {
+        return "Alerte{" + "id_alert=" + id_alert + ", description_a=" + description_a + ", latitude_a=" + latitude_a + ", longitude_a=" + longitude_a + ", date_a=" + date_a + '}' + membre.toString();
+    }
+
+}

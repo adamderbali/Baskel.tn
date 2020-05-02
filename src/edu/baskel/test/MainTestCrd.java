@@ -1,7 +1,9 @@
 
 package edu.baskel.test;
 
+import edu.baskel.entities.Alerte;
 import edu.baskel.entities.Reparateur;
+import edu.baskel.services.AlerteCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
 import java.sql.Date;
@@ -34,9 +36,18 @@ public class MainTestCrd {
         mcrd.ajouterMembres2(r);
         rcrd.ajouterReparateur(r);
         Reparateur r2 = new Reparateur();
-        r2 = rcrd.getReparateurById(25);
-        System.out.println("////////////");
+        r2 = rcrd.getReparateurById(4);
+        System.out.println("////////////************************************//////");
         rcrd.getListeReparateur();
+        AlerteCRUD altcrd =new AlerteCRUD();
+        Alerte a = new Alerte("panne a rades", "1222222", "1222"," marsa");
+        a.setId_alert(5);
+        altcrd.updateAlert(a);
+        a.setMembre(r2);
+        //altcrd.ajouterAlert(a);
+        System.out.println("////////////************************************//////");
+        altcrd.getListeAlerte();
+        
         
     }
         
