@@ -25,7 +25,7 @@ public class AlerteCRUD {
     }
     
     public void ajouterAlert(Alerte a){
-        
+        System.out.println("alert ajouter");
     }
     public void updateAlert(Alerte a){
         
