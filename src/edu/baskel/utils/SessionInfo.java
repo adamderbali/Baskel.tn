@@ -12,6 +12,7 @@ import edu.baskel.entities.Membre;
  * @author dell
  */
 public final class SessionInfo {
+    public static Membre loggedM;
 
     public static int iduser;
     
@@ -25,10 +26,13 @@ public final class SessionInfo {
 
     }
 
-  
+    public static Membre getLoggedM() {
+        return loggedM;
+    }
 
-    
-    
+    public static void setLoggedM(Membre loggedM) {
+        SessionInfo.loggedM = loggedM;
+    }
 
     public static SessionInfo getInstance(int iduser) {
         if (instance == null) {
@@ -41,15 +45,9 @@ public final class SessionInfo {
         SessionInfo.iduser = iduser;
     }
 
-    
-
-  
-
     public int getiduser() {
         return iduser;
     }
-
-    
 
     @Override
     public String toString() {

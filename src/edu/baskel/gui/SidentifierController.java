@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import edu.baskel.services.FacebookLog;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import static edu.baskel.utils.SessionInfo.iduser;
 
@@ -17,7 +18,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 import javafx.event.ActionEvent;
@@ -34,7 +34,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -44,6 +43,7 @@ import javafx.stage.Stage;
  */
 public class SidentifierController implements Initializable {
 //test git 2020
+
     @FXML
     private TextField txtutilisateur;
     @FXML
@@ -53,23 +53,19 @@ public class SidentifierController implements Initializable {
     @FXML
     private Label lblreponse;
     @FXML
-    private Label lblexit;
-    @FXML
     private JFXButton btnsinscrire;
     @FXML
     private CheckBox rememberMe;
-
-    Preferences preferences;
-
-    private int idu;
-
-    Connection cnx = null;
-    PreparedStatement prep = null;
-    ResultSet res = null;
     @FXML
     private Label lblpassoublié;
     @FXML
     private Button btnfb;
+
+    Preferences preferences;
+    private int idu;
+    Connection cnx = null;
+    PreparedStatement prep = null;
+    ResultSet res = null;
 
     public SidentifierController() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -122,7 +118,7 @@ public class SidentifierController implements Initializable {
     @FXML
     public void loggin1(ActionEvent event) {
         MembreCRUD mr = new MembreCRUD();
-        if (mr.Verification(txtutilisateur.getText(), txtmotdepasse.getText()) == true) {
+        if (mr.Verification(txtutilisateur.getText(), txtmotdepasse.getText()) != null) {
 
             if (rememberMe.isSelected()) {
 
@@ -149,13 +145,13 @@ public class SidentifierController implements Initializable {
             stage.setResizable(false);
             stage.setMaximized(false);
             stage.show();
-            SessionInfo s1 = SessionInfo.getInstance(iduser);
-            System.out.println(s1);
+            SessionInfo.getInstance(iduser);
+            SessionInfo.getLoggedM();
+            System.out.println(SessionInfo.getInstance(iduser));
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Erreur d'authentification");
-            alert.setContentText("Erreur ,veuillez  verifier vos données");
-            alert.show();
+            Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
+            alertnum.showAndWait();
+           
         }
     }
 
@@ -167,7 +163,7 @@ public class SidentifierController implements Initializable {
     @FXML
     public void RedirectionRegistration(ActionEvent event) throws IOException {
 
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("inscription.fxml"));
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("InscriptionMembre.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);

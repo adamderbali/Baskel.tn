@@ -8,14 +8,20 @@ package edu.baskel.services;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reparateur;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.SessionInfo;
 import static edu.baskel.utils.SessionInfo.iduser;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
 
 /**
  *
@@ -23,19 +29,22 @@ import java.util.List;
  */
 public class MembreCRUD {
 
-    public static String nomm;
+    /* public static String nomm;
     public static String prenomm;
     public static String telm;
     public static String emailm;
     public static String adressem;
     public static String mpassem;
     public static String datem;
-
+     */
     Connection cnx;
-
+    Stage owner = new Stage();
+    Membre membreLogged;
+    
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
     }
+//ajouter membre
 
     public Membre ajouterMembres2(Membre m) {
         try {
@@ -60,6 +69,7 @@ public class MembreCRUD {
         }
         return m;
     }
+// update info d un membre
 
     public void updateMembre(Membre m) {
         try {
@@ -83,6 +93,7 @@ public class MembreCRUD {
         }
     }
 
+//affichage de liste de tt les membres
     public List<Membre> getlistMembre() {
         List<Membre> listeMembre = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
 
@@ -112,8 +123,9 @@ public class MembreCRUD {
         return listeMembre;
 
     }
+// verification email et mot de passe au login
 
-    public boolean Verification(String email, String motdepasse) {
+    public Membre Verification(String email, String motdepasse) {
         try {
             String sq1 = "SELECT * FROM membre where email_u=? AND mot_passe_u=?";
             PreparedStatement prep = cnx.prepareStatement(sq1);
@@ -122,20 +134,36 @@ public class MembreCRUD {
             ResultSet res = prep.executeQuery();
 
             if (!res.next()) {
-
-                return false;
+return null;
+                //return false;
             } else {
 
                 System.out.println("authentification ok!");
                 iduser = res.getInt("id_u");
+                String nomm = res.getString("nom_u");
+                String prenomm = res.getString("prenom_u");
+                String telm = res.getString("num_tel_u");
+                String emailm =  res.getString("email_u");
+                String adressem  = res.getString("adresse_u");
+                String mpassem = res.getString("mot_passe_u");
+                Date datem = res.getDate("date_u");
+                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, datem, mpassem, telm);
+                
+                SessionInfo.setLoggedM(membreLogged);
+                
+                System.out.println(membreLogged);
+                
+
                 System.out.println(iduser);
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        return true;
+        return membreLogged;
+        //return true;
 
     }
+// verifaction s il ya deja un compte avec cette adresse mail a l inscription
 
     public boolean VerificationExistence(Membre m) {
         try {
@@ -144,10 +172,7 @@ public class MembreCRUD {
             prep.setString(1, m.getEmail_u());
             ResultSet res = prep.executeQuery();
             if (res.next()) {
-                /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Erreur d'authentification");
-                alert.setContentText("Vous etre deja inscris avec cette adresse");
-                alert.show();*/
+
                 return false;
             }
         } catch (Exception ex) {
@@ -155,22 +180,83 @@ public class MembreCRUD {
         }
         return true;
     }
+// ajouter user a l inscription
 
     public Membre AddUser(Membre user) {
 
-        if (user instanceof Membre) {
-            this.ajouterMembres2(user);
+        //if (user instanceof Membre) {
+        this.ajouterMembres2(user);
 
-        }
-        if (user instanceof Reparateur) {
-
-            ReparateurCRUD rc = new ReparateurCRUD();
-            rc.ajouterReparateur((Reparateur) user);
-        }
-
+        //}
         return user;
     }
 
+    public Reparateur adduser2(Reparateur user) {
+
+        // if (user instanceof Reparateur) {
+        ReparateurCRUD rc = new ReparateurCRUD();
+        rc.ajouterReparateur((Reparateur) user);
+        //}
+
+        return user;
+    }
+// afficher les info d  un seul membre
+
+    public void AfficherMembre(Membre m) {
+        String requet = "SELECT * FROM membre WHERE id_u=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requet);
+            pst.setInt(1, m.getId_u());
+            ResultSet rs = pst.executeQuery();
+            System.out.println("donné afficher");
+            if (rs.next()) {
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                m.setAdresse_u(rs.getString("adresse_u"));
+                m.setNum_tel_u(rs.getString("num_tel_u"));
+                m.setMot_passe_u(rs.getString("mot_passe_u"));
+                m.setDate_u(rs.getDate("date_u"));
+
+            } else {
+                System.out.println("erreur d affcihage");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+// partie a voir
+
+
+    /*
+            public void AfficherMembre(int id) {
+            String requet = "SELECT * FROM membre WHERE id_u=?";
+            try {
+            PreparedStatement pst = cnx.prepareStatement(requet);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            System.out.println("donné afficher");
+            if (rs.next()) {
+            nomm = rs.getString("nom_u");
+            prenomm = rs.getString("prenom_u");
+            emailm = rs.getString("email_u");
+            adressem = rs.getString("adresse_u");
+            telm = rs.getString("num_tel_u");
+            mpassem = rs.getString("mot_passe_u");
+            datem = rs.getDate("date_u").toString();
+            System.out.println(datem);
+            
+            } else {
+            System.out.println("erreur d affcihage");
+            }
+            } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            }
+            
+            }
+     */
+ /*
     public void AfficherMembre(int id) {
         String requet = "SELECT * FROM membre WHERE id_u=?";
         try {
@@ -196,7 +282,8 @@ public class MembreCRUD {
         }
 
     }
-
+     */
+    // veriffication par mot de passe avant la modif des info
     public boolean VerificationChgInfo(String mot_pas) {
         try {
             String sq1 = "SELECT * FROM membre where mot_passe_u=?";
@@ -217,6 +304,7 @@ public class MembreCRUD {
         return true;
 
     }
+// update du mot de passe (forgot password)
 
     public void changerMP(String eml, String passm) {
 
@@ -231,16 +319,25 @@ public class MembreCRUD {
 
         }
     }
+// suprression d un compte par son utilisateur
 
     public void supprimerMembre(int id) {
-        try {
-            String requete = "DELETE FROM membre WHERE id_u=?";
-            PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, id);
-            pst.executeUpdate();
-            System.out.println("membre supprimé");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+        alert1.setTitle("supression compte");
+        alert1.setHeaderText("Information");
+        alert1.setContentText("etes vous sur de vouloir supprimer votre compte");
+        Optional<ButtonType> action = alert1.showAndWait();
+        if (action.get() == ButtonType.OK) {
+            try {
+                String requete = "DELETE FROM membre WHERE id_u=?";
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                pst.setInt(1, id);
+                pst.executeUpdate();
+                pst.close();
+                System.out.println("membre supprimé");
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 

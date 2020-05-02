@@ -21,7 +21,7 @@
    <children>
       <ImageView fitHeight="659.0" fitWidth="1043.0" opacity="0.51" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../test/images/2.jpg" />
+            <Image url="@../../../images/2.jpg" />
          </image>
       </ImageView>
       <Pane fx:id="btnreparateur" layoutX="577.0" layoutY="12.0" prefHeight="622.0" prefWidth="455.0" style="-fx-border-color: #ffffff; -fx-border-width: 2;">
@@ -49,7 +49,7 @@
                </font>
             </Text>
             <JFXTextField fx:id="txtPrenom" focusColor="#0096a4" layoutX="211.0" layoutY="64.0" prefHeight="31.0" prefWidth="149.0" promptText="Prénom" />
-            <JFXButton fx:id="btninscription" layoutX="118.0" layoutY="567.0" onAction="#InsertData1" prefHeight="41.0" prefWidth="205.0" style="-fx-background-color: #0096a4;" text="Inscription" textFill="WHITE">
+            <JFXButton fx:id="btninscription" layoutX="125.0" layoutY="500.0" onAction="#InsertData1" prefHeight="41.0" prefWidth="205.0" style="-fx-background-color: #0096a4;" text="Inscription" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -63,19 +63,12 @@
                </toggleGroup></JFXRadioButton>
             <JFXRadioButton fx:id="chkfemme" layoutX="170.0" layoutY="411.0" text="Femme" toggleGroup="$sexegrp" />
             <Separator layoutX="128.0" layoutY="487.0" prefHeight="5.0" prefWidth="200.0" />
-            <JFXRadioButton fx:id="btnrep" layoutX="57.0" layoutY="500.0" onAction="#afficherrep" text="cocher si vous etes un reparateur" />
             <JFXButton fx:id="btnimage" layoutX="211.0" layoutY="440.0" onAction="#telechargerPhoto" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #0096a4;" text="Telecharger une image" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></JFXButton>
             <JFXTextField fx:id="txtimage" layoutX="45.0" layoutY="440.0" prefHeight="31.0" prefWidth="149.0" />
             <ImageView fx:id="img" fitHeight="87.0" fitWidth="78.0" layoutX="369.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true" />
-            <AnchorPane fx:id="anchroreparateur" layoutX="57.0" layoutY="526.0" prefHeight="41.0" prefWidth="318.0">
-               <children>
-                  <JFXTextField fx:id="txttelpro" prefHeight="31.0" prefWidth="149.0" promptText="tel_professionel" />
-                  <JFXTextField fx:id="txtadrlocal" layoutX="169.0" layoutY="-1.0" prefHeight="31.0" prefWidth="149.0" promptText="adresse locale" />
-               </children>
-            </AnchorPane>
          </children>
       </Pane>
       <Button fx:id="btnprofil" layoutX="398.0" layoutY="275.0" mnemonicParsing="false" onAction="#ProfilPage" text="Button" />

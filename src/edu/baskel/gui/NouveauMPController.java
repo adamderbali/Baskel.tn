@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.InputValidation;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -67,22 +68,12 @@ public class NouveauMPController implements Initializable {
         if (txtNvMp.getText().equals(txtCnvMp.getText())) {
             MembreCRUD r = new MembreCRUD();
             r.changerMP(txtm.getText(), txtCnvMp.getText());
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Mot de passe ");
-            alert1.setHeaderText("Information");
-            alert1.setContentText("Votre mot de passe a été réinitialisé !");
-            alert1.initModality(Modality.APPLICATION_MODAL);
-            alert1.initOwner(owner);
-            alert1.showAndWait();
+            Alert alertnum = new InputValidation().getAlert("mot de passe", "Votre mot de passe a été réinitialisé !");
+            alertnum.showAndWait();
 
         } else {
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Mot de passe ");
-            alert1.setHeaderText("Information");
-            alert1.setContentText("Verifier vos données");
-            alert1.initModality(Modality.APPLICATION_MODAL);
-            alert1.initOwner(owner);
-            alert1.showAndWait();
+            Alert alertnum = new InputValidation().getAlert("mot de passe", "Verifier vos données !");
+            alertnum.showAndWait();
             System.out.println("Erreur ");
         }
     }
