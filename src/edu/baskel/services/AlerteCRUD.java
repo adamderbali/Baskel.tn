@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package edu.baskel.services;
-
 import edu.baskel.entities.Alerte;
-import edu.baskel.entities.Reparateur;
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +37,9 @@ public class AlerteCRUD {
         List<Alerte> listAlerte = new ArrayList<Alerte>();
 
         try {
-            String requete = "SELECT* FROM reparateur";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(requete);
+            String requete = "SELECT* FROM alerte";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Alerte r = new Alerte();
                 

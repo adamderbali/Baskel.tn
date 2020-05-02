@@ -1,11 +1,9 @@
 
 package edu.baskel.test;
 
-import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reparateur;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
-import java.lang.reflect.Member;
 import java.sql.Date;
 
 public class MainTestCrd {
@@ -32,10 +30,13 @@ public class MainTestCrd {
         r.setAdresse_lo("tunis centre ville");
         r.setNum_pro("22795555");
         ReparateurCRUD rcrd = new ReparateurCRUD();
+        MembreCRUD mcrd = new MembreCRUD();
+        mcrd.ajouterMembres2(r);
         rcrd.ajouterReparateur(r);
         Reparateur r2 = new Reparateur();
         r2 = rcrd.getReparateurById(25);
-        System.out.println(r2.toString());
+        System.out.println("////////////");
+        rcrd.getListeReparateur();
         
     }
         

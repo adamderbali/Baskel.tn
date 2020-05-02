@@ -7,13 +7,12 @@ package edu.baskel.entities;
 
 import java.sql.Date;
 
-
-
 /**
  *
  * @author Skander
  */
 public class Reparateur extends Membre {
+
     private String adresse_lo;
     private String local_nom;
     private String num_pro;
@@ -23,7 +22,6 @@ public class Reparateur extends Membre {
     public Reparateur() {
         super();
     }
-    
 
     public Reparateur(String adresse_lo, String num_pro, String nom_u, String prenom_u, String adresse_u, String email_u, String sexe_u, Date date_u, String mot_passe_u, String num_tel_u) {
         super(nom_u, prenom_u, adresse_u, email_u, sexe_u, date_u, mot_passe_u, num_tel_u);
@@ -40,10 +38,9 @@ public class Reparateur extends Membre {
         this.longitude = longitude;
     }
 
-    
-
     public Reparateur(String adrloc, String telpro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        adrloc = adrloc;
+        telpro = telpro;
     }
 
     public String getAdresse_lo() {
@@ -88,6 +85,6 @@ public class Reparateur extends Membre {
 
     @Override
     public String toString() {
-        return "Reparateur{" + "adresse_lo=" + adresse_lo + ", local_nom=" + local_nom + ", num_pro=" + num_pro + ", latitude=" + latitude + ", longitude=" + longitude + '}'+super.toString();
-    }    
+        return "Reparateur{ id =" + super.getId_u() + ", adresse_lo=" + adresse_lo + ", local_nom=" + local_nom + ", num_pro=" + num_pro + ", latitude=" + latitude + ", longitude=" + longitude + '}' + super.toString();
+    }
 }

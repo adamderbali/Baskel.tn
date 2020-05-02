@@ -99,23 +99,29 @@ public class ReparateurCRUD {
         List<Reparateur> listeMembre = new ArrayList<Reparateur>();
 
         try {
-            String requete = "SELECT* FROM reparateur";
-            Statement pst = cnx.createStatement();
+            String requete = "SELECT * FROM `reparateur` r join membre m on r.id_u = m.id_u";
+            PreparedStatement pst = cnx.prepareStatement(requete);
             
-            ResultSet rs = pst.executeQuery(requete);
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Reparateur r = new Reparateur();
                 r.setId_u(rs.getInt(1));
-                r.setNom_u(rs.getString(2));
-                r.setPrenom_u(rs.getString(3));
-                r.setAdresse_u(rs.getString(4));
-                r.setEmail_u(rs.getString(5));
-                r.setSexe_u(rs.getString(6));
-                r.setDate_u(rs.getDate(7));
-                r.setMot_passe_u(rs.getString(8));
-                r.setNum_tel_u(rs.getString(9));
-                r.setImage_u(rs.getString(10));
-                r.setType_u(rs.getString(11));
+                r.setAdresse_lo(rs.getString(2));
+                r.setLocal_nom(rs.getString(3));
+                r.setNum_pro(rs.getString(4));
+                r.setLatitude(rs.getString(5));
+                r.setLongitude(rs.getString(6));
+                r.setNom_u(rs.getString(8));
+                r.setPrenom_u(rs.getString(9));
+                r.setAdresse_u(rs.getString(10));
+                r.setEmail_u(rs.getString(11));
+                r.setSexe_u(rs.getString(12));
+                r.setDate_u(rs.getDate(13));
+                r.setMot_passe_u(rs.getString(14));
+                r.setNum_tel_u(rs.getString(15));
+                r.setImage_u(rs.getString(16));
+                r.setType_u(rs.getString(17));
+                System.out.println(r.toString());
                 listeMembre.add(r);
             }
 
