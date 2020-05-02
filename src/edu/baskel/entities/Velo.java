@@ -16,7 +16,7 @@ public class Velo {
     private String marque;
     private String model;
     private String type_v;
-    private Date annee_sortie;
+    private String annee_sortie;
     private String status_v;
     private int num_tel_v;
     private String etat_v;
@@ -25,7 +25,7 @@ public class Velo {
     private String image_v;
     private int id_av;
 
-    public Velo(int num_serie, String marque, String model, String type_v, Date annee_sortie, String status_v, int num_tel_v, String etat_v, String description_v, int id_u,String image_v) {
+    public Velo(int num_serie, String marque, String model, String type_v, String annee_sortie, String status_v, int num_tel_v, String etat_v, String description_v, int id_u,String image_v) {
         this.num_serie = num_serie;
         this.marque = marque;
         this.model = model;
@@ -74,11 +74,11 @@ public class Velo {
         this.type_v = type_v;
     }
 
-    public Date getAnnee_sortie() {
+    public String getAnnee_sortie() {
         return annee_sortie;
     }
 
-    public void setAnnee_sortie(Date annee_sortie) {
+    public void setAnnee_sortie(String annee_sortie) {
         this.annee_sortie = annee_sortie;
     }
 

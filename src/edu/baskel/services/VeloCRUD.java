@@ -5,7 +5,7 @@
  */
 package edu.baskel.services;
 
-import edu.baskel.entities.Membre;
+
 import edu.baskel.entities.Velo;
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
@@ -39,7 +39,7 @@ public class VeloCRUD {
                pst.setString(2,v.getMarque());
                pst.setString(3,v.getModel());
                pst.setString(4,v.getType_v());
-               pst.setDate(5,v.getAnnee_sortie());
+               pst.setString(5,v.getAnnee_sortie());
                pst.setString(6,v.getStatus_v());
                pst.setInt(7,v.getNum_tel_v());
                pst.setString(8,v.getEtat_v());
@@ -69,7 +69,7 @@ public class VeloCRUD {
              pst2.setString(1,v.getMarque());
              pst2.setString(2,v.getModel());
              pst2.setString(3,v.getType_v());
-             pst2.setDate(4,v.getAnnee_sortie());
+             pst2.setString(4,v.getAnnee_sortie());
              pst2.setString(5,v.getStatus_v());
              pst2.setInt(6,v.getNum_tel_v());
              pst2.setString(7,v.getEtat_v());
@@ -115,7 +115,7 @@ public class VeloCRUD {
                 v.setMarque(rs.getString("marque"));
                 v.setModel(rs.getString("model"));
                 v.setType_v(rs.getString("type_v"));
-                v.setAnnee_sortie(rs.getDate("annee_sortie"));
+                v.setAnnee_sortie(rs.getString("annee_sortie"));
                 v.setStatus_v(rs.getString("status_v"));
                 v.setNum_tel_v(rs.getInt("num_tel_v "));
                 v.setEtat_v(rs.getString("etat_v"));
@@ -147,7 +147,7 @@ public class VeloCRUD {
                 v.setMarque(rs.getString("marque"));
                 v.setModel(rs.getString("model"));
                 v.setType_v(rs.getString("type_v"));
-                v.setAnnee_sortie(rs.getDate("annee_sortie"));
+                v.setAnnee_sortie(rs.getString("annee_sortie"));
                 v.setStatus_v(rs.getString("status_v"));
                 v.setNum_tel_v(rs.getInt("num_tel_v "));
                 v.setEtat_v(rs.getString("etat_v"));
@@ -184,13 +184,16 @@ public class VeloCRUD {
          }
          
          /* gerer dispo velo pour admin*/
-         public void gererDispoVelo(int id_av,int num_serie,String etat){
+         public void gererDispoVelo(int id_av,int num_serie,boolean etat){
              
          try {
              String requete1 = "UPDATE velo SET etat_v=?,id_av=? WHERE num_serie=?";
              PreparedStatement pst1 = cnx.prepareStatement(requete1);
-             
-             pst1.setString(1,etat);
+             if (etat==false){
+             pst1.setString(1,"Non disponible");
+             }else{
+               pst1.setString(1,"Disponible");  
+             }
              pst1.setInt(2,id_av);
              pst1.setInt(3,num_serie);
              pst1.executeUpdate();

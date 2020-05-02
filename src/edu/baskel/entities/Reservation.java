@@ -12,8 +12,8 @@ import java.sql.Date;
  * @author Hela
  */
 public class Reservation {
-    private Membre membre;
-    private Velo velo;
+    private int id_u;
+    private int num_serie;
     private String date_r;
     private int nbr_heure;
     private Date date_db_r;
@@ -22,39 +22,41 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Membre membre, Velo velo, String date_r, int nbr_heure) {
-        this.membre = membre;
-        this.velo = velo;
+    public Reservation(int id_u,int num_serie, String date_r, int nbr_heure) {
+        this.id_u = id_u;
+        this.num_serie = num_serie;
         this.date_r = date_r;
         this.nbr_heure = nbr_heure;
         
     }
 
-    public Reservation(Membre membre, Velo velo, String date_r, int nbr_heure, Date date_db_r) {
-        this.membre = membre;
-        this.velo = velo;
+    public Reservation(int id_u,int num_serie, String date_r, int nbr_heure, Date date_db_r) {
+        this.id_u = id_u;
+        this.num_serie = num_serie;
         this.date_r = date_r;
         this.nbr_heure = nbr_heure;
         this.date_db_r = date_db_r;
         
     }
+
+    public int getId_u() {
+        return id_u;
+    }
+
+    public void setId_u(int id_u) {
+        this.id_u = id_u;
+    }
+
+    public int getNum_serie() {
+        return num_serie;
+    }
+
+    public void setNum_serie(int num_serie) {
+        this.num_serie = num_serie;
+    }
     
 
-    public Membre getMembre() {
-        return membre;
-    }
-
-    public void setMembre(Membre membre) {
-        this.membre = membre;
-    }
-
-    public Velo getVelo() {
-        return velo;
-    }
-
-    public void setVelo(Velo velo) {
-        this.velo = velo;
-    }
+   
 
     public String getDate_r() {
         return date_r;
@@ -88,6 +90,11 @@ public class Reservation {
 
     public void setId_res(int id_res) {
         this.id_res = id_res;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" + "id_u=" + id_u + ", num_serie=" + num_serie + ", date_r=" + date_r + ", nbr_heure=" + nbr_heure + ", date_db_r=" + date_db_r + ", id_res=" + id_res + '}';
     }
 
     
