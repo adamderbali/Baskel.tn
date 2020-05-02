@@ -5,6 +5,7 @@
  */
 package edu.baskel.entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -16,11 +17,62 @@ public class Reclamation {
     private int id_rec;
     private Date date_rec;
     private String etat_rec; 
+    private String objet_rec;
+    private int id_u;
+    private int id_ur;
 
-    public Reclamation(String desc_r, Date date_rec, String etat_rec) {
+    public int getId_ur() {
+        return id_ur;
+    }
+
+    public void setId_ur(int id_ur) {
+        this.id_ur = id_ur;
+    }
+
+    public Reclamation(String desc_r, String objet_rec, int id_u, int id_ur) {
+        this.desc_r = desc_r;
+        this.objet_rec = objet_rec;
+        this.id_u = id_u;
+        this.id_ur = id_ur;
+    }
+
+    
+
+    public int getId_u() {
+        return id_u;
+    }
+
+    public void setId_u(int id_u) {
+        this.id_u = id_u;
+    }
+
+    public Reclamation(String desc_r, String objet_rec, int id_u) {
+        this.desc_r = desc_r;
+        this.objet_rec = objet_rec;
+        this.id_u = id_u;
+    }
+
+    public Reclamation(String desc_r, String objet_rec) {
+        this.desc_r = desc_r;
+        this.objet_rec = objet_rec;
+    }
+
+    
+ 
+   
+    public String getObjet_rec() {
+        return objet_rec;
+    }
+
+    public void setObjet_rec(String objet_rec) {
+        this.objet_rec = objet_rec;
+    }
+
+    public Reclamation(String desc_r, Date date_rec, String etat_rec ) {
         this.desc_r = desc_r;
         this.date_rec = new Date();
         this.etat_rec = etat_rec;
+        this.objet_rec= objet_rec;        
     }
 
     public Reclamation() {
