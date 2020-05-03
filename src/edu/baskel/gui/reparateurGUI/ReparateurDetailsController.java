@@ -23,11 +23,11 @@ public class ReparateurDetailsController implements Initializable {
      */
     @FXML
     private JFXTextField txtNom;
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-txtNom.setText("khaled");
+        txtNom.setText("khaled");
     }
-
+    
 }
