@@ -354,5 +354,23 @@ public class MembreCRUD {
             }
         }
     }
+    public void ajouterban(int id){
+        String query = null;
+        try {
+
+            query = "UPDATE membre SET nbr_ban_u=nbr_ban_u+1 WHERE id_u=?;";
+            PreparedStatement pstmt = cnx.prepareStatement(query);
+
+            pstmt.setInt(1,id);
+
+            pstmt.executeUpdate();
+
+            System.err.println("Insert: OK!");
+
+        } catch (SQLException e) {
+            System.out.println("Insert reclamtion : Query error ->" + e.getMessage());
+        }
+
+    }
 
 }
