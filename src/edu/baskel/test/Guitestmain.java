@@ -24,7 +24,7 @@ public class Guitestmain extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../gui/reparateurGUI/ReparateurDetails.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/reparateurGUI/AjoutAlerte.fxml"));
         stage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root);
         
