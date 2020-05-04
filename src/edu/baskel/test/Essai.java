@@ -8,6 +8,7 @@ package edu.baskel.test;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.services.ParticipationCrud;
 
 /**
  *
@@ -19,7 +20,9 @@ public class Essai {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       EvenementCRUD Mc = new EvenementCRUD();
+        ParticipationCrud Pc = new ParticipationCrud();
+        System.out.println(Pc.displayByUserP());
+        
  /*   Membre m = new Membre(2);
   Evenement e = new Evenement(75,"sss", "aaaa", "20/02/2013", "bbbb", null);
   Mc.supprimerEvenement(74);*/
@@ -28,7 +31,7 @@ public class Essai {
      /*  System.out.println(e.getNom_e());*/
  /* Mc.ajouterEvenement(e);*/
  /* Mc.supprimerEvenement(e);*/
-   System.out.println(Mc.displayAllList());
+ /*  System.out.println(Mc.displayAllList());*/
     }
     
 }

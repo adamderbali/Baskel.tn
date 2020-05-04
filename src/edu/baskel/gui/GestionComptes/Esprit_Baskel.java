@@ -20,7 +20,7 @@ public class Esprit_Baskel extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Affichage_Modifier_Supprimer_User.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Annulation_participation.fxml"));
         
         Scene scene = new Scene(root);
         

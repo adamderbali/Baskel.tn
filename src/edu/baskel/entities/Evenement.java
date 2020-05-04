@@ -11,6 +11,8 @@ import java.util.Date;
  *
  * @author Skander
  */
+
+ /*!!!!!*/
 public class Evenement {
 
     private int id_e;
@@ -23,6 +25,13 @@ public class Evenement {
     private Membre mbre;
 
     public Evenement() {
+    }
+  
+    public Evenement(int id_e, String nom_e, String lieu_e, String description_e) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.description_e = description_e;
     }
 
     public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u) {

@@ -27,6 +27,9 @@ public class Participation {
         this.event = event;
     }
 
+    public Participation() {
+    }
+
     public Participation(int id_e, int id_u, Date date_insc, Evenement event) {
         this.id_e = id_e;
         this.id_u = id_u;
@@ -103,8 +106,10 @@ public class Participation {
 
     @Override
     public String toString() {
-        return "Participation{" + "id_u=" + id_u + ", id_e=" + id_e + ", date_insc=" + date_insc + '}';
+        return "Participation{" + "id_e=" + id_e + ", id_u=" + id_u + ", date_insc=" + date_insc + ", mbre=" + mbre + ", event=" + event + '}';
     }
+
+   
     
     
 
