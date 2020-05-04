@@ -99,15 +99,4 @@ nbproject/
 build.xml
 manifest.mf
 lib/nblibraries.properties
-<<<<<<< HEAD
-src/edu/baskel/entities/Membre.java
-=======
-src/edu/baskel/entities/Evenement.java
-src/edu/baskel/gui/GestionComptes/Affichage_List_Evenement_Ajout_ParticipationController.java
-src/edu/baskel/gui/GestionComptes/Affichage_Modifier_Supprimer_UserController.java
-src/edu/baskel/gui/GestionComptes/Ajouter_Evenement.fxml
-src/edu/baskel/gui/GestionComptes/Ajouter_EvenementController.java
-src/edu/baskel/gui/GestionComptes/Annulation_participationController.java
-src/edu/baskel/gui/GestionComptes/Esprit_Baskel.java
-src/edu/baskel/test/Essai.java
->>>>>>> 43e241a741a2edf36d25187295a5ca91cce91723
+
