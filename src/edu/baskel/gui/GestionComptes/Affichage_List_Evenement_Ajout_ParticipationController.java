@@ -97,7 +97,7 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
     void participerEvenement(ActionEvent event) throws Exception {
 
         ParticipationCrud Pc = new ParticipationCrud();
-        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), m.getId_u());
+        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),m.getId_u());
         Pc.ajouterParticipation(p);
         SendMail Sm = new SendMail();
         Sm.envoiMail(m.getEmail_u());
