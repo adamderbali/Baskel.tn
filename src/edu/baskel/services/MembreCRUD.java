@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edu.baskel.services;
 
 import edu.baskel.entities.Membre;
@@ -40,7 +36,8 @@ public class MembreCRUD {
     Connection cnx;
     Stage owner = new Stage();
     Membre membreLogged;
-    
+    private int val;
+
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
     }
@@ -123,8 +120,26 @@ public class MembreCRUD {
         return listeMembre;
 
     }
+    
+//verification ban
+    public int ValidationBan(String emailu) {
+        try {
+            String req = "SELECT validation_u FROM membre where email_u = ?";
+            PreparedStatement per = cnx.prepareStatement(req);
+            per.setString(1, emailu);
+            ResultSet rs = per.executeQuery();
+            if(!rs.next()){
+                System.out.println("mich mawjoud");
+            }else{
+                val = rs.getInt("validation_u");
+               
+        }} catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return val;
+    }
+    
 // verification email et mot de passe au login
-
     public Membre Verification(String email, String motdepasse) {
         try {
             String sq1 = "SELECT * FROM membre where email_u=? AND mot_passe_u=?";
@@ -134,7 +149,7 @@ public class MembreCRUD {
             ResultSet res = prep.executeQuery();
 
             if (!res.next()) {
-return null;
+                return null;
                 //return false;
             } else {
 
@@ -143,16 +158,15 @@ return null;
                 String nomm = res.getString("nom_u");
                 String prenomm = res.getString("prenom_u");
                 String telm = res.getString("num_tel_u");
-                String emailm =  res.getString("email_u");
-                String adressem  = res.getString("adresse_u");
+                String emailm = res.getString("email_u");
+                String adressem = res.getString("adresse_u");
                 String mpassem = res.getString("mot_passe_u");
                 Date datem = res.getDate("date_u");
                 membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, datem, mpassem, telm);
-                
+
                 SessionInfo.setLoggedM(membreLogged);
-                
+
                 System.out.println(membreLogged);
-                
 
                 System.out.println(iduser);
             }
@@ -163,8 +177,8 @@ return null;
         //return true;
 
     }
+    
 // verifaction s il ya deja un compte avec cette adresse mail a l inscription
-
     public boolean VerificationExistence(Membre m) {
         try {
             String sq1 = "SELECT * FROM membre where email_u=?";
@@ -180,8 +194,8 @@ return null;
         }
         return true;
     }
+    
 // ajouter user a l inscription
-
     public Membre AddUser(Membre user) {
 
         //if (user instanceof Membre) {
@@ -200,8 +214,8 @@ return null;
 
         return user;
     }
+    
 // afficher les info d  un seul membre
-
     public void AfficherMembre(Membre m) {
         String requet = "SELECT * FROM membre WHERE id_u=?";
         try {

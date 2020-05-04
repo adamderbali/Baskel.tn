@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui;
+package edu.baskel.gui.GestionComptes;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;

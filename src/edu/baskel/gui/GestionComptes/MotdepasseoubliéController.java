@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui;
+package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Membre;
@@ -137,12 +137,17 @@ public class MotdepasseoubliéController implements Initializable {
     @FXML
     public void verifierCode(ActionEvent event) throws IOException {
         if ((e.verifierCode1(txtcode.getText()) == true)) /*if (Integer.valueOf(txtcode.getText()) == ran) */ {
-            Parent redirection_parent = FXMLLoader.load(getClass().getResource("NouveauMP.fxml"));
+           /* Parent redirection_parent = FXMLLoader.load(getClass().getResource("NouveauMP.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
-            app_stage.show();
+            app_stage.show();*/
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("NouveauMP.fxml"));
+           Parent root2 = loader.load();
+           NouveauMPController nmp = loader.getController();
+           nmp.setTxtm(txtentermail.getText());
+           txtentermail.getScene().setRoot(root2);
         } else {
             System.out.println("code erroné");
         }
