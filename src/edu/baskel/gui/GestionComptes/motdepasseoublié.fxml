@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="390.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.MotdepasseoubliéController">
+<AnchorPane id="AnchorPane" prefHeight="390.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.MotdepasseoubliéController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="718.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,5 +25,6 @@
       <Button fx:id="btnQuitter" layoutX="639.0" layoutY="59.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter" />
       <Button fx:id="btnDeconnexion" layoutX="586.0" layoutY="108.0" mnemonicParsing="false" onAction="#SeDeconnecter" text="Deconnexion" />
       <Button fx:id="btnSupp" layoutX="586.0" layoutY="205.0" mnemonicParsing="false" onAction="#supprimerCompte" text="Supprimer" />
+      <Button fx:id="btnevenmn" layoutX="499.0" layoutY="292.0" mnemonicParsing="false" onAction="#redirectionevenmn" text="avenmn" />
    </children>
 </AnchorPane>

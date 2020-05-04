@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -15,14 +16,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.SidentifierController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.SidentifierController">
    <children>
-      <ImageView fitHeight="639.0" fitWidth="1042.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="639.0" fitWidth="1042.0" opacity="0.51" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/2.jpg" />
+            <Image url="@../../../../images/2.jpg" />
          </image>
       </ImageView>
-      <Pane layoutX="592.0" layoutY="73.0" prefHeight="511.0" prefWidth="408.0" style="-fx-border-color: #ffffff; -fx-border-width: 2;">
+      <Pane layoutX="593.0" layoutY="55.0" prefHeight="530.0" prefWidth="408.0" style="-fx-border-color: #ffffff; -fx-border-width: 2;">
          <children>
             <JFXButton fx:id="btnconnexion" layoutX="102.0" layoutY="275.0" onAction="#loggin1" prefHeight="37.0" prefWidth="209.0" style="-fx-background-color: #0096a4#0096a4;" text="Connexion" textFill="SNOW">
                <font>
@@ -49,17 +50,29 @@
                   </LinearGradient>
                </fill>
             </Text>
-            <Text layoutX="141.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou se connecter avec" />
-            <JFXButton fx:id="btnsinscrire" layoutX="103.0" layoutY="328.0" onAction="#RedirectionRegistration" prefHeight="37.0" prefWidth="209.0" style="-fx-background-color: #0096a4#0096a4;" text="S'inscrire" textFill="SNOW">
+            <Text layoutX="125.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou se connecter avec" />
+            <JFXButton fx:id="btnsinscrire" layoutX="145.0" layoutY="350.0" onAction="#RedirectionRegistration" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Membre" textFill="SNOW">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
             <Label fx:id="lblreponse" layoutX="311.0" layoutY="200.0" prefHeight="21.0" prefWidth="26.0" />
             <CheckBox fx:id="rememberMe" layoutX="103.0" layoutY="245.0" mnemonicParsing="false" text="remember me" />
-            <Button fx:id="btnfb" layoutX="85.0" layoutY="413.0" mnemonicParsing="false" onAction="#FacebooLogin" text="facebook" />
+            <JFXTextField fx:id="txtshowmp" layoutX="97.0" layoutY="184.0" prefHeight="31.0" prefWidth="209.0" promptText="Mot de passe" />
+            <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="288.0" layoutY="207.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
+            <Text layoutX="106.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'incrire en tant que">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="199.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
+            <JFXButton fx:id="btnsinscrire1" layoutX="148.0" layoutY="408.0" onAction="#RedirectionRegistrationRep" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Reparateur" textFill="SNOW">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
          </children>
       </Pane>
-      <Label fx:id="lblexit" layoutX="1016.0" layoutY="14.0" onMouseClicked="#handleButtonAction" text="X" />
+      <Button fx:id="btnfb" layoutX="452.0" layoutY="292.0" mnemonicParsing="false" onAction="#FacebooLogin" text="facebook" />
    </children>
 </AnchorPane>

@@ -15,6 +15,7 @@ public class Velo {
     private int  num_serie;
     private String marque;
     private String model;
+    private double prix_v;
     private String type_v;
     private String annee_sortie;
     private String status_v;
@@ -25,10 +26,11 @@ public class Velo {
     private String image_v;
     private int id_av;
 
-    public Velo(int num_serie, String marque, String model, String type_v, String annee_sortie, String status_v, int num_tel_v, String etat_v, String description_v, int id_u,String image_v) {
+    public Velo(int num_serie, String marque, String model,double prix_v, String type_v, String annee_sortie, String status_v, int num_tel_v, String etat_v, String description_v, int id_u,String image_v) {
         this.num_serie = num_serie;
         this.marque = marque;
         this.model = model;
+        this.prix_v= prix_v;
         this.type_v = type_v;
         this.annee_sortie = annee_sortie;
         this.status_v = status_v;
@@ -66,6 +68,15 @@ public class Velo {
         this.model = model;
     }
 
+    public double getPrix_v() {
+        return prix_v;
+    }
+
+    public void setPrix_v(double prix_v) {
+        this.prix_v = prix_v;
+    }
+    
+    
     public String getType_v() {
         return type_v;
     }
@@ -142,8 +153,10 @@ public class Velo {
 
     @Override
     public String toString() {
-        return "Velo{" + "num_serie=" + num_serie + ", marque=" + marque + ", model=" + model + ", type_v=" + type_v + ", annee_sortie=" + annee_sortie + ", status_v=" + status_v + ", num_tel_v=" + num_tel_v + ", etat_v=" + etat_v + ", description_v=" + description_v + ", id_u=" + id_u + ", image_v=" + image_v + ", id_av=" + id_av + '}';
+        return "Velo{" + "num_serie=" + num_serie + ", marque=" + marque + ", model=" + model + ", prix_v=" + prix_v + ", type_v=" + type_v + ", annee_sortie=" + annee_sortie + ", status_v=" + status_v + ", num_tel_v=" + num_tel_v + ", etat_v=" + etat_v + ", description_v=" + description_v + ", id_u=" + id_u + ", image_v=" + image_v + ", id_av=" + id_av + '}';
     }
+
+    
 
     
 

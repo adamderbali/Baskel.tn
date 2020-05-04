@@ -1,9 +1,16 @@
+package edu.baskel.test;
+
+
+/**
+ *
+ * @author ASUS
+ */
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -13,11 +20,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class Main extends Application {
+public class Guitestmain extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
+       // Parent root = FXMLLoader.load(getClass().getResource("../gui/reparateurGUI/AjoutAlerte.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/evenementGUI/Affichage_List_Evenement_Ajout_Participation.fxml"));
         stage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root);
         

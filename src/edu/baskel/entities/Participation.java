@@ -6,55 +6,66 @@
 package edu.baskel.entities;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Skander
  */
 public class Participation {
-    
-    private Evenement event;
-    private Membre participant;
+    private int id_e;
+    private int id_u;
     private Date date_insc;
 
-    public Participation(Evenement event, Membre participant, Date date_insc) {
-        this.event = event;
-        this.participant = participant;
-        this.date_insc = new Date();
-       
+    public Participation(int id_u, int id_e) {
+        this.id_u = id_u;
+        this.id_e = id_e;
     }
 
-    public Participation() {
+    public Participation(int id_u, int id_e, Date date_insc) {
+        this.id_u = id_u;
+        this.id_e = id_e;
+        this.date_insc = date_insc;
     }
 
-    public Evenement getEvent() {
-        return event;
+    public Participation(int id_e) {
+        this.id_e = id_e;
     }
 
-    public void setEvent(Evenement event) {
-        this.event = event;
+    public Participation(int id_u, Date date_insc) {
+        this.id_u = id_u;
+        this.date_insc = date_insc;
     }
 
-    public Membre getParticipant() {
-        return participant;
+    public int getId_u() {
+        return id_u;
     }
 
-    public void setParticipant(Membre participant) {
-        this.participant = participant;
+    public int getId_e() {
+        return id_e;
     }
 
     public Date getDate_insc() {
         return date_insc;
     }
 
-   
+    public void setId_u(int id_u) {
+        this.id_u = id_u;
+    }
+
+    public void setId_e(int id_e) {
+        this.id_e = id_e;
+    }
+
+    public void setDate_insc(Date date_insc) {
+        this.date_insc = date_insc;
+    }
+
     @Override
     public String toString() {
-        return "Participation{" + "event=" + event + ", participant=" + participant + ", date_insc=" + date_insc + '}';
+        return "Participation{" + "id_u=" + id_u + ", id_e=" + id_e + ", date_insc=" + date_insc + '}';
     }
     
+    
 
-  
-    
-    
 }

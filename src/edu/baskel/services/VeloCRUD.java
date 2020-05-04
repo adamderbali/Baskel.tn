@@ -30,22 +30,23 @@ public class VeloCRUD {
     /*ajout*/
     public void ajouterVelo(Velo v){
            try {
-               String requete2 ="INSERT INTO velo (num_serie,marque,model,type_v,annee_sortie,status_v,num_tel_v,etat_v,description_v,id_u,image_v)"
-                       + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+               String requete2 ="INSERT INTO velo (num_serie,marque,model,prix_v,type_v,annee_sortie,status_v,num_tel_v,etat_v,description_v,id_u,image_v)"
+                       + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
                
 
                PreparedStatement pst = cnx.prepareStatement(requete2);
                pst.setInt(1,v.getNum_serie());
                pst.setString(2,v.getMarque());
                pst.setString(3,v.getModel());
-               pst.setString(4,v.getType_v());
-               pst.setString(5,v.getAnnee_sortie());
-               pst.setString(6,v.getStatus_v());
-               pst.setInt(7,v.getNum_tel_v());
-               pst.setString(8,v.getEtat_v());
-               pst.setString(9,v.getDescription_v());
-               pst.setInt(10,v.getId_u());
-               pst.setString(11,v.getImage_v());
+               pst.setDouble(4,v.getPrix_v());
+               pst.setString(5,v.getType_v());
+               pst.setString(6,v.getAnnee_sortie());
+               pst.setString(7,v.getStatus_v());
+               pst.setInt(8,v.getNum_tel_v());
+               pst.setString(9,v.getEtat_v());
+               pst.setString(10,v.getDescription_v());
+               pst.setInt(11,v.getId_u());
+               pst.setString(12,v.getImage_v());
                
                
                
@@ -62,20 +63,21 @@ public class VeloCRUD {
     public void modifierVelo(Velo v,int num_serie) {
             
          try {
-             String requete2 = "UPDATE velo SET marque=?,model=?,type_v=?,annee_sortie=?,status_v=?,num_tel_v=?,etat_v=?,description_v=?,image_v=?"
+             String requete2 = "UPDATE velo SET marque=?,model=?,prix_v=?,type_v=?,annee_sortie=?,status_v=?,num_tel_v=?,etat_v=?,description_v=?,image_v=?"
                      +" WHERE num_serie=?";
              PreparedStatement pst2 = cnx.prepareStatement(requete2);
              
              pst2.setString(1,v.getMarque());
              pst2.setString(2,v.getModel());
-             pst2.setString(3,v.getType_v());
-             pst2.setString(4,v.getAnnee_sortie());
-             pst2.setString(5,v.getStatus_v());
-             pst2.setInt(6,v.getNum_tel_v());
-             pst2.setString(7,v.getEtat_v());
-             pst2.setString(8,v.getDescription_v());
-             pst2.setString(9,v.getImage_v());
-             pst2.setInt(10,num_serie);
+             pst2.setDouble(3,v.getPrix_v());
+             pst2.setString(4,v.getType_v());
+             pst2.setString(5,v.getAnnee_sortie());
+             pst2.setString(6,v.getStatus_v());
+             pst2.setInt(7,v.getNum_tel_v());
+             pst2.setString(8,v.getEtat_v());
+             pst2.setString(9,v.getDescription_v());
+             pst2.setString(10,v.getImage_v());
+             pst2.setInt(11,num_serie);
             
              pst2.executeUpdate();
              System.out.println("Velo modifié");
@@ -114,6 +116,7 @@ public class VeloCRUD {
                 v.setNum_serie(rs.getInt(1));
                 v.setMarque(rs.getString("marque"));
                 v.setModel(rs.getString("model"));
+                v.setPrix_v(rs.getDouble("prix_v"));
                 v.setType_v(rs.getString("type_v"));
                 v.setAnnee_sortie(rs.getString("annee_sortie"));
                 v.setStatus_v(rs.getString("status_v"));
@@ -146,6 +149,7 @@ public class VeloCRUD {
                 v.setNum_serie(rs.getInt(1));
                 v.setMarque(rs.getString("marque"));
                 v.setModel(rs.getString("model"));
+                v.setPrix_v(rs.getDouble("prix_v"));
                 v.setType_v(rs.getString("type_v"));
                 v.setAnnee_sortie(rs.getString("annee_sortie"));
                 v.setStatus_v(rs.getString("status_v"));

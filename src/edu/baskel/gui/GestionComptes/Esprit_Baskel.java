@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui;
+package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.gui.GestionComptes.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,7 @@ public class Esprit_Baskel extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Ajouter_Evenement.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Affichage_Modifier_Supprimer_User.fxml"));
         
         Scene scene = new Scene(root);
         

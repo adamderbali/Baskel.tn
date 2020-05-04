@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui;
+package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import edu.baskel.entities.Membre;
 import edu.baskel.services.EnvoiMail;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
@@ -16,8 +17,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Properties;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -31,11 +30,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  * FXML Controller class
@@ -61,11 +55,12 @@ public class MotdepasseoubliéController implements Initializable {
 
     @FXML
     private Button btnDeconnexion;
-    
-        @FXML
+
+    @FXML
     private Button btnSupp;
-        
-        
+    @FXML
+    private Button btnevenmn;
+
 
     Connection cnx = null;
     PreparedStatement prep = null;
@@ -88,13 +83,13 @@ public class MotdepasseoubliéController implements Initializable {
         cnx = ConnectionBD.getInstance().getCnx();
 
     }
-       EnvoiMail e = new EnvoiMail();
+    EnvoiMail e = new EnvoiMail();
 
     @FXML
     public void envoyerMail(ActionEvent event) {
-        
-       e.envoyerMail1(txtentermail.getText());
-       /* try {
+
+        e.envoyerMail1(txtentermail.getText());
+        /* try {
             Random rann = new Random();
             ran = rann.nextInt(999999);
             System.out.println("Préparation de l envoie du mail");
@@ -141,40 +136,54 @@ public class MotdepasseoubliéController implements Initializable {
         app_stage.show();
 
     }
+       @FXML
+    void redirectionevenmn(ActionEvent event) throws IOException {
+   Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_Modifier_Supprimer_User.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+    }
 
     @FXML
     public void verifierCode(ActionEvent event) throws IOException {
-        if((e.verifierCode1(txtcode.getText())==true))
-
-        /*if (Integer.valueOf(txtcode.getText()) == ran) */{
-            Parent redirection_parent = FXMLLoader.load(getClass().getResource("NouveauMP.fxml"));
+        if ((e.verifierCode1(txtcode.getText()) == true)) /*if (Integer.valueOf(txtcode.getText()) == ran) */ {
+           /* Parent redirection_parent = FXMLLoader.load(getClass().getResource("NouveauMP.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
-            app_stage.show();
+            app_stage.setAlwaysOnTop(false);
+            app_stage.show();*/
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("NouveauMP.fxml"));
+           Parent root2 = loader.load();
+           NouveauMPController nmp = loader.getController();
+           nmp.setTxtm(txtentermail.getText());
+           txtentermail.getScene().setRoot(root2);
         } else {
             System.out.println("code erroné");
         }
 
     }
-    
-     @FXML
+
+    @FXML
     void supprimerCompte(ActionEvent event) {
-         MembreCRUD mr1 = new MembreCRUD();
-         mr1.supprimerMembre(iduser);
+        MembreCRUD mr1 = new MembreCRUD();
+        Membre l = SessionInfo.getLoggedM();// a voir bel iduser wela bel loggedm
+        mr1.supprimerMembre(l.getId_u());//iduser);
     }
 
     @FXML  //page d acceuil
     void SeDeconnecter(ActionEvent event) throws IOException {
-        
+
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
         SessionInfo.setIduser(0);
+        SessionInfo.setLoggedM(null);
         System.out.println(iduser);
-        
+
     }
 
     @FXML//page d acceuil

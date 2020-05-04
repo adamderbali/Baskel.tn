@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui;
+package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.InputValidation;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -24,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,10 +38,10 @@ import javafx.stage.Stage;
 public class NouveauMPController implements Initializable {
 
     @FXML
-    private JFXTextField txtNvMp;
+    private PasswordField txtNvMp;
 
     @FXML
-    private JFXTextField txtCnvMp;
+    private PasswordField txtCnvMp;
 
     @FXML
     private JFXButton btnConfirmation;
@@ -53,6 +55,12 @@ public class NouveauMPController implements Initializable {
     @FXML
     private JFXTextField txtm;
 
+    public void setTxtm(String txtmail) {
+        this.txtm.setText(txtmail);
+    }
+
+
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -67,22 +75,12 @@ public class NouveauMPController implements Initializable {
         if (txtNvMp.getText().equals(txtCnvMp.getText())) {
             MembreCRUD r = new MembreCRUD();
             r.changerMP(txtm.getText(), txtCnvMp.getText());
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Mot de passe ");
-            alert1.setHeaderText("Information");
-            alert1.setContentText("Votre mot de passe a été réinitialisé !");
-            alert1.initModality(Modality.APPLICATION_MODAL);
-            alert1.initOwner(owner);
-            alert1.showAndWait();
+            Alert alertnum = new InputValidation().getAlert("mot de passe", "Votre mot de passe a été réinitialisé !");
+            alertnum.showAndWait();
 
         } else {
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Mot de passe ");
-            alert1.setHeaderText("Information");
-            alert1.setContentText("Verifier vos données");
-            alert1.initModality(Modality.APPLICATION_MODAL);
-            alert1.initOwner(owner);
-            alert1.showAndWait();
+            Alert alertnum = new InputValidation().getAlert("mot de passe", "Verifier vos données !");
+            alertnum.showAndWait();
             System.out.println("Erreur ");
         }
     }
