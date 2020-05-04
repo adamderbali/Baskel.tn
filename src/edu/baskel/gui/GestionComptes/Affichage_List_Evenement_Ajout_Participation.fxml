@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor1" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.Affichage_List_Evenement_Ajout_ParticipationController">
+   <children>
+      <TableView fx:id="tableAffichage" layoutX="14.0" layoutY="83.0" prefHeight="468.0" prefWidth="872.0" style="-fx-border-color: #007782; -fx-fixed-cell-size: 70; -fx-effect: #007782;" stylesheets="@AffichageList.css">
+        <columns>
+          <TableColumn fx:id="colNom" prefWidth="127.0" text="Nom" />
+            <TableColumn fx:id="colLieu" prefWidth="118.0" text="Lieu" />
+            <TableColumn fx:id="colDate" prefWidth="127.0" text="Date" />
+            <TableColumn fx:id="colDescription" prefWidth="233.0" text="Description" />
+          <TableColumn fx:id="colImage" prefWidth="265.0" text="Image" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="participer" layoutX="369.0" layoutY="580.0" onAction="#participerEvenement" prefHeight="27.0" prefWidth="120.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Participer" textFill="#007782" />
+      <Text layoutX="284.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des evenements" wrappingWidth="182.3828125">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#007782" />
+                  <Stop color="#141414" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <JFXButton fx:id="btnAjout" layoutX="720.0" layoutY="43.0" onAction="#lancerAjout" prefHeight="27.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Ajouter un evenement" textFill="#007782" />
+      <Line endX="100.0" layoutX="375.0" layoutY="43.0" startX="-100.0" />
+      <AnchorPane fx:id="rootPaneA" cacheShape="false" centerShape="false" focusTraversable="true" layoutX="189.0" layoutY="78.0" prefHeight="400.0" prefWidth="600.0" scaleShape="false" />
+   </children>
+</AnchorPane>

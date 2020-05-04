@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Skander
  */
 public class Evenement {
-    
+
     private int id_e;
     private String nom_e;
     private String lieu_e;
@@ -20,7 +20,7 @@ public class Evenement {
     private String description_e;
     private String image_e;
     private int id_u;
- private Membre mbre;
+    private Membre mbre;
 
     public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u) {
         this.id_e = id_e;
@@ -70,7 +70,7 @@ public class Evenement {
         this.id_u = id_u;
     }
 
-   public void setMbre(Membre mbre) {
+    public void setMbre(Membre mbre) {
         this.mbre = mbre;
     }
 
@@ -134,6 +134,4 @@ public class Evenement {
         this.id_u = id_u;
     }
 
-
-   
 }

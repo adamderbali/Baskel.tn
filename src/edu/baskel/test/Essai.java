@@ -28,7 +28,7 @@ public class Essai {
      /*  System.out.println(e.getNom_e());*/
  /* Mc.ajouterEvenement(e);*/
  /* Mc.supprimerEvenement(e);*/
-     System.out.println(Mc.displayByUser(3)); 
+     System.out.println(Mc.displayAllList()); 
     }
     
 }

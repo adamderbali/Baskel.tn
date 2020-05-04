@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.evenementGUI;
+package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.gui.evenementGUI.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
