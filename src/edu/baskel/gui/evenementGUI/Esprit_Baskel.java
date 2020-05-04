@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui;
+package edu.baskel.gui.evenementGUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ public class Esprit_Baskel extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Ajouter_Evenement.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -31,7 +31,7 @@ public class Esprit_Baskel extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
     }
     
 }
