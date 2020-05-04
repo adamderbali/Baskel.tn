@@ -102,6 +102,14 @@ public class Membre {
         this.nbr_ban_u = nbr_ban_u;
         this.validation_u = validation_u;
     }
+// constructeur sabrine
+    public Membre(int id_u, String nom_u, String prenom_u, String email_u) {
+        this.id_u = id_u;
+        this.nom_u = nom_u;
+        this.prenom_u = prenom_u;
+        this.email_u = email_u;
+    }
+    
 
     public int getId_u() {
         return id_u;
