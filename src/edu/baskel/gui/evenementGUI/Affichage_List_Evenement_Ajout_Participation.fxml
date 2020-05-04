@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor1" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Affichage_List_Evenement_Ajout_ParticipationController">
+<AnchorPane id="AnchorPane" fx:id="anchor1" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.evenementGUI.Affichage_List_Evenement_Ajout_ParticipationController">
    <children>
       <TableView fx:id="tableAffichage" layoutX="14.0" layoutY="83.0" prefHeight="468.0" prefWidth="872.0" style="-fx-border-color: #007782; -fx-fixed-cell-size: 70; -fx-effect: #007782;" stylesheets="@AffichageList.css">
         <columns>

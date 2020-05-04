@@ -8,8 +8,8 @@
    <children>
       <MenuButton alignment="TOP_CENTER" layoutX="346.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-border-radius: 100px; -fx-background-radius: 100px;" text="Evenement">
         <items>
-          <MenuItem mnemonicParsing="false" onAction="#lancerListeEvenement" text="Liste des evenement" />
-          <MenuItem mnemonicParsing="false" onAction="#lancerVosEvenement" text="Vos evenements" />
+          <MenuItem mnemonicParsing="false" onAction="" text="Liste des evenement" />
+          <MenuItem mnemonicParsing="false" onAction="" text="Vos evenements" />
             <MenuItem mnemonicParsing="false" text="vos participation" />
         </items>
       </MenuButton>
