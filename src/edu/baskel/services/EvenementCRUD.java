@@ -206,11 +206,11 @@ public class EvenementCRUD {
         return Listevent;
     }
 
-    public List<Evenement> displayByUser(int id_user) {
+    public List<Evenement> displayByUser(int id_u) {
 
         Evenement e;
         List<Evenement> Listeventuser = new ArrayList<>();
-        String requete = "SELECT * FROM evenement WHERE id_u=" + id_user;
+        String requete = "SELECT * FROM evenement WHERE id_u=" + id_u;
 
         try {
             Statement pst = cnx.createStatement();
@@ -231,32 +231,6 @@ public class EvenementCRUD {
     }
 
     /* Affichage liste des participant deans les evenement par user */
-    public List<Evenement> displayParticipant(int id_u) {
-
-        Participation p;
-        Membre m;
-        Evenement e = null;
-        List<Evenement> ListEventPaticipation = new ArrayList<>();
-        String requete = "SELECT m.email_u, m.nom_u, m.prenom_u FROM membre m JOIN 'participation' p ON m.id_u=p.id_u JOIN 'evenement' e ON e.id_e=p.id_e WHERE e.id_u=?";
-
-        try {
-            Statement pst = cnx.createStatement();
-            ResultSet rs = pst.executeQuery(requete);
-
-            while (rs.next()) {
-                m = new Membre(rs.getInt("id_u"), rs.getString("nom_u"), rs.getString("prenom_u"), rs.getString("adresse_u"), rs.getString("email_u"), rs.getDate("date"
-                ), rs.getString("email_u"), rs.getString("email_u") );
-                /* System.out.println(m.getId_u());*/
-                 e = new Evenement(rs.getInt("id_e"), rs.getString("nom_e"),m);
-                ListEventPaticipation.add(e);
-
-            }
-            return ListEventPaticipation;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return ListEventPaticipation;
-    }
+  
 
 }
