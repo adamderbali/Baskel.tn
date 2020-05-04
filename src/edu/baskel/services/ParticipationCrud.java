@@ -87,18 +87,20 @@ public void supprimerParticipation(int id_e,int id_u){
 
     /* Affichage participation dans les evenement par user*/
     public List<Participation> displayByUserP(int id_user) {
-
+        Evenement e;
         Participation p;
         List<Participation> Listparticipation = new ArrayList<>();
-        String requete = "SELECT * FROM participation WHERE id_u=" + id_user;
+        String requete = "SELECT e.nom_e,e.lieu_e,e.description_e FROM participation p INNER evenement e WHERE e.id_e=p.id_e " ; /*AND*/
+             /*   + " id_u=" + id_user;*/
         PreparedStatement preparedStatement = null;
         try {
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                p = new Participation(rs.getInt("id_e"), rs.getInt("id_u"), rs.getDate("date_insc"));
-
+                e= new Evenement(rs.getInt("id_e"), rs.getString("id_nom"), rs.getString("lieu_e"), rs.getString("description_e"));
+                p = new Participation(rs.getInt("id_e"), rs.getInt("id_u"), rs.getDate("date_insc"),e);
+                
                 Listparticipation.add(p);
 
             }

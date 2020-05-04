@@ -103,7 +103,7 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
         Sm.envoiMail(m.getEmail_u());
         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
         alert1.setTitle("Particpation ok");
-        alert1.setContentText("Vous avez particper");
+        alert1.setContentText("Vous avez particper et vous allez reçevoir un mail de confirmation");
 
         alert1.show();
 

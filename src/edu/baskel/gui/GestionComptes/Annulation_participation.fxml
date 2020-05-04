@@ -16,8 +16,8 @@
           <TableColumn fx:id="colNom" prefWidth="120.0" text="Nom" />
             <TableColumn fx:id="colDate" prefWidth="104.0" text="Date" />
             <TableColumn fx:id="colLieu" prefWidth="102.0" text="Lieu" />
-            <TableColumn fx:id="colDescription" prefWidth="220.0" text="Description" />
-          <TableColumn fx:id="colImage" prefWidth="207.0" text="Image" />
+            <TableColumn fx:id="colDescription" prefWidth="187.0" text="Description" />
+          <TableColumn fx:id="colImage" prefWidth="240.0" text="Image" />
         </columns>
       </TableView>
       <JFXButton fx:id="participer" layoutX="277.0" layoutY="426.0" onAction="#annulerEvenement" prefHeight="27.0" prefWidth="144.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Annler participation" textFill="#007782" />

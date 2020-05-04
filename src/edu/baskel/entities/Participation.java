@@ -16,6 +16,30 @@ public class Participation {
     private int id_e;
     private int id_u;
     private Date date_insc;
+    private Membre mbre;
+    private Evenement event;
+
+    public Participation(int id_e, int id_u, Date date_insc, Membre mbre, Evenement event) {
+        this.id_e = id_e;
+        this.id_u = id_u;
+        this.date_insc = date_insc;
+        this.mbre = mbre;
+        this.event = event;
+    }
+
+    public Participation(int id_e, int id_u, Date date_insc, Evenement event) {
+        this.id_e = id_e;
+        this.id_u = id_u;
+        this.date_insc = date_insc;
+        this.event = event;
+    }
+
+    public Participation(int id_e, int id_u, Date date_insc, Membre mbre) {
+        this.id_e = id_e;
+        this.id_u = id_u;
+        this.date_insc = date_insc;
+        this.mbre = mbre;
+    }
 
     public Participation(int id_u, int id_e) {
         this.id_u = id_u;
@@ -32,9 +56,25 @@ public class Participation {
         this.id_e = id_e;
     }
 
+    public Membre getMbre() {
+        return mbre;
+    }
+
+    public Evenement getEvent() {
+        return event;
+    }
+
     public Participation(int id_u, Date date_insc) {
         this.id_u = id_u;
         this.date_insc = date_insc;
+    }
+
+    public void setMbre(Membre mbre) {
+        this.mbre = mbre;
+    }
+
+    public void setEvent(Evenement event) {
+        this.event = event;
     }
 
     public int getId_u() {
