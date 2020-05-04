@@ -36,15 +36,15 @@ public class EvenementCRUD {
     public void ajouterEvenement(Evenement e) {
 
         try {
-            String requete = "INSERT INTO evenement (nom_e,lieu_e,date_e,description_e,image_e)"
-                    + "VALUES (?,?,?,?,?)";
+            String requete = "INSERT INTO evenement (nom_e,lieu_e,date_e,description_e,image_e,id_u)"
+                    + "VALUES (?,?,?,?,?,?)";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, e.getNom_e());
             pst.setString(2, e.getLieu_e());
             pst.setString(3, e.getDate_e());
             pst.setString(4, e.getDescription_e());
             pst.setString(5, e.getImage_e());
-            pst.setInt(6, e.getId_user().getId_u());
+            pst.setInt(6, e.getId_u());
             pst.executeUpdate();
             System.out.println("Evenement added!");
         } catch (SQLException ex) {
@@ -193,7 +193,7 @@ public class EvenementCRUD {
             ResultSet rs = pst.executeQuery(requete);
 
             while (rs.next()) {
-                e = new Evenement(rs.getInt("id_e"), rs.getString("nom_e"), rs.getString("lieu_e"), rs.getString("date_e"),
+                e = new Evenement(rs.getInt("id_e"),rs.getString("nom_e"), rs.getString("lieu_e"), rs.getString("date_e"),
                         rs.getString("description_e"), rs.getString("image_e"));
                 Listevent.add(e);
 
@@ -237,8 +237,7 @@ public class EvenementCRUD {
         Membre m;
         Evenement e = null;
         List<Evenement> ListEventPaticipation = new ArrayList<>();
-        String requete = "SELECT evenement.nom_e,membre.email_u, membre.nom_u,membre.prenom_u FROM evenement INNER JOIN participation on evenement.id_e=participation.id_e INNER JOIN membre  ON membre.id_u=participation.id_u"
-                + "AND evenement.id_u='" + id_u + "'";
+        String requete = "SELECT m.email_u, m.nom_u, m.prenom_u FROM membre m JOIN 'participation' p ON m.id_u=p.id_u JOIN 'evenement' e ON e.id_e=p.id_e WHERE e.id_u=?";
 
         try {
             Statement pst = cnx.createStatement();
@@ -248,7 +247,7 @@ public class EvenementCRUD {
                 m = new Membre(rs.getInt("id_u"), rs.getString("nom_u"), rs.getString("prenom_u"), rs.getString("adresse_u"), rs.getString("email_u"), rs.getDate("date"
                 ), rs.getString("email_u"), rs.getString("email_u") );
                 /* System.out.println(m.getId_u());*/
-                 e = new Evenement(rs.getInt("id_e"), rs.getString("nom_e"), m);
+                 e = new Evenement(rs.getInt("id_e"), rs.getString("nom_e"),m);
                 ListEventPaticipation.add(e);
 
             }

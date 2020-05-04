@@ -9,9 +9,11 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
+import static edu.baskel.utils.SessionInfo.iduser;
 import java.io.File;
 import java.net.URL;
 
@@ -65,7 +67,9 @@ public class Ajouter_EvenementController implements Initializable {
     private ImageView img;
 
     private Image image;
-
+    
+    Membre m =SessionInfo.getLoggedM();
+    
     public Ajouter_EvenementController() {
 
     }
@@ -92,9 +96,9 @@ public class Ajouter_EvenementController implements Initializable {
         } /*ajout*/ else {
 
             EvenementCRUD Ec = new EvenementCRUD();
-            /*  int id_us = SessionInfo.iduser;*/
+            
             Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                    getText(), pathE.getText());
+                    getText(), pathE.getText(),m.getId_u());
             Ec.ajouterEvenement(e);
             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("ajout ok");

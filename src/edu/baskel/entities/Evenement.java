@@ -19,27 +19,37 @@ public class Evenement {
     private String date_e;
     private String description_e;
     private String image_e;
-    private Membre id_user;
+    private int id_u;
+    private Membre mbre;
 
-    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, Membre id_user) {
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u) {
         this.id_e = id_e;
         this.nom_e = nom_e;
         this.lieu_e = lieu_e;
         this.date_e = date_e;
         this.description_e = description_e;
         this.image_e = image_e;
-        this.id_user = id_user;
+        this.id_u = id_u;
     }
 
-    public Evenement(int id_e, String nom_e, Membre id_user) {
+    public Evenement(int id_e, String nom_e, Membre mbre) {
         this.id_e = id_e;
         this.nom_e = nom_e;
-        this.id_user = id_user;
+        this.mbre = mbre;
     }
 
-    public Evenement(int id_e, String nom_e, String date_e, String description_e, String image_e) {
-        this.id_e = id_e;
+    public Evenement(String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u) {
         this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+    }
+
+    public Evenement(String nom_e, String lieu_e, String date_e, String description_e, String image_e) {
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
         this.date_e = date_e;
         this.description_e = description_e;
         this.image_e = image_e;
@@ -52,6 +62,20 @@ public class Evenement {
         this.date_e = date_e;
         this.description_e = description_e;
         this.image_e = image_e;
+    }
+
+    public Evenement(int id_e, String nom_e, int id_u) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.id_u = id_u;
+    }
+
+    public void setMbre(Membre mbre) {
+        this.mbre = mbre;
+    }
+
+    public Membre getMbre() {
+        return mbre;
     }
 
     public int getId_e() {
@@ -78,8 +102,8 @@ public class Evenement {
         return image_e;
     }
 
-    public Membre getId_user() {
-        return id_user;
+    public int getId_u() {
+        return id_u;
     }
 
     public void setId_e(int id_e) {
@@ -106,14 +130,10 @@ public class Evenement {
         this.image_e = image_e;
     }
 
-    public void setId_user(Membre id_user) {
-        this.id_user = id_user;
+    public void setId_u(int id_u) {
+        this.id_u = id_u;
     }
 
-    @Override
-    public String toString() {
-        return "Evenement{" + "id_e=" + id_e + ", nom_e=" + nom_e + ", lieu_e=" + lieu_e + ", date_e=" + date_e + ", description_e=" + description_e + ", image_e=" + image_e + ", id_user=" + id_user + '}';
-    }
 
    
 }

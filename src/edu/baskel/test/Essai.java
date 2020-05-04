@@ -5,6 +5,8 @@
  */
 package edu.baskel.test;
 
+import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
 
 /**
@@ -18,11 +20,15 @@ public class Essai {
      */
     public static void main(String[] args) {
        EvenementCRUD Mc = new EvenementCRUD();
-  /*-  Evenement e = new Evenement("test_event","salut","15/04/2020","asllema", null);*/
+       Membre m = new Membre(2);
+  Evenement e = new Evenement("bbbb", "bbbb", "20/02/2013", "bbbb", null,3);
+  Mc.ajouterEvenement(e);
+  
+  
      /*  System.out.println(e.getNom_e());*/
  /* Mc.ajouterEvenement(e);*/
  /* Mc.supprimerEvenement(e);*/
-       System.out.println(Mc.displayParticipant(3)); 
+    /*   System.out.println(Mc.displayParticipant(3)); */
     }
     
 }
