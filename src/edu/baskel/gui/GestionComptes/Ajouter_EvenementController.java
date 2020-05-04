@@ -5,7 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
-import edu.baskel.gui.evenementGUI.*;
+import edu.baskel.gui.GestionComptes.*;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;

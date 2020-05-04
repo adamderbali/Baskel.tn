@@ -5,7 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
-import edu.baskel.gui.evenementGUI.*;
+import edu.baskel.gui.GestionComptes.*;
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
@@ -94,13 +94,13 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
 
     /* ajout de participation*/
     @FXML
-    void participerEvenement(ActionEvent event) {
+    void participerEvenement(ActionEvent event) throws Exception {
 
         ParticipationCrud Pc = new ParticipationCrud();
         Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), m.getId_u());
         Pc.ajouterParticipation(p);
-        /* sendMail Sm = new sendMail();
-            Sm.envoiMail("");*/
+        SendMail Sm = new SendMail();
+        Sm.envoiMail(m.getEmail_u());
         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
         alert1.setTitle("Particpation ok");
         alert1.setContentText("Vous avez particper");

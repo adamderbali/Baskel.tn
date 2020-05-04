@@ -20,15 +20,15 @@ public class Essai {
      */
     public static void main(String[] args) {
        EvenementCRUD Mc = new EvenementCRUD();
-   /*    Membre m = new Membre(2);
-  Evenement e = new Evenement("bbbb", "bbbb", "20/02/2013", "bbbb", null,3);
-  Mc.ajouterEvenement(e);*/
+ /*   Membre m = new Membre(2);
+  Evenement e = new Evenement(75,"sss", "aaaa", "20/02/2013", "bbbb", null);
+  Mc.supprimerEvenement(74);*/
   
   
      /*  System.out.println(e.getNom_e());*/
  /* Mc.ajouterEvenement(e);*/
  /* Mc.supprimerEvenement(e);*/
-     System.out.println(Mc.displayAllList()); 
+   System.out.println(Mc.displayAllList());
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
-import edu.baskel.gui.evenementGUI.*;
+import edu.baskel.gui.GestionComptes.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
