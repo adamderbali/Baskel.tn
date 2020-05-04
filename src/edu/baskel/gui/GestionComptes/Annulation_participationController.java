@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.gui.evenementGUI.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
