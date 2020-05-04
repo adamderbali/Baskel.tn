@@ -28,10 +28,10 @@ public class Main_reclam extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Envoie_Reclamation.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Affichage_user.fxml"));
             Scene scene = new Scene(root);
             
-            primaryStage.setTitle("Reclamation");
+            primaryStage.setTitle("Affichage_user");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {

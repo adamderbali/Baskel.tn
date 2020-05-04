@@ -18,13 +18,12 @@ public class Reclamation {
     private Date date_rec;
     private String etat_rec; 
     private String objet_rec;
-    private int id_u;
-    private int id_ur;
+    private int id_u;//RECLAMATEUR
+    private int id_ur;//
 
     public int getId_ur() {
         return id_ur;
     }
-
     public void setId_ur(int id_ur) {
         this.id_ur = id_ur;
     }
