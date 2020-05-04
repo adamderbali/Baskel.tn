@@ -58,6 +58,9 @@ public class MotdepasseoubliéController implements Initializable {
 
     @FXML
     private Button btnSupp;
+    @FXML
+    private Button btnevenmn;
+
 
     Connection cnx = null;
     PreparedStatement prep = null;
@@ -132,6 +135,14 @@ public class MotdepasseoubliéController implements Initializable {
         app_stage.setScene(redirection_scene);
         app_stage.show();
 
+    }
+       @FXML
+    void redirectionevenmn(ActionEvent event) throws IOException {
+   Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_Modifier_Supprimer_User.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
     }
 
     @FXML
