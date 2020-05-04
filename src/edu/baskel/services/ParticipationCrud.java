@@ -88,26 +88,37 @@ public void supprimerParticipation(int id_e,int id_u){
     /* Affichage participation dans les evenement par user*/
     public List<Participation> displayByUserP() { /*int id_user*/
        
-        Participation p;
+       
         List<Participation> Listparticipation = new ArrayList<>();
-        String requete = "SELECT * FROM evenement e JOIN participation p ON e.id_e=p.id_e " ; /*AND*/
-          System.out.println(requete);
+       /*AND*/
+          
         /*   + " id_u=" + id_user;*/
         PreparedStatement preparedStatement = null;
         try {
+            String requete = "SELECT * FROM evenement e JOIN participation p ON e.id_e=p.id_e " ;
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 Evenement e = new Evenement();
-                e= new Evenement(rs.getInt("id_e"), rs.getString("id_nom"), rs.getString("lieu_e"), rs.getString("Date_e"),rs.getString("description_e"),rs.getString("image_e"));
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
+               
                 Participation p = new Participation();
-                p = new Participation(rs.getInt("id_e"), rs.getInt("id_u"), rs.getDate("date_insc"));
                 
+                p.setId_e(rs.getInt("id_e"));  
+                p.setId_u(rs.getInt("id_u"));  
+                p.setDate_insc(rs.getDate("date_insc"));  
+                
+                p.setEvent(e);
+                System.out.println(p.toString());
                 Listparticipation.add(p);
-
             }
-            return Listparticipation;
+         
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
