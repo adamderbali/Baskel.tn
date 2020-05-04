@@ -21,9 +21,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,6 +40,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -205,10 +209,20 @@ public class InscriptionController implements Initializable {
         if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
                 | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
                 | (txtconfirmation.getText().isEmpty())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Notifications notificationBuilder = Notifications.create()
+                    .text("LEs champs doivent etre remplis").title("Inscription").graphic(new ImageView(image)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    
+                    System.out.println("Done ! ");
+                }
+                
+            });
+            notificationBuilder.show();
+           /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Erreur d'ajout");
             alert.setContentText("Les champs nom ,prenom,adresse, email, telephone,mot de passe et confirmation doivent etre tout remplis svp");
-            alert.show();
+            alert.show();*/
             return false;
         } else {
             return true;

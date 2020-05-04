@@ -138,7 +138,7 @@ public class MotdepasseoubliéController implements Initializable {
     }
        @FXML
     void redirectionevenmn(ActionEvent event) throws IOException {
-   Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_Modifier_Supprimer_User.fxml"));
+   Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_List_Evenement_Ajout_Participation.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);

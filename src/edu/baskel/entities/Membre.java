@@ -10,7 +10,7 @@ import java.sql.Date;
 
 /**
  *
- * @author Skander
+ * @author adam
  */
 public class Membre {
 
