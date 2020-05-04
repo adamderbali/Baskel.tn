@@ -99,3 +99,4 @@ nbproject/
 build.xml
 manifest.mf
 lib/nblibraries.properties
+src/edu/baskel/entities/Membre.java
