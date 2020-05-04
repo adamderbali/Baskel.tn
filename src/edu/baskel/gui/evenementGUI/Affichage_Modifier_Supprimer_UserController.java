@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
@@ -108,7 +109,7 @@ public class Affichage_Modifier_Supprimer_UserController implements Initializabl
 
 
   ObservableList observableList;
-    
+    Membre m =SessionInfo.getLoggedM();
     
     public Affichage_Modifier_Supprimer_UserController(){
         ConnectionBD mc = ConnectionBD.getInstance();
@@ -119,7 +120,7 @@ public class Affichage_Modifier_Supprimer_UserController implements Initializabl
     {
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayAllList();
+        arrayList = (ArrayList) Ec.displayByUser(m.getId_u());
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
        

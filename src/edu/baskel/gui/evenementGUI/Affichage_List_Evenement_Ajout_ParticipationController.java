@@ -7,6 +7,7 @@ package edu.baskel.gui.evenementGUI;
 
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
@@ -35,89 +36,81 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-
 public class Affichage_List_Evenement_Ajout_ParticipationController implements Initializable {
-    
+
     @FXML
     private AnchorPane anchor1;
     @FXML
     private TableView<Evenement> tableAffichage;
     @FXML
-    private TableColumn<Evenement,String> colNom;
+    private TableColumn<Evenement, String> colNom;
 
     @FXML
-    private TableColumn<Evenement,String> colLieu;
+    private TableColumn<Evenement, String> colLieu;
 
     @FXML
-    private TableColumn<Evenement,String> colDate;
+    private TableColumn<Evenement, String> colDate;
 
     @FXML
-    private TableColumn<Evenement,String> colDescription;
+    private TableColumn<Evenement, String> colDescription;
 
     @FXML
-    private TableColumn<Evenement,String> colImage;
+    private TableColumn<Evenement, String> colImage;
 
-  @FXML
+    @FXML
     private JFXButton participer;
-   @FXML
+    @FXML
     private AnchorPane rootPaneA;
 
     @FXML
     private JFXButton btnAjout;
-                @FXML
+    @FXML
     private AnchorPane rootPane;
-    
-    public Affichage_List_Evenement_Ajout_ParticipationController(){
-        
+    Membre m = SessionInfo.getLoggedM();
+
+    public Affichage_List_Evenement_Ajout_ParticipationController() {
+
         ConnectionBD mc = ConnectionBD.getInstance();
-        
+
     }
 
     /*Affichage les champs dans le table view*/
-    public void affichageEvenement()
-    {
-       
-      
-            EvenementCRUD Ec = new EvenementCRUD();
-            ArrayList arrayList;
-            arrayList = (ArrayList) Ec.displayAllList();
-            ObservableList obser;
-            obser = FXCollections.observableArrayList(arrayList);
-            colNom.setCellValueFactory(new PropertyValueFactory <>("nom_e"));
-            colLieu.setCellValueFactory(new PropertyValueFactory <>("lieu_e"));
-            colDate.setCellValueFactory(new PropertyValueFactory <>("date_e"));
-            colDescription.setCellValueFactory(new PropertyValueFactory <>("description_e"));
-            colImage.setCellValueFactory(new PropertyValueFactory <>("image_e"));
-            tableAffichage.setItems(obser);
-  
-    }
-    
-    
+    public void affichageEvenement() {
 
-    
-    
+        EvenementCRUD Ec = new EvenementCRUD();
+        ArrayList arrayList;
+        arrayList = (ArrayList) Ec.displayAllList();
+        ObservableList obser;
+        obser = FXCollections.observableArrayList(arrayList);
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+        tableAffichage.setItems(obser);
+
+    }
+
     /* ajout de participation*/
     @FXML
     void participerEvenement(ActionEvent event) {
-        
-         
-            ParticipationCrud Pc = new ParticipationCrud();
-            int id_us = SessionInfo.iduser;
-            Participation p = new Participation (tableAffichage.getSelectionModel().getSelectedItem().getId_e(),2);
-            Pc.ajouterParticipation(p);
-         /* sendMail Sm = new sendMail();
+
+        ParticipationCrud Pc = new ParticipationCrud();
+        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), m.getId_u());
+        Pc.ajouterParticipation(p);
+        /* sendMail Sm = new sendMail();
             Sm.envoiMail("");*/
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Particpation ok");
-            alert1.setContentText("Vous avez particper");
-           
-            alert1.show();
+        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Particpation ok");
+        alert1.setContentText("Vous avez particper");
+
+        alert1.show();
 
     }
-  
-@FXML
+
+    @FXML
     void lancerAjout(ActionEvent event) {
-        
+
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Ajouter_Evenement.fxml"));
             rootPaneA.getChildren().setAll(pane);
@@ -129,7 +122,7 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       affichageEvenement();
-    }    
-    
+        affichageEvenement();
+    }
+
 }
