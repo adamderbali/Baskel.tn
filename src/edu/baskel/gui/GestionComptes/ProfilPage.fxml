@@ -30,7 +30,7 @@
       <Button fx:id="btnmodifier1" layoutX="491.0" layoutY="492.0" mnemonicParsing="false" onAction="#chagerInfos2" text="modifier" />
       <Button fx:id="btnconfirmer1" layoutX="605.0" layoutY="492.0" mnemonicParsing="false" onAction="#confirmermodif" text="Confirmer " />
       <ImageView fx:id="imagev" fitHeight="194.0" fitWidth="231.0" layoutX="544.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnimage" layoutX="714.0" layoutY="245.0" mnemonicParsing="false" text="image" />
+      <Button fx:id="btnimage" layoutX="714.0" layoutY="245.0" mnemonicParsing="false" onAction="#filephoto" text="image" />
       <TextField fx:id="thximage" layoutX="546.0" layoutY="245.0" prefHeight="31.0" prefWidth="162.0" />
       <Text layoutX="48.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
          <font>

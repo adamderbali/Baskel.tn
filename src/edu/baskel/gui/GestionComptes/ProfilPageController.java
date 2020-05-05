@@ -16,6 +16,7 @@ import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import static edu.baskel.utils.SessionInfo.iduser;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -24,18 +25,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -109,6 +117,7 @@ public class ProfilPageController implements Initializable {
 
     @FXML
     private Text telpro;
+    
 
     @FXML
     private FontAwesomeIconView chkmotdepasse;
@@ -145,6 +154,19 @@ public class ProfilPageController implements Initializable {
         } else {
             informationReparateur();
         }
+        System.out.println(l.getImage_u());
+        if (l.getImage_u()!= null)
+             {
+             Image imagelog;
+             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\"+l.getImage_u());
+      
+                        SnapshotParameters parameters = new SnapshotParameters();
+                        parameters.setFill(Color.TRANSPARENT);
+                        WritableImage image = imagev.snapshot(parameters, null);
+                        imagev.setClip(null);
+                        imagev.setEffect(new DropShadow(20, Color.BLACK));
+                        imagev.setImage(imagelog);
+             }
     }
 
     public ProfilPageController() {
@@ -161,6 +183,7 @@ public class ProfilPageController implements Initializable {
         nvpass.setText(l.getMot_passe_u());
         profilteleph.setText(l.getNum_tel_u());
         profildate.setText(l.getDate_u().toString());
+  thximage.setText(l.getImage_u());
     }
 
     public boolean informationReparateur() {
@@ -259,6 +282,25 @@ public class ProfilPageController implements Initializable {
 
     }
      */
+      @FXML
+    private void filephoto(ActionEvent event) throws IOException {
+        System.out.println("Esprit.Projet.PIDEV.Vus.AdminAccuielFXMLController.filephoto()");
+        FileChooser fileChooser = new FileChooser();
+        final Stage stage = new Stage();
+        Image imagelog;
+         file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+            InputValidation u = new InputValidation();
+            System.out.println(photo);
+            String photo1 ; 
+            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+          //  System.out.println(photo);
+            u.CopyImage(photo1, file.toPath().toString());
+             imagelog = new Image("file:/"+photo1);
+             imagev.setImage(imagelog);
+        }
+           }
     public boolean validerchamps2() {
         String nvd = nvdate.getValue().toString();
         if ((profilnom.getText().isEmpty()) | (profilprenom.getText().isEmpty()) | (profiladresse.getText().isEmpty())

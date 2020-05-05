@@ -70,6 +70,7 @@ public class MotdepasseoubliéController implements Initializable {
     private String question;
     private String motdepasse;
     int ran;
+    Membre m = SessionInfo.getLoggedM();
 
     /**
      * Initializes the controller class.
@@ -128,7 +129,7 @@ public class MotdepasseoubliéController implements Initializable {
 
     @FXML
     public void backSidentifier(MouseEvent event) throws IOException {
-
+        System.out.println(m.getImage_u());
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

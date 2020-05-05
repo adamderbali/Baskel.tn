@@ -20,12 +20,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,8 +39,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -97,6 +94,7 @@ public class InscriptionController implements Initializable {
     private JFXTextField txtshowpass;
     @FXML
     private JFXTextField txtshowcpass;
+    String photo = null ;  
 
     public InscriptionController() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -124,6 +122,107 @@ public class InscriptionController implements Initializable {
         return false;
     }
      */
+    
+    
+    
+    public boolean validerchamps() {
+        if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
+                | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
+                | (txtconfirmation.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Erreur d'ajout");
+            alert.setContentText("Les champs nom ,prenom,adresse, email, telephone,mot de passe et confirmation doivent etre tout remplis svp");
+            alert.show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+/*
+//pour l upload d une photo
+    @FXML
+    public void telechargerPhoto(ActionEvent event) throws IOException {
+
+        FileChooser filechooser = new FileChooser();
+
+        filechooser.setTitle("Open file dialog");
+        Stage stage = (Stage) anchor.getScene().getWindow();
+        File file = filechooser.showOpenDialog(stage);
+
+        if (file != null) {
+            txtimage.setText(file.getAbsolutePath());
+            System.out.println("" + file.getAbsolutePath());
+
+            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
+            img.setImage(image);
+            img.setPreserveRatio(true);
+
+        }
+    }*/
+      @FXML
+    void File(MouseEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        final Stage stage = new Stage();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+                        image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
+
+            txtimage.setText(photo);
+            InputValidation u = new InputValidation();
+             String photo1 ; 
+            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+            System.out.println(photo);
+            u.CopyImage(photo1, file.toPath().toString());
+            img.setImage(image);
+            
+        }
+           }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb
+    ) {
+        txtmotdepasse.setVisible(true);
+        txtconfirmation.setVisible(true);
+        txtshowpass.setVisible(false);
+        txtshowcpass.setVisible(false);
+        /*
+        FileChooser filechooser = new FileChooser();
+
+        filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
+                new FileChooser.ExtensionFilter("Text File", "*.txt"));*/
+    }
+    
+      @FXML
+    public void VisualiserMPI(MouseEvent event) {
+        txtshowpass.setText(txtmotdepasse.getText());
+        txtshowcpass.setText(txtconfirmation.getText());
+        txtmotdepasse.setVisible(false);
+        txtconfirmation.setVisible(false);
+        txtshowpass.setVisible(true);
+        txtshowcpass.setVisible(true);
+    }
+
+    @FXML
+    public void hideMPI(MouseEvent event) {
+        txtmotdepasse.setVisible(true);
+        txtconfirmation.setVisible(true);
+        txtshowpass.setVisible(false);
+        txtshowcpass.setVisible(false);
+    }
+
+    public String sexeMembre() {
+        String message = "";
+        if (chkhomme.isSelected()) {
+            message += chkhomme.getText();
+        }
+        if (chkfemme.isSelected()) {
+            message += chkfemme.getText();
+        }
+        return message;
+    }
+
     //inscription d un simple membre
     @FXML
     public void InsertData1(ActionEvent event) {
@@ -185,6 +284,7 @@ public class InscriptionController implements Initializable {
                                         chkhomme.setSelected(false);
                                         chkfemme.setSelected(false);
                                         System.out.println("utilisateur ajouté");
+                                        
 
                                     } else {
                                         Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
@@ -203,95 +303,6 @@ public class InscriptionController implements Initializable {
                 }
             }
         }
-    }
-
-    public boolean validerchamps() {
-        if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
-                | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
-                | (txtconfirmation.getText().isEmpty())) {
-            Notifications notificationBuilder = Notifications.create()
-                    .text("LEs champs doivent etre remplis").title("Inscription").graphic(new ImageView(image)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    
-                    System.out.println("Done ! ");
-                }
-                
-            });
-            notificationBuilder.show();
-           /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Erreur d'ajout");
-            alert.setContentText("Les champs nom ,prenom,adresse, email, telephone,mot de passe et confirmation doivent etre tout remplis svp");
-            alert.show();*/
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-//pour l upload d une photo
-    @FXML
-    public void telechargerPhoto(ActionEvent event) throws IOException {
-
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.setTitle("Open file dialog");
-        Stage stage = (Stage) anchor.getScene().getWindow();
-        File file = filechooser.showOpenDialog(stage);
-
-        if (file != null) {
-            txtimage.setText(file.getAbsolutePath());
-            System.out.println("" + file.getAbsolutePath());
-
-            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
-            img.setImage(image);
-            img.setPreserveRatio(true);
-
-        }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb
-    ) {
-        txtmotdepasse.setVisible(true);
-        txtconfirmation.setVisible(true);
-        txtshowpass.setVisible(false);
-        txtshowcpass.setVisible(false);
-        
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt"));
-    }
-    
-      @FXML
-    public void VisualiserMPI(MouseEvent event) {
-        txtshowpass.setText(txtmotdepasse.getText());
-        txtshowcpass.setText(txtconfirmation.getText());
-        txtmotdepasse.setVisible(false);
-        txtconfirmation.setVisible(false);
-        txtshowpass.setVisible(true);
-        txtshowcpass.setVisible(true);
-    }
-
-    @FXML
-    public void hideMPI(MouseEvent event) {
-        txtmotdepasse.setVisible(true);
-        txtconfirmation.setVisible(true);
-        txtshowpass.setVisible(false);
-        txtshowcpass.setVisible(false);
-    }
-
-    public String sexeMembre() {
-        String message = "";
-        if (chkhomme.isSelected()) {
-            message += chkhomme.getText();
-        }
-        if (chkfemme.isSelected()) {
-            message += chkfemme.getText();
-        }
-        return message;
     }
 
     @FXML

@@ -1,5 +1,6 @@
 package edu.baskel.utils;
 
+import java.awt.TrayIcon;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,6 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.scene.control.Alert;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  *
@@ -93,12 +98,34 @@ public class InputValidation {
         output.close();
         inputStream.close();
     }
-    
-    public static String HshPassword(String password) throws NoSuchAlgorithmException{
+
+    public static String HshPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(password.getBytes(),0 , password.length());
-return password;
-}
-  
-    
+        md.update(password.getBytes(), 0, password.length());
+        return password;
+    }
+
+    public static void notificationError(String title, String message) {
+        TrayNotification tray = new TrayNotification();
+        AnimationType type = AnimationType.POPUP;
+
+        tray.setAnimationType(type);
+        tray.setTitle(title);
+        tray.setMessage(message);
+        tray.setNotificationType(NotificationType.ERROR);
+        tray.showAndDismiss(Duration.millis(3000));
+
+    }
+
+    public static void notificationsucces(String title, String message) {
+        TrayNotification tray = new TrayNotification();
+        AnimationType type = AnimationType.POPUP;
+
+        tray.setAnimationType(type);
+        tray.setTitle(title);
+        tray.setMessage(message);
+        tray.setNotificationType(NotificationType.SUCCESS);
+        tray.showAndDismiss(Duration.millis(3000));
+
+    }
 }

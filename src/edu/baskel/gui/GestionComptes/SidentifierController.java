@@ -95,37 +95,6 @@ public class SidentifierController implements Initializable {
         }
     }
 
-    /*
-    public int Verification() {
-        try {
-            String sq1 = "SELECT * FROM membre where email_u=? AND mot_passe_u=?";
-            String email = txtutilisateur.getText();
-            String mot_passe = txtmotdepasse.getText();
-            prep = cnx.prepareStatement(sq1);
-            prep.setString(1, email);
-            prep.setString(2, mot_passe);
-
-            res = prep.executeQuery();
-
-            if (!res.next()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Erreur d'authentification");
-                alert.setContentText("Erreur ,veuillez  verifier vos données");
-                alert.show();
-            } else {
-                lblreponse.setTextFill(Color.GREEN);
-                lblreponse.setText("OK!");
-                System.out.println("authentification ok!");
-                iduser = res.getInt("id_u");
-                System.out.println(iduser);
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        return iduser;
-
-    }
-     */
     @FXML
     public void VisualiserMP(MouseEvent event) {
         txtshowmp.setText(txtmotdepasse.getText());
@@ -175,13 +144,16 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getLoggedM();
                 System.out.println(SessionInfo.getInstance(iduser));
             } else {
+                
                 Alert alertn = new InputValidation().getAlert(" Erreur d'authentification", "vous etes banni s");
                 alertn.showAndWait();
             }
         } else {
+            InputValidation.notificationError("Erreur d'authentification", "veuillez  verifier vos données");
+            /*
             Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
             alertnum.showAndWait();
-
+*/
         }
     }
 

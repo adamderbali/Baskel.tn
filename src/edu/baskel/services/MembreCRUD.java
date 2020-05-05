@@ -162,7 +162,8 @@ public class MembreCRUD {
                 String adressem = res.getString("adresse_u");
                 String mpassem = res.getString("mot_passe_u");
                 Date datem = res.getDate("date_u");
-                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, datem, mpassem, telm);
+                String imagem = res.getString("image_u");
+                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, telm, datem, motdepasse, telm, imagem);
 
                 SessionInfo.setLoggedM(membreLogged);
 
