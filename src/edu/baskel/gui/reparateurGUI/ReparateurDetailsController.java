@@ -5,9 +5,12 @@
  */
 package edu.baskel.gui.reparateurGUI;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -23,11 +26,13 @@ public class ReparateurDetailsController implements Initializable {
      */
     @FXML
     private JFXTextField txtNom;
-    
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        txtNom.setText("khaled");
+       
+        
     }
-    
+
 }

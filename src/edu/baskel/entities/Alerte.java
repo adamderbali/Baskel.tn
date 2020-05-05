@@ -99,7 +99,7 @@ public class Alerte {
 
     @Override
     public String toString() {
-        return "Alerte{" + "id_alert=" + id_alert + ", description_a=" + description_a + ", latitude_a=" + latitude_a + ", longitude_a=" + longitude_a + ", date_a=" + date_a + '}' + membre.toString();
+        return "Alerte{" + "id_alert=" + id_alert + ", description_a=" + description_a + " adresse_a=" + adresse_a + ", latitude_a=" + latitude_a + ", longitude_a=" + longitude_a + ", date_a=" + date_a + '}' + membre.toString();
     }
 
 }
