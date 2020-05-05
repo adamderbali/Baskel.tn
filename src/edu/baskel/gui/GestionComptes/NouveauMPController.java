@@ -27,7 +27,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -46,14 +45,17 @@ public class NouveauMPController implements Initializable {
     @FXML
     private JFXButton btnConfirmation;
 
+    @FXML
+    private Button btnSidentifier2;
+    
+    @FXML
+    private JFXTextField txtm;
+    
     Stage owner;
     Connection cnx = null;
     PreparedStatement pst = null;
     ResultSet res = null;
-    @FXML
-    private Button btnSidentifier2;
-    @FXML
-    private JFXTextField txtm;
+    
 
     public void setTxtm(String txtmail) {
         this.txtm.setText(txtmail);
@@ -66,10 +68,12 @@ public class NouveauMPController implements Initializable {
         // TODO
     }
 
+    //cnx base de données
     public NouveauMPController() {
         cnx = ConnectionBD.getInstance().getCnx();
     }
 
+    //verifier la correspondance et reinitialiser le mot de passe
     @FXML
     public void changerMP(ActionEvent event) {
         if (txtNvMp.getText().equals(txtCnvMp.getText())) {
@@ -85,6 +89,7 @@ public class NouveauMPController implements Initializable {
         }
     }
 
+    //page d authentification
     @FXML
     public void backSidentifier2(MouseEvent event) throws IOException {
 

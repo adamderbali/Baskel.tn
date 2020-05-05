@@ -88,45 +88,11 @@ public class MotdepasseoubliéController implements Initializable {
 
     @FXML
     public void envoyerMail(ActionEvent event) {
-
+        
         e.envoyerMail1(txtentermail.getText());
-        /* try {
-            Random rann = new Random();
-            ran = rann.nextInt(999999);
-            System.out.println("Préparation de l envoie du mail");
-            String host = "smtp.gmail.com";
-            String user = "derbaliadam@gmail.com";
-            String pass = "gomugomuNOADAM";
-            String to = txtentermail.getText();
-            String subject = "reseting password";
-            String message = "Votre code de reinitalisation est " + " " + ran;
-            boolean sessionDebug = false;
-            Properties pros = System.getProperties();
-            pros.put("mail.smtp.starttls.enable", "true");
-            pros.put("mail.smtp.host", "host");
-            pros.put("mail.smtp.port", "587");
-            pros.put("mail.smtp.auth", "true");
-            pros.put("mail.smtp.starttls.required", "true");
-            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-            Session mailSession = Session.getDefaultInstance(pros, null);
-            mailSession.setDebug(sessionDebug);
-            Message msg = new MimeMessage(mailSession);
-            msg.setFrom(new InternetAddress(user));
-            InternetAddress[] address = {new InternetAddress(to)};
-            msg.setRecipients(Message.RecipientType.TO, address);
-            msg.setSubject(subject);
-            msg.setText(message);
-            Transport transport = mailSession.getTransport("smtp");
-            transport.connect(host, user, pass);
-            transport.sendMessage(msg, msg.getAllRecipients());
-            transport.close();
-            System.out.println("Email envoyé");
-
-        } catch (Exception ex) {
-
-        }*/
     }
 
+    //page d authentification
     @FXML
     public void backSidentifier(MouseEvent event) throws IOException {
         System.out.println(m.getImage_u());
@@ -137,6 +103,8 @@ public class MotdepasseoubliéController implements Initializable {
         app_stage.show();
 
     }
+    
+    //page...
        @FXML
     void redirectionevenmn(ActionEvent event) throws IOException {
    Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_List_Evenement_Ajout_Participation.fxml"));
@@ -146,15 +114,10 @@ public class MotdepasseoubliéController implements Initializable {
         app_stage.show();
     }
 
+    //varification code envoyé par mail
     @FXML
     public void verifierCode(ActionEvent event) throws IOException {
-        if ((e.verifierCode1(txtcode.getText()) == true)) /*if (Integer.valueOf(txtcode.getText()) == ran) */ {
-           /* Parent redirection_parent = FXMLLoader.load(getClass().getResource("NouveauMP.fxml"));
-            Scene redirection_scene = new Scene(redirection_parent);
-            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            app_stage.setScene(redirection_scene);
-            app_stage.setAlwaysOnTop(false);
-            app_stage.show();*/
+        if ((e.verifierCode1(txtcode.getText()) == true)) {
            FXMLLoader loader = new FXMLLoader(getClass().getResource("NouveauMP.fxml"));
            Parent root2 = loader.load();
            NouveauMPController nmp = loader.getController();
@@ -166,14 +129,16 @@ public class MotdepasseoubliéController implements Initializable {
 
     }
 
+    //supprimer son compte
     @FXML
     void supprimerCompte(ActionEvent event) {
         MembreCRUD mr1 = new MembreCRUD();
-        Membre l = SessionInfo.getLoggedM();// a voir bel iduser wela bel loggedm
-        mr1.supprimerMembre(l.getId_u());//iduser);
+        Membre l = SessionInfo.getLoggedM();
+        mr1.supprimerMembre(l.getId_u());
     }
 
-    @FXML  //page d acceuil
+    //page d acceuil
+    @FXML  
     void SeDeconnecter(ActionEvent event) throws IOException {
 
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
@@ -187,7 +152,8 @@ public class MotdepasseoubliéController implements Initializable {
 
     }
 
-    @FXML//page d acceuil
+    //fermer l application
+    @FXML
     void Quitter(ActionEvent event) {
         Platform.exit();
     }

@@ -22,6 +22,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +94,7 @@ public class InscriptionReparateurController implements Initializable {
     private JFXTextField txttelpro;
     @FXML
     private JFXTextField txtadrlocal;
+    
     Connection cnx;
     private PreparedStatement prep;
     private ResultSet res;
@@ -109,11 +111,6 @@ public class InscriptionReparateurController implements Initializable {
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
 
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt"));
     }
 
     // inscription d un reparateur
@@ -201,7 +198,7 @@ public class InscriptionReparateurController implements Initializable {
         }
     }
 
-    
+//validation champs vides    
     public boolean validerchamps() {
         if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
                 | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
@@ -216,29 +213,28 @@ public class InscriptionReparateurController implements Initializable {
         }
     }
 
-//pour l upload d une photo
-    @FXML
-    public void telechargerPhoto(ActionEvent event) throws IOException {
-
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.setTitle("Open file dialog");
-        Stage stage = (Stage) anchor.getScene().getWindow();
-        File file = filechooser.showOpenDialog(stage);
-
+//pour l upload d une photo   
+       @FXML
+    void telechargerPhoto(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        final Stage stage = new Stage();
+        File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
-            txtimage.setText(file.getAbsolutePath());
-            System.out.println("" + file.getAbsolutePath());
+            String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+                        image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
 
-            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
+            txtimage.setText(photo);
+            InputValidation u = new InputValidation();
+             String photo1 ; 
+            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+            System.out.println(photo);
+            u.CopyImage(photo1, file.toPath().toString());
             img.setImage(image);
-            img.setPreserveRatio(true);
-
+            
         }
-    }
+           }
 
-   
-
+    //voir MP
     @FXML
     public void VisualiserMPI(MouseEvent event) {
         txtshowpass.setText(txtmotdepasse.getText());
@@ -249,6 +245,7 @@ public class InscriptionReparateurController implements Initializable {
         txtshowcpass.setVisible(true);
     }
 
+    //cacher MP
     @FXML
     public void hideMPI(MouseEvent event) {
         txtmotdepasse.setVisible(true);
@@ -257,6 +254,7 @@ public class InscriptionReparateurController implements Initializable {
         txtshowcpass.setVisible(false);
     }
 
+    //chosiir sexe
     public String sexeMembre() {
         String message = "";
         if (chkhomme.isSelected()) {
@@ -268,6 +266,7 @@ public class InscriptionReparateurController implements Initializable {
         return message;
     }
 
+    //page profil
     @FXML
     public void ProfilPage(ActionEvent event) {
         try {

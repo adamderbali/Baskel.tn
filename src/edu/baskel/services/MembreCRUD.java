@@ -25,14 +25,6 @@ import javafx.stage.Stage;
  */
 public class MembreCRUD {
 
-    /* public static String nomm;
-    public static String prenomm;
-    public static String telm;
-    public static String emailm;
-    public static String adressem;
-    public static String mpassem;
-    public static String datem;
-     */
     Connection cnx;
     Stage owner = new Stage();
     Membre membreLogged;
@@ -41,8 +33,8 @@ public class MembreCRUD {
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
     }
+    
 //ajouter membre
-
     public Membre ajouterMembres2(Membre m) {
         try {
             String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u)"
@@ -57,7 +49,6 @@ public class MembreCRUD {
             pst.setString(7, m.getMot_passe_u());
             pst.setString(8, m.getNum_tel_u());
             pst.setString(9, m.getImage_u());
-            //pst.setString(10, 0); lezem nbadalha int
 
             pst.executeUpdate();
 
@@ -66,11 +57,11 @@ public class MembreCRUD {
         }
         return m;
     }
+    
 // update info d un membre
-
     public void updateMembre(Membre m) {
         try {
-            String requete = "UPDATE membre SET nom_u=?, prenom_u=?, adresse_u=?,email_u=?, sexe_u=?, date_u=?, mot_passe_u=?, num_tel_u=? WHERE id_u=? ";
+            String requete = "UPDATE membre SET nom_u=?, prenom_u=?, adresse_u=?,email_u=?, sexe_u=?, date_u=?, mot_passe_u=?, num_tel_u=?, image_u=? WHERE id_u=? ";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(9, m.getId_u());
             pst.setString(1, m.getNom_u());
@@ -81,7 +72,7 @@ public class MembreCRUD {
             pst.setDate(6, m.getDate_u());
             pst.setString(7, m.getMot_passe_u());
             pst.setString(8, m.getNum_tel_u());
-            //pst.setString(9, m.getImage_u());
+            pst.setString(9, m.getImage_u());
 
             pst.executeUpdate();
             System.out.println("personne modifié");
@@ -92,7 +83,7 @@ public class MembreCRUD {
 
 //affichage de liste de tt les membres
     public List<Membre> getlistMembre() {
-        List<Membre> listeMembre = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
+        List<Membre> listeMembre = new ArrayList<>();
 
         try {
             String requete = "SELECT* FROM membre";
@@ -216,6 +207,36 @@ public class MembreCRUD {
         return user;
     }
     
+    //afficher un membre by id
+    public void AfficherMembreById(int id) {
+        String requet = "SELECT * FROM membre WHERE id_u=?";
+        try {
+            Membre m = new Membre();
+            PreparedStatement pst = cnx.prepareStatement(requet);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            System.out.println("donné afficher");
+            if (rs.next()) {
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                m.setAdresse_u(rs.getString("adresse_u"));
+                m.setNum_tel_u(rs.getString("num_tel_u"));
+                m.setMot_passe_u(rs.getString("mot_passe_u"));
+                m.setDate_u(rs.getDate("date_u"));
+                m.setImage_u(rs.getString("image_u"));
+                m.setType_u(rs.getString("type_u"));
+                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
+                m.setValidation_u(rs.getInt("validation_u"));
+
+            } else {
+                System.out.println("erreur d affcihage");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
 // afficher les info d  un seul membre
     public void AfficherMembre(Membre m) {
         String requet = "SELECT * FROM membre WHERE id_u=?";
@@ -231,7 +252,10 @@ public class MembreCRUD {
                 m.setAdresse_u(rs.getString("adresse_u"));
                 m.setNum_tel_u(rs.getString("num_tel_u"));
                 m.setMot_passe_u(rs.getString("mot_passe_u"));
-                m.setDate_u(rs.getDate("date_u"));
+                m.setDate_u(rs.getDate("date_u"));m.setImage_u(rs.getString("image_u"));
+                m.setType_u(rs.getString("type_u"));
+                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
+                m.setValidation_u(rs.getInt("validation_u"));
 
             } else {
                 System.out.println("erreur d affcihage");
@@ -241,63 +265,7 @@ public class MembreCRUD {
         }
 
     }
-// partie a voir
 
-
-    /*
-            public void AfficherMembre(int id) {
-            String requet = "SELECT * FROM membre WHERE id_u=?";
-            try {
-            PreparedStatement pst = cnx.prepareStatement(requet);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            System.out.println("donné afficher");
-            if (rs.next()) {
-            nomm = rs.getString("nom_u");
-            prenomm = rs.getString("prenom_u");
-            emailm = rs.getString("email_u");
-            adressem = rs.getString("adresse_u");
-            telm = rs.getString("num_tel_u");
-            mpassem = rs.getString("mot_passe_u");
-            datem = rs.getDate("date_u").toString();
-            System.out.println(datem);
-            
-            } else {
-            System.out.println("erreur d affcihage");
-            }
-            } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            }
-            
-            }
-     */
- /*
-    public void AfficherMembre(int id) {
-        String requet = "SELECT * FROM membre WHERE id_u=?";
-        try {
-            PreparedStatement pst = cnx.prepareStatement(requet);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            System.out.println("donné afficher");
-            if (rs.next()) {
-                nomm = rs.getString("nom_u");
-                prenomm = rs.getString("prenom_u");
-                emailm = rs.getString("email_u");
-                adressem = rs.getString("adresse_u");
-                telm = rs.getString("num_tel_u");
-                mpassem = rs.getString("mot_passe_u");
-                datem = rs.getDate("date_u").toString();
-                System.out.println(datem);
-
-            } else {
-                System.out.println("erreur d affcihage");
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-    }
-     */
     // veriffication par mot de passe avant la modif des info
     public boolean VerificationChgInfo(String mot_pas) {
         try {
@@ -307,10 +275,7 @@ public class MembreCRUD {
             ResultSet res = pst.executeQuery();
 
             if (!res.next()) {
-                /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Erreur");
-                alert.setContentText("Mot de passe incorrectS");
-                alert.show();*/
+                
                 return false;
             }
         } catch (SQLException ex) {
@@ -319,8 +284,8 @@ public class MembreCRUD {
         return true;
 
     }
+    
 // update du mot de passe (forgot password)
-
     public void changerMP(String eml, String passm) {
 
         try {
@@ -334,8 +299,8 @@ public class MembreCRUD {
 
         }
     }
+    
 // suprression d un compte par son utilisateur
-
     public void supprimerMembre(int id) {
         Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
         alert1.setTitle("supression compte");
@@ -355,6 +320,8 @@ public class MembreCRUD {
             }
         }
     }
+    
+    //ajouter ban
     public void ajouterban(int id){
         String query = null;
         try {

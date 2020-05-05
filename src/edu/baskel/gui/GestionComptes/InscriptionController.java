@@ -1,4 +1,3 @@
-
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
@@ -30,7 +29,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -80,12 +78,8 @@ public class InscriptionController implements Initializable {
     @FXML
     private ImageView img;
     private Image image;
-    @FXML 
+    @FXML
     private Button btnprofil;
-    
-    Connection cnx;
-    private PreparedStatement prep;
-    private ResultSet res;
     @FXML
     private Pane btnreparateur;
     @FXML
@@ -94,37 +88,18 @@ public class InscriptionController implements Initializable {
     private JFXTextField txtshowpass;
     @FXML
     private JFXTextField txtshowcpass;
-    String photo = null ;  
+    
+    String photo = null;
+    Connection cnx;
+    private PreparedStatement prep;
+    private ResultSet res;
 
     public InscriptionController() {
         cnx = ConnectionBD.getInstance().getCnx();
-        
-    }
 
-    /*
-    public boolean VerificationExistence() {
-        try {
-            String sq1 = "SELECT * FROM membre where email_u=?";
-            String emailV = txtemail.getText();
-            prep = cnx.prepareStatement(sq1);
-            prep.setString(1, emailV);
-            res = prep.executeQuery();
-            if (res.next()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Erreur d'authentification");
-                alert.setContentText("Vous etre deja inscris avec cette adresse");
-                alert.show();
-                return true;
-            }
-        } catch (Exception ex) {
-            
-        }
-        return false;
     }
-     */
     
-    
-    
+// validation champs non vides
     public boolean validerchamps() {
         if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
                 | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
@@ -138,46 +113,27 @@ public class InscriptionController implements Initializable {
             return true;
         }
     }
-/*
-//pour l upload d une photo
+
+//choidir une photo de profil
     @FXML
-    public void telechargerPhoto(ActionEvent event) throws IOException {
-
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.setTitle("Open file dialog");
-        Stage stage = (Stage) anchor.getScene().getWindow();
-        File file = filechooser.showOpenDialog(stage);
-
-        if (file != null) {
-            txtimage.setText(file.getAbsolutePath());
-            System.out.println("" + file.getAbsolutePath());
-
-            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
-            img.setImage(image);
-            img.setPreserveRatio(true);
-
-        }
-    }*/
-      @FXML
     void File(MouseEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         final Stage stage = new Stage();
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
-                        image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
+            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
 
             txtimage.setText(photo);
             InputValidation u = new InputValidation();
-             String photo1 ; 
+            String photo1;
             photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
             System.out.println(photo);
             u.CopyImage(photo1, file.toPath().toString());
             img.setImage(image);
-            
+
         }
-           }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb
@@ -186,15 +142,11 @@ public class InscriptionController implements Initializable {
         txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
-        /*
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt"));*/
+        
     }
     
-      @FXML
+//voir mot de passe
+    @FXML
     public void VisualiserMPI(MouseEvent event) {
         txtshowpass.setText(txtmotdepasse.getText());
         txtshowcpass.setText(txtconfirmation.getText());
@@ -204,6 +156,7 @@ public class InscriptionController implements Initializable {
         txtshowcpass.setVisible(true);
     }
 
+    //cacher mot de passe
     @FXML
     public void hideMPI(MouseEvent event) {
         txtmotdepasse.setVisible(true);
@@ -212,6 +165,7 @@ public class InscriptionController implements Initializable {
         txtshowcpass.setVisible(false);
     }
 
+    //choisir sexe
     public String sexeMembre() {
         String message = "";
         if (chkhomme.isSelected()) {
@@ -257,7 +211,7 @@ public class InscriptionController implements Initializable {
                         alertEmail.showAndWait();
                     } else {
                         if (InputValidation.validPwd(txtmotdepasse.getText()) == 0) {
-                            Alert alertnum = new InputValidation().getAlert("Numero TelephoneMot de passe", "Saisissez un mot de passe valide");
+                            Alert alertnum = new InputValidation().getAlert("Mot de passe", "Saisissez un mot de passe valide");
                             alertnum.showAndWait();
                         } else {
                             if (InputValidation.PhoneNumber(txttelephone.getText()) == 0) {
@@ -284,7 +238,6 @@ public class InscriptionController implements Initializable {
                                         chkhomme.setSelected(false);
                                         chkfemme.setSelected(false);
                                         System.out.println("utilisateur ajouté");
-                                        
 
                                     } else {
                                         Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
@@ -305,6 +258,7 @@ public class InscriptionController implements Initializable {
         }
     }
 
+    //page de profil
     @FXML
     public void ProfilPage(ActionEvent event) {
         try {
@@ -319,5 +273,5 @@ public class InscriptionController implements Initializable {
             System.out.println(ex.getMessage());
         }
     }
-   
+
 }

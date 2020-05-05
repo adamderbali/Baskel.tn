@@ -8,13 +8,6 @@ package edu.baskel.services;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -29,7 +22,7 @@ public class EnvoiMail {
     int ran;
     
     
-    
+    //envoyer un mail avec le code de reinitialisation mot de passe
     public void envoyerMail1(String too) {
         try {
             Random rann = new Random();
@@ -68,7 +61,7 @@ public class EnvoiMail {
         }
     }
     
-    
+    //verifier le code envoyé avant dla reinitialisation de MP
     public boolean verifierCode1(String code) throws IOException {
 
         if (Integer.valueOf(code) == ran) {

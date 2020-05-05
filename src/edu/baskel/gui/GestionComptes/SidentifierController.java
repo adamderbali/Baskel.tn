@@ -44,7 +44,6 @@ import javafx.stage.Stage;
  * @author dell
  */
 public class SidentifierController implements Initializable {
-//test git 2020
 
     @FXML
     private TextField txtutilisateur;
@@ -68,7 +67,6 @@ public class SidentifierController implements Initializable {
     private FontAwesomeIconView chkmotdepasse;
     @FXML
     private JFXButton btnsinscrire1;
-    
 
     Preferences preferences;
     private int idu;
@@ -94,21 +92,24 @@ public class SidentifierController implements Initializable {
             }
         }
     }
-
+    
+// visualiser le mot de passe
     @FXML
     public void VisualiserMP(MouseEvent event) {
         txtshowmp.setText(txtmotdepasse.getText());
         txtmotdepasse.setVisible(false);
         txtshowmp.setVisible(true);
     }
-
+    
+// cacher le mot de passe
     @FXML
     public void hideMP(MouseEvent event) {
         txtshowmp.setText(txtmotdepasse.getText());
         txtmotdepasse.setVisible(true);
         txtshowmp.setVisible(false);
     }
-
+    
+//se connecter et se souvenir de moi
     @FXML
     public void loggin1(ActionEvent event) {
         MembreCRUD mr = new MembreCRUD();
@@ -144,7 +145,7 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getLoggedM();
                 System.out.println(SessionInfo.getInstance(iduser));
             } else {
-                
+
                 Alert alertn = new InputValidation().getAlert(" Erreur d'authentification", "vous etes banni s");
                 alertn.showAndWait();
             }
@@ -153,7 +154,7 @@ public class SidentifierController implements Initializable {
             /*
             Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
             alertnum.showAndWait();
-*/
+             */
         }
     }
 
@@ -161,6 +162,7 @@ public class SidentifierController implements Initializable {
     private void handleButtonAction(MouseEvent event) {
 
     }
+//redirection pasge d inscription membre
 
     @FXML
     public void RedirectionRegistration(ActionEvent event) throws IOException {
@@ -172,6 +174,7 @@ public class SidentifierController implements Initializable {
 
     }
 
+//redirection page inscription membre
     @FXML
     public void RedirectionRegistrationRep(ActionEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("InscriptionReparateur.fxml"));
@@ -182,6 +185,7 @@ public class SidentifierController implements Initializable {
 
     }
 
+//page mot de passe oublié
     @FXML
     public void motdepasseOubliéid(MouseEvent event) throws IOException {
 

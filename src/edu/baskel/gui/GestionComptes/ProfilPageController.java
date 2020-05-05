@@ -117,7 +117,6 @@ public class ProfilPageController implements Initializable {
 
     @FXML
     private Text telpro;
-    
 
     @FXML
     private FontAwesomeIconView chkmotdepasse;
@@ -130,15 +129,12 @@ public class ProfilPageController implements Initializable {
     private Image image;
     Connection cnx;
     Membre l = SessionInfo.getLoggedM();
-    
 
-    /**
-     * Initializes the controller class.
-     */
+    //afficher la photo de profil
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO M
-        
+
         profildate.setVisible(true);
         chkmotdepasse2.setVisible(false);
         nvdate.setVisible(false);
@@ -155,24 +151,25 @@ public class ProfilPageController implements Initializable {
             informationReparateur();
         }
         System.out.println(l.getImage_u());
-        if (l.getImage_u()!= null)
-             {
-             Image imagelog;
-             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\"+l.getImage_u());
-      
-                        SnapshotParameters parameters = new SnapshotParameters();
-                        parameters.setFill(Color.TRANSPARENT);
-                        WritableImage image = imagev.snapshot(parameters, null);
-                        imagev.setClip(null);
-                        imagev.setEffect(new DropShadow(20, Color.BLACK));
-                        imagev.setImage(imagelog);
-             }
+        if (l.getImage_u() != null) {
+            Image imagelog;
+            imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
+
+            SnapshotParameters parameters = new SnapshotParameters();
+            parameters.setFill(Color.TRANSPARENT);
+            WritableImage image = imagev.snapshot(parameters, null);
+            imagev.setClip(null);
+            imagev.setEffect(new DropShadow(20, Color.BLACK));
+            imagev.setImage(imagelog);
+        }
     }
 
+    //connexion
     public ProfilPageController() {
         cnx = ConnectionBD.getInstance().getCnx();
     }
 
+    //information du membre a afficher ds le profil
     public void informationMembre() {
 
         lblprofil.setText(l.getNom_u() + " " + l.getPrenom_u());
@@ -183,12 +180,12 @@ public class ProfilPageController implements Initializable {
         nvpass.setText(l.getMot_passe_u());
         profilteleph.setText(l.getNum_tel_u());
         profildate.setText(l.getDate_u().toString());
-  thximage.setText(l.getImage_u());
+        thximage.setText(l.getImage_u());
     }
 
+    //information reparateur a afficher ds le profil
     public boolean informationReparateur() {
 
-        //afficher reparateur
         String req = "select * from reparateur where id_u=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(req);
@@ -259,58 +256,39 @@ public class ProfilPageController implements Initializable {
         txtshowc.setVisible(false);
     }
 
-    /*
+    //changer la photo de profil
     @FXML
-    public void filephoto(MouseEvent event) throws IOException {
-
+    private void filephoto(ActionEvent event) throws IOException {
+        System.out.println("Esprit.Projet.PIDEV.Vus.AdminAccuielFXMLController.filephoto()");
         FileChooser fileChooser = new FileChooser();
         final Stage stage = new Stage();
         Image imagelog;
         file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+            thximage.setText(photo);
             InputValidation u = new InputValidation();
-
             System.out.println(photo);
             String photo1;
-
-            photo1 = "C:\\wamp\\www\\Baskel\\" + photo;
-            u.CopyImage(photo1, file.toPath().toString());
-            image = new Image("file:/" + photo1);
-            imagev.setImage(image);
-        }
-
-    }
-     */
-      @FXML
-    private void filephoto(ActionEvent event) throws IOException {
-        System.out.println("Esprit.Projet.PIDEV.Vus.AdminAccuielFXMLController.filephoto()");
-        FileChooser fileChooser = new FileChooser();
-        final Stage stage = new Stage();
-        Image imagelog;
-         file = fileChooser.showOpenDialog(stage);
-        if (file != null) {
-            photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
-            InputValidation u = new InputValidation();
-            System.out.println(photo);
-            String photo1 ; 
             photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
-          //  System.out.println(photo);
+            //  System.out.println(photo);
             u.CopyImage(photo1, file.toPath().toString());
-             imagelog = new Image("file:/"+photo1);
-             imagev.setImage(imagelog);
+            imagelog = new Image("file:/" + photo1);
+            imagev.setImage(imagelog);
         }
-           }
+    }
+
+    //valider les champs modifier
     public boolean validerchamps2() {
         String nvd = nvdate.getValue().toString();
         if ((profilnom.getText().isEmpty()) | (profilprenom.getText().isEmpty()) | (profiladresse.getText().isEmpty())
                 | (profilmail.getText().isEmpty()) | (profilteleph.getText().isEmpty()) | (nvpass.getText().isEmpty())
-                | (cnvpass.getText().isEmpty()) | nvd == null ){
+                | (cnvpass.getText().isEmpty()) | nvd == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Erreur d'ajout");
             alert.setContentText("Les champs nom ,prenom,adresse, email, telephone,mot de passe et confirmation doivent etre tout remplis svp");
             alert.show();
-                    System.out.println(nvd);
+            System.out.println(nvd);
 
             return false;
         } else {
@@ -318,6 +296,7 @@ public class ProfilPageController implements Initializable {
         }
     }
 
+    //confirmer les modification et les enregistrés
     @FXML
     public void confirmermodif(ActionEvent event) {
         Date nvd = java.sql.Date.valueOf(nvdate.getValue());
@@ -346,7 +325,7 @@ public class ProfilPageController implements Initializable {
                             } else if ((nvpass.getText()).equals(cnvpass.getText())) {
                                 MembreCRUD mrcc = new MembreCRUD();
                                 Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
-                                        profilmail.getText(), "homme", nvd, nvpass.getText(), profilteleph.getText());
+                                        profilmail.getText(), l.getSexe_u(), nvd, nvpass.getText(), profilteleph.getText(), thximage.getText());
                                 m1.setId_u(iduser);
                                 mrcc.updateMembre(m1);
                                 System.out.println("modifie");
