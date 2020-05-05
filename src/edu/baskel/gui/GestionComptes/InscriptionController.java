@@ -9,6 +9,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
+import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import java.io.File;
@@ -29,6 +30,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,6 +39,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -88,6 +91,8 @@ public class InscriptionController implements Initializable {
     private JFXTextField txtshowpass;
     @FXML
     private JFXTextField txtshowcpass;
+    @FXML
+    private TextField auto;
     
     String photo = null;
     Connection cnx;
@@ -143,6 +148,8 @@ public class InscriptionController implements Initializable {
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
         
+        
+        TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
     }
     
 //voir mot de passe

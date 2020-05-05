@@ -154,7 +154,11 @@ public class MembreCRUD {
                 String mpassem = res.getString("mot_passe_u");
                 Date datem = res.getDate("date_u");
                 String imagem = res.getString("image_u");
-                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, telm, datem, motdepasse, telm, imagem);
+                String typem =res.getString("type_u");
+                int validationm = res.getInt("validation_u");
+                int nbr_banm = res.getInt("nbr_ban_u");
+                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, telm, datem, 
+                        motdepasse, telm, imagem, typem, validationm, nbr_banm);
 
                 SessionInfo.setLoggedM(membreLogged);
 
@@ -166,7 +170,6 @@ public class MembreCRUD {
             System.err.println(ex.getMessage());
         }
         return membreLogged;
-        //return true;
 
     }
 
@@ -189,20 +192,15 @@ public class MembreCRUD {
 
 // ajouter user a l inscription
     public Membre AddUser(Membre user) {
-
-        //if (user instanceof Membre) {
-        this.ajouterMembres2(user);
-
-        //}
+        this.ajouterMembres2(user);       
         return user;
     }
 
     public Reparateur adduser2(Reparateur user) {
 
-        // if (user instanceof Reparateur) {
         ReparateurCRUD rc = new ReparateurCRUD();
         rc.ajouterReparateur((Reparateur) user);
-        //}
+       
 
         return user;
     }
@@ -241,7 +239,7 @@ public class MembreCRUD {
     }
 // afficher les info d  un seul membre
 
-    public void AfficherMembre(Membre m) {
+    public Membre AfficherMembre(Membre m) {
         String requet = "SELECT * FROM membre WHERE id_u=?";
         try {
             PreparedStatement pst = cnx.prepareStatement(requet);
@@ -267,7 +265,7 @@ public class MembreCRUD {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        return m;
     }
 
     // veriffication par mot de passe avant la modif des info

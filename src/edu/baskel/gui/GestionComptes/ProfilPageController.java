@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXDatePicker;
@@ -171,7 +167,7 @@ public class ProfilPageController implements Initializable {
 
     //information du membre a afficher ds le profil
     public void informationMembre() {
-
+    
         lblprofil.setText(l.getNom_u() + " " + l.getPrenom_u());
         profilnom.setText(l.getNom_u());
         profilprenom.setText(l.getPrenom_u());
@@ -258,8 +254,7 @@ public class ProfilPageController implements Initializable {
 
     //changer la photo de profil
     @FXML
-    private void filephoto(ActionEvent event) throws IOException {
-        System.out.println("Esprit.Projet.PIDEV.Vus.AdminAccuielFXMLController.filephoto()");
+    public void filephoto(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         final Stage stage = new Stage();
         Image imagelog;
@@ -271,7 +266,6 @@ public class ProfilPageController implements Initializable {
             System.out.println(photo);
             String photo1;
             photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
-            //  System.out.println(photo);
             u.CopyImage(photo1, file.toPath().toString());
             imagelog = new Image("file:/" + photo1);
             imagev.setImage(imagelog);

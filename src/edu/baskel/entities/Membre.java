@@ -102,7 +102,14 @@ public class Membre {
         this.image_u = image_u;
         this.type_u = type_u;
     }
-
+//Constructeur skan
+    public Membre(int id_u, String nom_u, String prenom_u, int nbr_ban_u) {
+        this.id_u = id_u;
+        this.nom_u = nom_u;
+        this.prenom_u = prenom_u;
+        this.nbr_ban_u = nbr_ban_u;
+    }
+    
     public Membre(int id_u, int nbr_ban_u) {
         this.id_u = id_u;
         this.nbr_ban_u = nbr_ban_u;
