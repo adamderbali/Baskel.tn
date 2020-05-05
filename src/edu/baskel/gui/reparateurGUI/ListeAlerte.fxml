@@ -16,7 +16,6 @@
                 <TableColumn fx:id="colLieu" prefWidth="118.0" text="Lieu" />
                 <TableColumn fx:id="colDate" prefWidth="127.0" text="Date" />
                 <TableColumn fx:id="colDescription" prefWidth="233.0" text="Description" />
-                <TableColumn fx:id="colImage" prefWidth="265.0" text="Image" />
             </columns>
         </TableView>
     </children>

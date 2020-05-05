@@ -39,8 +39,6 @@ public class ListeAlerteController implements Initializable {
     private TableColumn<Alerte, Date> colDate;
     @FXML
     private TableColumn<Alerte, String> colDescription;
-    @FXML
-    private TableColumn<Alerte, String> colImage;
 
     /**
      * Initializes the controller class.
@@ -49,15 +47,13 @@ public class ListeAlerteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         AlerteCRUD altcrd = new AlerteCRUD();
         List<Alerte> alertlst = altcrd.getListeAlerte();
-        ObservableList obser;
-        obser = FXCollections.observableArrayList(alertlst);
+        ObservableList obser = FXCollections.observableArrayList(alertlst);
         TableColumn<Alerte, String> c1 = new TableColumn<Alerte, String>("first");
         //afficher le non du membre dnas la classe alerte
-        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMembre().getNom_u() + " " +p.getValue().getMembre().getPrenom_u()));
+        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMembre().getNom_u() + " " + p.getValue().getMembre().getPrenom_u()));
         colLieu.setCellValueFactory(new PropertyValueFactory<Alerte, String>("adresse_a"));
         colDate.setCellValueFactory(new PropertyValueFactory<Alerte, Date>("date_a"));
         colDescription.setCellValueFactory(new PropertyValueFactory<Alerte, String>("description_a"));
-        colImage.setCellValueFactory(new PropertyValueFactory<Alerte, String>("image_e"));
         tableAffichage.setItems(obser);
     }
 
