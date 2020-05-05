@@ -15,10 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -217,13 +214,14 @@ public class EvenementCRUD {
         Membre m;
         Evenement e = null;
         List<Evenement> ListEventPaticipation = new ArrayList<>();
-        String requete = "SELECT m.email_u, m.nom_u, m.prenom_u FROM membre m JOIN participation p ON m.id_u=p.id_u JOIN evenement e ON e.id_e=p.id_e WHERE e.id_u=?";
+        String requete = "SELECT m.email_u, m.nom_u, m.prenom_u FROM membre m JOIN participation p ON m.id_u=p.id_u JOIN evenement e ON e.id_e=p.id_e WHERE e.id_u="+id_u;
         
         try {
             Statement pst = cnx.createStatement();
             ResultSet rs = pst.executeQuery(requete);
 
             while (rs.next()) {
+                
                 m = new Membre(rs.getInt("id_u"), rs.getString("nom_u"), rs.getString("prenom_u"), rs.getString("adresse_u"), rs.getString("email_u"), rs.getDate("date"
                 ), rs.getString("email_u"), rs.getString("email_u"));
                 /* System.out.println(m.getId_u());*/
@@ -238,6 +236,11 @@ public class EvenementCRUD {
 
         return ListEventPaticipation;
     }
+    
+    
+
+    
+   
     
     
 

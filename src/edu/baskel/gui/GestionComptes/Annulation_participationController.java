@@ -7,9 +7,11 @@ package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,22 +35,22 @@ public class Annulation_participationController implements Initializable {
     private AnchorPane anchor1;
 
     @FXML
-    private TableView<Evenement> tableAffichage;
+    private TableView<Participation> tableAffichage;
 
     @FXML
-    private TableColumn<Evenement, String> colNom;
+    private TableColumn<Participation, String> colNom;
 
     @FXML
-    private TableColumn<Evenement,String> colDate;
+    private TableColumn<Participation,String> colDate;
 
     @FXML
-    private TableColumn<Evenement,String> colLieu;
+    private TableColumn<Participation,String> colLieu;
 
     @FXML
-    private TableColumn<Evenement,String> colDescription;
+    private TableColumn<Participation,String> colDescription;
 
     @FXML
-    private TableColumn<Evenement,String> colImage;
+    private TableColumn<Participation,String> colImage;
 
     @FXML
     private JFXButton participer;
@@ -64,12 +66,14 @@ public class Annulation_participationController implements Initializable {
         ArrayList arrayList;
         arrayList = (ArrayList) Pc.displayByUserP();
         ObservableList obser;
-        obser = FXCollections.observableArrayList(arrayList);
+        System.out.println("-------22222---------"+arrayList);
+         obser = FXCollections.observableArrayList(arrayList);
+       
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-        colImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
         tableAffichage.setItems(obser);
 
     }

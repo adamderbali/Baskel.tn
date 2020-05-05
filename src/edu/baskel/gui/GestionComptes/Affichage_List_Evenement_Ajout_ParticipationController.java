@@ -4,19 +4,12 @@
  * and open the template in the editor.
  */
 package edu.baskel.gui.GestionComptes;
-
-import edu.baskel.gui.GestionComptes.*;
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
-import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
-import edu.baskel.services.ParticipationCrud;
-import edu.baskel.services.SendMail;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,12 +22,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class Affichage_List_Evenement_Ajout_ParticipationController implements Initializable {

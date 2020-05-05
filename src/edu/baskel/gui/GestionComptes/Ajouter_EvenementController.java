@@ -5,32 +5,28 @@
  */
 package edu.baskel.gui.GestionComptes;
 
-import edu.baskel.gui.GestionComptes.*;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
-import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
-import static edu.baskel.utils.SessionInfo.iduser;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -94,17 +90,17 @@ public class Ajouter_EvenementController implements Initializable {
             alert2.setTitle("Date erronée");
             alert2.setContentText("La date saisie doit etre superieur à" + date_system);
             alert2.show();
-        } /*ajout*/ else {
+        } 
+        else {
 
             EvenementCRUD Ec = new EvenementCRUD();
             
             Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                    getText(), pathE.getText(),m.getId_u());
+                    getText(), pathE.getText(),m.getId_u()); 
             Ec.ajouterEvenement(e);
             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("ajout ok");
             alert1.setContentText("Event added");
-
             alert1.show();
 
             txtNom.clear();
@@ -117,7 +113,7 @@ public class Ajouter_EvenementController implements Initializable {
     }
 
     /* button parcourrir photo*/
-
+/*
     @FXML
     void telechargerPhoto(ActionEvent event) {
 
@@ -136,16 +132,38 @@ public class Ajouter_EvenementController implements Initializable {
             img.setPreserveRatio(true);
         }
 
-    }
+    }*/
+    
+    
+           @FXML
+            
+    void telecharger(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        final Stage stage = new Stage();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+         String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+                        image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
+
+            pathE.setText(photo);
+            InputValidation u = new InputValidation();
+             String photo1 ; 
+            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+            System.out.println(photo);
+            u.CopyImage(photo1, file.toPath().toString());
+            img.setImage(image);
+            
+        }
+           }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        FileChooser filechooser = new FileChooser();
+    /*    FileChooser filechooser = new FileChooser();
 
         filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt"));
+                new FileChooser.ExtensionFilter("Text File", "*.txt"));*/
 
     }
 
