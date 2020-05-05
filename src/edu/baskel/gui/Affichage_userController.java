@@ -15,9 +15,12 @@ import edu.baskel.services.ReclamationCRUD;
 import edu.baskel.utils.SessionInfo;
 import static java.awt.SystemColor.text;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -101,7 +104,8 @@ public class Affichage_userController implements Initializable {
        table_user.setItems(obser);
     }
      Membre user; 
-        
+     Reclamation reclam;
+
     @FXML
     void chargerDonnee() {
 user = table_user.getSelectionModel().getSelectedItem();
@@ -116,36 +120,66 @@ user = table_user.getSelectionModel().getSelectedItem();
         }
     }
     @FXML
-    public void send_reclamation(ActionEvent event) {
+    public void send_reclamation(ActionEvent event) throws SQLException {
             //int id_us = SessionInfo.iduser;
             //Membre reclamer;
             Image image = new Image("/images/icons8-ok-128.png",true);
             ReclamationCRUD s_rec =new ReclamationCRUD();
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            //Reclamation reclamation2 = new Reclamation(2,this.reclam.getId_ur());
+            
+            //s_rec.BaneExist(2,user.getId_u());
+            /*if(s_rec.banexist(2,this.reclam.getId_ur())==true)
+            {
+                System.out.println("hani lenna");
+                Notifications notificationBuilder2 = Notifications.create()
+                    .text("votre reclamation deja existe").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            
+                            System.out.println("Reclamation annulèe ! ");
+                        }
+                        
+                    });
+            notificationBuilder2.showError();
+            }*/
+            if(s_rec.banexist(2,user.getId_u())==false){
+            
             Reclamation reclamation=  new Reclamation( textarea_rec.getText(),tf_objet_rec.getText(),2,user.getId_u());
-            s_rec.ajouterReclamation(reclamation); //a modifier  
+            s_rec.ajouterReclamation(reclamation); 
             MembreCRUD s_mem = new MembreCRUD();
             Membre mem = new Membre(user.getId_u(),user.getNbr_ban_u());
             s_mem.ajouterban(user.getId_u());
-            
             text.setText("");
             Notifications notificationBuilder = Notifications.create()
                     .text("Votre Reclamation a été envoyer avec succés").title("Reclamation").graphic(new ImageView(image)).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    
-                    System.out.println("Done ! ");
-                }
-                
-            });
+                        @Override
+                        public void handle(ActionEvent event) {
+                            
+                            System.out.println("Done ! ");
+                        }
+                        
+                    });
             notificationBuilder.show();
- 
-            
+            } 
+            else{
+                Notifications notificationBuilder2 = Notifications.create()
+                    .text("votre reclamation deja existe").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            
+                            System.out.println("Reclamation annulèe ! ");
+                        }
+                        
+                    });
+            notificationBuilder2.showError();
+            }}
 
-            
-    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         affichage_user();
     }  
 }
+
