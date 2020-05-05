@@ -1,4 +1,3 @@
-
 package edu.baskel.services;
 
 import edu.baskel.entities.Membre;
@@ -33,7 +32,7 @@ public class MembreCRUD {
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
     }
-    
+
 //ajouter membre
     public Membre ajouterMembres2(Membre m) {
         try {
@@ -57,7 +56,7 @@ public class MembreCRUD {
         }
         return m;
     }
-    
+
 // update info d un membre
     public void updateMembre(Membre m) {
         try {
@@ -111,7 +110,7 @@ public class MembreCRUD {
         return listeMembre;
 
     }
-    
+
 //verification ban
     public int ValidationBan(String emailu) {
         try {
@@ -119,17 +118,18 @@ public class MembreCRUD {
             PreparedStatement per = cnx.prepareStatement(req);
             per.setString(1, emailu);
             ResultSet rs = per.executeQuery();
-            if(!rs.next()){
+            if (!rs.next()) {
                 System.out.println("mich mawjoud");
-            }else{
+            } else {
                 val = rs.getInt("validation_u");
-               
-        }} catch (SQLException ex) {
+
+            }
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return val;
     }
-    
+
 // verification email et mot de passe au login
     public Membre Verification(String email, String motdepasse) {
         try {
@@ -169,7 +169,7 @@ public class MembreCRUD {
         //return true;
 
     }
-    
+
 // verifaction s il ya deja un compte avec cette adresse mail a l inscription
     public boolean VerificationExistence(Membre m) {
         try {
@@ -186,7 +186,7 @@ public class MembreCRUD {
         }
         return true;
     }
-    
+
 // ajouter user a l inscription
     public Membre AddUser(Membre user) {
 
@@ -206,14 +206,46 @@ public class MembreCRUD {
 
         return user;
     }
-    
+
     //afficher un membre by id
-    public void AfficherMembreById(int id) {
+    public Membre AfficherMembreById(int id) {
         String requet = "SELECT * FROM membre WHERE id_u=?";
+        Membre m = new Membre();
+
         try {
-            Membre m = new Membre();
             PreparedStatement pst = cnx.prepareStatement(requet);
             pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            System.out.println("donné afficher");
+            if (rs.next()) {
+                m.setId_u(rs.getInt("id_u"));
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                m.setAdresse_u(rs.getString("adresse_u"));
+                m.setNum_tel_u(rs.getString("num_tel_u"));
+                m.setMot_passe_u(rs.getString("mot_passe_u"));
+                m.setDate_u(rs.getDate("date_u"));
+                m.setImage_u(rs.getString("image_u"));
+                m.setType_u(rs.getString("type_u"));
+                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
+                m.setValidation_u(rs.getInt("validation_u"));
+
+            } else {
+                System.out.println("erreur d affcihage");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return m;
+    }
+// afficher les info d  un seul membre
+
+    public void AfficherMembre(Membre m) {
+        String requet = "SELECT * FROM membre WHERE id_u=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requet);
+            pst.setInt(1, m.getId_u());
             ResultSet rs = pst.executeQuery();
             System.out.println("donné afficher");
             if (rs.next()) {
@@ -237,34 +269,6 @@ public class MembreCRUD {
         }
 
     }
-// afficher les info d  un seul membre
-    public void AfficherMembre(Membre m) {
-        String requet = "SELECT * FROM membre WHERE id_u=?";
-        try {
-            PreparedStatement pst = cnx.prepareStatement(requet);
-            pst.setInt(1, m.getId_u());
-            ResultSet rs = pst.executeQuery();
-            System.out.println("donné afficher");
-            if (rs.next()) {
-                m.setNom_u(rs.getString("nom_u"));
-                m.setPrenom_u(rs.getString("prenom_u"));
-                m.setEmail_u(rs.getString("email_u"));
-                m.setAdresse_u(rs.getString("adresse_u"));
-                m.setNum_tel_u(rs.getString("num_tel_u"));
-                m.setMot_passe_u(rs.getString("mot_passe_u"));
-                m.setDate_u(rs.getDate("date_u"));m.setImage_u(rs.getString("image_u"));
-                m.setType_u(rs.getString("type_u"));
-                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
-                m.setValidation_u(rs.getInt("validation_u"));
-
-            } else {
-                System.out.println("erreur d affcihage");
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-    }
 
     // veriffication par mot de passe avant la modif des info
     public boolean VerificationChgInfo(String mot_pas) {
@@ -275,7 +279,7 @@ public class MembreCRUD {
             ResultSet res = pst.executeQuery();
 
             if (!res.next()) {
-                
+
                 return false;
             }
         } catch (SQLException ex) {
@@ -284,7 +288,7 @@ public class MembreCRUD {
         return true;
 
     }
-    
+
 // update du mot de passe (forgot password)
     public void changerMP(String eml, String passm) {
 
@@ -299,7 +303,7 @@ public class MembreCRUD {
 
         }
     }
-    
+
 // suprression d un compte par son utilisateur
     public void supprimerMembre(int id) {
         Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
@@ -320,16 +324,16 @@ public class MembreCRUD {
             }
         }
     }
-    
+
     //ajouter ban
-    public void ajouterban(int id){
+    public void ajouterban(int id) {
         String query = null;
         try {
 
             query = "UPDATE membre SET nbr_ban_u=nbr_ban_u+1 WHERE id_u=?;";
             PreparedStatement pstmt = cnx.prepareStatement(query);
 
-            pstmt.setInt(1,id);
+            pstmt.setInt(1, id);
 
             pstmt.executeUpdate();
 
