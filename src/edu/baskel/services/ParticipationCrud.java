@@ -89,15 +89,16 @@ public void supprimerParticipation(int id_e,int id_u){
     public List<Participation> displayByUserP() { /*int id_user*/
        
        
-        List<Participation> Listparticipation = new ArrayList<>();
+        List<Participation> Listparticipation = new ArrayList<Participation>();
        /*AND*/
           
         /*   + " id_u=" + id_user;*/
-        PreparedStatement preparedStatement = null;
+      
         try {
-            String requete = "SELECT * FROM evenement e JOIN participation p ON e.id_e=p.id_e " ;
+            String requete = "SELECT* FROM evenement e join participation p on e.id_e = p.id_e" ;
             PreparedStatement pst = cnx.prepareStatement(requete);
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = pst.executeQuery();
+            System.out.println(rs);
 
             while (rs.next()) {
                 Evenement e = new Evenement();
@@ -115,6 +116,7 @@ public void supprimerParticipation(int id_e,int id_u){
                 p.setDate_insc(rs.getDate("date_insc"));  
                 
                 p.setEvent(e);
+                System.out.println(e.toString());
                 System.out.println(p.toString());
                 Listparticipation.add(p);
             }

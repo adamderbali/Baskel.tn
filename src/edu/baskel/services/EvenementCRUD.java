@@ -162,51 +162,51 @@ public class EvenementCRUD {
 }*/
     public List<Evenement> displayAllList() {
 
-        Evenement e;
-        List<Evenement> Listevent = new ArrayList<>();
-        String requete = "SELECT * FROM evenement";
-
+    
+        List<Evenement> Listevent = new ArrayList<Evenement>();   
         try {
-            Statement pst = cnx.createStatement();
-            ResultSet rs = pst.executeQuery(requete);
+            String requete = "SELECT * FROM evenement";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                e = new Evenement(rs.getInt("id_e"), rs.getString("nom_e"), rs.getString("lieu_e"), rs.getString("date_e"),
-                        rs.getString("description_e"), rs.getString("image_e"));
+                Evenement e = new Evenement();
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
                 Listevent.add(e);
-
-            }
-            return Listevent;
+            }   
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return Listevent;
     }
 
     public List<Evenement> displayByUser(int id_u) {
 
-        Evenement e;
         List<Evenement> Listeventuser = new ArrayList<>();
     
         try {
             String requete = "SELECT * FROM evenement WHERE id_u="+id_u;
-            PreparedStatement pst = cnx.prepareStatement(requete);
-           /* pst.setInt(1,id_u);*/
-            ResultSet rs = pst.executeQuery(requete);
-            
-            ;
+             PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+
             while (rs.next()) {
-                e = new Evenement(rs.getInt("id_e"), rs.getString("nom_e"), rs.getString("lieu_e"), rs.getString("date_e"),
-                        rs.getString("description_e"), rs.getString("image_e"));
+                Evenement e = new Evenement();
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
                 Listeventuser.add(e);
-               ;
-            }
-            return Listeventuser;
+            }   
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return Listeventuser;
     }
 
@@ -238,5 +238,7 @@ public class EvenementCRUD {
 
         return ListEventPaticipation;
     }
+    
+    
 
 }

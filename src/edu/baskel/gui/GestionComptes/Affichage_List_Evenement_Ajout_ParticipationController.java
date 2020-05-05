@@ -93,8 +93,8 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
     }
 
     /* ajout de participation*/
-    @FXML
-    void participerEvenement(ActionEvent event) throws Exception {
+   @FXML
+    void participerEvenement(ActionEvent event) throws Exception {/*
 
         ParticipationCrud Pc = new ParticipationCrud();
         Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),m.getId_u());
@@ -106,7 +106,7 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
         alert1.setContentText("Vous avez particper et vous allez reçevoir un mail de confirmation");
 
         alert1.show();
-
+*/
     }
 
     @FXML

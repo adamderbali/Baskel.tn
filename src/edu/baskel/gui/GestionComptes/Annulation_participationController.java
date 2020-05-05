@@ -6,15 +6,14 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
-import edu.baskel.entities.Participation;
-import edu.baskel.gui.GestionComptes.*;
-import edu.baskel.services.EvenementCRUD;
+import edu.baskel.entities.Evenement;
 import edu.baskel.services.ParticipationCrud;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -34,22 +33,22 @@ public class Annulation_participationController implements Initializable {
     private AnchorPane anchor1;
 
     @FXML
-    private TableView<Participation> tableAffichage;
+    private TableView<Evenement> tableAffichage;
 
     @FXML
-    private TableColumn<Participation, String> colNom;
+    private TableColumn<Evenement, String> colNom;
 
     @FXML
-    private TableColumn<Participation,String> colDate;
+    private TableColumn<Evenement,String> colDate;
 
     @FXML
-    private TableColumn<Participation,String> colLieu;
+    private TableColumn<Evenement,String> colLieu;
 
     @FXML
-    private TableColumn<Participation,String> colDescription;
+    private TableColumn<Evenement,String> colDescription;
 
     @FXML
-    private TableColumn<Participation,String> colImage;
+    private TableColumn<Evenement,String> colImage;
 
     @FXML
     private JFXButton participer;
@@ -59,11 +58,11 @@ public class Annulation_participationController implements Initializable {
     }
 
     
-    public void affichageEvenement() {
+    public void affichageEvenementP() {
 
-        ParticipationCrud Pa = new ParticipationCrud();
+        ParticipationCrud Pc = new ParticipationCrud();
         ArrayList arrayList;
-        arrayList = (ArrayList) Pa.displayByUserP();
+        arrayList = (ArrayList) Pc.displayByUserP();
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
@@ -76,11 +75,16 @@ public class Annulation_participationController implements Initializable {
     }
     
     
+     @FXML
+    void annulerParticipation(ActionEvent event) {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         
-        affichageEvenement();
+        affichageEvenementP();
       
     }    
     
