@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.31" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../.images/image.PNG" />
+            <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
       <BorderPane layoutX="292.0" layoutY="17.0" prefHeight="376.0" prefWidth="302.0" style="-fx-border-color: #FFFFFF;" />

@@ -49,20 +49,20 @@ import javafx.stage.Stage;
  */
 public class Affichage_Modifier_Supprimer_UserController implements Initializable {
 
-   @FXML
+    @FXML
     private TableView<Evenement> tableAffichage;
 
     @FXML
-    private TableColumn<Evenement,String> colNom;
+    private TableColumn<Evenement, String> colNom;
 
     @FXML
-    private TableColumn<Evenement,String> colLieu;
+    private TableColumn<Evenement, String> colLieu;
 
     @FXML
-    private TableColumn<Evenement,String> colDate;
+    private TableColumn<Evenement, String> colDate;
 
     @FXML
-    private TableColumn<Evenement,String> colDescription;
+    private TableColumn<Evenement, String> colDescription;
 
     @FXML
     private TableColumn<Evenement, String> colImage;
@@ -99,191 +99,187 @@ public class Affichage_Modifier_Supprimer_UserController implements Initializabl
 
     @FXML
     private JFXButton modif;
-   
-    
+
     @FXML
     private ImageView imageV;
-    
-   
+
     @FXML
     private JFXTextField filter;
 
+    ObservableList observableList;
+    Membre m = SessionInfo.getLoggedM();
 
-  ObservableList observableList;
-    Membre m =SessionInfo.getLoggedM();
-    
-    public Affichage_Modifier_Supprimer_UserController(){
+    public Affichage_Modifier_Supprimer_UserController() {
         ConnectionBD mc = ConnectionBD.getInstance();
-        
+
     }
-    
-     public void affichageEvenement()
-    {
+
+    public void affichageEvenement() {
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(m.getId_u());
+        arrayList = (ArrayList) Ec.displayByUser(2);
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
-       
-       colNom.setCellValueFactory(new PropertyValueFactory <>("nom_e"));
-       colLieu.setCellValueFactory(new PropertyValueFactory <>("lieu_e"));
-       colDate.setCellValueFactory(new PropertyValueFactory <>("date_e"));
-       colDescription.setCellValueFactory(new PropertyValueFactory <>("description_e"));
-       colImage.setCellValueFactory(new PropertyValueFactory <>("image_e"));
-       tableAffichage.setItems(obser);
-     /*  displayByUser(m.getId_u()*/
+
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+        tableAffichage.setItems(obser);
+        /*  displayByUser(m.getId_u()*/
     }
- 
-   Evenement event; 
-         @FXML
+
+    Evenement event;
+
+    @FXML
     void chargerDonnee() {
-             
+
         event = tableAffichage.getSelectionModel().getSelectedItem();
-      
-        if (event!=null){
+
+        if (event != null) {
             txtNom.setText(event.getNom_e());
             txtLieu.setText(event.getLieu_e());
             txtDescription.setText(event.getDescription_e());
             pathE.setText(event.getImage_e());
-           
+
         }
-      
+
     }
-    
+
     @FXML
     void ValiderModif(ActionEvent event) {
-        
+
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        
+
         String date = txtDate.getEditor().getText();
-        
-        if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty())))
-        {
+
+        if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Erreur de modification");
             alert.setContentText("Les champs doivent etre tout remplis svp");
             alert.show();
-        } 
-        
-        else if (txtDate.getEditor().getText().compareTo(date_system)<0) {
+        } else if (txtDate.getEditor().getText().compareTo(date_system) < 0) {
 
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);  
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Date erronée");
-            alert2.setContentText("La date saisie doit etre superieur à"+date_system);
+            alert2.setContentText("La date saisie doit etre superieur à" + date_system);
             alert2.show();
-        }
-        
-        else{
-            
-        EvenementCRUD Ec = new EvenementCRUD();
-    /*  java.util.Date date_util = new java.util.Date();
+        } else {
+
+            EvenementCRUD Ec = new EvenementCRUD();
+            /*  java.util.Date date_util = new java.util.Date();
         java.sql.Date date = new java.sql.Date(date_util.getTime());*/
-        Evenement e = new Evenement(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),
-                txtNom.getText(),txtLieu.getText(),txtDate.getEditor().getText(),txtDescription.getText(),pathE.getText()
-                );
-       Ec.updateEvenement(e);
-       
-        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+            Evenement e = new Evenement(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),
+                    txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText()
+            );
+            if(Ec.updateEvenement(e)==true){
+
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("Modification ok");
             alert1.setContentText("Evenement modifié");
-           
+
             alert1.show();
-     actualiser();
-     
-       txtNom.clear();
-       txtLieu.clear();
-       txtDate.setValue(null);
-       txtDescription.clear();
-       pathE.clear();
+            actualiser();
+
+            txtNom.clear();
+            txtLieu.clear();
+            txtDate.setValue(null);
+            txtDescription.clear();
+            pathE.clear();
+            }
+            else {
+                
+                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+            alert1.setTitle("erreur de modification ");
+            alert1.setContentText("Echec de modification");
+
+            alert1.show();
+                
+            }
         }
-      
+
     }
-    
-   private void actualiser() {
-       
+
+    private void actualiser() {
+
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayAllList();
-      
-       observableList = FXCollections.observableArrayList(arrayList);
-       tableAffichage.setItems(observableList);
-       colNom.setCellValueFactory(new PropertyValueFactory <>("nom_e"));
-       colLieu.setCellValueFactory(new PropertyValueFactory <>("lieu_e"));
-       colDate.setCellValueFactory(new PropertyValueFactory <>("date_e"));
-       colDescription.setCellValueFactory(new PropertyValueFactory <>("description_e"));
-       colImage.setCellValueFactory(new PropertyValueFactory <>("image_e"));
-      
-       
+        arrayList = (ArrayList) Ec.displayByUser(2);
+
+        observableList = FXCollections.observableArrayList(arrayList);
+        tableAffichage.setItems(observableList);
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
 
     }
-      
-   
 
-      
-        @FXML
+    @FXML
     void supprimer(ActionEvent event) {
-        
+
         EvenementCRUD Ec = new EvenementCRUD();
-        System.out.println("22222"+tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-        Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
-      tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
-      
-       Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Supression ok");
-            alert1.setContentText("Evenement supprimé");
-           
-            alert1.show();
-       actualiser();
+        System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+      if (Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem())==true) {
+        tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
        
-       txtNom.clear();
-       txtLieu.clear();
-       txtDate.setValue(null);
-       txtDescription.clear();
-       pathE.clear();
+        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Supression ok");
+        alert1.setContentText("Evenement supprimé");
+
+        alert1.show();
+        actualiser();
+
+        txtNom.clear();
+        txtLieu.clear();
+        txtDate.setValue(null);
+        txtDescription.clear();
+        pathE.clear();}
       
+      else {
+          
+           
+        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Erreur de suppression");
+        alert1.setContentText("Echec de suppression");
+
+        alert1.show();
+          
+      }
 
     }
-    
 
- 
     @FXML
     void telechargerPhoto(ActionEvent event) {
-        
-          FileChooser filechooser = new FileChooser();
-                
+
+        FileChooser filechooser = new FileChooser();
+
         filechooser.setTitle("Open file dialog");
         Stage stage = (Stage) anchor.getScene().getWindow();
         File file = filechooser.showOpenDialog(stage);
-        
-        if(file!=null){
-            pathE.setText(file.getAbsolutePath());
-           System.out.println(""+file.getAbsolutePath());
 
-            image = new Image(file.getAbsoluteFile().toURI().toString(),img.getFitWidth(),img.getFitHeight(),true,true);
+        if (file != null) {
+            pathE.setText(file.getAbsolutePath());
+            System.out.println("" + file.getAbsolutePath());
+
+            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
             img.setImage(image);
             img.setPreserveRatio(true);
-        }  
-        
+        }
 
     }
-    
-    
-    
-    
-   
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         affichageEvenement();
-         FileChooser filechooser = new FileChooser();
-        
-        filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles","*.*"),
-           new FileChooser.ExtensionFilter("Images","*.png","*.jpg","*.gif"),
-           new FileChooser.ExtensionFilter("Text File","*.txt"));
-        
-        
-       
-        
-    }    
-    
+        FileChooser filechooser = new FileChooser();
+
+        filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
+                new FileChooser.ExtensionFilter("Text File", "*.txt"));
+
+    }
+
 }

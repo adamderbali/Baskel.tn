@@ -64,9 +64,9 @@ public class Ajouter_EvenementController implements Initializable {
     private ImageView img;
 
     private Image image;
-    
-    Membre m =SessionInfo.getLoggedM();
-    
+
+    Membre m = SessionInfo.getLoggedM();
+
     public Ajouter_EvenementController() {
 
     }
@@ -90,30 +90,39 @@ public class Ajouter_EvenementController implements Initializable {
             alert2.setTitle("Date erronée");
             alert2.setContentText("La date saisie doit etre superieur à" + date_system);
             alert2.show();
-        } 
-        else {
+        } else {
 
             EvenementCRUD Ec = new EvenementCRUD();
-            
-            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                    getText(), pathE.getText(),m.getId_u()); 
-            Ec.ajouterEvenement(e);
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("ajout ok");
-            alert1.setContentText("Event added");
-            alert1.show();
 
-            txtNom.clear();
-            txtLieu.clear();
-            txtDate.setValue(null);
-            txtDescription.clear();
-            pathE.clear();
+            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                    getText(), pathE.getText());
+
+            if (Ec.ajouterEvenement(e) == true) {
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("ajout ok");
+                alert1.setContentText("Event added");
+                alert1.show();
+
+                txtNom.clear();
+                txtLieu.clear();
+                txtDate.setValue(null);
+                txtDescription.clear();
+                pathE.clear();
+
+            } else {
+
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Erreur d'insertion");
+                alert1.setContentText("Evenement non inseré");
+                alert1.show();
+
+            }
         }
 
     }
 
     /* button parcourrir photo*/
-/*
+ /*
     @FXML
     void telechargerPhoto(ActionEvent event) {
 
@@ -133,38 +142,35 @@ public class Ajouter_EvenementController implements Initializable {
         }
 
     }*/
-    
-    
-           @FXML
-            
+    @FXML
+
     void telecharger(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         final Stage stage = new Stage();
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
-         String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
-                        image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
+            String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
 
             pathE.setText(photo);
             InputValidation u = new InputValidation();
-             String photo1 ; 
+            String photo1;
             photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
             System.out.println(photo);
             u.CopyImage(photo1, file.toPath().toString());
             img.setImage(image);
-            
+
         }
-           }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-    /*    FileChooser filechooser = new FileChooser();
+        /*    FileChooser filechooser = new FileChooser();
 
         filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
                 new FileChooser.ExtensionFilter("Text File", "*.txt"));*/
-
     }
 
 }

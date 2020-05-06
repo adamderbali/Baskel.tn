@@ -8,16 +8,20 @@ package edu.baskel.gui.GestionComptes;
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Participation;
+import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
+import static javafx.collections.FXCollections.observableList;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -60,35 +64,70 @@ public class Annulation_participationController implements Initializable {
     }
 
     
-    public void affichageEvenementP() {
+  public void affichageEvenementP() {
 
-        ParticipationCrud Pc = new ParticipationCrud();
-        ArrayList arrayList;
-        arrayList = (ArrayList) Pc.displayByUserP();
+         ParticipationCrud parList = new ParticipationCrud();
+        List<Participation> alertlst = parList.displayByUser(3);
         ObservableList obser;
-        System.out.println("-------22222---------"+arrayList);
-         obser = FXCollections.observableArrayList(arrayList);
-       
-        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
-        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
-        colImage.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
+        obser = FXCollections.observableArrayList(alertlst);
+        TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
+        //afficher le non du membre dnas la classe alerte
+        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
+        colLieu.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
+        colDate.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));
+        colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
+        colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
         tableAffichage.setItems(obser);
 
     }
-    
-    
+
      @FXML
     void annulerParticipation(ActionEvent event) {
-
+        
+         ParticipationCrud Pc = new ParticipationCrud();
+        System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+     if (Pc.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem())==true){
+        tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
+         
+        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Supression ok");
+        alert1.setContentText("Votre participation est annulé");
+        alert1.show();
+        actualiser();
+              }
+     
+     else {
+   
+        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Erreur d' annulation");
+        alert1.setContentText("Echec d'annulation");
+        alert1.show();
+         
+     }
     }
 
+      private void actualiser() {
+        ParticipationCrud parList = new ParticipationCrud();
+        List<Participation> alertlst = parList.displayByUser(2);
+        ObservableList obser;
+        obser = FXCollections.observableArrayList(alertlst);
+        TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
+        //afficher le non du membre dnas la classe alerte
+        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
+        colLieu.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
+        colDate.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));
+        colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
+        colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
+       
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         
-        affichageEvenementP();
+        
+        
+       affichageEvenementP();
       
     }    
     

@@ -4,10 +4,14 @@
  * and open the template in the editor.
  */
 package edu.baskel.gui.GestionComptes;
+
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
+import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.SendMail;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
@@ -22,6 +26,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -83,21 +88,36 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
     }
 
     /* ajout de participation*/
-   @FXML
-    void participerEvenement(ActionEvent event) throws Exception {/*
-
+    @FXML
+    void participerEvenement(ActionEvent event) throws Exception {
+        
         ParticipationCrud Pc = new ParticipationCrud();
-        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),m.getId_u());
-        Pc.ajouterParticipation(p);
-        SendMail Sm = new SendMail();
-        Sm.envoiMail(m.getEmail_u());
-        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-        alert1.setTitle("Particpation ok");
-        alert1.setContentText("Vous avez particper et vous allez reçevoir un mail de confirmation");
-
+        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), m.getId_u());
+        if ((p.getId_u() == m.getId_u()) && (p.getId_e() == tableAffichage.getSelectionModel().getSelectedItem().getId_e())) {
+              Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Particpation erreur");
+        alert1.setContentText("Vous avez dejé partic^pé a ce evenement");
         alert1.show();
-*/
-    }
+        }
+
+     else if (Pc.ajouterParticipation(p) == true) {
+            SendMail Sm = new SendMail();
+            Sm.envoiMail(m.getEmail_u());
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+            alert1.setTitle("Particpation ok");
+            alert1.setContentText("Vous avez particper et vous allez reçevoir un mail de confirmation");
+
+            alert1.show();
+        }
+            else {
+           Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+        alert1.setTitle("Particpation erreur");
+        alert1.setContentText("Echec de participation");
+
+        alert1.show();}
+        }
+
+    
 
     @FXML
     void lancerAjout(ActionEvent event) {
