@@ -21,6 +21,10 @@ public class Reclamation {
     private int id_u;//RECLAMATEUR
     private int id_ur;//
 
+    public Reclamation(int id_u) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId_ur() {
         return id_ur;
     }

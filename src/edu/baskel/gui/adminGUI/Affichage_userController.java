@@ -164,11 +164,11 @@ user = table_user.getSelectionModel().getSelectedItem();
             } 
             else{
                 Notifications notificationBuilder2 = Notifications.create()
-                    .text("votre reclamation deja existe").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                    .text("Vous avez deja Reclamer ce Membre").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             
-                            System.out.println("Reclamation annulèe ! ");
+                            System.out.println("Reclamation annulèe !");
                         }
                         
                     });

@@ -127,5 +127,60 @@ public boolean banexist (int id_u , int id_ur){
         }
 return false;
 }
+public void bannerUtilisateur(Membre m)
+{
+        try {
+            String reqa1 = "UPDATE membre SET validation_u=0 WHERE nbr_ban_u>=3 and id_u=? ";
+            PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
+            pstmt.setInt(1,m.getId_u());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+}
+public List<Membre> getlistMembre_ban() {
+        List<Membre> listeMembre_ban = new ArrayList<>();
+
+        try {
+            String requete = "SELECT * FROM membre where nbr_ban_u>=3";
+            Statement st = cnxs.createStatement();
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                Membre m = new Membre();
+                m.setId_u(rs.getInt("id_u"));
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                //m.setAdresse_u(rs.getString(4));
+                //m.setEmail_u(rs.getString(5));
+                //m.setSexe_u(rs.getString(6));
+                //m.setDate_u(rs.getDate(7));
+                //m.setMot_passe_u(rs.getString(8));
+                //m.setNum_tel_u(rs.getString(9));
+                //m.setImage_u(rs.getString(10));
+                //m.setType_u(rs.getString(11));
+                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
+                //m.setValidation_u(rs.getInt());
+                listeMembre_ban.add(m);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listeMembre_ban;
+
+    }
+public void desactiverbannerUtilisateur(Membre m)
+{
+        try {
+            String reqa1 = "UPDATE membre SET validation_u=1 WHERE id_u=? ";
+            PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
+            pstmt.setInt(1,m.getId_u());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+}
+
+
     
 }
