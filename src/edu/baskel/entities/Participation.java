@@ -44,10 +44,11 @@ public class Participation {
         this.mbre = mbre;
     }
 
-    public Participation(int id_u, int id_e) {
-        this.id_u = id_u;
+    public Participation(int id_e, int id_u) {
         this.id_e = id_e;
+        this.id_u = id_u;
     }
+
 
     public Participation(int id_u, int id_e, Date date_insc) {
         this.id_u = id_u;

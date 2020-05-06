@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import static javafx.collections.FXCollections.observableList;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-public class Affichage_List_Evenement_Ajout_ParticipationController implements Initializable {
+public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private AnchorPane anchor1;
@@ -64,7 +65,7 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
     private AnchorPane rootPane;
     Membre m = SessionInfo.getLoggedM();
 
-    public Affichage_List_Evenement_Ajout_ParticipationController() {
+    public List_Event_Add_ParticipationController() {
 
         ConnectionBD mc = ConnectionBD.getInstance();
 
@@ -92,42 +93,44 @@ public class Affichage_List_Evenement_Ajout_ParticipationController implements I
     void participerEvenement(ActionEvent event) throws Exception {
         
         ParticipationCrud Pc = new ParticipationCrud();
-        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), m.getId_u());
-        if ((p.getId_u() == m.getId_u()) && (p.getId_e() == tableAffichage.getSelectionModel().getSelectedItem().getId_e())) {
-              Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-        alert1.setTitle("Particpation erreur");
-        alert1.setContentText("Vous avez dejé partic^pé a ce evenement");
-        alert1.show();
-        }
-
-     else if (Pc.ajouterParticipation(p) == true) {
-            SendMail Sm = new SendMail();
-            Sm.envoiMail(m.getEmail_u());
+        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),7);
+        Pc.ajouterParticipation(p);
+        SendMail Sm = new SendMail();
+            Sm.envoiMail("sabrine.zekri@esprit.tn");
             Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
             alert1.setTitle("Particpation ok");
             alert1.setContentText("Vous avez particper et vous allez reçevoir un mail de confirmation");
-
             alert1.show();
+            actualiser();
         }
-            else {
-           Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-        alert1.setTitle("Particpation erreur");
-        alert1.setContentText("Echec de participation");
 
-        alert1.show();}
-        }
 
     
+      private void actualiser() {
+
+        EvenementCRUD Ec = new EvenementCRUD();
+        ArrayList arrayList;
+        arrayList = (ArrayList) Ec.displayAllList();
+        ObservableList obser;
+        obser = FXCollections.observableArrayList(arrayList);
+        tableAffichage.setItems(obser);
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+
+    }
 
     @FXML
     void lancerAjout(ActionEvent event) {
-
+/*
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Ajouter_Evenement.fxml"));
             rootPaneA.getChildren().setAll(pane);
         } catch (IOException ex) {
-            Logger.getLogger(Affichage_List_Evenement_Ajout_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
 
     }
 

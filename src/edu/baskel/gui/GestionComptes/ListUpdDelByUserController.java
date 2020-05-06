@@ -15,6 +15,7 @@ import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
+import edu.baskel.utils.validationSaisie;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
@@ -47,7 +48,7 @@ import javafx.stage.Stage;
  *
  * @author sabri
  */
-public class Affichage_Modifier_Supprimer_UserController implements Initializable {
+public class ListUpdDelByUserController implements Initializable {
 
     @FXML
     private TableView<Evenement> tableAffichage;
@@ -109,7 +110,7 @@ public class Affichage_Modifier_Supprimer_UserController implements Initializabl
     ObservableList observableList;
     Membre m = SessionInfo.getLoggedM();
 
-    public Affichage_Modifier_Supprimer_UserController() {
+    public ListUpdDelByUserController() {
         ConnectionBD mc = ConnectionBD.getInstance();
 
     }
@@ -117,7 +118,7 @@ public class Affichage_Modifier_Supprimer_UserController implements Initializabl
     public void affichageEvenement() {
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(2);
+        arrayList = (ArrayList) Ec.displayByUser(3);
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
 
@@ -141,71 +142,60 @@ public class Affichage_Modifier_Supprimer_UserController implements Initializabl
             txtNom.setText(event.getNom_e());
             txtLieu.setText(event.getLieu_e());
             txtDescription.setText(event.getDescription_e());
+            //  txtDate
             pathE.setText(event.getImage_e());
+            
+                img.setImage(image);
+                img.setPreserveRatio(true);
+
+            }
 
         }
 
-    }
-
-    @FXML
-    void ValiderModif(ActionEvent event) {
+        @FXML
+        void ValiderModif(ActionEvent event){
 
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String date = txtDate.getEditor().getText();
+            /* test sur les champs vides ou non*/
 
-        String date = txtDate.getEditor().getText();
+            if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
+                Alert alertChamps = new validationSaisie().getAlert("Verifier la saisie", "Les champs doit etre tout saisie");
+                alertChamps.showAndWait();
+                /* test sur les dates*/
+            } else if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
 
-        if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Erreur de modification");
-            alert.setContentText("Les champs doivent etre tout remplis svp");
-            alert.show();
-        } else if (txtDate.getEditor().getText().compareTo(date_system) < 0) {
+                System.out.println("------------------");
+                Alert alertDtae = new validationSaisie().getAlert("date", "La date saisie doit etre superieur à" + date_system);
+                alertDtae.showAndWait();
+            } else {
 
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-            alert2.setTitle("Date erronée");
-            alert2.setContentText("La date saisie doit etre superieur à" + date_system);
-            alert2.show();
-        } else {
+                EvenementCRUD Ec = new EvenementCRUD();
+                Evenement e = new Evenement(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),
+                        txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText()
+                );
+                Ec.updateEvenement(e);
+                Alert alertAdded = new validationSaisie().getAlert("Modification ok", "Evenement Modifié");
+                alertAdded.showAndWait();
+                actualiser();
 
-            EvenementCRUD Ec = new EvenementCRUD();
-            /*  java.util.Date date_util = new java.util.Date();
-        java.sql.Date date = new java.sql.Date(date_util.getTime());*/
-            Evenement e = new Evenement(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),
-                    txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText()
-            );
-            if(Ec.updateEvenement(e)==true){
-
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Modification ok");
-            alert1.setContentText("Evenement modifié");
-
-            alert1.show();
-            actualiser();
-
-            txtNom.clear();
-            txtLieu.clear();
-            txtDate.setValue(null);
-            txtDescription.clear();
-            pathE.clear();
+                txtNom.clear();
+                txtLieu.clear();
+                txtDate.setValue(null);
+                txtDescription.clear();
+                pathE.clear();
+                img.setVisible(false);
             }
-            else {
-                
-                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("erreur de modification ");
-            alert1.setContentText("Echec de modification");
 
-            alert1.show();
-                
-            }
-        }
-
+        
     }
-
+    
+    
     private void actualiser() {
 
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(2);
+        arrayList = (ArrayList) Ec.displayByUser(3);
 
         observableList = FXCollections.observableArrayList(arrayList);
         tableAffichage.setItems(observableList);
@@ -222,33 +212,17 @@ public class Affichage_Modifier_Supprimer_UserController implements Initializabl
 
         EvenementCRUD Ec = new EvenementCRUD();
         System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-      if (Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem())==true) {
+        Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
         tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
-       
-        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-        alert1.setTitle("Supression ok");
-        alert1.setContentText("Evenement supprimé");
-
-        alert1.show();
+        Alert alertDelete = new validationSaisie().getAlert("Suppression ok", "Evenement supprimé");
+        alertDelete.showAndWait();
         actualiser();
 
         txtNom.clear();
         txtLieu.clear();
         txtDate.setValue(null);
         txtDescription.clear();
-        pathE.clear();}
-      
-      else {
-          
-           
-        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-        alert1.setTitle("Erreur de suppression");
-        alert1.setContentText("Echec de suppression");
-
-        alert1.show();
-          
-      }
-
+        pathE.clear();
     }
 
     @FXML

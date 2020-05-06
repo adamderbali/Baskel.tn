@@ -139,33 +139,7 @@ public class EvenementCRUD {
             System.out.println(ex.getMessage());        }
         
     }*/
- /*    public List<Evenement> displayByUser(int id_user){
-       
-            Evenement e;
-            List<Evenement> Listevent = new ArrayList<>();
-            String requete = "SELECT * FROM evenement WHERE id_u="+id_user;
-            PreparedStatement preparedStatement = null;
-           try {  
-            PreparedStatement pst = cnx.prepareStatement(requete);
-            ResultSet rs = preparedStatement.executeQuery();
-            
-            
-            while (rs.next()) {
-                e= new Evenement(rs.getInt("id_e"),rs.getString("nom_e"), rs.getString("lieu_e"),rs.getString("date_e"),
-                        rs.getString("description_e"),rs.getString("image_e"));
-             Listevent.add(e);
-                
-            }
-           return Listevent;
-        }
-        
-            catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-   
-        
-       return Listevent; 
-}*/
+ 
     public List<Evenement> displayAllList() {
 
         List<Evenement> Listevent = new ArrayList<Evenement>();

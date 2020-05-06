@@ -33,6 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import edu.baskel.utils.validationSaisie;
 
 public class Ajouter_EvenementController implements Initializable {
 
@@ -76,45 +77,34 @@ public class Ajouter_EvenementController implements Initializable {
     void ajouterEvenement(ActionEvent event) {
 
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
         if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Erreur d'ajout");
-            alert.setContentText("Les champs doivent etre tout remplis svp");
-            alert.show();
-        } /* test sur les dates*/ else if (date.compareTo(date_system) < 0) {
+            Alert alertChamps = new validationSaisie().getAlert("Echec", "Saisi tout les champs");
+            alertChamps.showAndWait();
 
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-            alert2.setTitle("Date erronée");
-            alert2.setContentText("La date saisie doit etre superieur à" + date_system);
-            alert2.show();
+            /* test sur les dates*/
         } else {
+            if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
 
-            EvenementCRUD Ec = new EvenementCRUD();
+                System.out.println("------------------");
+                Alert alertDtae = new validationSaisie().getAlert("date", "La date saisie doit etre superieur à" + date_system);
+                alertDtae.showAndWait();
+            } else {
 
-            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                    getText(), pathE.getText());
-
-            if (Ec.ajouterEvenement(e) == true) {
-                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                alert1.setTitle("ajout ok");
-                alert1.setContentText("Event added");
-                alert1.show();
+                EvenementCRUD Ec = new EvenementCRUD();
+                Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                        getText(), pathE.getText());
+                Ec.ajouterEvenement(e);
+                Alert alertAdded = new validationSaisie().getAlert("Ajout ok", "Evenement ajouté");
+                alertAdded.showAndWait();
 
                 txtNom.clear();
                 txtLieu.clear();
                 txtDate.setValue(null);
                 txtDescription.clear();
                 pathE.clear();
-
-            } else {
-
-                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                alert1.setTitle("Erreur d'insertion");
-                alert1.setContentText("Evenement non inseré");
-                alert1.show();
+                img.setVisible(false);
 
             }
         }
@@ -122,7 +112,6 @@ public class Ajouter_EvenementController implements Initializable {
     }
 
     /* button parcourrir photo*/
- /*
     @FXML
     void telechargerPhoto(ActionEvent event) {
 
@@ -141,8 +130,9 @@ public class Ajouter_EvenementController implements Initializable {
             img.setPreserveRatio(true);
         }
 
-    }*/
-    @FXML
+    }
+
+    /*  @FXML
 
     void telecharger(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -161,16 +151,15 @@ public class Ajouter_EvenementController implements Initializable {
             img.setImage(image);
 
         }
-    }
-
+    }*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        /*    FileChooser filechooser = new FileChooser();
+        FileChooser filechooser = new FileChooser();
 
         filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt"));*/
+                new FileChooser.ExtensionFilter("Text File", "*.txt"));
     }
 
 }
