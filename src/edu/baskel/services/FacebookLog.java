@@ -20,7 +20,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class FacebookLog {
 
     public void fb() {
-        String domain = "https://www.aquatz.com/";
+        String domain = "http://gmail.com/";
         String appId = "564610487520090";
 
         String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri="
