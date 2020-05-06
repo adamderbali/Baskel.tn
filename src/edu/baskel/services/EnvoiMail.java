@@ -5,6 +5,7 @@
  */
 package edu.baskel.services;
 
+import edu.baskel.utils.InputValidation;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
@@ -55,6 +56,7 @@ public class EnvoiMail {
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
             System.out.println("Email envoyé");
+            InputValidation.notificationsucces("succés", "le code a été envoyer verifier votre boite mail");
 
         } catch (Exception ex) {
 

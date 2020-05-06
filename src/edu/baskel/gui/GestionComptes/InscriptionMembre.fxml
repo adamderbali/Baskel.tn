@@ -57,7 +57,7 @@
             </JFXButton>
             <JFXDatePicker fx:id="txtnaissance" defaultColor="#0096a4" layoutX="43.0" layoutY="344.0" prefHeight="31.0" prefWidth="318.0" promptText="Date de naissance" />
             <JFXTextField fx:id="txttelephone" focusColor="#0096a4" layoutX="44.0" layoutY="154.0" prefHeight="31.0" prefWidth="318.0" promptText="Numéro télephone" />
-            <JFXTextField fx:id="txtAdresse" focusColor="#0096a4" layoutX="44.0" layoutY="198.0" prefHeight="31.0" prefWidth="318.0" promptText="Adresse-mail" text="Adresse" />
+            <JFXTextField fx:id="txtAdresse" focusColor="#0096a4" layoutX="44.0" layoutY="198.0" prefHeight="31.0" prefWidth="318.0" promptText="Adresse" />
             <JFXRadioButton fx:id="chkhomme" layoutX="54.0" layoutY="411.0" text="Homme">
                <toggleGroup>
                   <ToggleGroup fx:id="sexegrp" />

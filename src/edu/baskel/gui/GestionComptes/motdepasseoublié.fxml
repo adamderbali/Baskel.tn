@@ -8,23 +8,24 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="390.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.MotdepasseoubliéController">
+<AnchorPane id="AnchorPane" prefHeight="749.0" prefWidth="1118.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.MotdepasseoubliéController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="718.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="btnQuitter" layoutX="646.0" layoutY="172.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter" />
+      <ImageView fitHeight="482.0" fitWidth="407.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/motdepasse.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnback" layoutX="639.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#backSidentifier" text="login" />
+      <Button fx:id="btnback" layoutX="592.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#backSidentifier" text="login" />
       <Button fx:id="btnenv" layoutX="246.0" layoutY="92.0" mnemonicParsing="false" onAction="#envoyerMail" text="envoyer" />
       <Label layoutX="42.0" layoutY="46.0" text="enter email" />
       <Label layoutX="29.0" layoutY="176.0" text="code" />
       <TextField fx:id="txtentermail" layoutX="160.0" layoutY="43.0" />
       <TextField fx:id="txtcode" layoutX="96.0" layoutY="171.0" />
       <JFXButton fx:id="btnverifycode" layoutX="117.0" layoutY="236.0" onAction="#verifierCode" text="verify code" />
-      <Button fx:id="btnQuitter" layoutX="639.0" layoutY="59.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter" />
-      <Button fx:id="btnDeconnexion" layoutX="586.0" layoutY="108.0" mnemonicParsing="false" onAction="#SeDeconnecter" text="Deconnexion" />
-      <Button fx:id="btnSupp" layoutX="586.0" layoutY="205.0" mnemonicParsing="false" onAction="#supprimerCompte" text="Supprimer" />
-      <Button fx:id="btnevenmn" layoutX="499.0" layoutY="292.0" mnemonicParsing="false" onAction="#redirectionevenmn" text="avenmn" />
+      <Button fx:id="btnevenmn" layoutX="437.0" layoutY="92.0" mnemonicParsing="false" onAction="#redirectionevenmn" text="avenmn" />
+      <Button fx:id="btnSupp" layoutX="557.0" layoutY="130.0" mnemonicParsing="false" onAction="#supprimerCompte" text="Supprimer" />
+      <Button fx:id="btnDeconnexion" layoutX="437.0" layoutY="156.0" mnemonicParsing="false" onAction="#SeDeconnecter" text="Deconnexion" />
+      <AnchorPane layoutX="2.0" layoutY="279.0" prefHeight="463.0" prefWidth="1100.0" />
    </children>
 </AnchorPane>

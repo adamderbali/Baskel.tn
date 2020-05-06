@@ -25,7 +25,7 @@
       </ImageView>
       <Pane layoutX="593.0" layoutY="55.0" prefHeight="530.0" prefWidth="408.0" style="-fx-border-color: #ffffff; -fx-border-width: 2;">
          <children>
-            <JFXButton fx:id="btnconnexion" layoutX="102.0" layoutY="275.0" onAction="#loggin1" prefHeight="37.0" prefWidth="209.0" style="-fx-background-color: #0096a4#0096a4;" text="Connexion" textFill="SNOW">
+            <JFXButton fx:id="btnconnexion" layoutX="101.0" layoutY="312.0" onAction="#loggin1" prefHeight="37.0" prefWidth="209.0" style="-fx-background-color: #0096a4#0096a4;" text="Connexion" textFill="SNOW">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -50,27 +50,28 @@
                   </LinearGradient>
                </fill>
             </Text>
-            <Text layoutX="139.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou se connecter avec" />
-            <JFXButton fx:id="btnsinscrire" layoutX="145.0" layoutY="350.0" onAction="#RedirectionRegistration" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Membre" textFill="SNOW">
+            <JFXButton fx:id="btnsinscrire" layoutX="145.0" layoutY="387.0" onAction="#RedirectionRegistration" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Membre" textFill="SNOW">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
             <Label fx:id="lblreponse" layoutX="311.0" layoutY="200.0" prefHeight="21.0" prefWidth="26.0" />
-            <CheckBox fx:id="rememberMe" layoutX="103.0" layoutY="245.0" mnemonicParsing="false" text="Se souvenir de moi" />
+            <CheckBox fx:id="rememberMe" layoutX="106.0" layoutY="272.0" mnemonicParsing="false" text="Se souvenir de moi" />
             <JFXTextField fx:id="txtshowmp" layoutX="97.0" layoutY="184.0" prefHeight="31.0" prefWidth="209.0" promptText="Mot de passe" />
             <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="288.0" layoutY="207.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
-            <Text layoutX="138.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'incrire en tant que">
+            <Text layoutX="137.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'incrire en tant que">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text layoutX="199.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
-            <JFXButton fx:id="btnsinscrire1" layoutX="148.0" layoutY="408.0" onAction="#RedirectionRegistrationRep" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Reparateur" textFill="SNOW">
+            <Text layoutX="198.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
+            <JFXButton fx:id="btnsinscrire1" layoutX="147.0" layoutY="445.0" onAction="#RedirectionRegistrationRep" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Reparateur" textFill="SNOW">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
+            <FontAwesomeIconView glyphName="USER" layoutX="70.0" layoutY="148.0" size="20.0" />
+            <FontAwesomeIconView glyphName="LOCK" layoutX="71.0" layoutY="207.0" size="20.0" />
          </children>
       </Pane>
       <Button fx:id="btnfb" layoutX="452.0" layoutY="292.0" mnemonicParsing="false" onAction="#FacebooLogin" text="facebook" />

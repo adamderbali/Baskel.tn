@@ -27,6 +27,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -60,6 +62,10 @@ public class MotdepasseoubliéController implements Initializable {
     private Button btnSupp;
     @FXML
     private Button btnevenmn;
+      @FXML
+    private MenuItem itemSedeconnecter;
+       @FXML
+    private MenuButton menu;
 
 
     Connection cnx = null;
@@ -107,7 +113,7 @@ public class MotdepasseoubliéController implements Initializable {
     //page...
        @FXML
     void redirectionevenmn(ActionEvent event) throws IOException {
-   Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_List_Evenement_Ajout_Participation.fxml"));
+   Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_Modifier_Supprimer_User.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);

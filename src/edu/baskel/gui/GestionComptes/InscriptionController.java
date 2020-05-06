@@ -12,6 +12,7 @@ import edu.baskel.services.ReparateurCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
+import java.awt.RenderingHints;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +20,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import javafx.event.ActionEvent;
@@ -30,10 +33,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -93,7 +98,8 @@ public class InscriptionController implements Initializable {
     private JFXTextField txtshowcpass;
     @FXML
     private TextField auto;
-    
+   
+
     String photo = null;
     Connection cnx;
     private PreparedStatement prep;
@@ -104,12 +110,22 @@ public class InscriptionController implements Initializable {
 
     }
     
+        @Override
+    public void initialize(URL url, ResourceBundle rb ) {
+        txtmotdepasse.setVisible(true);
+        txtconfirmation.setVisible(true);
+        txtshowpass.setVisible(false);
+        txtshowcpass.setVisible(false);
+
+        TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
+    }
+
 // validation champs non vides
     public boolean validerchamps() {
         if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
                 | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
                 | (txtconfirmation.getText().isEmpty())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur d'ajout");
             alert.setContentText("Les champs nom ,prenom,adresse, email, telephone,mot de passe et confirmation doivent etre tout remplis svp");
             alert.show();
@@ -140,18 +156,8 @@ public class InscriptionController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb
-    ) {
-        txtmotdepasse.setVisible(true);
-        txtconfirmation.setVisible(true);
-        txtshowpass.setVisible(false);
-        txtshowcpass.setVisible(false);
-        
-        
-        TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
-    }
-    
+
+
 //voir mot de passe
     @FXML
     public void VisualiserMPI(MouseEvent event) {
@@ -183,6 +189,18 @@ public class InscriptionController implements Initializable {
         }
         return message;
     }
+
+    public boolean verifDate() {
+
+        String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        String date;
+        date = txtnaissance.getEditor().getText().toString();
+        if (date.compareTo(date_system) > 0) {
+            return false;
+        }
+        return true;
+    }
+    
 
     //inscription d un simple membre
     @FXML
@@ -229,34 +247,41 @@ public class InscriptionController implements Initializable {
                                 Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
                                 alertnum.showAndWait();
                             } else {
-                                if (mr.VerificationExistence(m) == true) {
+                                if (verifDate() == false) {
+                                    Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
+                                    alertnum.showAndWait();
+                                    txtnaissance.setValue(null);
+                                } else {
+                                    if (mr.VerificationExistence(m) == true) {
 
-                                    if (motdepasse.equals(conmotdepasse)) {
-                                        mr.AddUser(m);
-                                        txtNom.clear();
-                                        txtPrenom.clear();
-                                        txtnaissance.setValue(null);
-                                        txtAdresse.clear();
-                                        txtimage.clear();
-                                        txtemail.clear();
-                                        txtconfirmation.clear();
-                                        txtmotdepasse.clear();
-                                        txttelephone.clear();
-                                        chkhomme.setSelected(false);
-                                        chkfemme.setSelected(false);
-                                        System.out.println("utilisateur ajouté");
+                                        if (motdepasse.equals(conmotdepasse)) {
+                                            mr.AddUser(m);
+                                            txtNom.clear();
+                                            txtPrenom.clear();
+                                            txtnaissance.setValue(null);
+                                            txtAdresse.clear();
+                                            txtimage.clear();
+                                            txtemail.clear();
+                                            txtconfirmation.clear();
+                                            txtmotdepasse.clear();
+                                            txttelephone.clear();
+                                            chkhomme.setSelected(false);
+                                            chkfemme.setSelected(false);
+                                            System.out.println("utilisateur ajouté");
+                                            InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
 
+                                        } else {
+                                            Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
+                                            alertnum.showAndWait();
+
+                                        }
                                     } else {
-                                        Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
+                                        Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
                                         alertnum.showAndWait();
 
                                     }
-                                } else {
-                                    Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
-                                    alertnum.showAndWait();
 
                                 }
-
                             }
                         }
                     }

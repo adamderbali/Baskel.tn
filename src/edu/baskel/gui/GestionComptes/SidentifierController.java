@@ -145,16 +145,17 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getLoggedM();
                 System.out.println(SessionInfo.getInstance(iduser));
             } else {
+            //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
 
                 Alert alertn = new InputValidation().getAlert(" Erreur d'authentification", "vous etes banni s");
                 alertn.showAndWait();
             }
         } else {
             InputValidation.notificationError("Erreur d'authentification", "veuillez  verifier vos données");
-            /*
-            Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
-            alertnum.showAndWait();
-             */
+            
+            /*Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
+            alertnum.showAndWait();*/
+             
         }
     }
 
@@ -162,8 +163,8 @@ public class SidentifierController implements Initializable {
     private void handleButtonAction(MouseEvent event) {
 
     }
+    
 //redirection pasge d inscription membre
-
     @FXML
     public void RedirectionRegistration(ActionEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("InscriptionMembre.fxml"));

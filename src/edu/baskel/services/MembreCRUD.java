@@ -101,6 +101,8 @@ public class MembreCRUD {
                 m.setNum_tel_u(rs.getString(9));
                 m.setImage_u(rs.getString(10));
                 m.setType_u(rs.getString(11));
+                m.setValidation_u(rs.getInt(12));
+                m.setNbr_ban_u(rs.getInt(13));
                 listeMembre.add(m);
             }
 
@@ -154,17 +156,19 @@ public class MembreCRUD {
                 String mpassem = res.getString("mot_passe_u");
                 Date datem = res.getDate("date_u");
                 String imagem = res.getString("image_u");
-                String typem =res.getString("type_u");
+                String typem = res.getString("type_u");
                 int validationm = res.getInt("validation_u");
                 int nbr_banm = res.getInt("nbr_ban_u");
-                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, telm, datem, 
-                        motdepasse, telm, imagem, typem, validationm, nbr_banm);
 
-                SessionInfo.setLoggedM(membreLogged);
+                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, telm, datem,
+                        motdepasse, telm, imagem, typem, nbr_banm, validationm);
+                if (this.ValidationBan(emailm) != 0) {
+                    SessionInfo.setLoggedM(membreLogged);
 
-                System.out.println(membreLogged);
+                    System.out.println(membreLogged);
 
-                System.out.println(iduser);
+                    System.out.println(iduser);
+                }
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -192,7 +196,7 @@ public class MembreCRUD {
 
 // ajouter user a l inscription
     public Membre AddUser(Membre user) {
-        this.ajouterMembres2(user);       
+        this.ajouterMembres2(user);
         return user;
     }
 
@@ -200,7 +204,6 @@ public class MembreCRUD {
 
         ReparateurCRUD rc = new ReparateurCRUD();
         rc.ajouterReparateur((Reparateur) user);
-       
 
         return user;
     }
@@ -256,8 +259,9 @@ public class MembreCRUD {
                 m.setDate_u(rs.getDate("date_u"));
                 m.setImage_u(rs.getString("image_u"));
                 m.setType_u(rs.getString("type_u"));
-                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
                 m.setValidation_u(rs.getInt("validation_u"));
+                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
+                
 
             } else {
                 System.out.println("erreur d affcihage");
