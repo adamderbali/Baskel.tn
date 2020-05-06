@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -45,6 +46,10 @@ public class ListeAlerteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.getlistealert();
+    }
+
+    public void getlistealert() {
         AlerteCRUD altcrd = new AlerteCRUD();
         List<Alerte> alertlst = altcrd.getListeAlerte();
         ObservableList obser = FXCollections.observableArrayList(alertlst);
@@ -55,6 +60,17 @@ public class ListeAlerteController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<Alerte, Date>("date_a"));
         colDescription.setCellValueFactory(new PropertyValueFactory<Alerte, String>("description_a"));
         tableAffichage.setItems(obser);
+    }
+
+    @FXML
+    private void supprimerAlerte(ActionEvent event) {
+        if (tableAffichage.getSelectionModel().getSelectedItem() != null) {
+            Alerte alerte = tableAffichage.getSelectionModel().getSelectedItem();
+            System.out.println(alerte.getId_alert());
+            AlerteCRUD alrtcrd = new AlerteCRUD();
+            alrtcrd.supprimerAlert(alerte.getId_alert());
+            this.getlistealert();
+        }
     }
 
 }

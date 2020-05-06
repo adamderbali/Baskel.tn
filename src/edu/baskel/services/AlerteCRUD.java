@@ -65,11 +65,11 @@ public class AlerteCRUD {
 
     public void supprimerAlert(int id) {
         try {
-            String requete = "DELETE FROM membre WHERE membre.id_u = ?";
+            String requete = "DELETE FROM alerte WHERE 	id_alerte = ?";
             PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, id);
             pst.executeUpdate();
-            System.out.println("alert ajouter");
+            System.out.println("alert supprimer");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
