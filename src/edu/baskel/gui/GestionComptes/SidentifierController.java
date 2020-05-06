@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -12,6 +13,7 @@ import edu.baskel.services.FacebookLog;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.PDF;
 import edu.baskel.utils.SessionInfo;
 import static edu.baskel.utils.SessionInfo.iduser;
 
@@ -111,7 +113,8 @@ public class SidentifierController implements Initializable {
     
 //se connecter et se souvenir de moi
     @FXML
-    public void loggin1(ActionEvent event) {
+    public void loggin1(ActionEvent event) throws DocumentException {
+        PDF.pdfRead();
         MembreCRUD mr = new MembreCRUD();
         if (mr.Verification(txtutilisateur.getText(), txtmotdepasse.getText()) != null) {
             if (mr.ValidationBan(txtutilisateur.getText()) != 0) {

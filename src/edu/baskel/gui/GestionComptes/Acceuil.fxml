@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
+   <children>
+      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="30.0" prefHeight="598.0" prefWidth="817.0" />
+      <MenuButton fx:id="btnCompte" layoutX="725.0" layoutY="-1.0" mnemonicParsing="false" text="Compte">
+        <items>
+          <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deconnexion" text="Se deconnecter" />
+          <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>

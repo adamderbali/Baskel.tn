@@ -72,7 +72,7 @@
             <JFXTextField fx:id="txtshowpass" layoutX="44.0" layoutY="247.0" prefHeight="31.0" prefWidth="318.0" promptText="Mot de passe" />
             <JFXTextField fx:id="txtshowcpass" layoutX="44.0" layoutY="297.0" prefHeight="31.0" prefWidth="318.0" promptText="Confirmer mot de passe" />
             <JFXTextField fx:id="txttelpro" layoutX="42.0" layoutY="391.0" prefHeight="31.0" prefWidth="149.0" promptText="Numéro tél pro" />
-            <JFXTextField fx:id="txtadrlocal" layoutX="211.0" layoutY="391.0" prefHeight="31.0" prefWidth="149.0" promptText="Adressa locale" />
+            <JFXTextField fx:id="txtadrlocal" layoutX="211.0" layoutY="391.0" prefHeight="31.0" prefWidth="149.0" promptText="Adresse locale" />
          </children>
       </Pane>
       <Button fx:id="btnprofil" layoutX="398.0" layoutY="275.0" mnemonicParsing="false" onAction="#ProfilPage" text="Button" />

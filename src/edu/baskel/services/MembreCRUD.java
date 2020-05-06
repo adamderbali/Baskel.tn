@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 public class MembreCRUD {
 
     Connection cnx;
-    Stage owner = new Stage();
     Membre membreLogged;
     private int val;
 

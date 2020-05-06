@@ -14,6 +14,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Reparateur;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
+import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +44,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -114,6 +116,7 @@ public class InscriptionReparateurController implements Initializable {
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
 
+        TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
     }
 
     //validation champs vides
