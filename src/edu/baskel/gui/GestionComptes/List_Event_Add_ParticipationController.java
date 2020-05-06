@@ -32,6 +32,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import edu.baskel.utils.validationSaisie;
 
 public class List_Event_Add_ParticipationController implements Initializable {
 
@@ -94,16 +95,20 @@ public class List_Event_Add_ParticipationController implements Initializable {
         
         ParticipationCrud Pc = new ParticipationCrud();
         Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),7);
+        if (Pc.verifierParticipation(7,tableAffichage.getSelectionModel().getSelectedItem().getId_e())==0){
+             Alert alertParticipation = new validationSaisie().getAlert("Echec", "Vous avez deja particpé a ce evenement");
+            alertParticipation.showAndWait();
+            actualiser();
+        }
+        else {
         Pc.ajouterParticipation(p);
         SendMail Sm = new SendMail();
             Sm.envoiMail("sabrine.zekri@esprit.tn");
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Particpation ok");
-            alert1.setContentText("Vous avez particper et vous allez reçevoir un mail de confirmation");
-            alert1.show();
+           Alert alertParticipationValidé = new validationSaisie().getAlert("ok", "Votre participation est confirmé ");
+           alertParticipationValidé.showAndWait();
             actualiser();
         }
-
+    }
 
     
       private void actualiser() {

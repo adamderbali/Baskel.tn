@@ -276,7 +276,36 @@ public void supprimerParticipation(int id_e,int id_u){
 
         return ListEventPaticipation;
     }
-    
+     
+  
+      public int verifierParticipation(int id_u,int id_e){
+             
+          {  int v = 0;
+           try {
+               String requete = "SELECT* FROM participation WHERE p.id_u=" + id_u+"AND id_e="+id_e;
+               System.out.println("+++++++++++" + requete);
+               PreparedStatement pst = cnx.prepareStatement(requete);
+               ResultSet rs = pst.executeQuery();
+               if (rs.next()){
+                   v=0;
+               }
+               
+               else
+               v=1;
+               
+               
+           } catch (SQLException ex) {
+               
+              
+                   
+           }
+           
+           return v;
+         
+     }
+        
+         
+     }
     
     
 }

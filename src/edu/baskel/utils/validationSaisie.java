@@ -5,8 +5,14 @@
  */
 package edu.baskel.utils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 
 /**
@@ -14,6 +20,13 @@ import javafx.scene.control.Alert;
  * @author sabri
  */
 public class validationSaisie {
+   Connection cnx;
+    public validationSaisie() {
+        
+         cnx = ConnectionBD.getInstance().getCnx();
+    }
+    
+    
     
     public static boolean validTextField(String test) {
         return test.equals("");
@@ -38,11 +51,8 @@ public class validationSaisie {
         
         }
      }
-     
-        
-        
-         
-     }
-       
     
-
+   
+     
+    
+     }
