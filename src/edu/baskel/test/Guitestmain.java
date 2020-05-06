@@ -1,6 +1,5 @@
 package edu.baskel.test;
 
-
 /**
  *
  * @author ASUS
@@ -11,7 +10,6 @@ package edu.baskel.test;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -21,30 +19,24 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Guitestmain extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../gui/reparateurGUI/ListeReparateur.fxml"));
-       // Parent root = FXMLLoader.load(getClass().getResource("../gui/evenementGUI/Affichage_List_Evenement_Ajout_Participation.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/reparateurGUI/MenuReparateur.fxml"));
         stage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
 
     }
 
-   
-    
-    
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         launch(args);
-        
-        
+
     }
-        
+
 }
