@@ -260,7 +260,6 @@ public class MembreCRUD {
                 m.setType_u(rs.getString("type_u"));
                 m.setValidation_u(rs.getInt("validation_u"));
                 m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
-                
 
             } else {
                 System.out.println("erreur d affcihage");

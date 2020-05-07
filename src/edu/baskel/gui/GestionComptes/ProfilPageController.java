@@ -151,11 +151,11 @@ public class ProfilPageController implements Initializable {
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
 
-            SnapshotParameters parameters = new SnapshotParameters();
+            /*SnapshotParameters parameters = new SnapshotParameters();
             parameters.setFill(Color.TRANSPARENT);
             WritableImage image = imagev.snapshot(parameters, null);
             imagev.setClip(null);
-            imagev.setEffect(new DropShadow(20, Color.BLACK));
+            imagev.setEffect(new DropShadow(20, Color.BLACK));*/
             imagev.setImage(imagelog);
         }
     }

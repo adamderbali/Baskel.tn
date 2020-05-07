@@ -69,6 +69,8 @@ public class SidentifierController implements Initializable {
     private FontAwesomeIconView chkmotdepasse;
     @FXML
     private JFXButton btnsinscrire1;
+    @FXML
+    private Label CDutil;
 
     Preferences preferences;
     private int idu;
@@ -94,7 +96,7 @@ public class SidentifierController implements Initializable {
             }
         }
     }
-    
+
 // visualiser le mot de passe
     @FXML
     public void VisualiserMP(MouseEvent event) {
@@ -102,7 +104,7 @@ public class SidentifierController implements Initializable {
         txtmotdepasse.setVisible(false);
         txtshowmp.setVisible(true);
     }
-    
+
 // cacher le mot de passe
     @FXML
     public void hideMP(MouseEvent event) {
@@ -110,11 +112,10 @@ public class SidentifierController implements Initializable {
         txtmotdepasse.setVisible(true);
         txtshowmp.setVisible(false);
     }
-    
+
 //se connecter et se souvenir de moi
     @FXML
     public void loggin1(ActionEvent event) throws DocumentException {
-        PDF.pdfRead();
         MembreCRUD mr = new MembreCRUD();
         if (mr.Verification(txtutilisateur.getText(), txtmotdepasse.getText()) != null) {
             if (mr.ValidationBan(txtutilisateur.getText()) != 0) {
@@ -148,25 +149,31 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getLoggedM();
                 System.out.println(SessionInfo.getInstance(iduser));
             } else {
-            //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
+                //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
 
                 Alert alertn = new InputValidation().getAlert(" Erreur d'authentification", "vous etes banni s");
                 alertn.showAndWait();
             }
         } else {
-            InputValidation.notificationError("Erreur d'authentification", "veuillez  verifier vos données");
-            
-            /*Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
-            alertnum.showAndWait();*/
-             
+            //InputValidation.notificationError("Erreur d'authentification", "veuillez  verifier vos données");
+
+            Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
+            alertnum.showAndWait();
+
         }
     }
 
     @FXML
     private void handleButtonAction(MouseEvent event) {
+    }
+
+    //Lire COnd d utilisations
+    @FXML
+    void LireCondUtil(MouseEvent event) {
+        PDF.pdfRead();
 
     }
-    
+
 //redirection pasge d inscription membre
     @FXML
     public void RedirectionRegistration(ActionEvent event) throws IOException {

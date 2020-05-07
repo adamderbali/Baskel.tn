@@ -72,6 +72,7 @@
             </JFXButton>
             <FontAwesomeIconView glyphName="USER" layoutX="70.0" layoutY="148.0" size="20.0" />
             <FontAwesomeIconView glyphName="LOCK" layoutX="71.0" layoutY="207.0" size="20.0" />
+            <Label fx:id="CDutil" layoutX="108.0" layoutY="495.0" onMouseClicked="#LireCondUtil" text="Lire les Condition d'utilisation" />
          </children>
       </Pane>
       <Button fx:id="btnfb" layoutX="452.0" layoutY="292.0" mnemonicParsing="false" onAction="#FacebooLogin" text="facebook" />
