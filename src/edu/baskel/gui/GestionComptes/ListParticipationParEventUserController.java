@@ -51,7 +51,7 @@ public class ListParticipationParEventUserController implements Initializable {
     public void affichageParticip() {
 
          ParticipationCrud Pc = new ParticipationCrud();
-        List<Participation> partlst = Pc.displayParticipant(3);
+        List<Participation> partlst = Pc.displayParticipant(7);
         ObservableList obser;
         obser = FXCollections.observableArrayList(partlst);
         TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");

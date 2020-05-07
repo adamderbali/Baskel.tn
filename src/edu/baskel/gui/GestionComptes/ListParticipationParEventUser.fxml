@@ -6,22 +6,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ListParticipationParEventUserController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ListParticipationParEventUserController">
    <children>
-      <TableView fx:id="tableAffichage" layoutX="-2.0" layoutY="65.0" prefHeight="529.0" prefWidth="806.0" stylesheets="@AffichageAnnulParti.css">
-        <columns>
-          <TableColumn fx:id="colNom" prefWidth="111.0" text="Nom" />
-          <TableColumn fx:id="colPrenom" prefWidth="110.0" text="Prenom" />
-            <TableColumn fx:id="colEmail" prefWidth="108.0" text="Email" />
-            <TableColumn fx:id="colNomE" prefWidth="169.0" text="Nom Evenement" />
-            <TableColumn fx:id="colLieuE" prefWidth="134.0" text="Lieu Evenement" />
-            <TableColumn fx:id="colDateE" prefWidth="144.0" text="Date de l'evenement" />
-        </columns>
-      </TableView>
-      <ImageView fitHeight="529.0" fitWidth="814.0" layoutX="-1.0" layoutY="66.0" opacity="0.28" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="373.0" fitWidth="863.0" layoutX="14.0" layoutY="88.0">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
+      <TableView fx:id="tableAffichage" layoutX="14.0" layoutY="49.0" opacity="0.74" prefHeight="413.0" prefWidth="863.0" style="-fx-fixed-cell-size: 70;" stylesheets="@AffichageList.css">
+        <columns>
+          <TableColumn fx:id="colNom" prefWidth="135.0" text="Nom de participant" />
+          <TableColumn fx:id="colPrenom" prefWidth="139.0" text="Prenom de participant" />
+            <TableColumn fx:id="colEmail" prefWidth="162.0" text="E-mail de participant" />
+            <TableColumn fx:id="colNomE" prefWidth="150.0" text="Nom de l'evenement" />
+            <TableColumn fx:id="colLieuE" prefWidth="139.0" text="Lieu de l'evenement" />
+            <TableColumn fx:id="colDateE" prefWidth="137.0" text="Date de l'evenement" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

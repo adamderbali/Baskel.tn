@@ -67,10 +67,10 @@ public class Annulation_participationController implements Initializable {
     
   public void affichageEvenementP() {
 
-         ParticipationCrud parList = new ParticipationCrud();
-        List<Participation> alertlst = parList.displayByUser(7);
+        ParticipationCrud parList = new ParticipationCrud();
+        List<Participation> partListU = parList.displayByUser(7);
         ObservableList obser;
-        obser = FXCollections.observableArrayList(alertlst);
+        obser = FXCollections.observableArrayList(partListU);
         TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
         //afficher le non du membre dnas la classe alerte
         colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
@@ -101,9 +101,9 @@ public class Annulation_participationController implements Initializable {
 
       private void actualiser() {
         ParticipationCrud parList = new ParticipationCrud();
-        List<Participation> alertlst = parList.displayByUser(2);
+        List<Participation> partListU = parList.displayByUser(7);
         ObservableList obser;
-        obser = FXCollections.observableArrayList(alertlst);
+        obser = FXCollections.observableArrayList(partListU);
         TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
         //afficher le non du membre dnas la classe alerte
         colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));

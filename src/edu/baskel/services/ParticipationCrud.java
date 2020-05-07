@@ -237,7 +237,7 @@ public void supprimerParticipation(int id_e,int id_u){
         List<Participation> ListEventPaticipation = new ArrayList<>();
 
         try {
-            String requete = "SELECT * FROM  evenement e JOIN participation p ON  e.id_e = p.id_e JOIN membre m ON m.id_u = p.id_u  WHERE e.id_u =" + id_u;
+            String requete = "SELECT * FROM  evenement e JOIN participation p ON  e.id_e = p.id_e JOIN membre m ON m.id_u = p.id_u  WHERE e.id_u =" + id_u+"ORDER BY p.id_e";
             Statement pst = cnx.createStatement();
             ResultSet rs = pst.executeQuery(requete);
 

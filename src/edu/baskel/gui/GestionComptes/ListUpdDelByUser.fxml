@@ -7,17 +7,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="650.0" prefWidth="900.0" stylesheets="@AffichageListUser.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ListUpdDelByUserController">
    <children>
-      <TableView fx:id="tableAffichage" layoutX="17.0" layoutY="61.0" onMouseClicked="#chargerDonnee" prefHeight="281.0" prefWidth="872.0" style="-fx-fixed-cell-size: 70px; -fx-background-image: ..\..\..\..\images\image.PNG;" stylesheets="@AffichageListUser.css">
+      <ImageView fitHeight="241.0" fitWidth="872.0" layoutX="18.0" layoutY="101.0">
+         <image>
+            <Image url="@../../../../images/image.PNG" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableAffichage" layoutX="17.0" layoutY="61.0" onMouseClicked="#chargerDonnee" opacity="0.74" prefHeight="281.0" prefWidth="872.0" style="-fx-fixed-cell-size: 70px;" stylesheets="@AffichageListUser.css">
         <columns>
           <TableColumn fx:id="colNom" prefWidth="114.0" text="Nom" />
           <TableColumn fx:id="colLieu" prefWidth="105.0" text="Lieu" />
@@ -26,19 +27,6 @@
             <TableColumn fx:id="colImage" prefWidth="301.0" text="Image" />
         </columns>
       </TableView>
-      <Text layoutX="285.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerer vos evenement" wrappingWidth="182.3828125">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#00747f" />
-                  <Stop color="#1b1b1b" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Text>
       <JFXButton fx:id="fileChoose" layoutX="557.0" layoutY="451.0" onAction="#telechargerPhoto" prefHeight="27.0" prefWidth="102.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Parcourrir" textFill="#00747f" />
       <JFXTextField fx:id="txtNom" focusColor="#00747f" layoutX="23.0" layoutY="388.0" prefHeight="25.0" prefWidth="232.0" promptText="Modifier le nom de l'evenement" />
       <JFXTextField fx:id="txtLieu" focusColor="#00747f" layoutX="23.0" layoutY="426.0" prefHeight="25.0" prefWidth="232.0" promptText="Modifier le lieu de l'evenement" />
@@ -48,6 +36,5 @@
       <TextField fx:id="pathE" layoutX="533.0" layoutY="493.0" promptText="Url" style="-fx-border-color: #C0C0C0; -fx-background-radius: 100px; -fx-border-radius: 100px;" />
       <JFXButton fx:id="valider" layoutX="221.0" layoutY="582.0" onAction="#ValiderModif" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Valider la modification" textFill="#00747f" />
       <JFXButton fx:id="supprimer" layoutX="419.0" layoutY="582.0" onAction="#supprimer" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Supprimer" textFill="#00747f" />
-      <Line endX="100.0" layoutX="361.0" layoutY="49.0" startX="-100.0" />
    </children>
 </AnchorPane>

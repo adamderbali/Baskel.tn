@@ -80,8 +80,11 @@ public class Ajouter_EvenementController implements Initializable {
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
         if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-           validationSaisie.notificationErreur("Echec", "Tous les champs doivent etre remplis Svp");
+             //validationSaisie.validNotif("Erreur", "Saisie tous les champs");
+             Alert alertDtae1 = new validationSaisie().getAlert("erreur", "Saisi tous les");
+                alertDtae1.showAndWait();
             /* test sur les dates*/
+         
         } else {
             if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
 

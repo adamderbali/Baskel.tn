@@ -118,7 +118,7 @@ public class ListUpdDelByUserController implements Initializable {
     public void affichageEvenement() {
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(3);
+        arrayList = (ArrayList) Ec.displayByUser(7);
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
 
@@ -195,7 +195,7 @@ public class ListUpdDelByUserController implements Initializable {
 
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(3);
+        arrayList = (ArrayList) Ec.displayByUser(7);
 
         observableList = FXCollections.observableArrayList(arrayList);
         tableAffichage.setItems(observableList);

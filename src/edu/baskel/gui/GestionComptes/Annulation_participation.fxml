@@ -8,26 +8,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor1" prefHeight="507.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.Annulation_participationController">
+<AnchorPane id="AnchorPane" fx:id="anchor1" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.Annulation_participationController">
    <children>
-    
-      <TableView fx:id="tableAffichage" layoutX="14.0" layoutY="89.0" prefHeight="306.0" prefWidth="723.0" style="-fx-border-color: #007782; -fx-fixed-cell-size: 70; -fx-effect: #007782;" stylesheets="@AffichageAnnulParti.css">
-        <columns>
-          <TableColumn fx:id="colNom" prefWidth="120.0" text="Nom" />
-            <TableColumn fx:id="colDate" prefWidth="104.0" text="Date" />
-            <TableColumn fx:id="colLieu" prefWidth="102.0" text="Lieu" />
-            <TableColumn fx:id="colDescription" prefWidth="187.0" text="Description" />
-          <TableColumn fx:id="colImage" prefWidth="240.0" text="Image" />
-        </columns>
-      </TableView>
-      <JFXButton fx:id="participer" layoutX="302.0" layoutY="426.0" onAction="#annulerParticipation" prefHeight="31.0" prefWidth="166.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Annuler participation" textFill="#007782">
-         <font>
-            <Font size="13.0" />
-         </font></JFXButton>
-      <ImageView fitHeight="255.0" fitWidth="723.0" layoutX="13.0" layoutY="141.0" opacity="0.21" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="427.0" fitWidth="856.0" layoutX="23.0" layoutY="108.0">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
+      <TableView fx:id="tableAffichage" layoutX="19.0" layoutY="67.0" opacity="0.74" prefHeight="470.0" prefWidth="862.0" style="-fx-fixed-cell-size: 70px;" stylesheets="@AffichageList.css">
+         <columns>
+            <TableColumn fx:id="colNom" prefWidth="138.0" text="Nom de l'vebement" />
+            <TableColumn fx:id="colLieu" prefWidth="146.0" text="Lieu de l'evenement" />
+            <TableColumn fx:id="colDate" prefWidth="147.0" text="Date de l'evenement" />
+            <TableColumn fx:id="colDescription" prefWidth="197.0" text="Description de l'evenement" />
+            <TableColumn fx:id="colImage" prefWidth="233.0" text="Image" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="participer" layoutX="320.0" layoutY="558.0" onAction="#annulerParticipation" prefHeight="31.0" prefWidth="166.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Annuler participation" textFill="#007782">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font></JFXButton>
    </children>
 </AnchorPane>

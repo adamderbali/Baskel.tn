@@ -44,22 +44,23 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private AnchorPane anchor1;
-    @FXML
+      @FXML
     private TableView<Evenement> tableAffichage;
-    @FXML
-    private TableColumn<Evenement, String> colNom;
 
     @FXML
-    private TableColumn<Evenement, String> colLieu;
+    private TableColumn<Evenement,String> colNom;
 
     @FXML
-    private TableColumn<Evenement, String> colDate;
+    private TableColumn<Evenement,String> colLieu;
 
     @FXML
-    private TableColumn<Evenement, String> colDescription;
+    private TableColumn<Evenement,String> ColDate;
 
     @FXML
-    private TableColumn<Evenement, String> colImage;
+    private TableColumn<Evenement,String> colDescription;
+
+    @FXML
+    private TableColumn<Evenement,String> ColImage;
 
     @FXML
     private JFXButton participer;
@@ -97,9 +98,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
         obser = FXCollections.observableArrayList(arrayList);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-        colImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
         tableAffichage.setItems(obser);
        
        
@@ -138,9 +139,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
         tableAffichage.setItems(obser);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-        colImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
 
     }
 
@@ -156,7 +157,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     }
     
-    
+ /*
     @FXML
     void Filtre(ActionEvent event) {
          
@@ -171,10 +172,10 @@ public class List_Event_Add_ParticipationController implements Initializable {
         }
 
     }
-
+*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        affichageEvenement();
+       affichageEvenement();
     }
 
 }
