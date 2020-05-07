@@ -92,7 +92,7 @@ public class AlerteCRUD {
                 a.setDate_a(rs.getDate("date_a"));
                 
                 Membre m = new Membre();
-                m.setId_u(rs.getInt("id_alerte"));
+                m.setId_u(rs.getInt("id_u"));
                 m.setNom_u(rs.getString("nom_u"));
                 m.setPrenom_u(rs.getString("prenom_u"));
                 m.setAdresse_u(rs.getString("adresse_u"));

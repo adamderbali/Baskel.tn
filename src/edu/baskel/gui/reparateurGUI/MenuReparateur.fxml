@@ -21,7 +21,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#golistereparateur" text="liste Reparateur" />
             <Button mnemonicParsing="false" onAction="#golistealerte" text="liste Alerte" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#golisteavis"  text="Liste des avis"  GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />

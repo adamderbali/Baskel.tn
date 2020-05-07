@@ -5,6 +5,9 @@
  */
 package edu.baskel.entities;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author ASUS
@@ -13,6 +16,7 @@ public class Avis {
    private int id_av;
    private int note_av;
    private String desc_av;
+   private Timestamp date_avis;
    private Membre membre;
    private Reparateur reparateur;
 
@@ -64,6 +68,20 @@ public class Avis {
 
     public void setReparateur(Reparateur reparateur) {
         this.reparateur = reparateur;
+    }
+
+    public Timestamp getDate_avis() {
+        return date_avis;
+    }
+
+    public void setDate_avis(Timestamp date_avis) {
+        this.date_avis = date_avis;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Avis{" + "id_av=" + id_av + ", note_av=" + note_av + ", desc_av=" + desc_av + ", membre=" + membre.toString() + ", reparateur=" + reparateur.toString() + '}';
     }
     
     
