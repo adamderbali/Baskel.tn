@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -27,5 +28,6 @@
             <Font name="System Italic" size="13.0" />
          </font>
       </JFXButton>
+      <TextField fx:id="rechercher" layoutX="40.0" layoutY="60.0" onAction="#Filtre" promptText="Rechercher par nom" />
    </children>
 </AnchorPane>

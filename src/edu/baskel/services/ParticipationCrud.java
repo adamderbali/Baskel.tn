@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdk.nashorn.internal.ir.ObjectNode;
 
 
@@ -278,34 +280,44 @@ public void supprimerParticipation(int id_e,int id_u){
     }
      
   
-      public int verifierParticipation(int id_u,int id_e){
+      public boolean verifierParticipation(int id_u,int id_e){
+            
+        try {
+            
+            
+            String requete = "SELECT * FROM participation WHERE id_u=? AND id_e=?";
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, id_u);
+            pst.setInt(2, id_e);
+            ResultSet rs = pst.executeQuery();
+           if(rs.next()){
+            return false;
              
-          {  int v = 0;
-           try {
-               String requete = "SELECT* FROM participation WHERE p.id_u=" + id_u+"AND id_e="+id_e;
-               System.out.println("+++++++++++" + requete);
-               PreparedStatement pst = cnx.prepareStatement(requete);
-               ResultSet rs = pst.executeQuery();
-               if (rs.next()){
-                   v=0;
-               }
-               
-               else
-               v=1;
-               
-               
-           } catch (SQLException ex) {
-               
-              
-                   
            }
-           
-           return v;
-         
-     }
+        } catch (SQLException ex) {
+            Logger.getLogger(ParticipationCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return true;
         
          
      }
     
     
 }
+
+/*   int nb = 0;
+        try {
+            
+            
+            String requete = "SELECT count(*) AS count FROM participation WHERE id_u=" + id_u+ "AND id_e="+id_e;
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+           while(rs.next()){
+            nb = rs.getInt("count");
+           }
+        } catch (SQLException ex) {
+            Logger.getLogger(ParticipationCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return nb;*/

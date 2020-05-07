@@ -80,9 +80,7 @@ public class Ajouter_EvenementController implements Initializable {
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
         if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-            Alert alertChamps = new validationSaisie().getAlert("Echec", "Saisi tout les champs");
-            alertChamps.showAndWait();
-
+           validationSaisie.notificationErreur("Echec", "Tous les champs doivent etre remplis Svp");
             /* test sur les dates*/
         } else {
             if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
@@ -112,7 +110,7 @@ public class Ajouter_EvenementController implements Initializable {
     }
 
     /* button parcourrir photo*/
-    @FXML
+  /*  @FXML
     void telechargerPhoto(ActionEvent event) {
 
         FileChooser filechooser = new FileChooser();
@@ -131,8 +129,8 @@ public class Ajouter_EvenementController implements Initializable {
         }
 
     }
-
-    /*  @FXML
+*/
+     @FXML
 
     void telecharger(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -151,15 +149,15 @@ public class Ajouter_EvenementController implements Initializable {
             img.setImage(image);
 
         }
-    }*/
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        FileChooser filechooser = new FileChooser();
+     /*   FileChooser filechooser = new FileChooser();
 
         filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt"));
+                new FileChooser.ExtensionFilter("Text File", "*.txt"));*/
     }
 
 }

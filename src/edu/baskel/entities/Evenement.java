@@ -6,6 +6,7 @@
 package edu.baskel.entities;
 
 import java.util.Date;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -14,7 +15,8 @@ import java.util.Date;
 
  /*!!!!!*/
 public class Evenement {
-
+    
+  
     private int id_e;
     private String nom_e;
     private String lieu_e;
@@ -67,6 +69,7 @@ public class Evenement {
         this.image_e = image_e;
     }
 
+   
     public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e) {
         this.id_e = id_e;
         this.nom_e = nom_e;

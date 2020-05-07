@@ -10,6 +10,7 @@ import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.utils.validationSaisie;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class Annulation_participationController implements Initializable {
   public void affichageEvenementP() {
 
          ParticipationCrud parList = new ParticipationCrud();
-        List<Participation> alertlst = parList.displayByUser(3);
+        List<Participation> alertlst = parList.displayByUser(7);
         ObservableList obser;
         obser = FXCollections.observableArrayList(alertlst);
         TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
@@ -88,21 +89,13 @@ public class Annulation_participationController implements Initializable {
         System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
      if (Pc.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem())==true){
         tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
-         
-        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-        alert1.setTitle("Supression ok");
-        alert1.setContentText("Votre participation est annulé");
-        alert1.show();
+         Alert alertParticipation = new validationSaisie().getAlert("Ok", "Vous avez annulé votre participation");
+         alertParticipation.showAndWait();
         actualiser();
               }
      
      else {
-   
-        Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-        alert1.setTitle("Erreur d' annulation");
-        alert1.setContentText("Echec d'annulation");
-        alert1.show();
-         
+              System.out.println("Erreur d'annulation");
      }
     }
 
