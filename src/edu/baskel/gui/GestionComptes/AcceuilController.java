@@ -32,25 +32,36 @@ public class AcceuilController implements Initializable {
     @FXML
     private AnchorPane ANchorProfil;
 
+    @FXML
+    private AnchorPane anchorproincipal;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     public void Deconnexion(ActionEvent event) {
-        
+
     }
 
+//afficher page profil a partir de l acceuil
     @FXML
     public void Profil(ActionEvent event) throws IOException {
-        
+
         AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
-            ANchorProfil.getChildren().setAll(pane);
+        ANchorProfil.getChildren().setAll(pane);
     }
-    
-    
+
+    //se deconnecter a partir de l acceuil
+    @FXML
+    public void Deco(ActionEvent event) throws IOException {
+
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+    }
+
 }

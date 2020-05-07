@@ -252,44 +252,43 @@ public class InscriptionReparateurController implements Initializable {
                                     if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
                                         Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
                                         alertnum.showAndWait();
-                                    } else {
+                                    } else /*{
                                         if (verifDate() == false) {
                                             Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
                                             alertnum.showAndWait();
                                             txtnaissance.setValue(null);
-                                        } else {
-                                            if (mr.VerificationExistence(r) == true) {
+                                        } else*/ {
+                                        if (mr.VerificationExistence(r) == true) {
 
-                                                if (motdepasse.equals(conmotdepasse)) {
-                                                    ReparateurCRUD rr = new ReparateurCRUD();
-                                                    rr.ajouterReparateur(r);
-                                                    //mr.adduser2(r);
-                                                    txtNom.clear();
-                                                    txtPrenom.clear();
-                                                    txtnaissance.setValue(null);
-                                                    txtAdresse.clear();
-                                                    txtimage.clear();
-                                                    txtemail.clear();
-                                                    txtconfirmation.clear();
-                                                    txtmotdepasse.clear();
-                                                    txttelephone.clear();
-                                                    chkhomme.setSelected(false);
-                                                    chkfemme.setSelected(false);
-                                                    txttelpro.clear();
-                                                    txtadrlocal.clear();
-                                                    System.out.println("Reparateur ajouté");
+                                            if (motdepasse.equals(conmotdepasse)) {
+                                                ReparateurCRUD rr = new ReparateurCRUD();
+                                                rr.ajouterReparateur(r);
+                                                //mr.adduser2(r);
+                                                txtNom.clear();
+                                                txtPrenom.clear();
+                                                txtnaissance.setValue(null);
+                                                txtAdresse.clear();
+                                                txtimage.clear();
+                                                txtemail.clear();
+                                                txtconfirmation.clear();
+                                                txtmotdepasse.clear();
+                                                txttelephone.clear();
+                                                chkhomme.setSelected(false);
+                                                chkfemme.setSelected(false);
+                                                txttelpro.clear();
+                                                txtadrlocal.clear();
+                                                System.out.println("Reparateur ajouté");
 
-                                                } else {
-                                                    Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
-                                                    alertnum.showAndWait();
-
-                                                }
                                             } else {
-                                                Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
+                                                Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
                                                 alertnum.showAndWait();
-                                            }
 
+                                            }
+                                        } else {
+                                            Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
+                                            alertnum.showAndWait();
                                         }
+
                                     }
                                 }
                             }

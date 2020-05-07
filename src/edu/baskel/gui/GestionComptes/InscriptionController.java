@@ -95,7 +95,6 @@ public class InscriptionController implements Initializable {
     private JFXTextField txtshowcpass;
     @FXML
     private TextField auto;
-   
 
     String photo = null;
     Connection cnx;
@@ -106,9 +105,9 @@ public class InscriptionController implements Initializable {
         cnx = ConnectionBD.getInstance().getCnx();
 
     }
-    
-        @Override
-    public void initialize(URL url, ResourceBundle rb ) {
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         txtmotdepasse.setVisible(true);
         txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
@@ -153,8 +152,6 @@ public class InscriptionController implements Initializable {
         }
     }
 
-
-
 //voir mot de passe
     @FXML
     public void VisualiserMPI(MouseEvent event) {
@@ -197,7 +194,6 @@ public class InscriptionController implements Initializable {
         }
         return true;
     }
-    
 
     //inscription d un simple membre
     @FXML
@@ -243,47 +239,47 @@ public class InscriptionController implements Initializable {
                             if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
                                 Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
                                 alertnum.showAndWait();
-                            } else {
+                            } else /*{
                                 if (verifDate() == false) {
                                     Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
                                     alertnum.showAndWait();
                                     txtnaissance.setValue(null);
-                                } else {
-                                    if (mr.VerificationExistence(m) == true) {
+                                } else*/ {
+                                if (mr.VerificationExistence(m) == true) {
 
-                                        if (motdepasse.equals(conmotdepasse)) {
-                                            mr.AddUser(m);
-                                            txtNom.clear();
-                                            txtPrenom.clear();
-                                            txtnaissance.setValue(null);
-                                            txtAdresse.clear();
-                                            txtimage.clear();
-                                            txtemail.clear();
-                                            txtconfirmation.clear();
-                                            txtmotdepasse.clear();
-                                            txttelephone.clear();
-                                            chkhomme.setSelected(false);
-                                            chkfemme.setSelected(false);
-                                            System.out.println("utilisateur ajouté");
-                                            InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
+                                    if (motdepasse.equals(conmotdepasse)) {
+                                        mr.AddUser(m);
+                                        txtNom.clear();
+                                        txtPrenom.clear();
+                                        txtnaissance.setValue(null);
+                                        txtAdresse.clear();
+                                        txtimage.clear();
+                                        txtemail.clear();
+                                        txtconfirmation.clear();
+                                        txtmotdepasse.clear();
+                                        txttelephone.clear();
+                                        chkhomme.setSelected(false);
+                                        chkfemme.setSelected(false);
+                                        System.out.println("utilisateur ajouté");
+                                        InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
 
-                                        } else {
-                                            Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
-                                            alertnum.showAndWait();
-
-                                        }
                                     } else {
-                                        Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
+                                        Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
                                         alertnum.showAndWait();
 
                                     }
+                                } else {
+                                    Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
+                                    alertnum.showAndWait();
 
                                 }
+
                             }
                         }
                     }
                 }
             }
+
         }
     }
 
