@@ -5,8 +5,13 @@
  */
 package edu.baskel.gui.reparateurGUI;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +35,7 @@ public class MenuReparateurController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void golistereparateur(ActionEvent event) throws IOException {
@@ -42,7 +47,7 @@ public class MenuReparateurController implements Initializable {
     }
 
     @FXML
-    private void golistealerte(ActionEvent event) throws IOException{
+    private void golistealerte(ActionEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("ListeAlerte.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -58,5 +63,43 @@ public class MenuReparateurController implements Initializable {
         app_stage.setScene(redirection_scene);
         app_stage.show();
     }
-    
+
+    @FXML
+    private void fetchapi(ActionEvent event) {
+        try {
+            this.MyGETRequest();
+        } catch (Exception err) {
+            System.out.println(err);
+        }
+    }
+public static void MyGETRequest() throws IOException {
+    URL urlForGetRequest = new URL("https://gestion.cityc.fr/newConcept/wsapp/getVille.php");
+    String readLine = null;
+    HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
+    conection.setRequestMethod("GET");
+    conection.setRequestProperty("userId", "a1bcdef"); // set userId its a sample here
+    int responseCode = conection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
+        BufferedReader in = new BufferedReader(
+            new InputStreamReader(conection.getInputStream()));
+        StringBuffer response = new StringBuffer();
+        while ((readLine = in .readLine()) != null) {
+            response.append(readLine);
+        } in .close();
+        // print result
+        System.out.println("JSON String Result " + response.toString());
+        //GetAndPost.POSTRequest(response.toString());
+    } else {
+        System.out.println("GET NOT WORKED");
+    }
+}
+
+    @FXML
+    private void godetailrep(ActionEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("DetailsReparateur.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+    }
 }

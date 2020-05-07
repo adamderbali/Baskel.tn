@@ -21,8 +21,6 @@ public class Avis {
    private Reparateur reparateur;
 
     public Avis() {
-        membre = new Membre();
-        reparateur = new Reparateur();
     }
 
     public Avis(Membre membre, Reparateur reparateur) {

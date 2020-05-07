@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,6 +45,42 @@ public class AvisCRUD {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public int getnbrAvisperDep(Reparateur r) {
+        int n = 0;
+        try {
+
+            String requete = "SELECT count(*) as nbravis FROM Avis where id_r = ?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, r.getId_u());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt("nbravis");
+            }
+
+        } catch (SQLException ex) {
+        }
+        System.out.println("nbr avis :" + n);
+        return n;
+    }
+
+    public Float getavgAvisperDep(Reparateur r) {
+        Float n = null;
+        try {
+
+            String requete = "SELECT avg(note) as avgavis FROM Avis where id_r = ?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setFloat(1, r.getId_u());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                n = rs.getFloat("avgavis");
+            }
+
+        } catch (SQLException ex) {
+        }
+        System.out.println("avg avis :" + n);
+        return n;
     }
 
     public List<Avis> getListeAvis() {

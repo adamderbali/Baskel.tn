@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="421.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="edu.baskel.gui.reparateurGUI.DetailsReparateurController">
+   <children>
+      <VBox layoutX="9.0" layoutY="19.0" prefHeight="153.0" prefWidth="583.0">
+         <children>
+            <Label text="Nom Locale" />
+            <TextArea fx:id="nomloc" prefHeight="200.0" prefWidth="200.0" />
+            <Label layoutX="10.0" layoutY="10.0" text="Nom" />
+            <TextArea fx:id="nom" layoutX="10.0" layoutY="27.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label layoutX="10.0" layoutY="202.0" text="Prenom" />
+            <TextArea fx:id="prenom" layoutX="10.0" layoutY="219.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label text="Adresse" />
+            <TextArea fx:id="adresse" prefHeight="200.0" prefWidth="200.0" />
+            <Label text="Téléphone" />
+            <TextArea fx:id="tel" prefHeight="200.0" prefWidth="200.0" />
+            <Label text="email" />
+            <TextArea fx:id="email" prefHeight="200.0" prefWidth="200.0" />
+            <Label text="note" />
+            <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

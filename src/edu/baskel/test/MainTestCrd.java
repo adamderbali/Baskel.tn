@@ -57,7 +57,9 @@ public class MainTestCrd {
         AvisCRUD avcrd = new AvisCRUD();
         avcrd.ajouterAvis(av);
         avcrd.getListeAvis();
-        avcrd.getListeAvisByReparateur(r);
+        avcrd.getListeAvisByReparateur(r2);
+        avcrd.getnbrAvisperDep(r2);
+        avcrd.getavgAvisperDep(r2);
         
         
     }

@@ -22,7 +22,6 @@ public class Alerte {
     private Membre membre;
 
     public Alerte() {
-        membre = new Membre();
     }
 
     public Alerte(String description_a, String latitude_a, String longitude_a, String adresse_a) {
