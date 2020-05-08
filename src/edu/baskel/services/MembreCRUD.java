@@ -37,7 +37,8 @@ public class MembreCRUD {
         try {
             String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u)"
                     + "VALUES(?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pst = cnx.prepareStatement(requete);
+            //historiqyue
+            PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);//histo
             pst.setString(1, m.getNom_u());
             pst.setString(2, m.getPrenom_u());
             pst.setString(3, m.getAdresse_u());
@@ -49,7 +50,14 @@ public class MembreCRUD {
             pst.setString(9, m.getImage_u());
 
             pst.executeUpdate();
-
+            ResultSet rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                //get las id inserted for member
+                int last_inserted_id = rs.getInt(1);
+                HistoriqueCRUD hh = new HistoriqueCRUD();
+                hh.ajouterHistorique(last_inserted_id);
+                System.out.println("Historrique added!");
+            }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }

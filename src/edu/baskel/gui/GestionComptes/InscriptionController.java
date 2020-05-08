@@ -12,6 +12,7 @@ import edu.baskel.services.ReparateurCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.verifEmail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -195,7 +196,7 @@ public class InscriptionController implements Initializable {
         return true;
     }
 
-    //inscription d un simple membre
+    //inscription d un simple membre(verif email ds inscip membre seulmn ,rep pas encore) 
     @FXML
     public void InsertData1(ActionEvent event) {
         MembreCRUD mr = new MembreCRUD();
@@ -228,64 +229,70 @@ public class InscriptionController implements Initializable {
                         Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email valide");
                         alertEmail.showAndWait();
                     } else {
-                        if (InputValidation.validPwd(txtmotdepasse.getText()) == 0) {
-                            Alert alertnum = new InputValidation().getAlert("Mot de passe", "Saisissez un mot de passe valide");
-                            alertnum.showAndWait();
+                        if ((verifEmail.check(txtemail.getText())) == false) {
+                            Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email existante");
+                            alertEmail.showAndWait();
                         } else {
-                            if (InputValidation.PhoneNumber(txttelephone.getText()) == 0) {
-                                Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone valide");
+                            if (InputValidation.validPwd(txtmotdepasse.getText()) == 0) {
+                                Alert alertnum = new InputValidation().getAlert("Mot de passe", "Saisissez un mot de passe valide");
                                 alertnum.showAndWait();
-                            }
-                            if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
-                                Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
-                                alertnum.showAndWait();
-                            } else /*{
+                            } else {
+                                if (InputValidation.PhoneNumber(txttelephone.getText()) == 0) {
+                                    Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone valide");
+                                    alertnum.showAndWait();
+                                }
+                                if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
+                                    Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
+                                    alertnum.showAndWait();
+                                } else /*{
                                 if (verifDate() == false) {
                                     Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
                                     alertnum.showAndWait();
                                     txtnaissance.setValue(null);
                                 } else*/ {
-                                if (mr.VerificationExistence(m) == true) {
+                                    if (mr.VerificationExistence(m) == true) {
 
-                                    if (motdepasse.equals(conmotdepasse)) {
-                                        mr.AddUser(m);
-                                        txtNom.clear();
-                                        txtPrenom.clear();
-                                        txtnaissance.setValue(null);
-                                        txtAdresse.clear();
-                                        txtimage.clear();
-                                        txtemail.clear();
-                                        txtconfirmation.clear();
-                                        txtmotdepasse.clear();
-                                        txttelephone.clear();
-                                        chkhomme.setSelected(false);
-                                        chkfemme.setSelected(false);
-                                        System.out.println("utilisateur ajouté");
-                                        InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
+                                        if (motdepasse.equals(conmotdepasse)) {
+                                            mr.AddUser(m);
+                                            txtNom.clear();
+                                            txtPrenom.clear();
+                                            txtnaissance.setValue(null);
+                                            txtAdresse.clear();
+                                            txtimage.clear();
+                                            txtemail.clear();
+                                            txtconfirmation.clear();
+                                            txtmotdepasse.clear();
+                                            txttelephone.clear();
+                                            chkhomme.setSelected(false);
+                                            chkfemme.setSelected(false);
+                                            System.out.println("utilisateur ajouté");
+                                            InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
 
+                                        } else {
+                                            Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
+                                            alertnum.showAndWait();
+
+                                        }
                                     } else {
-                                        Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
+                                        Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
                                         alertnum.showAndWait();
 
                                     }
-                                } else {
-                                    Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
-                                    alertnum.showAndWait();
 
                                 }
-
                             }
                         }
                     }
                 }
-            }
 
+            }
         }
     }
 
     //page de profil
     @FXML
-    public void ProfilPage(ActionEvent event) {
+    public void ProfilPage(ActionEvent event
+    ) {
         try {
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);

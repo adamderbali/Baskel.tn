@@ -10,13 +10,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.services.FacebookLog;
+import edu.baskel.services.HistoriqueCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.PDF;
 import edu.baskel.utils.SessionInfo;
 import static edu.baskel.utils.SessionInfo.iduser;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -77,6 +77,7 @@ public class SidentifierController implements Initializable {
     Connection cnx = null;
     PreparedStatement prep = null;
     ResultSet res = null;
+    HistoriqueCRUD hh = new HistoriqueCRUD();
 
     public SidentifierController() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -147,7 +148,9 @@ public class SidentifierController implements Initializable {
                 stage.show();
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
-                System.out.println(SessionInfo.getInstance(iduser));
+                hh.UpdateLastCnx(iduser);
+
+                // System.out.println(SessionInfo.getInstance(iduser));
             } else {
                 //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
 
@@ -167,10 +170,12 @@ public class SidentifierController implements Initializable {
     private void handleButtonAction(MouseEvent event) {
     }
 
-    //Lire COnd d utilisations
+    //Lire COnd d utilisations + mail historique***********************
     @FXML
-    void LireCondUtil(MouseEvent event) {
+    void LireCondUtil(MouseEvent event) throws Exception {
         PDF.pdfRead();
+        //hh.LastCnx();
+        //hh.UpdateLastCnx(iduser);
 
     }
 
