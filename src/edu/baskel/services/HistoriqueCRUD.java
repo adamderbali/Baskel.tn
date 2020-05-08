@@ -69,7 +69,7 @@ public class HistoriqueCRUD {
 
     }
 
-    //update un historique
+    //update d un historique
     public void UpdateLastCnx(int id) {
         String datee = java.time.LocalDate.now().toString();
 

@@ -116,7 +116,7 @@ public class SidentifierController implements Initializable {
 
 //se connecter et se souvenir de moi
     @FXML
-    public void loggin1(ActionEvent event) throws DocumentException {
+    public void loggin1(ActionEvent event) throws DocumentException, Exception {
         MembreCRUD mr = new MembreCRUD();
         if (mr.Verification(txtutilisateur.getText(), txtmotdepasse.getText()) != null) {
             if (mr.ValidationBan(txtutilisateur.getText()) != 0) {
@@ -149,7 +149,7 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
                 hh.UpdateLastCnx(iduser);
-
+                hh.LastCnx();//histo
                 // System.out.println(SessionInfo.getInstance(iduser));
             } else {
                 //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
