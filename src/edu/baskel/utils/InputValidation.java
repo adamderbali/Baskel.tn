@@ -25,10 +25,12 @@ import tray.notification.TrayNotification;
  */
 public class InputValidation {
 
+    //valid text field
     public static boolean validTextField(String test) {
         return test.equals("");
     }
 
+    //valid password
     public static int validPwd(String mdp) {
         int i = 0;
         if ((!mdp.equals(""))) {
@@ -37,6 +39,7 @@ public class InputValidation {
         return i;
     }
 
+    /*
     public static int StrengthPwd(String mdp) {
         int i = 0;
         if (mdp.length() < 6) {
@@ -49,7 +52,7 @@ public class InputValidation {
             i = 3;
         }
         return i;
-    }
+    }*/
 
     public static boolean validEmail(String email) {
         boolean status = false;
@@ -76,7 +79,7 @@ public class InputValidation {
     }
     
     
-
+//alert d erreur
     public Alert getAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -85,6 +88,7 @@ public class InputValidation {
         return alert;
     }
 
+    //copie l image vers le serveur
     public void CopyImage(String url, String imageDestination) throws IOException {
         //URL l'emplacement de fichier image sous wamp exemple (http://localhost/image/product)
         InputStream inputStream = new FileInputStream(imageDestination);//upload l'image
@@ -101,12 +105,14 @@ public class InputValidation {
         inputStream.close();
     }
 
+    //hash password
     public static String HshPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes(), 0, password.length());
         return password;
     }
 
+    //api  notif erreur
     public static void notificationError(String title, String message) {
         TrayNotification tray = new TrayNotification();
         AnimationType type = AnimationType.POPUP;
@@ -119,6 +125,8 @@ public class InputValidation {
 
     }
 
+    
+    //api notif succes
     public static void notificationsucces(String title, String message) {
         TrayNotification tray = new TrayNotification();
         AnimationType type = AnimationType.POPUP;
@@ -129,5 +137,39 @@ public class InputValidation {
         tray.setNotificationType(NotificationType.SUCCESS);
         tray.showAndDismiss(Duration.millis(3000));
 
+    }
+    
+      
+    //password strength
+    public static int calculatePasswordStrength(String password){
+        
+        //total score of password
+        int iPasswordScore = 0;
+        
+        if( password.length() < 8 )
+            return 0;
+        else if( password.length() >= 10 )
+            iPasswordScore += 2;
+        else 
+            iPasswordScore += 1;
+        
+        //if it contains one digit, add 2 to total score
+        if( password.matches("(?=.*[0-9]).*") )
+            iPasswordScore += 2;
+        
+        //if it contains one lower case letter, add 2 to total score
+        if( password.matches("(?=.*[a-z]).*") )
+            iPasswordScore += 2;
+        
+        //if it contains one upper case letter, add 2 to total score
+        if( password.matches("(?=.*[A-Z]).*") )
+            iPasswordScore += 2;    
+        
+        //if it contains one special character, add 2 to total score
+        if( password.matches("(?=.*[~!@#$%^&*()_-]).*") )
+            iPasswordScore += 2;
+        
+        return iPasswordScore;
+        
     }
 }

@@ -33,13 +33,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -96,6 +99,8 @@ public class InscriptionController implements Initializable {
     private JFXTextField txtshowcpass;
     @FXML
     private TextField auto;
+    @FXML
+    private Label lblfaible;
 
     String photo = null;
     Connection cnx;
@@ -113,6 +118,7 @@ public class InscriptionController implements Initializable {
         txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
+        
 
         TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
     }
@@ -195,6 +201,23 @@ public class InscriptionController implements Initializable {
         }
         return true;
     }
+
+    //verif password strength
+    @FXML
+    void passStrength(MouseEvent event) {
+   
+        if (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) < 6) {
+                lblfaible.setText("faible");
+                lblfaible.setTextFill(Color.RED);
+            } else if ((InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) > 6) && (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) <= 6)) {
+                lblfaible.setText("fmoyen");
+                lblfaible.setTextFill(Color.ORANGE);
+            } else {
+                lblfaible.setText("fort");
+                lblfaible.setTextFill(Color.GREEN);
+            }
+        }
+    
 
     //inscription d un simple membre(verif email ds inscip membre seulmn ,rep pas encore) 
     @FXML
