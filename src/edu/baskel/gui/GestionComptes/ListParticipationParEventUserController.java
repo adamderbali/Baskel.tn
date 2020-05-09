@@ -5,7 +5,10 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.jfoenix.controls.JFXTextField;
+import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Participation;
+import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
 import java.net.URL;
 import java.util.List;
@@ -13,10 +16,13 @@ import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -24,7 +30,8 @@ import javafx.scene.control.TableView;
  * @author sabri
  */
 public class ListParticipationParEventUserController implements Initializable {
-    
+      @FXML
+    private JFXTextField search; 
       @FXML
     private TableView<Participation> tableAffichage;
  @FXML
@@ -65,6 +72,9 @@ public class ListParticipationParEventUserController implements Initializable {
         tableAffichage.setItems(obser);
 
     }
+    
+   
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

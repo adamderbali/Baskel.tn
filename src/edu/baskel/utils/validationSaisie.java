@@ -5,10 +5,15 @@
  */
 package edu.baskel.utils;
 
+import com.jfoenix.controls.JFXButton;
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 
 /**
  *
@@ -45,6 +50,45 @@ public class validationSaisie {
         {return false;
         
         }
+     }
+     
+     
+     public static boolean confrimSuppression(){
+         
+         boolean clear=false;
+         
+         Alert alert = new Alert(Alert.AlertType.WARNING);
+         alert.setContentText("");
+         alert.setTitle("Supression evenement");
+         alert.setHeaderText("Voulez vraiment suprrimer ce evenement");
+         ButtonType cancelButtonType = new ButtonType("Cancel",ButtonData.CANCEL_CLOSE);
+         alert.getDialogPane().getButtonTypes().add(cancelButtonType);
+         
+         Optional<ButtonType> result = alert.showAndWait();
+         if(result.isPresent() && result.get() == ButtonType.OK)
+         {
+             clear=true;
+         }
+         return clear;
+     }
+     
+      public static boolean confrimAnnulation(){
+         
+         boolean clear=false;
+         
+         Alert alert = new Alert(Alert.AlertType.WARNING);
+         alert.setContentText("");
+         alert.setTitle("Annulation participation");
+         alert.setHeaderText("Voulez vraiment annuler votre particpation");
+         ButtonType cancelButtonType = new ButtonType("Cancel",ButtonData.CANCEL_CLOSE);
+         alert.getDialogPane().getButtonTypes().add(cancelButtonType);
+         
+         Optional<ButtonType> result = alert.showAndWait();
+         if(result.isPresent() && result.get() == ButtonType.OK)
+         {
+             clear=true;
+         }
+         return clear;
      }
      
  

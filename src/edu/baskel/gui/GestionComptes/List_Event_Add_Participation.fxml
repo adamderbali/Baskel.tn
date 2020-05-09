@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -34,5 +35,6 @@
             <Font name="System Italic" size="13.0" />
          </font>
       </JFXButton>
+      <JFXTextField fx:id="search" focusColor="#007782" layoutX="22.0" layoutY="72.0" onKeyTyped="#searchBox" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
    </children>
 </AnchorPane>

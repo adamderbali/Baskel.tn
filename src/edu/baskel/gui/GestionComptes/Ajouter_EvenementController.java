@@ -5,12 +5,14 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import java.io.File;
@@ -34,6 +36,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import edu.baskel.utils.validationSaisie;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import javafx.scene.input.KeyEvent;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 public class Ajouter_EvenementController implements Initializable {
 
@@ -43,8 +51,7 @@ public class Ajouter_EvenementController implements Initializable {
     @FXML
     private JFXTextField txtNom;
 
-    @FXML
-    private JFXTextField txtLieu;
+    
 
     @FXML
     private JFXTextArea txtDescription;
@@ -66,13 +73,18 @@ public class Ajouter_EvenementController implements Initializable {
 
     private Image image;
 
-    Membre m = SessionInfo.getLoggedM();
+    
+    @FXML
+    private JFXTextField txtLieu;
+  
 
     public Ajouter_EvenementController() {
 
     }
 
     /* Ajout evenement*/
+    
+   
     @FXML
     void ajouterEvenement(ActionEvent event) {
 
@@ -155,12 +167,10 @@ public class Ajouter_EvenementController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-     /*   FileChooser filechooser = new FileChooser();
-
-        filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt"));*/
+        TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
+    
     }
 
-}
+    }
+
+

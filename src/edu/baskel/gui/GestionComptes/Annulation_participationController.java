@@ -77,7 +77,7 @@ public class Annulation_participationController implements Initializable {
         colLieu.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDate.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));
         colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
-        colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
+     //   colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
         tableAffichage.setItems(obser);
 
     }
@@ -87,8 +87,8 @@ public class Annulation_participationController implements Initializable {
         
          ParticipationCrud Pc = new ParticipationCrud();
         System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-     if (Pc.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem())==true){
-        tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
+     if ((Pc.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem())==true) && (validationSaisie.confrimAnnulation()))
+     { tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
          Alert alertParticipation = new validationSaisie().getAlert("Ok", "Vous avez annulé votre participation");
          alertParticipation.showAndWait();
         actualiser();
@@ -110,7 +110,7 @@ public class Annulation_participationController implements Initializable {
         colLieu.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDate.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));
         colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
-        colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
+     //   colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
        
 
     }

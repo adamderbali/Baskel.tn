@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -23,5 +24,6 @@
             <TableColumn fx:id="colDateE" prefWidth="137.0" text="Date de l'evenement" />
         </columns>
       </TableView>
+      <JFXTextField fx:id="search" focusColor="#007782" layoutX="14.0" layoutY="14.0" onKeyTyped="#searchBox" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
    </children>
 </AnchorPane>

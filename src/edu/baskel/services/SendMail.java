@@ -57,9 +57,9 @@ public class SendMail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(monCompte));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recp) );
-            message.setSubject("Conframtion participation");
-            message.setSubject("Conframtion participation");
-            message.setText("votre participation est confirmé");
+            message.setSubject("Confirmation participation");
+            message.setSubject("Confirmation participation");
+            message.setText("votre participation est confirmée");
             return message;
         } catch (AddressException ex) {
             Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);

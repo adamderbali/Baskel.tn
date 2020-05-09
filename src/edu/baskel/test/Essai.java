@@ -24,7 +24,8 @@ public class Essai {
        ParticipationCrud Pc = new ParticipationCrud();
        // System.out.println(Pc.displayByUserP());
         
-  ParticipationCrud pa = new ParticipationCrud();
+//  ParticipationCrud pa = new ParticipationCrud();
+     //   System.out.println(Pc.displayEmailParticipant());
   /*c EvenementCRUD ev = new EvenementCRUD();*/
   /* Participation p = new Participation(64,4);*/
     /*    System.out.println(pa.displayByUserP());*/

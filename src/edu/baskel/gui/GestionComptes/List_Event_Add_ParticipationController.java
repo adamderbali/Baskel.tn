@@ -6,6 +6,7 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
@@ -33,12 +34,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import edu.baskel.utils.validationSaisie;
+import java.awt.Insets;
+import java.io.File;
+import static java.util.Collections.list;
+import java.util.function.Predicate;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.EventType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import static jdk.nashorn.internal.objects.NativeString.search;
 
 public class List_Event_Add_ParticipationController implements Initializable {
 
@@ -64,20 +74,16 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private JFXButton participer;
-    @FXML
-    private AnchorPane rootPaneA;
 
     @FXML
     private JFXButton btnAjout;
-    @FXML
-    private AnchorPane rootPane;
-    
-     @FXML
-    private TextField rechercher;
      ObservableList obser ;
 
     ImageView imagev;
     Membre m = SessionInfo.getLoggedM();
+    @FXML
+    private TextField search;
+  
 
     public List_Event_Add_ParticipationController() {
 
@@ -85,6 +91,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     }
 
+     
     /*Affichage les champs dans le table view*/
     public void affichageEvenement() {
 
@@ -92,21 +99,62 @@ public class List_Event_Add_ParticipationController implements Initializable {
         Evenement e = new Evenement();
         ArrayList arrayList;
         arrayList = (ArrayList) Ec.displayAllList();
-    //    ImageView imageEvent = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
+       //ImageView imageEvent = new ImageView(new Image(this.getClass().getResourceAsStream("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
        
-        
+     //  ImageView photo = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
+     //  PropertyValueFactory<Evenement,ImageView> photo = new PropertyValueFactory<> (("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())) ;
+      
         obser = FXCollections.observableArrayList(arrayList);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+       //  ColImage.setCellValueFactory(new PropertyValueFactory<>("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e()));
+        
         ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+        
         tableAffichage.setItems(obser);
+        
+        
        
        
                }
+    
+      @FXML
+    private void searchBox(KeyEvent event) {
+        FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);
+          search.textProperty().addListener((observable,oldValue,newValue) -> {
+              filterData.setPredicate(e ->{
+                  
+                  if (newValue == null || newValue.isEmpty()){
+                      return true;
+                  }
+                  String typedText = newValue.toLowerCase();
+              if   (e.getNom_e().toLowerCase().indexOf(typedText)!= -1) {
+                  
+                  return true;
+              }
+                          
+                     if   (e.getLieu_e().toLowerCase().indexOf(typedText)!= -1) {
+                  
+                  return true;
+              }     
+                    if   (e.getDate_e().toLowerCase().indexOf(typedText)!= -1) {
+                  
+                  return true;
+              }      
+                  return false;
+                  
+              });
+              
+              SortedList<Evenement> sortedList = new SortedList<>(filterData);
+              sortedList.comparatorProperty().bind(tableAffichage.comparatorProperty());
+              tableAffichage.setItems(sortedList);
+          });
+    }
+   
  
-    /* ajout de participation*/
+   
     @FXML
     void participerEvenement(ActionEvent event) throws Exception {
         
@@ -177,5 +225,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        affichageEvenement();
     }
+
+  
+
+   
 
 }

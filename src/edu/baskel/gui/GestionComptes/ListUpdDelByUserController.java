@@ -12,7 +12,10 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
+import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.SendMail;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
@@ -24,10 +27,12 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import static javafx.collections.FXCollections.observableList;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,6 +43,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -104,10 +110,11 @@ public class ListUpdDelByUserController implements Initializable {
     @FXML
     private ImageView imageV;
 
-    @FXML
-    private JFXTextField filter;
+        @FXML
+    private JFXTextField search;
 
-    ObservableList observableList;
+   
+    ObservableList obser;
     Membre m = SessionInfo.getLoggedM();
 
     public ListUpdDelByUserController() {
@@ -143,7 +150,7 @@ public class ListUpdDelByUserController implements Initializable {
             txtLieu.setText(event.getLieu_e());
             txtDescription.setText(event.getDescription_e());
             //  txtDate
-            pathE.setText(event.getImage_e());
+         //     pathE.setText(event.getImage_e());
             
                 img.setImage(image);
                 img.setPreserveRatio(true);
@@ -151,6 +158,46 @@ public class ListUpdDelByUserController implements Initializable {
             }
 
         }
+    
+      @FXML
+    private void searchBox(KeyEvent event) {
+      
+        EvenementCRUD Ec = new EvenementCRUD();
+        ArrayList arrayList;
+        arrayList = (ArrayList) Ec.displayByUser(7);
+        ObservableList obser;
+        obser = FXCollections.observableArrayList(arrayList);
+        FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);
+          search.textProperty().addListener((observable,oldValue,newValue) -> {
+              filterData.setPredicate(e ->{
+                  
+                  if (newValue == null || newValue.isEmpty()){
+                      return true;
+                  }
+                  String typedText = newValue.toLowerCase();
+              if   (e.getNom_e().toLowerCase().indexOf(typedText)!= -1) {
+                  
+                  return true;
+              }
+                          
+                     if   (e.getLieu_e().toLowerCase().indexOf(typedText)!= -1) {
+                  
+                  return true;
+              }     
+                    if   (e.getDate_e().toLowerCase().indexOf(typedText)!= -1) {
+                  
+                  return true;
+              }      
+                  return false;
+                  
+              });
+              
+              SortedList<Evenement> sortedList = new SortedList<>(filterData);
+              sortedList.comparatorProperty().bind(tableAffichage.comparatorProperty());
+              tableAffichage.setItems(sortedList);
+          });
+    }
+   
 
         @FXML
         void ValiderModif(ActionEvent event){
@@ -197,8 +244,8 @@ public class ListUpdDelByUserController implements Initializable {
         ArrayList arrayList;
         arrayList = (ArrayList) Ec.displayByUser(7);
 
-        observableList = FXCollections.observableArrayList(arrayList);
-        tableAffichage.setItems(observableList);
+        obser = FXCollections.observableArrayList(arrayList);
+        tableAffichage.setItems(obser);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
@@ -208,21 +255,29 @@ public class ListUpdDelByUserController implements Initializable {
     }
 
     @FXML
-    void supprimer(ActionEvent event) {
-
+    void supprimer(ActionEvent event) throws Exception {
+        int i;
+        ParticipationCrud Pc = new ParticipationCrud();
         EvenementCRUD Ec = new EvenementCRUD();
+      
         System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+        if(validationSaisie.confrimSuppression()){
+          
+        Pc.eventAnnuler(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
         Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
+        Pc.supprimerParticipationE(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
         tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
+        
         Alert alertDelete = new validationSaisie().getAlert("Suppression ok", "Evenement supprimé");
         alertDelete.showAndWait();
-        actualiser();
+        actualiser();     
 
         txtNom.clear();
         txtLieu.clear();
         txtDate.setValue(null);
         txtDescription.clear();
         pathE.clear();
+        }
     }
 
     @FXML

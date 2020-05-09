@@ -31,7 +31,7 @@ public class EvenementCRUD {
 
     /* Insert */
     public boolean ajouterEvenement(Evenement e) {
-            
+
         try {
             String requete = "INSERT INTO evenement (nom_e,lieu_e,date_e,description_e,image_e)"
                     + "VALUES (?,?,?,?,?)";
@@ -41,9 +41,9 @@ public class EvenementCRUD {
             pst.setString(3, e.getDate_e());
             pst.setString(4, e.getDescription_e());
             pst.setString(5, e.getImage_e());
-        /*    pst.setInt(6, e.getId_u());*/
+            /*    pst.setInt(6, e.getId_u());*/
             pst.executeUpdate();
-            
+
             System.out.println("Evenement added!");
             return true;
         } catch (SQLException ex) {
@@ -51,7 +51,7 @@ public class EvenementCRUD {
             System.out.println(ex.getMessage());
             return false;
         }
-        
+
     }
 
     public boolean supprimerEvenement(Evenement e) {
@@ -64,28 +64,13 @@ public class EvenementCRUD {
             /* pst1.setInt(1,e.getId_e());*/
             pst1.executeUpdate();
             System.out.println("Evenement supprimé");
-            return true ;
+            return true;
         } catch (SQLException ex) {
             return false;
         }
 
     }
 
-    /* Delete */
-
- /*  public void supprimerEvenement(Evenement e){
-             
-         try {
-             String requete1 = "DELETE FROM evenement where id_e=?";
-             PreparedStatement pst1 = cnx.prepareStatement(requete1);
-             pst1.setInt(1,e.getId_e());
-             pst1.executeUpdate();
-             System.out.println("Evenement supprimé");
-         } catch (SQLException ex) {
-             ex.printStackTrace();
-         }
-  
-         }*/
     public boolean supprimerEvenement(int id_e) {
 
         try {
@@ -139,7 +124,6 @@ public class EvenementCRUD {
             System.out.println(ex.getMessage());        }
         
     }*/
- 
     public List<Evenement> displayAllList() {
 
         List<Evenement> Listevent = new ArrayList<Evenement>();
@@ -190,35 +174,4 @@ public class EvenementCRUD {
     }
 
     /* Affichage liste des participant deans les evenement par user */
-    public List<Evenement> displayParticipant(int id_u) {
-
-        Participation p;
-        Membre m;
-        Evenement e = null;
-        List<Evenement> ListEventPaticipation = new ArrayList<>();
-        String requete = "SELECT m.email_u, m.nom_u, m.prenom_u FROM membre m JOIN participation p ON m.id_u=p.id_u JOIN evenement e ON e.id_e=p.id_e WHERE e.id_u=" + id_u;
-
-        try {
-            Statement pst = cnx.createStatement();
-            ResultSet rs = pst.executeQuery(requete);
-
-            while (rs.next()) {
-
-                m = new Membre(rs.getInt("id_u"), rs.getString("nom_u"), rs.getString("prenom_u"), rs.getString("adresse_u"), rs.getString("email_u"), rs.getDate("date"
-                ), rs.getString("email_u"), rs.getString("email_u"));
-                /* System.out.println(m.getId_u());*/
-                e = new Evenement(rs.getInt("id_e"), rs.getString("nom_e"), m);
-                ListEventPaticipation.add(e);
-
-            }
-            return ListEventPaticipation;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return ListEventPaticipation;
-    }
-
-    
-    
 }

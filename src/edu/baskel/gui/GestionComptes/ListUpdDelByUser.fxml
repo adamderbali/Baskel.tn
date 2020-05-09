@@ -36,5 +36,6 @@
       <TextField fx:id="pathE" layoutX="533.0" layoutY="493.0" promptText="Url" style="-fx-border-color: #C0C0C0; -fx-background-radius: 100px; -fx-border-radius: 100px;" />
       <JFXButton fx:id="valider" layoutX="221.0" layoutY="582.0" onAction="#ValiderModif" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Valider la modification" textFill="#00747f" />
       <JFXButton fx:id="supprimer" layoutX="419.0" layoutY="582.0" onAction="#supprimer" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Supprimer" textFill="#00747f" />
+      <JFXTextField fx:id="search" focusColor="#007782" layoutX="18.0" layoutY="28.0" onKeyTyped="#searchBox" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
    </children>
 </AnchorPane>
