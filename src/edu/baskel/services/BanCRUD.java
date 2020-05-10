@@ -5,12 +5,21 @@
  */
 package edu.baskel.services;
 
+import edu.baskel.entities.Ban;
+import edu.baskel.entities.Reclamation;
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,4 +88,51 @@ public class BanCRUD {
         
         
     }
+    public List<Ban> getlist_ban(){
+    List<Ban> list_ban = new ArrayList<>();
+        try {
+           
+            
+            String rq="select * from ban ";
+            Statement st = cnxs.createStatement();
+            ResultSet rs = st.executeQuery(rq);
+            while (rs.next()) {
+                Ban b = new Ban();
+                b.setDate_ban(rs.getDate("date_ban"));
+                b.setId_u(rs.getInt("id_u"));
+                list_ban.add(b);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list_ban;
+}
+
+
+public void Reactive_ban(){
+    ReclamationCRUD rc = new ReclamationCRUD();
+    for(Ban b : getlist_ban())
+        
+    {   
+
+        LocalDate d = LocalDate.now();
+        LocalDate d2 = LocalDate.parse(b.getDate_ban().toString());
+        System.out.println(d);
+        
+        if(d.compareTo(d2)>3)
+        {
+            rc.desactiverbannerUtilisateur(b.getId_u());
+            System.out.println(d.compareTo(d2));
+            System.out.println("ok Done ");
+                    }
+        else  {
+            System.out.println(d.compareTo(d2));
+            System.out.println("pas encore");
+            System.out.println(b.getDate_ban());
+        }
+    }
+    
+}
+
 }

@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -177,29 +178,31 @@ public List<Membre> getlistMembre_ban() {
     }
  public void Banner_user() throws Exception {
       
-        MembreCRUD mc = new MembreCRUD();
-       
+        
+        BanCRUD bn = new BanCRUD();
         for (Membre m : getlistMembre_ban()) {
                 String sq1 = "UPDATE membre SET validation_u=0";
                 PreparedStatement prep2 = cnxs.prepareStatement(sq1);
                 //prep2.setInt(1, m.getId_u());
                 prep2.executeUpdate();
+                bn.bannereExiste(m.getId_u());
+                System.out.println("cbon");
             }
+        
         }
  
 
-public void desactiverbannerUtilisateur(Membre m)
+public void desactiverbannerUtilisateur(int id_u)
 {
         try {
             String reqa1 = "UPDATE membre SET validation_u=1 WHERE id_u=? ";
             PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
-            pstmt.setInt(1,m.getId_u());
+            pstmt.setInt(1,id_u);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 }
-
-
+ 
     
 }

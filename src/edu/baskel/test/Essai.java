@@ -40,7 +40,8 @@ public class Essai {
 ReclamationCRUD m = new ReclamationCRUD();
 BanCRUD b= new BanCRUD();
 //m.Banner_user();
-b.bannereExiste(6);
+//b.bannereExiste(6);
+b.Reactive_ban();
 
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
