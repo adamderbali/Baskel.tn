@@ -8,6 +8,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
+import static edu.baskel.utils.CronJob.jobs;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import static edu.baskel.utils.SessionInfo.iduser;
@@ -330,4 +331,6 @@ public class ProfilPageController implements Initializable {
             }
         }
     }
+    
+  
 }

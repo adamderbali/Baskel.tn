@@ -149,7 +149,7 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
                 hh.UpdateLastCnx(iduser);
-                hh.LastCnx();//histo
+                //hh.LastCnx();//histo
                 // System.out.println(SessionInfo.getInstance(iduser));
             } else {
                 //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
