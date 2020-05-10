@@ -82,7 +82,10 @@ public class Afficher_mes_velos_detailsController implements Initializable {
 
     @FXML
     void retour(ActionEvent event) {
-         try {
+        Stage stage = (Stage) bachbutt.getScene().getWindow();
+    // do what you have to do
+    stage.close();
+        /* try {
              //System.exit(0);
              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));
              Scene redirection_scene = new Scene(redirection_parent);
@@ -91,7 +94,7 @@ public class Afficher_mes_velos_detailsController implements Initializable {
              app_stage.show();
          } catch (IOException ex) {
              ex.printStackTrace();
-         }
+         }*/
     }  
     public Afficher_mes_velos_detailsController(Afficher_mes_velosController controller1) {
         this.controller1 = controller1;
@@ -155,8 +158,8 @@ public class Afficher_mes_velos_detailsController implements Initializable {
         lbletat.setText(v.getEtat_v());
         lbldsc.setText(v.getDescription_v());
         
-        System.out.println(controller1.getClickedVelo());
-        Image im =new Image(controller1.getClickedVelo().getImage_v());
+        System.out.println("image"+controller1.getClickedVelo().getImage_v());
+        Image im =new Image("file:\\C:\\xampp\\htdocs\\Baskel\\images\\"+controller1.getClickedVelo().getImage_v());
         Imgvelo.setImage(im);
     }
     /**

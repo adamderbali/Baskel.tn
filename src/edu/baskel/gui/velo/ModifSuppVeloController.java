@@ -7,10 +7,14 @@ package edu.baskel.gui.velo;
 
 import edu.baskel.entities.Velo;
 import edu.baskel.services.VeloCRUD;
+import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.validationSaisie;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -25,6 +30,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 /**
  * FXML Controller class
@@ -34,6 +40,8 @@ import javafx.stage.Stage;
 public class ModifSuppVeloController implements Initializable {
        @FXML
     private ImageView Imgvelo;
+       @FXML
+    private   Image im;
 
     @FXML
     private Label lblnums;
@@ -79,22 +87,71 @@ public class ModifSuppVeloController implements Initializable {
 
     @FXML
     void annuler(ActionEvent event) {
-
+              Stage stage = (Stage) annbut.getScene().getWindow();
+    // do what you have to do
+    stage.close();
     }
 
     @FXML
     void editerVelo(ActionEvent event) {
-
+            Velo vedit =new Velo();
+            vedit.setNum_serie(Integer.parseInt(lblnums.getText()));
+            vedit.setMarque(txtmarq.getText());
+            vedit.setModel(txtmod.getText());
+            vedit.setPrix_v(Double.parseDouble(txtpr.getText()));
+            vedit.setType_v(txttyp.getText());
+            vedit.setAnnee_sortie(txtann.getText());
+            vedit.setStatus_v(statbox.getValue());
+            vedit.setEtat_v(etatbox.getValue());
+            vedit.setDescription_v(lbldsc.getText());
+            vedit.setImage_v(pathE.getText());
+            System.out.println("edit"+vedit);
+            if (((statbox.getValue()) ==null) | ((etatbox.getValue())==null) ) {
+            Alert alertChamps = new validationSaisie().getAlert("Echec", "Veuillez saisir tout les champs");
+            alertChamps.showAndWait();
+            }
+            else{
+                
+                    VeloCRUD Vc = new VeloCRUD();
+                    Vc.modifierVelo(vedit, Integer.parseInt(lblnums.getText()));
+                    Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Vélo modifié");
+                    alertAdded.showAndWait();
+                    Stage stage = (Stage) editbutt.getScene().getWindow();
+                     // do what you have to do
+                    stage.close();
+               
+                
+            }
     }
 
     @FXML
     void supprimervelo(ActionEvent event) {
-
+            int nums = Integer.parseInt(controller1.getEnteredText());
+            VeloCRUD Vc = new VeloCRUD();
+            Vc.supprimerVelo(nums);
+            Alert alertAdded = new validationSaisie().getAlert("Succés de suppression", "Vélo supprimé");
+            alertAdded.showAndWait();
     }
 
     @FXML
-    void telecharger(ActionEvent event) {
+     void telecharger(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        final Stage stage = new Stage();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+            im = new Image(file.getAbsoluteFile().toURI().toString(), Imgvelo.getFitWidth(), Imgvelo.getFitHeight(), true, true);
+            System.out.println(photo);
+            pathE.setText(photo);
+            InputValidation u = new InputValidation();
+            String photo1;
+            //photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+            photo1 = "C:\\xampp\\htdocs\\Baskel\\images\\" + photo;
+            System.out.println(photo);
+            u.CopyImage(photo1, file.toPath().toString());
+            Imgvelo.setImage(im);
 
+        }
     }
     
     private Stage thisStage;
@@ -162,12 +219,13 @@ public class ModifSuppVeloController implements Initializable {
          ObservableList<String> liste = FXCollections.observableArrayList();
          liste.addAll("Disponible", "Non Disponible");
          //populate the Choicebox;  
-         etatbox .setItems(list);
+         etatbox .setItems(liste);
         
         lbldsc.setText(v.getDescription_v());
-        
+        pathE.setText(v.getImage_v());
+        //"C:\\xampp\\htdocs\\Baskel\\images\\" + photo;
        // System.out.println(controller1.getClickedVelo());
-        Image im =new Image(v.getImage_v());
+         im =new Image("file:\\C:\\xampp\\htdocs\\Baskel\\images\\"+v.getImage_v());
         Imgvelo.setImage(im);
     }
     /**

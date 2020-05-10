@@ -67,7 +67,15 @@ public class Afficher_mes_velosController implements Initializable {
      @FXML
     private Button butTout;
 
-   
+     @FXML
+    private Button resbut;
+
+    
+
+    @FXML
+    void consulterReservation(ActionEvent event) {
+
+    }
 
     @FXML
     void consultertout(ActionEvent event) {
@@ -113,7 +121,7 @@ public class Afficher_mes_velosController implements Initializable {
         System.out.println("hellooo");
         VeloCRUD Vc =new VeloCRUD();
         ArrayList av;
-        av=(ArrayList) Vc.afficherVeloUser(2);
+        av=(ArrayList) Vc.afficherVeloUser(1);
         ObservableList o;
         o= FXCollections.observableArrayList(av);
         

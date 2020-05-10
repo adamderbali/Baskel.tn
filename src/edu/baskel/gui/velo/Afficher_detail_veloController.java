@@ -7,6 +7,7 @@ package edu.baskel.gui.velo;
 
 import edu.baskel.entities.Velo;
 import edu.baskel.services.VeloCRUD;
+import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -66,13 +68,53 @@ public class Afficher_detail_veloController implements Initializable {
 
     @FXML
     private TextArea lbldsc;
-
+  
+     @FXML
+    private Button bachbutt;
     
     private Stage thisStage;
-     private final Afficher_Tout_VeloController controller1;
+    private final Afficher_Tout_VeloController controller1;
      
-    
-   
+     @FXML
+    private Button resbut;
+
+       
+    @FXML
+    private Button achatbut;
+
+    @FXML
+    void acheterVelo(ActionEvent event) {
+           int nums = Integer.parseInt(controller1.getEnteredText());
+            VeloCRUD vc = new VeloCRUD();
+            vc.louerOuAcheterVelo(1, nums);
+            if(lbletat.getText().equals("Non Disponible")){
+                Alert alertAdded = new validationSaisie().getAlert("Erreur", "Ce vélo n'est pas disponible");
+            alertAdded.showAndWait();
+            }
+            Alert alertAdded = new validationSaisie().getAlert("Succés", "Ce vélo est réservé pour votre achat");
+            alertAdded.showAndWait();
+            Stage stage = (Stage) achatbut.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+    }
+    @FXML
+    void reserverVélo(ActionEvent event) {
+            Reserver_veloController controller2 = new Reserver_veloController(this);
+                     controller2.showStage();
+    }
+    Velo v;
+     public String getEnteredText() {
+         System.out.println(lblnums.getText());
+       return lblnums.getText() ;
+         
+    }
+     
+    @FXML
+    void retour(ActionEvent event) {
+        Stage stage = (Stage) bachbutt.getScene().getWindow();
+    // do what you have to do
+    stage.close();
+    }
     public Afficher_detail_veloController(Afficher_Tout_VeloController controller1) {
         this.controller1 = controller1;
 
@@ -126,11 +168,18 @@ public class Afficher_detail_veloController implements Initializable {
         lbltyp.setText(v.getType_v());
         lblann.setText(v.getAnnee_sortie());
         lblstt.setText(v.getStatus_v());
+        if (lblstt.getText().equals("A louer")){
+            resbut.setVisible(true);
+            achatbut.setVisible(false);
+        }else{
+            resbut.setVisible(false);
+            achatbut.setVisible(true);
+        }
         lbletat.setText(v.getEtat_v());
         lbldsc.setText(v.getDescription_v());
         
         System.out.println(controller1.getClickedVelo());
-        Image im =new Image(controller1.getClickedVelo().getImage_v());
+        Image im =new Image("file:\\C:\\xampp\\htdocs\\Baskel\\images\\"+controller1.getClickedVelo().getImage_v());
         Imgvelo.setImage(im);
     }
     

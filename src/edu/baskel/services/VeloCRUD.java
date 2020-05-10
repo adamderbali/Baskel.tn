@@ -121,7 +121,7 @@ public class VeloCRUD {
                 //v.setStatus_v(rs.getString("status_v"));
                 //v.setImage_v(rs.getString("image_v"));
                 
-                
+                System.out.println(v);
              
                 listeVelo.add(v);
             }

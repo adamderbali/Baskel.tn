@@ -43,7 +43,7 @@ public class Velo {
         this.image_v=image_v;
     }
 
-    public Velo(int num_serie, String marque, String model, double prix_v, String type_v, String status_v, String image_v) {
+    /*public Velo(int num_serie, String marque, String model, double prix_v, String type_v, String status_v, String image_v) {
         this.num_serie = num_serie;
         this.marque = marque;
         this.model = model;
@@ -55,9 +55,19 @@ public class Velo {
         this.image_v = image_v;
         this.button= new Button("Voir détails");
         
-    }
+    }*/
     
-     public Velo(int num_serie, String marque, String model, double prix_v, String type_v,String annee_sortie, String status_v,String description_v, String image_v) {
+     public Velo(int num_serie, String marque, String model, double prix_v, String type_v, String status_v, String image_v) {
+        this.num_serie = num_serie;
+        this.marque = marque;
+        this.model = model;
+        this.prix_v = prix_v;
+        this.type_v = type_v;
+        this.status_v = status_v;
+        this.image_v = image_v;
+    }
+
+    public Velo(int num_serie, String marque, String model, double prix_v, String type_v, String annee_sortie, String status_v, String description_v, String image_v) {
         this.num_serie = num_serie;
         this.marque = marque;
         this.model = model;

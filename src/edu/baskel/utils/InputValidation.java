@@ -78,6 +78,17 @@ public class InputValidation {
         return i;
     }
     
+    public static int Number(String ch) {
+        int i = 0;
+        
+            try {
+                i = Integer.parseInt(ch);
+            } catch (NumberFormatException e) {
+                return i;
+            }
+        //System.out.println(i);
+        return i;
+    }
     
 //alert d erreur
     public Alert getAlert(String title, String message) {
