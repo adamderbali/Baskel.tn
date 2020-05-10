@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -75,6 +74,5 @@
             <Label fx:id="CDutil" layoutX="108.0" layoutY="495.0" onMouseClicked="#LireCondUtil" text="Lire les Condition d'utilisation" />
          </children>
       </Pane>
-      <Button fx:id="btnfb" layoutX="452.0" layoutY="292.0" mnemonicParsing="false" onAction="#FacebooLogin" text="facebook" />
    </children>
 </AnchorPane>

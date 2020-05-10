@@ -9,7 +9,6 @@ import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import edu.baskel.services.FacebookLog;
 import edu.baskel.services.HistoriqueCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
@@ -149,7 +148,7 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
                 hh.UpdateLastCnx(iduser);
-                hh.LastCnx();//histo
+                //hh.LastCnx();//histo
                 // System.out.println(SessionInfo.getInstance(iduser));
             } else {
                 //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
@@ -213,10 +212,10 @@ public class SidentifierController implements Initializable {
 
     }
 
-    @FXML
+    /*@FXML
     public void FacebooLogin(ActionEvent event) {
         FacebookLog fl = new FacebookLog();
         fl.fb();
-    }
+    }*/
 
 }

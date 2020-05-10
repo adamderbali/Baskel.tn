@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class HistoriqueCRUD {
 
-    Connection cnx;
+    public static Connection cnx;
 
     EnvoiMail e = new EnvoiMail();
 
@@ -85,7 +85,7 @@ public class HistoriqueCRUD {
     }
 
     //check et envoie du mail
-    public void LastCnx() throws Exception {
+    public  void LastCnx() throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         MembreCRUD mc = new MembreCRUD();
         EnvoiMail e = new EnvoiMail();
