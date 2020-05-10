@@ -94,7 +94,7 @@ public class Ajouter_veloController implements Initializable {
             Alert alertChamps = new validationSaisie().getAlert("Echec", "Veuillez saisir tout les champs");
             alertChamps.showAndWait();
 
-            /* test sur les dates*/
+            
         } else {
             
 

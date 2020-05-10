@@ -27,8 +27,11 @@ public class VeloMain extends Application {
     public void start(Stage stage) throws IOException {
        
         //Parent root = FXMLLoader.load(getClass().getResource("Afficher_Tout_Velo.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));
+       
+       //Parent root = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));
+       //Parent root = FXMLLoader.load(getClass().getResource("Reserver_velo.fxml"));
         //Parent root = FXMLLoader.load(getClass().getResource("Ajouter_velo.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Afficher_mes_reservations.fxml"));
         stage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root);
         

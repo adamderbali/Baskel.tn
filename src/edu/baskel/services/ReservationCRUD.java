@@ -6,11 +6,16 @@
 package edu.baskel.services;
 
 import edu.baskel.entities.Reservation;
+import edu.baskel.entities.Velo;
 
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,7 +27,34 @@ public class ReservationCRUD {
     public ReservationCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
     }
-    
+     /* Affichage */
+
+        
+       public List<Reservation> afficherReservation(int id_u){
+       List<Reservation> listeReservation = new ArrayList<>();
+        try {
+            String requete = "SELECT * FROM reservation WHERE id_u ="+id_u;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(requete);
+            while(rs.next()){
+                Reservation r = new Reservation();
+                r.setId_res(rs.getInt(1));
+                r.setDate_r(rs.getString("date_res"));
+                r.setNbr_heure(rs.getInt("nbr_heure"));
+                r.setDate_db_r(rs.getDate("date_db_res"));
+                r.setNum_serie(rs.getInt("num_serie"));
+                r.setId_u(rs.getInt("id_u"));
+                
+                
+                System.out.println(r);
+             
+                listeReservation.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listeReservation;
+   }
     /*ajout*/
     public void ajouterReservation(Reservation r){
            try {

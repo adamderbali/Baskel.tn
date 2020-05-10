@@ -27,5 +27,6 @@
       </TableView>
       <AnchorPane fx:id="detailWin" layoutX="44.0" layoutY="216.0" prefHeight="631.0" prefWidth="953.0" />
       <Button fx:id="butTout" layoutX="127.0" layoutY="46.0" mnemonicParsing="false" onAction="#consultertout" prefHeight="39.0" prefWidth="247.0" text="Consulter tout les vélos" />
+      <Button fx:id="resbut" layoutX="407.0" layoutY="46.0" mnemonicParsing="false" onAction="#consulterReservation" prefHeight="39.0" prefWidth="220.0" text="Consulter mes réservations" />
    </children>
 </AnchorPane>
