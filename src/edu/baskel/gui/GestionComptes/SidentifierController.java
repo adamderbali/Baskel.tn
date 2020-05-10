@@ -9,7 +9,6 @@ import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import edu.baskel.services.FacebookLog;
 import edu.baskel.services.HistoriqueCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
@@ -213,10 +212,10 @@ public class SidentifierController implements Initializable {
 
     }
 
-    @FXML
+    /*@FXML
     public void FacebooLogin(ActionEvent event) {
         FacebookLog fl = new FacebookLog();
         fl.fb();
-    }
+    }*/
 
 }
