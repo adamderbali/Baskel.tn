@@ -142,14 +142,14 @@ public List<Membre> getlistMembre_ban() {
         List<Membre> listeMembre_ban = new ArrayList<>();
 
         try {
-            String requete = "SELECT * FROM membre where nbr_ban_u>=3";
+            String requete = "SELECT id_u FROM membre where nbr_ban_u>=3";
             Statement st = cnxs.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
                 Membre m = new Membre();
                 m.setId_u(rs.getInt("id_u"));
-                m.setNom_u(rs.getString("nom_u"));
-                m.setPrenom_u(rs.getString("prenom_u"));
+                //m.setNom_u(rs.getString("nom_u"));
+                //m.setPrenom_u(rs.getString("prenom_u"));
                 //m.setAdresse_u(rs.getString(4));
                 //m.setEmail_u(rs.getString(5));
                 //m.setSexe_u(rs.getString(6));
@@ -158,10 +158,16 @@ public List<Membre> getlistMembre_ban() {
                 //m.setNum_tel_u(rs.getString(9));
                 //m.setImage_u(rs.getString(10));
                 //m.setType_u(rs.getString(11));
-                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
+                //m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
                 //m.setValidation_u(rs.getInt());
                 listeMembre_ban.add(m);
             }
+            /*for (Membre m : getlistMembre_ban()) {
+                String sq1 = "UPDATE membre SET validation_u=0";
+                PreparedStatement prep2 = cnxs.prepareStatement(sq1);
+                //prep2.setInt(1, m.getId_u());
+                prep2.executeUpdate();
+            }*/
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -169,6 +175,19 @@ public List<Membre> getlistMembre_ban() {
         return listeMembre_ban;
 
     }
+ public void Banner_user() throws Exception {
+      
+        MembreCRUD mc = new MembreCRUD();
+       
+        for (Membre m : getlistMembre_ban()) {
+                String sq1 = "UPDATE membre SET validation_u=0";
+                PreparedStatement prep2 = cnxs.prepareStatement(sq1);
+                //prep2.setInt(1, m.getId_u());
+                prep2.executeUpdate();
+            }
+        }
+ 
+
 public void desactiverbannerUtilisateur(Membre m)
 {
         try {

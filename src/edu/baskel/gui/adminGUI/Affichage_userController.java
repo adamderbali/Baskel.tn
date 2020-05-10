@@ -145,7 +145,7 @@ public class Affichage_userController implements Initializable {
                 Alert alertObjet = new InputValidation().getAlert("Objet", "Saisissez votre Objet de Reclamation ");
                 alertObjet.showAndWait();
             } else {
-                if (s_rec.banexist(2, user.getId_u()) == false) {
+                if (s_rec.banexist(4, user.getId_u()) == false) {
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText(" Vous voulez envoyer cette reclamation ?");
@@ -153,7 +153,7 @@ public class Affichage_userController implements Initializable {
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
-                        Reclamation reclamation = new Reclamation(textarea_rec.getText(), tf_objet_rec.getText(), 2, user.getId_u());
+                        Reclamation reclamation = new Reclamation(textarea_rec.getText(), tf_objet_rec.getText(), 4, user.getId_u());
                         s_rec.ajouterReclamation(reclamation);
                         MembreCRUD s_mem = new MembreCRUD();
                         Membre mem = new Membre(user.getId_u(), user.getNbr_rec_u());
