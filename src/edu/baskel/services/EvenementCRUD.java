@@ -141,6 +141,7 @@ public class EvenementCRUD {
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e"));
                 Listevent.add(e);
+                System.out.println("--------------+++++++++------------");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -174,4 +175,26 @@ public class EvenementCRUD {
     }
 
     /* Affichage liste des participant deans les evenement par user */
+    
+        public int nombreEvent(){
+              int nb=0;
+              
+        try { 
+            String req1 = "SELECT count(*) AS nombreEvent from evenement";
+            System.out.println("+++++++++++" + req1);
+            PreparedStatement pst = cnx.prepareStatement(req1);
+          
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+            nb = rs.getInt(1);
+            
+            System.out.println("----------"+nb);
+            } 
+        } catch (SQLException ex) {
+             ex.printStackTrace();
+        }
+          System.out.println("-------------"+nb);
+          return nb;
+          
+      }
 }

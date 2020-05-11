@@ -106,7 +106,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-        //  ColImage.setCellValueFactory(new PropertyValueFactory<>("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e()));
 
         ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
 
@@ -154,15 +153,14 @@ public class List_Event_Add_ParticipationController implements Initializable {
         Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
         if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
             System.out.println();
-            Alert alertParticipation = new validationSaisie().getAlert("Echec", "Vous avez deja particpé a ce evenement");
-            alertParticipation.showAndWait();
+            validationSaisie.notifInfo("Information", "Vous avez deja particpé a ce evenement");
             actualiser();
         } else {
             Pc.ajouterParticipation(p);
             SendMail Sm = new SendMail();
             Sm.envoiMail("sabrine.zekri@esprit.tn");
-            Alert alertParticipationValidé = new validationSaisie().getAlert("ok", "Votre participation est confirmé ");
-            alertParticipationValidé.showAndWait();
+            validationSaisie.notifConfirm("ok", "Votre participation est confirmé ");
+            System.out.println("okok++++okokok");
             actualiser();
         }
     }
@@ -194,7 +192,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
         }*/
 
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

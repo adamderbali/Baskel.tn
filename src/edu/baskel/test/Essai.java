@@ -30,8 +30,10 @@ public class Essai {
   /* Participation p = new Participation(64,4);*/
     /*    System.out.println(pa.displayByUserP());*/
     
-    ParticipationCrud pc = new ParticipationCrud();
+  //  ParticipationCrud pc = new ParticipationCrud();
       //  System.out.println(pc.displayParticipantList(7,113));
+      EvenementCRUD ec = new EvenementCRUD();
+      ec.nombreEvent();
     }
     
 }

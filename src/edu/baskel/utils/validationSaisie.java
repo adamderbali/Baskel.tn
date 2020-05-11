@@ -59,14 +59,14 @@ public class validationSaisie {
      }
      
      
-     public static boolean confrimSuppression(){
+     public static boolean confrimSuppression(String msg,String mes){
          
          boolean clear=false;
          
          Alert alert = new Alert(Alert.AlertType.WARNING);
          alert.setContentText("");
-         alert.setTitle("Supression evenement");
-         alert.setHeaderText("Voulez vraiment suprrimer ce evenement");
+         alert.setTitle(msg);
+         alert.setHeaderText(mes);
          ButtonType cancelButtonType = new ButtonType("Cancel",ButtonData.CANCEL_CLOSE);
          alert.getDialogPane().getButtonTypes().add(cancelButtonType);
          
@@ -77,6 +77,10 @@ public class validationSaisie {
          }
          return clear;
      }
+     
+     
+   
+     
      
       public static boolean confrimAnnulation(){
          

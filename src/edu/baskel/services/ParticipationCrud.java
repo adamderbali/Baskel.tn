@@ -60,9 +60,11 @@ public class ParticipationCrud {
     public boolean supprimerParticipationP(Participation p) {
 
         try {
-            String requete2 = "DELETE FROM participation where id_e=? AND id_u=?";
+           
+          String requete2 = "DELETE FROM participation where id_e=?";
+       
             PreparedStatement pst1 = cnx.prepareStatement(requete2);
-            pst1.setInt(2, p.getId_u());
+         //   pst1.setInt(2, p.getId_u());
             pst1.setInt(1, p.getId_e());
 
             pst1.executeUpdate();
@@ -74,6 +76,9 @@ public class ParticipationCrud {
         }
 
     }
+    
+    
+ 
 
       public boolean supprimerParticipationE(int id_e) {
 
