@@ -15,11 +15,13 @@ import static edu.baskel.utils.SessionInfo.iduser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import javafx.event.ActionEvent;
@@ -129,10 +131,11 @@ public class ProfilPageController implements Initializable {
 
         profildate.setVisible(true);
         chkmotdepasse2.setVisible(false);
-        nvdate.setVisible(false);
+       // nvdate.setVisible(false);
         cnvpass.setVisible(false);
         txtshow.setVisible(false);
         txtshowc.setVisible(false);
+        profildate.setVisible(false);//
         if (informationReparateur() == false) {
             informationMembre();
             profiladrlocal.setVisible(false);
@@ -163,12 +166,12 @@ public class ProfilPageController implements Initializable {
 
     //information du membre a afficher ds le profil
     public void informationMembre() {
-    
         lblprofil.setText(l.getNom_u() + " " + l.getPrenom_u());
         profilnom.setText(l.getNom_u());
         profilprenom.setText(l.getPrenom_u());
         profilmail.setText(l.getEmail_u());
         profiladresse.setText(l.getAdresse_u());
+        nvdate.setValue(LocalDate.parse(l.getDate_u().toString()));
         nvpass.setText(l.getMot_passe_u());
         profilteleph.setText(l.getNum_tel_u());
         profildate.setText(l.getDate_u().toString());
@@ -288,7 +291,7 @@ public class ProfilPageController implements Initializable {
 
     //confirmer les modification et les enregistrés
     @FXML
-    public void confirmermodif(ActionEvent event) {
+    public void confirmermodif(ActionEvent event) throws NoSuchAlgorithmException {
         Date nvd = java.sql.Date.valueOf(nvdate.getValue());
         if (validerchamps2() == true) {
             if (InputValidation.validTextField(profilnom.getText())) {
@@ -312,10 +315,10 @@ public class ProfilPageController implements Initializable {
                             if (InputValidation.PhoneNumber(profilteleph.getText()) == 0) {
                                 Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone valide");
                                 alertnum.showAndWait();
-                            } else if ((nvpass.getText()).equals(cnvpass.getText())) {
+                            } else if ((InputValidation.HshPassword(nvpass.getText(), "MD5")).equals(InputValidation.HshPassword(cnvpass.getText(), "MD5"))) {
                                 MembreCRUD mrcc = new MembreCRUD();
                                 Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
-                                        profilmail.getText(), l.getSexe_u(), nvd, nvpass.getText(), profilteleph.getText(), thximage.getText());
+                                        profilmail.getText(), l.getSexe_u(), nvd, InputValidation.HshPassword(nvpass.getText(), "MD5"), profilteleph.getText(), thximage.getText());
                                 m1.setId_u(iduser);
                                 mrcc.updateMembre(m1);
                                 System.out.println("modifie");
