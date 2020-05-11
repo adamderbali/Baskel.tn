@@ -10,10 +10,16 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+
 
 /**
  *
@@ -90,7 +96,64 @@ public class validationSaisie {
          }
          return clear;
      }
+      
+    public static void notif(String mes,String message)  {
+      Notifications notificationBuilder = Notifications.create()
+               .title(mes)
+               .text(message)
+               //.graphic(new ImageView(img))
+               .hideAfter(Duration.seconds(5))
+               .position(Pos.CENTER)
+               .onAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               System.out.println("clicked");
+           }
+       });
+       //notificationBuilder.darkStyle();
+       notificationBuilder.showError();
      
  
+    }
+    
+    
+     public static void notifInfo(String mes,String message)  {
+      Notifications notificationBuilder = Notifications.create()
+               .title(mes)
+               .text(message)
+               //.graphic(new ImageView(img))
+               .hideAfter(Duration.seconds(5))
+               .position(Pos.CENTER)
+               .onAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               System.out.println("clicked");
+           }
+       });
+       //notificationBuilder.darkStyle();
+       notificationBuilder.showInformation();
+     
  
-     }
+    }
+     
+     
+      public static void notifConfirm(String mes,String message)  {
+      Notifications notificationBuilder = Notifications.create()
+               .title(mes)
+               .text(message)
+               //.graphic(new ImageView(img))
+               .hideAfter(Duration.seconds(5))
+               .position(Pos.CENTER)
+               .onAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               System.out.println("clicked");
+           }
+       });
+       //notificationBuilder.darkStyle();
+       notificationBuilder.showConfirm();
+     
+ 
+    }
+     
+}

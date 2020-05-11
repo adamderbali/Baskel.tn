@@ -29,6 +29,9 @@ public class Essai {
   /*c EvenementCRUD ev = new EvenementCRUD();*/
   /* Participation p = new Participation(64,4);*/
     /*    System.out.println(pa.displayByUserP());*/
+    
+    ParticipationCrud pc = new ParticipationCrud();
+      //  System.out.println(pc.displayParticipantList(7,113));
     }
     
 }

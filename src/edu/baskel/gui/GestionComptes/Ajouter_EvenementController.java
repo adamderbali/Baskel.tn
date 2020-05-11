@@ -5,16 +5,13 @@
  */
 package edu.baskel.gui.GestionComptes;
 
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
-import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
-import edu.baskel.utils.SessionInfo;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -36,11 +33,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import edu.baskel.utils.validationSaisie;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import javafx.scene.input.KeyEvent;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 public class Ajouter_EvenementController implements Initializable {
@@ -50,8 +42,6 @@ public class Ajouter_EvenementController implements Initializable {
 
     @FXML
     private JFXTextField txtNom;
-
-    
 
     @FXML
     private JFXTextArea txtDescription;
@@ -92,8 +82,8 @@ public class Ajouter_EvenementController implements Initializable {
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
         if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-             //validationSaisie.validNotif("Erreur", "Saisie tous les champs");
-             Alert alertDtae1 = new validationSaisie().getAlert("erreur", "Saisi tous les");
+             validationSaisie.notifInfo("Echec", "Tous les champs doivent etre saisis");
+           /*  Alert alertDtae1 = new validationSaisie().getAlert("erreur", "Saisi tous les");
                 alertDtae1.showAndWait();
             /* test sur les dates*/
          
@@ -101,16 +91,18 @@ public class Ajouter_EvenementController implements Initializable {
             if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
 
                 System.out.println("------------------");
-                Alert alertDtae = new validationSaisie().getAlert("date", "La date saisie doit etre superieur à" + date_system);
-                alertDtae.showAndWait();
+                validationSaisie.notifInfo("Erreur","La date saisie doit etre superieur à" + date_system );
+              /*  Alert alertDtae = new validationSaisie().getAlert("date", "La date saisie doit etre superieur à" + date_system);
+                alertDtae.showAndWait();*/
             } else {
 
                 EvenementCRUD Ec = new EvenementCRUD();
                 Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
                         getText(), pathE.getText());
                 Ec.ajouterEvenement(e);
-                Alert alertAdded = new validationSaisie().getAlert("Ajout ok", "Evenement ajouté");
-                alertAdded.showAndWait();
+                validationSaisie.notifConfirm("ok", "Evenement ajouté");
+             /*   Alert alertAdded = new validationSaisie().getAlert("Ajout ok", "Evenement ajouté");
+                alertAdded.showAndWait();*/
 
                 txtNom.clear();
                 txtLieu.clear();
@@ -124,27 +116,7 @@ public class Ajouter_EvenementController implements Initializable {
 
     }
 
-    /* button parcourrir photo*/
-  /*  @FXML
-    void telechargerPhoto(ActionEvent event) {
 
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.setTitle("Open file dialog");
-        Stage stage = (Stage) anchor.getScene().getWindow();
-        File file = filechooser.showOpenDialog(stage);
-
-        if (file != null) {
-            pathE.setText(file.getAbsolutePath());
-            System.out.println("" + file.getAbsolutePath());
-
-            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
-            img.setImage(image);
-            img.setPreserveRatio(true);
-        }
-
-    }
-*/
      @FXML
 
     void telecharger(ActionEvent event) throws IOException {
