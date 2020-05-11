@@ -69,7 +69,7 @@ public class MembreCRUD {
         try {
             String requete = "UPDATE membre SET nom_u=?, prenom_u=?, adresse_u=?,email_u=?, sexe_u=?, date_u=?, mot_passe_u=?, num_tel_u=?, image_u=? WHERE id_u=? ";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(9, m.getId_u());
+            pst.setInt(10, m.getId_u());
             pst.setString(1, m.getNom_u());
             pst.setString(2, m.getPrenom_u());
             pst.setString(3, m.getAdresse_u());
@@ -279,7 +279,7 @@ public class MembreCRUD {
     }
 
     // veriffication par mot de passe avant la modif des info
-    public boolean VerificationChgInfo(String mot_pas) {
+    public boolean VerificationChgInfo(String mot_pas) {// ne9sa l hash********************
         try {
             String sq1 = "SELECT * FROM membre where mot_passe_u=?";
             PreparedStatement pst = cnx.prepareStatement(sq1);

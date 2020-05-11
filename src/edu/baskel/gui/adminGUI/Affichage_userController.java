@@ -39,6 +39,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+import edu.baskel.utils.InputValidation;
+import static edu.baskel.utils.SmsTwillo.ACCOUNT_SID;
+import static edu.baskel.utils.SmsTwillo.AUTH_TOKEN;
+import java.util.Optional;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -81,36 +94,36 @@ public class Affichage_userController implements Initializable {
     private JFXTextArea textarea_rec;
     @FXML
     private Label text;
-    
-    
+
+    ObservableList obser;
+    @FXML
+    private TextField search_user;
 
     /**
      * Initializes the controller class.
      */
-    
-    
-    public void affichage_user(){
+    public void affichage_user() {
         MembreCRUD Mc = new MembreCRUD();
         ArrayList arrayList;
         arrayList = (ArrayList) Mc.getlistMembre();
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
-        
-       Nom_user.setCellValueFactory(new PropertyValueFactory <>("nom_u"));
-       prenom_user.setCellValueFactory(new PropertyValueFactory <>("prenom_u"));
-       email_user.setCellValueFactory(new PropertyValueFactory <>("email_u"));
-       //colDescription.setCellValueFactory(new PropertyValueFactory <>("description_e"));
-       //colImage.setCellValueFactory(new PropertyValueFactory <>("image_e"));
-       table_user.setItems(obser);
+
+        Nom_user.setCellValueFactory(new PropertyValueFactory<>("nom_u"));
+        prenom_user.setCellValueFactory(new PropertyValueFactory<>("prenom_u"));
+        email_user.setCellValueFactory(new PropertyValueFactory<>("email_u"));
+        //colDescription.setCellValueFactory(new PropertyValueFactory <>("description_e"));
+        //colImage.setCellValueFactory(new PropertyValueFactory <>("image_e"));
+        table_user.setItems(obser);
     }
-     Membre user; 
-     Reclamation reclam;
+    Membre user;
+    Reclamation reclam;
 
     @FXML
     void chargerDonnee() {
-user = table_user.getSelectionModel().getSelectedItem();
-      
-        if (user!=null){
+        user = table_user.getSelectionModel().getSelectedItem();
+
+        if (user != null) {
             tf_nom_user.setText(user.getNom_u());
             tf_prenom_user.setText(user.getPrenom_u());
             tf_email_user.setText(user.getEmail_u());
@@ -119,67 +132,114 @@ user = table_user.getSelectionModel().getSelectedItem();
             //pathE.setText(event.getImage_e());  
         }
     }
+
     @FXML
     public void send_reclamation(ActionEvent event) throws SQLException {
-            //int id_us = SessionInfo.iduser;
-            //Membre reclamer;
-            Image image = new Image("/images/icons8-ok-128.png",true);
-            ReclamationCRUD s_rec =new ReclamationCRUD();
-            //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            //Reclamation reclamation2 = new Reclamation(2,this.reclam.getId_ur());
-            
-            //s_rec.BaneExist(2,user.getId_u());
-            /*if(s_rec.banexist(2,this.reclam.getId_ur())==true)
-            {
-                System.out.println("hani lenna");
-                Notifications notificationBuilder2 = Notifications.create()
-                    .text("votre reclamation deja existe").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            
-                            System.out.println("Reclamation annulèe ! ");
-                        }
-                        
-                    });
-            notificationBuilder2.showError();
-            }*/
-            if(s_rec.banexist(2,user.getId_u())==false){
-            
-            Reclamation reclamation=  new Reclamation( textarea_rec.getText(),tf_objet_rec.getText(),2,user.getId_u());
-            s_rec.ajouterReclamation(reclamation); 
-            MembreCRUD s_mem = new MembreCRUD();
-            Membre mem = new Membre(user.getId_u(),user.getNbr_ban_u());
-            s_mem.ajouterban(user.getId_u());
-            text.setText("");
-            Notifications notificationBuilder = Notifications.create()
-                    .text("Votre Reclamation a été envoyer avec succés").title("Reclamation").graphic(new ImageView(image)).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            
-                            System.out.println("Done ! ");
-                        }
-                        
-                    });
-            notificationBuilder.show();
-            } 
-            else{
-                Notifications notificationBuilder2 = Notifications.create()
-                    .text("Vous avez deja Reclamer ce Membre").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            
-                            System.out.println("Reclamation annulèe !");
-                        }
-                        
-                    });
-            notificationBuilder2.showError();
-            }}
 
-    
-    
+        Image image = new Image("/images/icons8-ok-128.png", true);
+        ReclamationCRUD s_rec = new ReclamationCRUD();
+        if (textarea_rec.getText().isEmpty()) {
+            Alert alertDesc = new InputValidation().getAlert("Description", "Saisissez votre Description de Reclamation ");
+            alertDesc.showAndWait();
+        } else if (tf_objet_rec.getText().isEmpty()) {
+                Alert alertObjet = new InputValidation().getAlert("Objet", "Saisissez votre Objet de Reclamation ");
+                alertObjet.showAndWait();
+            } else {
+                if (s_rec.banexist(4, user.getId_u()) == false) {
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText(" Vous voulez envoyer cette reclamation ?");
+                    alert.setContentText(" Appuyez vous sur OK si vous etes d'accord ");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        Reclamation reclamation = new Reclamation(textarea_rec.getText(), tf_objet_rec.getText(), 4, user.getId_u());
+                        s_rec.ajouterReclamation(reclamation);
+                        MembreCRUD s_mem = new MembreCRUD();
+                        Membre mem = new Membre(user.getId_u(), user.getNbr_rec_u());
+                        s_mem.ajouterban(user.getId_u());
+                        text.setText("");
+                        Notifications notificationBuilder = Notifications.create()
+                                .text(" Votre Reclamation a été envoyer avec succés").title("Reclamation").graphic(new ImageView(image)).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Done ! ");
+                            }
+
+                        });
+                        notificationBuilder.show();
+
+                    }
+                    if (result.get() == ButtonType.CANCEL) {
+                        Notifications notificationBuilder2 = Notifications.create()
+                                .text("  Votre réclamation est  annulée ").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Reclamation annulèe !");
+                            }
+
+                        });
+                        notificationBuilder2.showError();
+                    }
+
+                } else {
+                    Image image2 = new Image("/images/iconfinder_Error_381599.png", true);
+                    Notifications notificationBuilder3 = Notifications.create()
+                            .text("Votre Reclamation deja existe ").title("Reclamation").graphic(new ImageView(image2)).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                            System.out.println("X !");
+                        }
+
+                    });
+                    notificationBuilder3.show();
+                }
+            }
+        
+    }
+
+    @FXML
+    private void searchBox(KeyEvent k) {
+        MembreCRUD Mc = new MembreCRUD();
+        ArrayList arrayList;
+        arrayList = (ArrayList) Mc.getlistMembre();
+        ObservableList obser;
+        obser = FXCollections.observableArrayList(arrayList);
+
+        FilteredList<Membre> filterData = new FilteredList<>(obser, p -> true);
+        search_user.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(x -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newValue.toLowerCase();
+                if (x.getNom_u().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+                if (x.getPrenom_u().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+                return false;
+
+            });
+
+            SortedList<Membre> sortedList = new SortedList<>(filterData);
+            sortedList.comparatorProperty().bind(table_user.comparatorProperty());
+            table_user.setItems(sortedList);
+        });
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         affichage_user();
-    }  
-}
+    }
 
+}

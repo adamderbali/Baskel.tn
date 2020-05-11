@@ -28,10 +28,10 @@ public class VeloCRUD {
     }
     
     /*ajout*/
-    public void ajouterVelo(Velo v){
+    public void ajouterVelo(Velo v,int id_u){
            try {
-               String requete2 ="INSERT INTO velo (num_serie,marque,model,prix_v,type_v,annee_sortie,status_v,num_tel_v,etat_v,description_v,id_u,image_v)"
-                       + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+               String requete2 ="INSERT INTO velo (num_serie,marque,model,prix_v,type_v,annee_sortie,status_v,etat_v,description_v,id_u,image_v)"
+                       + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
                
 
                PreparedStatement pst = cnx.prepareStatement(requete2);
@@ -42,11 +42,11 @@ public class VeloCRUD {
                pst.setString(5,v.getType_v());
                pst.setString(6,v.getAnnee_sortie());
                pst.setString(7,v.getStatus_v());
-               pst.setInt(8,v.getNum_tel_v());
-               pst.setString(9,v.getEtat_v());
-               pst.setString(10,v.getDescription_v());
-               pst.setInt(11,v.getId_u());
-               pst.setString(12,v.getImage_v());
+               //pst.setInt(8,v.getNum_tel_v());
+               pst.setString(8,"Disponible");
+               pst.setString(9,v.getDescription_v());
+               pst.setInt(10,id_u);
+               pst.setString(11,v.getImage_v());
                
                
                
@@ -112,18 +112,40 @@ public class VeloCRUD {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while(rs.next()){
-                Velo v = new Velo();     
-                v.setNum_serie(rs.getInt(1));
-                v.setMarque(rs.getString("marque"));
-                v.setModel(rs.getString("model"));
-                v.setPrix_v(rs.getDouble("prix_v"));
-                v.setType_v(rs.getString("type_v"));
-                v.setAnnee_sortie(rs.getString("annee_sortie"));
-                v.setStatus_v(rs.getString("status_v"));
-                v.setNum_tel_v(rs.getInt("num_tel_v "));
-                v.setEtat_v(rs.getString("etat_v"));
-                v.setDescription_v(rs.getString("description_v"));
-                v.setImage_v(rs.getString("image_v"));
+                Velo v = new Velo(rs.getInt(1),rs.getString("marque"),rs.getString("model"),rs.getDouble("prix_v"),rs.getString("type_v"),rs.getString("status_v"),rs.getString("image_v"));     
+                //v.setNum_serie(rs.getInt(1));
+                //v.setMarque(rs.getString("marque"));
+                //v.setModel(rs.getString("model"));
+                //v.setPrix_v(rs.getDouble("prix_v"));
+                //v.setType_v(rs.getString("type_v"));
+                //v.setStatus_v(rs.getString("status_v"));
+                //v.setImage_v(rs.getString("image_v"));
+                
+                System.out.println(v);
+             
+                listeVelo.add(v);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listeVelo;
+   }
+       public List<Velo> afficherDetail(int nums){
+       List<Velo> listeVelo = new ArrayList<>();
+        try {
+            String requete = "SELECT * FROM velo WHERE num_serie ="+nums;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(requete);
+            while(rs.next()){
+                Velo v = new Velo(rs.getInt(1), rs.getString("marque"),rs.getString("model"),rs.getDouble("prix_v"),rs.getString("type_v"),rs.getString("annee_sortie"),rs.getString("status_v"),rs.getString("etat_v"),rs.getString("description_v"),rs.getString("image_v"));    
+                //v.setNum_serie(rs.getInt(1));
+                System.out.println("tst"+v);
+                //v.setAnnee_sortie(rs.getString("annee_sortie"));
+                
+                //v.setNum_tel_v(rs.getInt("num_tel_v "));
+               // v.setEtat_v(rs.getString("etat_v"));
+                //v.setDescription_v(rs.getString("description_v"));
+               
                 
                 
              
@@ -135,12 +157,12 @@ public class VeloCRUD {
         return listeVelo;
    }
        
-       public List<Velo> afficherVeloUser(){
+       public List<Velo> afficherVeloUser(int id_u){
           
            Velo v;
            List<Velo> listeVelo = new ArrayList<>();
         try {
-            String requete = "SELECT * FROM velo v, membre m WHERE v.id_u = m.id_u";
+            String requete = "SELECT * FROM velo v WHERE id_u =" + id_u;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while(rs.next()){
@@ -151,16 +173,16 @@ public class VeloCRUD {
                 v.setModel(rs.getString("model"));
                 v.setPrix_v(rs.getDouble("prix_v"));
                 v.setType_v(rs.getString("type_v"));
-                v.setAnnee_sortie(rs.getString("annee_sortie"));
+                //v.setAnnee_sortie(rs.getString("annee_sortie"));
                 v.setStatus_v(rs.getString("status_v"));
-                v.setNum_tel_v(rs.getInt("num_tel_v "));
+                //v.setNum_tel_v(rs.getInt("num_tel_v "));
                 v.setEtat_v(rs.getString("etat_v"));
-                v.setDescription_v(rs.getString("description_v"));
+                //v.setDescription_v(rs.getString("description_v"));
                 v.setImage_v(rs.getString("image_v"));
-                v.setId_u(rs.getInt("id_u"));
+                //v.setId_u(rs.getInt("id_u"));
                 
                 
-             
+                System.out.println(v);
                 listeVelo.add(v);
             }
         } catch (SQLException ex) {
@@ -168,6 +190,40 @@ public class VeloCRUD {
         }
         return listeVelo;
    }
+       
+       /*public List<Velo> afficherVeloDetailUser(int id_u){
+          
+           Velo v;
+           List<Velo> listeVelo = new ArrayList<>();
+        try {
+            String requete = "SELECT * FROM velo v WHERE id_u =" + id_u;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(requete);
+            while(rs.next()){
+                
+                v = new Velo();     
+                v.setNum_serie(rs.getInt(1));
+                v.setMarque(rs.getString("marque"));
+                v.setModel(rs.getString("model"));
+                v.setPrix_v(rs.getDouble("prix_v"));
+                v.setType_v(rs.getString("type_v"));
+                //v.setAnnee_sortie(rs.getString("annee_sortie"));
+                v.setStatus_v(rs.getString("status_v"));
+                //v.setNum_tel_v(rs.getInt("num_tel_v "));
+                v.setEtat_v(rs.getString("etat_v"));
+                //v.setDescription_v(rs.getString("description_v"));
+                v.setImage_v(rs.getString("image_v"));
+                //v.setId_u(rs.getInt("id_u"));
+                
+                
+                System.out.println(v);
+                listeVelo.add(v);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listeVelo;
+   }*/
        
         /* Louer velo */
          public void louerOuAcheterVelo(int id_av,int num_serie){

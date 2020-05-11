@@ -12,6 +12,7 @@ import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,10 +76,10 @@ public class NouveauMPController implements Initializable {
 
     //verifier la correspondance et reinitialiser le mot de passe
     @FXML
-    public void changerMP(ActionEvent event) {
-        if (txtNvMp.getText().equals(txtCnvMp.getText())) {
+    public void changerMP(ActionEvent event) throws NoSuchAlgorithmException {
+        if (InputValidation.HshPassword(txtNvMp.getText(), "MD5").equals(InputValidation.HshPassword(txtCnvMp.getText(), "MD5"))) {
             MembreCRUD r = new MembreCRUD();
-            r.changerMP(txtm.getText(), txtCnvMp.getText());
+            r.changerMP(txtm.getText(), InputValidation.HshPassword(txtNvMp.getText(), "MD5"));
             Alert alertnum = new InputValidation().getAlert("mot de passe", "Votre mot de passe a été réinitialisé !");
             alertnum.showAndWait();
 

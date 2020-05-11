@@ -16,14 +16,17 @@ import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.verifEmail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -115,6 +118,7 @@ public class InscriptionReparateurController implements Initializable {
         txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
+        txtnaissance.setValue(LocalDate.of(2010, Month.JANUARY, 10));
 
         TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
     }
@@ -189,19 +193,25 @@ public class InscriptionReparateurController implements Initializable {
 
     //validation date
     public boolean verifDate() {
-
-        String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        String date;
-        date = txtnaissance.getEditor().getText().toString();
-        if (date.compareTo(date_system) > 0) {
+        LocalDate local = LocalDate.now();
+        LocalDate d = txtnaissance.getValue();
+        System.out.println(d);
+        System.out.println(local);
+        System.out.println(d.compareTo(local));
+        if (d.compareTo(local) > 0) {
+            System.out.println("future");
             return false;
+        } else {
+            System.out.println("passé");
+
         }
+
         return true;
     }
 
     // inscription d un reparateur
     @FXML
-    public void insertData(ActionEvent event) {
+    public void insertData(ActionEvent event) throws NoSuchAlgorithmException {
         MembreCRUD mr = new MembreCRUD();
         String nom = txtNom.getText();
         String prenom = txtPrenom.getText();
@@ -210,8 +220,8 @@ public class InscriptionReparateurController implements Initializable {
         Date datenais = java.sql.Date.valueOf(txtnaissance.getValue());
         String tel = txttelephone.getText();
         String sexe = sexeMembre();
-        String motdepasse = txtmotdepasse.getText();
-        String conmotdepasse = txtconfirmation.getText();
+        String motdepasse = InputValidation.HshPassword(txtmotdepasse.getText(), "MD5");
+        String conmotdepasse = InputValidation.HshPassword(txtconfirmation.getText(), "MD5");
         String telpro = txttelpro.getText();
         String adrloc = txtadrlocal.getText();
         String imge = txtimage.getText();
@@ -231,70 +241,78 @@ public class InscriptionReparateurController implements Initializable {
                     if (!InputValidation.validEmail(txtemail.getText())) {
                         Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email valide");
                         alertEmail.showAndWait();
-                    } else {
-                        if (InputValidation.validPwd(txtmotdepasse.getText()) == 0) {
-                            Alert alertnum = new InputValidation().getAlert("Numero TelephoneMot de passe", "Saisissez un mot de passe valide");
-                            alertnum.showAndWait();
-                        } else {
-                            if (InputValidation.PhoneNumber(txttelephone.getText()) == 0) {
-                                Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone valide");
+                    } else {//verif email vrai
+                        if ((verifEmail.check(txtemail.getText())) == false) {
+                            Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email existante");
+                            alertEmail.showAndWait();
+                        }
+                        {
+                            if (InputValidation.validPwd(txtmotdepasse.getText()) == 0) {
+                                Alert alertnum = new InputValidation().getAlert("Mot de passe", "Saisissez un mot de passe valide");
                                 alertnum.showAndWait();
                             } else {
-                                if (InputValidation.PhoneNumber(txttelpro.getText()) == 0) {
-                                    Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone professionnel valide");
+                                if (InputValidation.PhoneNumber(txttelephone.getText()) == 0) {
+                                    Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone valide");
                                     alertnum.showAndWait();
                                 } else {
-                                    if (InputValidation.validTextField(txtadrlocal.getText())) {
-                                        Alert alertNom = new InputValidation().getAlert("Nom", "Saisissez votre adresse du locale");
-                                        alertNom.showAndWait();
-                                    }
-
-                                    if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
-                                        Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
+                                    if (InputValidation.PhoneNumber(txttelpro.getText()) == 0) {
+                                        Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone professionnel valide");
                                         alertnum.showAndWait();
-                                    } else /*{
-                                        if (verifDate() == false) {
-                                            Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
-                                            alertnum.showAndWait();
-                                            txtnaissance.setValue(null);
-                                        } else*/ {
-                                        if (mr.VerificationExistence(r) == true) {
-
-                                            if (motdepasse.equals(conmotdepasse)) {
-                                                ReparateurCRUD rr = new ReparateurCRUD();
-                                                rr.ajouterReparateur(r);
-                                                //mr.adduser2(r);
-                                                txtNom.clear();
-                                                txtPrenom.clear();
-                                                txtnaissance.setValue(null);
-                                                txtAdresse.clear();
-                                                txtimage.clear();
-                                                txtemail.clear();
-                                                txtconfirmation.clear();
-                                                txtmotdepasse.clear();
-                                                txttelephone.clear();
-                                                chkhomme.setSelected(false);
-                                                chkfemme.setSelected(false);
-                                                txttelpro.clear();
-                                                txtadrlocal.clear();
-                                                System.out.println("Reparateur ajouté");
-
-                                            } else {
-                                                Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
-                                                alertnum.showAndWait();
-
-                                            }
-                                        } else {
-                                            Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
-                                            alertnum.showAndWait();
+                                    } else {
+                                        if (InputValidation.validTextField(txtadrlocal.getText())) {
+                                            Alert alertNom = new InputValidation().getAlert("Nom", "Saisissez votre adresse du locale");
+                                            alertNom.showAndWait();
                                         }
 
+                                        if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
+                                            Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
+                                            alertnum.showAndWait();
+                                        } else {
+                                            if (verifDate() == false) {
+                                                Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
+                                                alertnum.showAndWait();
+                                                txtnaissance.setValue(null);
+                                            } else {
+                                                if (mr.VerificationExistence(r) == true) {
+
+                                                    if (motdepasse.equals(conmotdepasse)) {
+                                                        ReparateurCRUD rr = new ReparateurCRUD();
+                                                        rr.ajouterReparateur(r);
+                                                        //mr.adduser2(r);
+                                                        txtNom.clear();
+                                                        txtPrenom.clear();
+                                                        txtnaissance.setValue(null);
+                                                        txtAdresse.clear();
+                                                        txtimage.clear();
+                                                        txtemail.clear();
+                                                        txtconfirmation.clear();
+                                                        txtmotdepasse.clear();
+                                                        txttelephone.clear();
+                                                        chkhomme.setSelected(false);
+                                                        chkfemme.setSelected(false);
+                                                        txttelpro.clear();
+                                                        txtadrlocal.clear();
+                                                        System.out.println("Reparateur ajouté");
+
+                                                    } else {
+                                                        Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
+                                                        alertnum.showAndWait();
+
+                                                    }
+                                                } else {
+                                                    Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
+                                                    alertnum.showAndWait();
+                                                }
+
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
+
             }
         }
     }

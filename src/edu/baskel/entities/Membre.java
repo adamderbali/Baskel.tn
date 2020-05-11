@@ -25,16 +25,16 @@ public class Membre {
     private String num_tel_u;
     private String image_u;
     private String type_u;
-    private int nbr_ban_u;
+    private int nbr_rec_u;
     private int validation_u;
     private InputValidation u ;
 
-    public int getNbr_ban_u() {
-        return nbr_ban_u;
+    public int getNbr_rec_u() {
+        return nbr_rec_u;
     }
 
-    public void setNbr_ban_u(int nbr_ban_u) {
-        this.nbr_ban_u = nbr_ban_u;
+    public void setNbr_ban_u(int nbr_rec_u) {
+        this.nbr_rec_u = nbr_rec_u;
     }
 
     public int getValidation_u() {
@@ -103,19 +103,19 @@ public class Membre {
         this.type_u = type_u;
     }
 //Constructeur skan
-    public Membre(int id_u, String nom_u, String prenom_u, int nbr_ban_u) {
+    public Membre(int id_u, String nom_u, String prenom_u, int nbr_rec_u) {
         this.id_u = id_u;
         this.nom_u = nom_u;
         this.prenom_u = prenom_u;
-        this.nbr_ban_u = nbr_ban_u;
+        this.nbr_rec_u = nbr_rec_u;
     }
     
-    public Membre(int id_u, int nbr_ban_u) {
+    public Membre(int id_u, int nbr_rec_u) {
         this.id_u = id_u;
-        this.nbr_ban_u = nbr_ban_u;
+        this.nbr_rec_u = nbr_rec_u;
     }
 
-    public Membre(int id_u, String nom_u, String prenom_u, String adresse_u, String email_u, String sexe_u, Date date_u, String mot_passe_u, String num_tel_u, String image_u, String type_u, int nbr_ban_u, int validation_u) {
+    public Membre(int id_u, String nom_u, String prenom_u, String adresse_u, String email_u, String sexe_u, Date date_u, String mot_passe_u, String num_tel_u, String image_u, String type_u, int nbr_rec_u, int validation_u) {
         this.id_u = id_u;
         this.nom_u = nom_u;
         this.prenom_u = prenom_u;
@@ -127,7 +127,7 @@ public class Membre {
         this.num_tel_u = num_tel_u;
         this.image_u = image_u;
         this.type_u = type_u;
-        this.nbr_ban_u = nbr_ban_u;
+        this.nbr_rec_u = nbr_rec_u;
         this.validation_u = validation_u;
     }
 
@@ -244,7 +244,7 @@ public class Membre {
 
     @Override
     public String toString() {
-        return "Membre{" + "id_u=" + id_u + ", nom_u=" + nom_u + ", prenom_u=" + prenom_u + ", adresse_u=" + adresse_u + ", email_u=" + email_u + ", sexe_u=" + sexe_u + ", date_u=" + date_u + ", mot_passe_u=" + mot_passe_u + ", num_tel_u=" + num_tel_u + ", image_u=" + image_u + ", type_u=" + type_u + ", nbr_ban_u=" + nbr_ban_u + ", validation_u=" + validation_u + '}';
+        return "Membre{" + "id_u=" + id_u + ", nom_u=" + nom_u + ", prenom_u=" + prenom_u + ", adresse_u=" + adresse_u + ", email_u=" + email_u + ", sexe_u=" + sexe_u + ", date_u=" + date_u + ", mot_passe_u=" + mot_passe_u + ", num_tel_u=" + num_tel_u + ", image_u=" + image_u + ", type_u=" + type_u + ", nbr_rec_u=" + nbr_rec_u + ", validation_u=" + validation_u + '}';
     }
 
     

@@ -10,6 +10,7 @@ import edu.baskel.entities.Reclamation;
 import edu.baskel.services.ReclamationCRUD;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +19,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -56,7 +60,9 @@ public class Ban_userController implements Initializable {
     private Button banner;
     @FXML
     private Button desactiver_banner;
-Membre user ;
+    @FXML
+    private ImageView Image_table_ban;
+    Membre user ;
     /**
      * Initializes the controller class.
      */
@@ -84,47 +90,87 @@ Membre user ;
         if (user!=null){
             tf_nom_user_ban.setText(user.getNom_u());
             tf_prenom_user_ban.setText(user.getPrenom_u());
-            tf_nbr_user_ban.setText(String.valueOf(user.getNbr_ban_u()));
+            tf_nbr_user_ban.setText(String.valueOf(user.getNbr_rec_u()));
             tf_id_user_ban.setText(String.valueOf(user.getId_u()));
             //tf_date_user.set(user.getDate_u());
             //pathE.setText(event.getImage_e());  
         }
     }
+    @FXML
     public void bannerUser(ActionEvent event){
         ReclamationCRUD s_rec =new ReclamationCRUD();
         Membre m = new Membre(table_user_ban.getSelectionModel().getSelectedItem().getId_u());
-        s_rec.bannerUtilisateur(m);
         Reclamation reclamation=  new Reclamation();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Vous voulez Banner ce membre");
+        alert.setContentText("Si vous avez d'accord appuez sur OK");
+        Optional<ButtonType> result = alert.showAndWait();
+              if (result.get() == ButtonType.OK){
+                  s_rec.bannerUtilisateur(m);
         Notifications notificationBuilder = Notifications.create()
-                    .text("Operation de Ban est Bien determiner ").title("Banner").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                    .text("Opération Ban est bien effecutèe ").title("Banner").graphic(null).hideAfter(Duration.seconds(4)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {    
+                            System.out.println("Done ! ");
+                        }
+                    });
+            notificationBuilder.showConfirm();
+            }   
+              if(result.get() == ButtonType.CANCEL) 
+              {
+                  Notifications notificationBuilder = Notifications.create()
+                    .text("Opération Ban est annulée").title("Banner").graphic(null).hideAfter(Duration.seconds(4)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            
                             System.out.println("Done ! ");
                         }
                         
                     });
-            notificationBuilder.showConfirm();
-            } 
+            notificationBuilder.showInformation();
+              }
+              }
+                  
+                    
+            
+        
+    @FXML
     public void DisbannerUser(ActionEvent event){
         ReclamationCRUD s_rec =new ReclamationCRUD();
         Membre m = new Membre(table_user_ban.getSelectionModel().getSelectedItem().getId_u());
         s_rec.desactiverbannerUtilisateur(m.getId_u());
         Notifications notificationBuilder = Notifications.create()
                     .text("Desactivation Banner").title("Banner").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation ");
+        alert.setHeaderText("Vous voulez Banner ce membre");
+        alert.setContentText("Si vous avez d'accord appuez sur OK");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            s_rec.desactiverbannerUtilisateur(m.getId_u());
+             Notifications notificationBuilder = Notifications.create()
+                    .text("Désactivation Ban était bien effectuée").title("Banner").graphic(null).hideAfter(Duration.seconds(4)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            
                             System.out.println("Done ! ");
-                        }
-                        
+                        }    
                     });
             notificationBuilder.showConfirm();
+    }
+        if (result.get() == ButtonType.CANCEL)
+        {
+            Notifications notificationBuilder = Notifications.create()
+                    .text("Desactivation de ban est annulée").title("Banner").graphic(null).hideAfter(Duration.seconds(4)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            System.out.println("Done ! ");
+                        }    
+                    });
+        }
         
         
     }
         
-
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
