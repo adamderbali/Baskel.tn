@@ -74,11 +74,7 @@ public class ParticipationCrud {
         }
 
     }
-     
-      
-    
-    
-    
+
       public boolean supprimerParticipationE(int id_e) {
 
         try {
@@ -95,17 +91,12 @@ public class ParticipationCrud {
 
     }
     
-    
 
-
-    /* Affichage participation dans les evenement par user*/
- /* Affichage tt les participation*/
- /*Affichage liste des participation par user*/
     public List<Participation> displayByUser(int id_u) {
 
         List<Participation> Listparticipation = new ArrayList<Participation>();
         try {
-            String requete = "SELECT* FROM evenement e join participation p on e.id_e = p.id_e WHERE p.id_u=" + id_u;
+            String requete = "SELECT * FROM evenement e join participation p on e.id_e = p.id_e WHERE p.id_u=" + id_u;
             System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
@@ -139,42 +130,41 @@ public class ParticipationCrud {
         return Listparticipation;
     }
 
-    public List<Participation> displayParticipant(int id_u) {
+    public List<Evenement> displayParticipant(int id_u) {
 
-        List<Participation> ListEventPaticipation = new ArrayList<>();
+        List<Evenement> ListEventPaticipation = new ArrayList<>();
 
-        try {
-            String requete = "SELECT * FROM  evenement e JOIN participation p ON  e.id_e = p.id_e JOIN membre m ON m.id_u = p.id_u  WHERE e.id_u =" + id_u;
+        try { String requete = "SELECT * FROM  evenement e JOIN membre m ON m.id_u = e.id_u  WHERE e.id_u =" + id_u;
+         
             Statement pst = cnx.createStatement();
             ResultSet rs = pst.executeQuery(requete);
 
             while (rs.next()) {
 
-                Membre m = new Membre();
+              Membre m = new Membre();
                 m.setId_u(rs.getInt("id_u"));
                 m.setNom_u(rs.getString("nom_u"));
                 m.setPrenom_u(rs.getString("prenom_u"));
                 m.setEmail_u(rs.getString("email_u"));
                 System.out.println("1-------------" + rs.getString("nom_u"));
 
-                System.out.println("1-------------" + rs.getString("nom_e"));
                 Evenement e = new Evenement();
                 e.setId_e(rs.getInt("id_e"));
                 e.setNom_e(rs.getString("nom_e"));
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
 
-                Participation p = new Participation();
+            /*    Participation p = new Participation();
 
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 p.setDate_insc(rs.getDate("date_insc"));
                 System.out.println("1-------------" + rs.getString("id_e"));
 
-                p.setMbre(m);
-                p.setEvent(e);
+              p.setMbre(m);*/
+                e.setMbre(m);
 
-                ListEventPaticipation.add(p);
+                ListEventPaticipation.add(e);
                 System.out.println("-----------" + ListEventPaticipation);
 
             }
@@ -201,7 +191,7 @@ public class ParticipationCrud {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ParticipationCrud.class.getName()).log(Level.SEVERE, null, ex);
+             ex.printStackTrace();
         }
         return true;
 
@@ -265,21 +255,78 @@ public class ParticipationCrud {
 
             } 
         }
+      
+      public int nombreParticipation(int id_e){
+              int nb=0;
+              
+        try { 
+            String req1 = "SELECT count(*) AS nombreParticipant From participation WHERE id_e=?";
+            System.out.println("+++++++++++" + req1);
+            PreparedStatement pst = cnx.prepareStatement(req1);
+            pst.setInt(1, id_e);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+            nb = rs.getInt(1);
+            
+            System.out.println("----------"+nb);
+            } 
+        } catch (SQLException ex) {
+             ex.printStackTrace();
+        }
+          System.out.println("-------------"+nb);
+          return nb;
+          
+      }
+      
+      
+      
+    public List<Participation> displayParticipantList(int id_e) {
+
+        List<Participation> ListEventPaticipation = new ArrayList<>();
+
+        try {
+            String requete = "SELECT * FROM participation p JOIN membre m ON m.id_u = p.id_u  WHERE p.id_e="+id_e;
+
+
+            Statement pst = cnx.createStatement();
+            ResultSet rs = pst.executeQuery(requete);
+
+            while (rs.next()) {
+
+                Membre m = new Membre();
+                m.setId_u(rs.getInt("id_u"));
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                System.out.println("1-------------" + rs.getString("nom_u"));
+
+                Participation p = new Participation();
+
+                p.setId_e(rs.getInt("id_e"));
+                p.setId_u(rs.getInt("id_u"));
+                p.setDate_insc(rs.getDate("date_insc"));
+                System.out.println("1-------------" + rs.getString("id_e"));
+
+                p.setMbre(m);
+              //  p.setEvent(e);
+
+                ListEventPaticipation.add(p);
+                System.out.println("-----------" + ListEventPaticipation);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return ListEventPaticipation;
+    }
+    
+    
 
     }
     
-   
-  /*  public void emailMembre(){
-        
-        ParticipationCrud pc = new ParticipationCrud();
-        SendMail sm = new SendMail();
-        
-        for(Participation e : displayEmailParticipant(int id_e)){
-        
-        
-    }
-    }*/
- 
+
     
       
       

@@ -6,7 +6,7 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
+
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
@@ -54,36 +54,35 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private AnchorPane anchor1;
-      @FXML
+    @FXML
     private TableView<Evenement> tableAffichage;
 
     @FXML
-    private TableColumn<Evenement,String> colNom;
+    private TableColumn<Evenement, String> colNom;
 
     @FXML
-    private TableColumn<Evenement,String> colLieu;
+    private TableColumn<Evenement, String> colLieu;
 
     @FXML
-    private TableColumn<Evenement,String> ColDate;
+    private TableColumn<Evenement, String> ColDate;
 
     @FXML
-    private TableColumn<Evenement,String> colDescription;
+    private TableColumn<Evenement, String> colDescription;
 
     @FXML
-    private TableColumn<Evenement,String> ColImage;
+    private TableColumn<Evenement, String> ColImage;
 
     @FXML
     private JFXButton participer;
 
     @FXML
     private JFXButton btnAjout;
-     ObservableList obser ;
+    ObservableList obser;
 
     ImageView imagev;
     Membre m = SessionInfo.getLoggedM();
     @FXML
     private TextField search;
-  
 
     public List_Event_Add_ParticipationController() {
 
@@ -91,7 +90,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     }
 
-     
     /*Affichage les champs dans le table view*/
     public void affichageEvenement() {
 
@@ -99,85 +97,77 @@ public class List_Event_Add_ParticipationController implements Initializable {
         Evenement e = new Evenement();
         ArrayList arrayList;
         arrayList = (ArrayList) Ec.displayAllList();
-       //ImageView imageEvent = new ImageView(new Image(this.getClass().getResourceAsStream("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
-       
-     //  ImageView photo = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
-     //  PropertyValueFactory<Evenement,ImageView> photo = new PropertyValueFactory<> (("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())) ;
-      
+        //ImageView imageEvent = new ImageView(new Image(this.getClass().getResourceAsStream("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+
+        //  ImageView photo = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
+        //  PropertyValueFactory<Evenement,ImageView> photo = new PropertyValueFactory<> (("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())) ;
         obser = FXCollections.observableArrayList(arrayList);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-       //  ColImage.setCellValueFactory(new PropertyValueFactory<>("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e()));
-        
+        //  ColImage.setCellValueFactory(new PropertyValueFactory<>("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e()));
+
         ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
-        
+
         tableAffichage.setItems(obser);
-        
-        
-       
-       
-               }
-    
-      @FXML
+
+    }
+
+    @FXML
     private void searchBox(KeyEvent event) {
         FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);
-          search.textProperty().addListener((observable,oldValue,newValue) -> {
-              filterData.setPredicate(e ->{
-                  
-                  if (newValue == null || newValue.isEmpty()){
-                      return true;
-                  }
-                  String typedText = newValue.toLowerCase();
-              if   (e.getNom_e().toLowerCase().indexOf(typedText)!= -1) {
-                  
-                  return true;
-              }
-                          
-                     if   (e.getLieu_e().toLowerCase().indexOf(typedText)!= -1) {
-                  
-                  return true;
-              }     
-                    if   (e.getDate_e().toLowerCase().indexOf(typedText)!= -1) {
-                  
-                  return true;
-              }      
-                  return false;
-                  
-              });
-              
-              SortedList<Evenement> sortedList = new SortedList<>(filterData);
-              sortedList.comparatorProperty().bind(tableAffichage.comparatorProperty());
-              tableAffichage.setItems(sortedList);
-          });
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(e -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newValue.toLowerCase();
+                if (e.getNom_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+                if (e.getLieu_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                if (e.getDate_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                return false;
+
+            });
+
+            SortedList<Evenement> sortedList = new SortedList<>(filterData);
+            sortedList.comparatorProperty().bind(tableAffichage.comparatorProperty());
+            tableAffichage.setItems(sortedList);
+        });
     }
-   
- 
-   
+
     @FXML
     void participerEvenement(ActionEvent event) throws Exception {
-        
+
         ParticipationCrud Pc = new ParticipationCrud();
-        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),7);
-        if (Pc.verifierParticipation(7,tableAffichage.getSelectionModel().getSelectedItem().getId_e())==false){
+        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
+        if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
             System.out.println();
-             Alert alertParticipation = new validationSaisie().getAlert("Echec", "Vous avez deja particpé a ce evenement");
+            Alert alertParticipation = new validationSaisie().getAlert("Echec", "Vous avez deja particpé a ce evenement");
             alertParticipation.showAndWait();
             actualiser();
-        }
-        else {
-        Pc.ajouterParticipation(p);
-        SendMail Sm = new SendMail();
+        } else {
+            Pc.ajouterParticipation(p);
+            SendMail Sm = new SendMail();
             Sm.envoiMail("sabrine.zekri@esprit.tn");
-           Alert alertParticipationValidé = new validationSaisie().getAlert("ok", "Votre participation est confirmé ");
-           alertParticipationValidé.showAndWait();
+            Alert alertParticipationValidé = new validationSaisie().getAlert("ok", "Votre participation est confirmé ");
+            alertParticipationValidé.showAndWait();
             actualiser();
         }
     }
 
-    
-      private void actualiser() {
+    private void actualiser() {
 
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
@@ -195,7 +185,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     void lancerAjout(ActionEvent event) {
-/*
+        /*
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Ajouter_Evenement.fxml"));
             rootPaneA.getChildren().setAll(pane);
@@ -204,30 +194,11 @@ public class List_Event_Add_ParticipationController implements Initializable {
         }*/
 
     }
-    
- /*
-    @FXML
-    void Filtre(ActionEvent event) {
-         
-         String R = rechercher.getText();
-        if(R.length()>0)
-        {   
-            ObservableList t= obser.filtered(cou->((Evenement)cou).getNom_e().contains(R));
-            tableAffichage.setItems(t);
-           // update();
-        }else{
-            tableAffichage.setItems(obser);
-        }
 
-    }
-*/
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       affichageEvenement();
+        affichageEvenement();
     }
-
-  
-
-   
 
 }
