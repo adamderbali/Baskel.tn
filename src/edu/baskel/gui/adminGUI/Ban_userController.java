@@ -1,9 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
+//
+ /* To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.adminGUI;
+/*package edu.baskel.gui.adminGUI;
 
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reclamation;
@@ -169,7 +169,7 @@ public class Ban_userController implements Initializable {
         }
         
         
-    }
+    }}
         
     
     @Override
@@ -178,3 +178,4 @@ public class Ban_userController implements Initializable {
     }    
     
 }
+*/
