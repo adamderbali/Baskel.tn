@@ -202,8 +202,5 @@ public class InputValidation {
 
     }
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        System.out.println("hash = " + InputValidation.HshPassword("0125dhduy", algorithe));
-        System.out.println("hash = " + InputValidation.HshPassword("0125dhduy", algorithe));
-    }
+    
 }
