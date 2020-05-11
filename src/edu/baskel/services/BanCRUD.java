@@ -20,8 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -74,11 +73,11 @@ public class BanCRUD {
             if(!res.next())
             {
                 insertionByID(id_u);
-                System.out.println("insertion validée");
+                System.out.println("insertion de Membre "+id_u+"  validée");
             }
             else{
                 updateByID(id_u);
-                System.out.println("update validée");
+                System.out.println("Update de Membre "+id_u+"  validée");
 
             }
             
@@ -91,8 +90,6 @@ public class BanCRUD {
     public List<Ban> getlist_ban(){
     List<Ban> list_ban = new ArrayList<>();
         try {
-           
-            
             String rq="select * from ban ";
             Statement st = cnxs.createStatement();
             ResultSet rs = st.executeQuery(rq);

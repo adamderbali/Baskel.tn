@@ -144,7 +144,7 @@ public List<Membre> getlistMembre_ban() {
         List<Membre> listeMembre_ban = new ArrayList<>();
 
         try {
-            String requete = "SELECT id_u FROM membre where nbr_ban_u>=3";
+            String requete = "SELECT id_u FROM membre where nbr_ban_u>=3 and type_u='U' ";
             Statement st = cnxs.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
@@ -184,12 +184,12 @@ public void Banner_user() throws Exception {
         
         BanCRUD bn = new BanCRUD();
         for (Membre m : getlistMembre_ban()) {
-                String sq1 = "UPDATE membre SET validation_u=0";
+                String sq1 = "UPDATE membre SET validation_u=0 where nbr_ban_u>=3 ";
                 PreparedStatement prep2 = cnxs.prepareStatement(sq1);
                 //prep2.setInt(1, m.getId_u());
                 prep2.executeUpdate();
                 bn.bannereExiste(m.getId_u());
-                System.out.println("cbon");
+                System.out.println("c bon");
             }
         
         }
@@ -198,7 +198,7 @@ public void Banner_user() throws Exception {
 public void desactiverbannerUtilisateur(int id_u)
 {
         try {
-            String reqa1 = "UPDATE membre SET validation_u=1 WHERE id_u=? ";
+            String reqa1 = "UPDATE membre SET validation_u=1 and nbr_ban_u=0 WHERE id_u=? ";
             PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
             //pstmt.setInt(1,m.getId_u());
             //pstmt.setInt(1,m.getId_u());
