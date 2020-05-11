@@ -5,6 +5,7 @@
  */
 package edu.baskel.services;
 
+import com.gluonhq.impl.charm.a.b.b.m;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reclamation;
 import edu.baskel.utils.ConnectionBD;
@@ -169,11 +170,30 @@ public List<Membre> getlistMembre_ban() {
         return listeMembre_ban;
 
     }
+public void Banner_user() throws Exception {
+      
+        MembreCRUD mc = new MembreCRUD();
+       
+        
+        BanCRUD bn = new BanCRUD();
+        for (Membre m : getlistMembre_ban()) {
+                String sq1 = "UPDATE membre SET validation_u=0";
+                PreparedStatement prep2 = cnxs.prepareStatement(sq1);
+                //prep2.setInt(1, m.getId_u());
+                prep2.executeUpdate();
+                bn.bannereExiste(m.getId_u());
+                System.out.println("cbon");
+            }
+        
+        }
+ 
+
 public void desactiverbannerUtilisateur(Membre m)
 {
         try {
             String reqa1 = "UPDATE membre SET validation_u=1 WHERE id_u=? ";
             PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
+            //pstmt.setInt(1,m.getId_u());
             pstmt.setInt(1,m.getId_u());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -182,5 +202,10 @@ public void desactiverbannerUtilisateur(Membre m)
 }
 
 
+ 
     
 }
+
+
+
+ 

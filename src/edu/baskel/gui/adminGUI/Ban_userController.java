@@ -109,7 +109,7 @@ Membre user ;
     public void DisbannerUser(ActionEvent event){
         ReclamationCRUD s_rec =new ReclamationCRUD();
         Membre m = new Membre(table_user_ban.getSelectionModel().getSelectedItem().getId_u());
-        s_rec.desactiverbannerUtilisateur(m);
+        s_rec.desactiverbannerUtilisateur(m.getId_u());
         Notifications notificationBuilder = Notifications.create()
                     .text("Desactivation Banner").title("Banner").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                         @Override
