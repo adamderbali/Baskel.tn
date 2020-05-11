@@ -37,11 +37,7 @@ public class Essai {
 /*c EvenementCRUD ev = new EvenementCRUD();*/
 /* Participation p = new Participation(64,4);*/
 /*    System.out.println(pa.displayByUserP());*/
-ReclamationCRUD m = new ReclamationCRUD();
-BanCRUD b= new BanCRUD();
-//m.Banner_user();
-//b.bannereExiste(6);
-b.Reactive_ban();
+
 
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
