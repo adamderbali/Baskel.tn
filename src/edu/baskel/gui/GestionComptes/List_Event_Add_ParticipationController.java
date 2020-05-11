@@ -70,7 +70,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
     private TableColumn<Evenement, String> colDescription;
 
     @FXML
-    private TableColumn<Evenement, String> ColImage;
+    private TableColumn<Evenement, ImageView> ColImage;
 
     @FXML
     private JFXButton participer;
@@ -106,7 +106,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-
+        ImageView eventPhoto = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
+        
+         
         ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
 
         tableAffichage.setItems(obser);
