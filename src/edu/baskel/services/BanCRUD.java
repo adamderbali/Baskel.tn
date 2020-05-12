@@ -55,7 +55,7 @@ public class BanCRUD {
     }
     public void updateByID(int id_u){
         try {
-            String reqa3 = "UPDATE ban SET ban_num_u=ban_num_u+1 where id_u='"+id_u+"'";
+            String reqa3 = "UPDATE ban SET ban_num_u=ban_num_u+1 , date_ban=sysdate() where id_u='"+id_u+"'";
             PreparedStatement pstmt = cnxs.prepareStatement(reqa3);
             //pstmt.setInt(1,id);
             pstmt.executeUpdate(reqa3);
@@ -97,6 +97,8 @@ public class BanCRUD {
                 Ban b = new Ban();
                 b.setDate_ban(rs.getDate("date_ban"));
                 b.setId_u(rs.getInt("id_u"));
+                b.setId_ban(rs.getInt("id_ban"));
+                b.setBan_num_u(rs.getInt("ban_num_u"));
                 list_ban.add(b);
             }
             

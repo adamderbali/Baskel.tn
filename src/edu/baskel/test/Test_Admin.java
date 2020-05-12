@@ -24,9 +24,10 @@ public class Test_Admin         // TODO code application logic here
         try {
             ReclamationCRUD m = new ReclamationCRUD();
             BanCRUD b= new BanCRUD();
-            //m.Banner_user();
+            m.Banner_user();
             //b.bannereExiste(6);
-            b.Reactive_ban();
+            //b.Reactive_ban();
+            //System.out.println(b.getlist_ban());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
