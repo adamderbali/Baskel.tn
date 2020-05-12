@@ -36,7 +36,7 @@ import org.controlsfx.control.Notifications;
  *
  * @author Skander
  */
-public class Ban_userController implements Initializable {
+/*public class Ban_userController implements Initializable {
 
     @FXML
     private TableView<Membre> table_user_ban;
@@ -66,7 +66,7 @@ public class Ban_userController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    public void afficherMembre_ban(){
+/*    public void afficherMembre_ban(){
         ReclamationCRUD rc = new ReclamationCRUD();
         ArrayList arrayList1;
         arrayList1 = (ArrayList) rc.getlistMembre_ban();
@@ -177,5 +177,4 @@ public class Ban_userController implements Initializable {
         afficherMembre_ban();
     }    
     
-}
-*/
+}*/

@@ -8,6 +8,7 @@ package edu.baskel.test;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
+
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
 

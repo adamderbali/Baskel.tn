@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+
+
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
@@ -95,11 +97,14 @@ public class Ajouter_EvenementController implements Initializable {
               /*  Alert alertDtae = new validationSaisie().getAlert("date", "La date saisie doit etre superieur à" + date_system);
                 alertDtae.showAndWait();*/
             } else {
-
+                
                 EvenementCRUD Ec = new EvenementCRUD();
+               // Create_QR srvc= new Create_QR();
                 Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
                         getText(), pathE.getText());
                 Ec.ajouterEvenement(e);
+             //   srvc.Create("nom de l'evenement= "+txtNom.getText()+" Date= "+txtDate.getEditor().getText()+"Lieu de l'evenement",txtNom.getText());
+                
                 validationSaisie.notifConfirm("ok", "Evenement ajouté");
              /*   Alert alertAdded = new validationSaisie().getAlert("Ajout ok", "Evenement ajouté");
                 alertAdded.showAndWait();*/
