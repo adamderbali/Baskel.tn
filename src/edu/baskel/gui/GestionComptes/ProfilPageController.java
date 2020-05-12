@@ -40,6 +40,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -133,12 +135,9 @@ public class ProfilPageController implements Initializable {
     @FXML
     private Label lblfaible;
 
-
-    /* @FXML
-    private Text adrloc;
-
     @FXML
-    private Text telpro;*/
+    private Circle circle;
+
     @FXML
     private FontAwesomeIconView chkmotdepasse;
 
@@ -163,6 +162,10 @@ public class ProfilPageController implements Initializable {
         txtshowc.setVisible(false);
         profildate.setVisible(false);
         informationMembre();
+        circle.setStroke(Color.SEAGREEN);
+        Image im;
+        im = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
+        circle.setFill(new ImagePattern(im));
 
         if (l.getImage_u() != null) {
             System.out.println(l.getImage_u());
@@ -175,6 +178,7 @@ public class ProfilPageController implements Initializable {
             imagev.setClip(null);
             imagev.setEffect(new DropShadow(20, Color.BLACK));
             imagev.setImage(imagelog);
+
         }
     }
 
@@ -246,8 +250,8 @@ public class ProfilPageController implements Initializable {
         txtshowActuel.setVisible(false);
         actuelPass.setVisible(true);
     }
-    
-     @FXML
+
+    @FXML
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
@@ -306,8 +310,6 @@ public class ProfilPageController implements Initializable {
         return true;
     }
 
-   
-
     //confirmer les modification et les enregistrés
     @FXML
     public void confirmermodif(ActionEvent event) throws NoSuchAlgorithmException, IOException {
@@ -328,7 +330,7 @@ public class ProfilPageController implements Initializable {
                             if (verifDate() == false) {
                                 InputValidation.notificationError("Date", "Saisissez une date valide");
                             } else {
-                                if (((!profilmail.getText().equals(l.getEmail_u()))&&(mrc.VerificationExistence(l) == false))) {
+                                if (((!profilmail.getText().equals(l.getEmail_u())) && (mrc.VerificationExistence(l) == false))) {
                                     InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                 } else {
                                     if ((verifEmail.check(profilmail.getText())) == false) {

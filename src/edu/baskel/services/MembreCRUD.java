@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -372,4 +374,22 @@ public class MembreCRUD {
         return false;
     }
 
+    //verif email mot de passe oublié
+    public boolean VerifEmailMpOublié(String email){
+        try {
+            String req = "SELECT * FROM membre Where email_u=?";
+            PreparedStatement per = cnx.prepareStatement(req);
+            per.setString(1, email);
+            ResultSet rs = per.executeQuery();
+            if(!rs.next()){
+                System.out.println("Aucun compte avec cette adresse");
+                return false;
+            }else{
+                System.out.println("Compte trouvé");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
 }
