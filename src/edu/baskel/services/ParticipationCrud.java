@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -235,10 +233,10 @@ public class ParticipationCrud {
     
     
       public void eventAnnuler(int id_e) throws Exception {
-      
+     
         MembreCRUD mc = new MembreCRUD();
         SendMail Sm = new SendMail();
-       
+  
         for (Participation p : displayEmailParticipant(id_e)) {
             
            
@@ -248,17 +246,19 @@ public class ParticipationCrud {
                 ResultSet res = prep.executeQuery();
 
                 if (res.next()) {
-
+           
                     String em = res.getString("email_u");
                     Sm.envoiMail(em);
                     System.out.println(em);
-                    
+                
 
                 } else {
                     System.out.println("Aucun participant");
+                
                 }
 
             } 
+   
         }
       
       public int nombreParticipation(int id_e){

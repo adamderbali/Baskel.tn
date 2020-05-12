@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.google.zxing.qrcode.encoder.QRCode;
 import com.jfoenix.controls.JFXButton;
 
 import edu.baskel.entities.Evenement;
@@ -12,7 +13,9 @@ import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.services.MailAttachement;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.Qrcode;
 import edu.baskel.services.SendMail;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
@@ -138,6 +141,8 @@ public class List_Event_Add_ParticipationController implements Initializable {
     void participerEvenement(ActionEvent event) throws Exception {
        
         ParticipationCrud Pc = new ParticipationCrud();
+        Qrcode qr = new Qrcode();
+        MailAttachement ma = new MailAttachement();
         Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
         if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
             System.out.println();
@@ -145,9 +150,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
             actualiser();
         } else {
             Pc.ajouterParticipation(p);
-            SendMail Sm = new SendMail();
-            Sm.envoiMail("sabrine.zekri@esprit.tn");
-            validationSaisie.notifConfirm("ok", "Votre participation est confirmé ");
+            qr.Create("nom= "+tableAffichage.getSelectionModel().getSelectedItem().getNom_e()+"Date= "+tableAffichage.getSelectionModel().getSelectedItem().getDate_e(), tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
+            ma.envoiMailQrcode("sabrine.zekri@esprit.tn", tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
+            validationSaisie.notifConfirm("ok", "Votre participation est confirmé et vous allez reçevoir un mail qui contient QrCode de votre participation");
             System.out.println("okok++++okokok");
             actualiser();
         }

@@ -259,13 +259,12 @@ public class ListUpdDelByUserController implements Initializable {
 
     @FXML
     void supprimer(ActionEvent event) throws Exception {
-        int i;
+       
         ParticipationCrud Pc = new ParticipationCrud();
         EvenementCRUD Ec = new EvenementCRUD();
-      
+        
         System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
         if(validationSaisie.confrimSuppression("Information","Voulez vous supprimer cet evenement")){
-          
         Pc.eventAnnuler(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
         Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
         Pc.supprimerParticipationE(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
@@ -277,6 +276,7 @@ public class ListUpdDelByUserController implements Initializable {
         txtLieu.clear();
         txtDate.setValue(null);
         txtDescription.clear();
+        img.setVisible(false);
         pathE.clear();
         }
     }
