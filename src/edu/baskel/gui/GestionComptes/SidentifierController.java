@@ -122,7 +122,6 @@ public class SidentifierController implements Initializable {
             if (mr.ValidationBan(txtutilisateur.getText()) != 0) {
 
                 if (rememberMe.isSelected()) {
-
                     preferences.put("txtutilisateur", txtutilisateur.getText());
                     preferences.put("txtmotdepasse", txtmotdepasse.getText());
 
@@ -134,7 +133,7 @@ public class SidentifierController implements Initializable {
                 Stage stage = (Stage) rememberMe.getScene().getWindow();
                 Parent root = null;
                 try {
-                    root = FXMLLoader.load(getClass().getResource("motdepasseoublié.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
 
                 } catch (IOException ex) {
                 }
@@ -152,16 +151,16 @@ public class SidentifierController implements Initializable {
                 //hh.LastCnx();//histo
                 // System.out.println(SessionInfo.getInstance(iduser));
             } else {
-                //InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
+                InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
 
-                Alert alertn = new InputValidation().getAlert(" Erreur d'authentification", "vous etes banni s");
-                alertn.showAndWait();
+                //Alert alertn = new InputValidation().getAlert(" Erreur d'authentification", "vous etes banni s");
+                //alertn.showAndWait();
             }
         } else {
-            //InputValidation.notificationError("Erreur d'authentification", "veuillez  verifier vos données");
+            InputValidation.notificationError("Erreur d'authentification", "veuillez  verifier vos données");
 
-            Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
-            alertnum.showAndWait();
+            //Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
+            //alertnum.showAndWait();
 
         }
     }

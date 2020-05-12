@@ -118,7 +118,7 @@ public class InscriptionReparateurController implements Initializable {
         txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
-        txtnaissance.setValue(LocalDate.of(2010, Month.JANUARY, 10));
+        txtnaissance.setValue(LocalDate.now());
 
         TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
     }
@@ -225,8 +225,9 @@ public class InscriptionReparateurController implements Initializable {
         String telpro = txttelpro.getText();
         String adrloc = txtadrlocal.getText();
         String imge = txtimage.getText();
-
-        Reparateur r = new Reparateur(adrloc, telpro, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel);
+//ne9es constructeur bel image f reparateur w blehc long w latitude w nom local
+//ne9sa image f ajouter reparateur
+        Reparateur r = new Reparateur(adrloc,null, telpro,null,null,2, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel,imge, "A");
         if (validerchamps() == true) {
             if (InputValidation.validTextField(txtNom.getText())) {
                 Alert alertNom = new InputValidation().getAlert("Nom", "Saisissez votre nom");

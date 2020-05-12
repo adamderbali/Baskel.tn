@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.services.MembreCRUD;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,6 +36,8 @@ public class AcceuilController implements Initializable {
     @FXML
     private AnchorPane anchorproincipal;
 
+    MembreCRUD mc = new MembreCRUD();
+
     /**
      * Initializes the controller class.
      */
@@ -51,9 +54,13 @@ public class AcceuilController implements Initializable {
 //afficher page profil a partir de l acceuil
     @FXML
     public void Profil(ActionEvent event) throws IOException {
-
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
-        ANchorProfil.getChildren().setAll(pane);
+        if (mc.VerifReparateur() == false) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
+            ANchorProfil.getChildren().setAll(pane);
+        } else if(mc.VerifReparateur() == true){
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPageReparateur.fxml"));
+            ANchorProfil.getChildren().setAll(pane);
+        }
     }
 
     //se deconnecter a partir de l acceuil
