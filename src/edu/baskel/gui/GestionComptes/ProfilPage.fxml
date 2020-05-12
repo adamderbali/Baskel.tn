@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -48,6 +49,7 @@
       <Separator layoutX="174.0" layoutY="78.0" orientation="VERTICAL" prefHeight="513.0" prefWidth="5.0" style="-fx-background-color: #0096a4;" />
       <Pane fx:id="panePrincipale" layoutX="190.0" layoutY="78.0" prefHeight="421.0" prefWidth="842.0">
          <children>
+            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="658.0" layoutY="114.0" radius="111.0" stroke="BLACK" strokeType="INSIDE" />
             <JFXTextField fx:id="profilnom" editable="false" layoutX="243.0" layoutY="59.0" />
             <JFXTextField fx:id="profilprenom" editable="false" layoutX="243.0" layoutY="108.0" />
             <JFXTextField fx:id="profilmail" editable="false" layoutX="243.0" layoutY="159.0" />
@@ -84,15 +86,15 @@
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="btnimage" layoutX="703.0" layoutY="221.0" mnemonicParsing="false" onAction="#filephoto" text="image" />
-            <TextField fx:id="thximage" layoutX="534.0" layoutY="221.0" prefHeight="31.0" prefWidth="162.0" />
+            <Button fx:id="btnimage" layoutX="701.0" layoutY="231.0" mnemonicParsing="false" onAction="#filephoto" text="image" />
+            <TextField fx:id="thximage" layoutX="524.0" layoutY="231.0" prefHeight="31.0" prefWidth="162.0" />
             <Button fx:id="btnconfirmer1" layoutX="308.0" layoutY="380.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="207.0" text="Enregistrer les modifications" />
             <Button fx:id="btnmodifier1" layoutX="38.0" layoutY="380.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="207.0" text="Modifier les informations" />
             <JFXTextField fx:id="profildate" editable="false" layoutX="490.0" layoutY="395.0" />
-            <ImageView fx:id="imagev" fitHeight="172.0" fitWidth="200.0" layoutX="534.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagev" fitHeight="172.0" fitWidth="200.0" layoutX="549.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Pane fx:id="PaneMotpass" layoutX="188.0" layoutY="126.0" prefHeight="474.0" prefWidth="828.0">
+      <Pane fx:id="PaneMotpass" layoutX="198.0" layoutY="136.0" prefHeight="474.0" prefWidth="828.0">
          <children>
             <Text layoutX="35.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau">
                <font>

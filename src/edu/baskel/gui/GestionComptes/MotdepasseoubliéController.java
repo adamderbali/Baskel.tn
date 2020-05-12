@@ -10,6 +10,7 @@ import edu.baskel.entities.Membre;
 import edu.baskel.services.EnvoiMail;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import static edu.baskel.utils.SessionInfo.iduser;
 import java.io.IOException;
@@ -62,11 +63,10 @@ public class MotdepasseoubliéController implements Initializable {
     private Button btnSupp;
     @FXML
     private Button btnevenmn;
-      @FXML
+    @FXML
     private MenuItem itemSedeconnecter;
-       @FXML
+    @FXML
     private MenuButton menu;
-
 
     Connection cnx = null;
     PreparedStatement prep = null;
@@ -77,6 +77,7 @@ public class MotdepasseoubliéController implements Initializable {
     private String motdepasse;
     int ran;
     Membre m = SessionInfo.getLoggedM();
+    MembreCRUD mc = new MembreCRUD();
 
     /**
      * Initializes the controller class.
@@ -94,8 +95,11 @@ public class MotdepasseoubliéController implements Initializable {
 
     @FXML
     public void envoyerMail(ActionEvent event) {
-        
-        e.envoyerMail1(txtentermail.getText());
+        if (mc.VerifEmailMpOublié(txtentermail.getText()) == true) {
+            e.envoyerMail1(txtentermail.getText());
+        } else {
+            InputValidation.notificationError("Adresse Email", "verifier votre adresse email");
+        }
     }
 
     //page d authentification
@@ -109,11 +113,11 @@ public class MotdepasseoubliéController implements Initializable {
         app_stage.show();
 
     }
-    
+
     //page...
-       @FXML
+    @FXML
     void redirectionevenmn(ActionEvent event) throws IOException {
-   Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
@@ -124,11 +128,11 @@ public class MotdepasseoubliéController implements Initializable {
     @FXML
     public void verifierCode(ActionEvent event) throws IOException {
         if ((e.verifierCode1(txtcode.getText()) == true)) {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("NouveauMP.fxml"));
-           Parent root2 = loader.load();
-           NouveauMPController nmp = loader.getController();
-           nmp.setTxtm(txtentermail.getText());
-           txtentermail.getScene().setRoot(root2);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NouveauMP.fxml"));
+            Parent root2 = loader.load();
+            NouveauMPController nmp = loader.getController();
+            nmp.setTxtm(txtentermail.getText());
+            txtentermail.getScene().setRoot(root2);
         } else {
             System.out.println("code erroné");
         }
@@ -144,7 +148,7 @@ public class MotdepasseoubliéController implements Initializable {
     }
 
     //page d acceuil
-    @FXML  
+    @FXML
     void SeDeconnecter(ActionEvent event) throws IOException {
 
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
@@ -162,6 +166,8 @@ public class MotdepasseoubliéController implements Initializable {
     @FXML
     void Quitter(ActionEvent event) {
         Platform.exit();
+        SessionInfo.setIduser(0);
+        SessionInfo.setLoggedM(null);
     }
 
 }

@@ -102,11 +102,10 @@ public class InscriptionController implements Initializable {
     private Label lblfaible;
     @FXML
     private JFXButton btnConnexion;
-
-    String photo = null;
-    Connection cnx;
     private PreparedStatement prep;
     private ResultSet res;
+    private String photo = null;
+    Connection cnx;
 
     public InscriptionController() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -310,7 +309,7 @@ public class InscriptionController implements Initializable {
                                                     chkhomme.setSelected(false);
                                                     chkfemme.setSelected(false);
                                                     System.out.println("utilisateur ajouté");
-                                                    
+
                                                     InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
                                                     Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
                                                     Scene redirection_scene = new Scene(redirection_parent);

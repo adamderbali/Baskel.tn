@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -11,98 +12,123 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="639.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageReparateurController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="639.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageController">
    <children>
-      <JFXTextField fx:id="profildate" editable="false" layoutX="755.0" layoutY="514.0" />
-      <JFXTextField fx:id="txtshow" layoutX="558.0" layoutY="540.0" />
-      <Button fx:id="btnmodifier1" layoutX="567.0" layoutY="46.0" mnemonicParsing="false" onAction="#chagerInfos2" text="modifier" />
-      <Button fx:id="btnconfirmer1" layoutX="774.0" layoutY="440.0" mnemonicParsing="false" onAction="#confirmermodif" text="Confirmer " />
-      <Text layoutX="333.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe">
-         <font>
-            <Font name="System Bold Italic" size="15.0" />
-         </font>
-      </Text>
-      <JFXPasswordField fx:id="nvpass" editable="false" layoutX="558.0" layoutY="540.0" />
-      <JFXTextField fx:id="txtshowc" layoutX="799.0" layoutY="540.0" />
-      <Label fx:id="lblprofil" layoutX="180.0" layoutY="29.0" prefHeight="50.0" prefWidth="333.0" text="adam derbali">
-         <font>
-            <Font name="System Bold Italic" size="44.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#0096a4" />
-                  <Stop color="#616161" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill></Label>
-      <JFXPasswordField fx:id="cnvpass" layoutX="799.0" layoutY="540.0" />
-      <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="710.0" layoutY="562.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
-      <FontAwesomeIconView fx:id="chkmotdepasse2" glyphName="EYE" layoutX="949.0" layoutY="562.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" />
       <Separator layoutX="11.0" layoutY="589.0" prefHeight="3.0" prefWidth="1021.0" style="-fx-background-color: #0096a4;" />
-      <Separator layoutX="157.0" layoutY="101.0" prefHeight="3.0" prefWidth="319.0" style="-fx-background-color: #0096a4;" />
-      <Pane layoutX="25.0" layoutY="109.0" prefHeight="431.0" prefWidth="526.0">
+      <Pane fx:id="paneNomProfil" prefHeight="86.0" prefWidth="1042.0">
          <children>
-            <JFXTextField fx:id="profilnom" editable="false" layoutX="245.0" layoutY="25.0" />
-            <JFXTextField fx:id="profilprenom" editable="false" layoutX="245.0" layoutY="74.0" />
-            <JFXTextField fx:id="profilmail" editable="false" layoutX="245.0" layoutY="125.0" />
-            <JFXTextField fx:id="profiladresse" editable="false" layoutX="245.0" layoutY="173.0" />
-            <JFXTextField fx:id="profilteleph" editable="false" layoutX="244.0" layoutY="274.0" />
-            <JFXDatePicker fx:id="nvdate" editable="false" layoutX="244.0" layoutY="227.0" />
-            <JFXTextField fx:id="profiladrlocal" editable="false" layoutX="244.0" layoutY="320.0" />
-            <JFXTextField fx:id="profiltelpro" editable="false" layoutX="244.0" layoutY="368.0" />
-            <Text layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
+            <Label fx:id="lblprofil" layoutX="388.0" prefHeight="77.0" prefWidth="406.0" text="adam derbali">
                <font>
-                  <Font name="System Bold Italic" size="15.0" />
+                  <Font name="System Bold Italic" size="53.0" />
                </font>
-            </Text>
-            <Text layoutX="21.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Text>
-            <Text layoutX="21.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse email">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Text>
-            <Text layoutX="21.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Text>
-            <Text layoutX="17.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de naissance">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Text>
-            <Text layoutX="16.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Text>
-            <Text fx:id="adrloc" layoutX="18.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse local">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Text>
-            <Text fx:id="telpro" layoutX="15.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone professionel">
-               <font>
-                  <Font name="System Bold Italic" size="15.0" />
-               </font>
-            </Text>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#0096a4" />
+                        <Stop color="#616161" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Separator layoutX="5.0" layoutY="74.0" prefHeight="3.0" prefWidth="1028.0" style="-fx-background-color: #0096a4;" />
          </children>
       </Pane>
-      <Pane layoutX="605.0" layoutY="41.0" prefHeight="279.0" prefWidth="260.0">
+      <VBox layoutY="78.0" prefHeight="200.0" prefWidth="178.0">
          <children>
-            <ImageView fx:id="imagev" fitHeight="194.0" fitWidth="231.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField fx:id="thximage" layoutX="14.0" layoutY="220.0" prefHeight="31.0" prefWidth="162.0" />
-            <Button fx:id="btnimage" layoutX="192.0" layoutY="220.0" mnemonicParsing="false" onAction="#filephoto" text="image" />
+            <Button fx:id="btnGenerale" mnemonicParsing="false" onAction="#afficherOngletGenrale" prefHeight="31.0" prefWidth="190.0" text="Générale" />
+            <Button fx:id="btnSécurité" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#afficherOngletSecurité" prefHeight="31.0" prefWidth="190.0" text="Sécurité" />
+         </children>
+      </VBox>
+      <Separator layoutX="174.0" layoutY="78.0" orientation="VERTICAL" prefHeight="513.0" prefWidth="5.0" style="-fx-background-color: #0096a4;" />
+      <Pane fx:id="panePrincipale" layoutX="190.0" layoutY="78.0" prefHeight="421.0" prefWidth="842.0">
+         <children>
+            <JFXTextField fx:id="profilnom" editable="false" layoutX="243.0" layoutY="59.0" />
+            <JFXTextField fx:id="profilprenom" editable="false" layoutX="243.0" layoutY="108.0" />
+            <JFXTextField fx:id="profilmail" editable="false" layoutX="243.0" layoutY="159.0" />
+            <JFXTextField fx:id="profiladresse" editable="false" layoutX="243.0" layoutY="207.0" />
+            <JFXTextField fx:id="profilteleph" editable="false" layoutX="242.0" layoutY="308.0" />
+            <JFXDatePicker fx:id="nvdate" editable="false" layoutX="242.0" layoutY="261.0" />
+            <Text layoutX="19.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="19.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="19.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse email">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="19.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de naissance">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnimage" layoutX="703.0" layoutY="221.0" mnemonicParsing="false" onAction="#filephoto" text="image" />
+            <TextField fx:id="thximage" layoutX="534.0" layoutY="221.0" prefHeight="31.0" prefWidth="162.0" />
+            <Button fx:id="btnconfirmer1" layoutX="308.0" layoutY="380.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="207.0" text="Enregistrer les modifications" />
+            <Button fx:id="btnmodifier1" layoutX="38.0" layoutY="380.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="207.0" text="Modifier les informations" />
+            <JFXTextField fx:id="profildate" editable="false" layoutX="490.0" layoutY="395.0" />
+            <ImageView fx:id="imagev" fitHeight="172.0" fitWidth="200.0" layoutX="434.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="728.0" layoutY="108.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <Pane fx:id="PaneMotpass" layoutX="198.0" layoutY="136.0" prefHeight="474.0" prefWidth="828.0">
+         <children>
+            <Text layoutX="35.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <JFXTextField fx:id="txtshow" editable="false" layoutX="196.0" layoutY="162.0" prefHeight="31.0" prefWidth="218.0" />
+            <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="390.0" layoutY="184.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
+            <Text layoutX="38.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmer">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <FontAwesomeIconView fx:id="chkmotdepasse2" glyphName="EYE" layoutX="390.0" layoutY="235.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" />
+            <JFXTextField fx:id="txtshowc" editable="false" layoutX="196.0" layoutY="213.0" prefHeight="31.0" prefWidth="218.0" />
+            <Text layoutX="35.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actuel">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <JFXPasswordField fx:id="actuelPass" layoutX="196.0" layoutY="111.0" prefHeight="31.0" prefWidth="218.0" />
+            <JFXTextField fx:id="txtshowActuel" editable="false" layoutX="196.0" layoutY="111.0" prefHeight="31.0" prefWidth="218.0" />
+            <FontAwesomeIconView fx:id="chkmotdepasseActuel" glyphName="EYE" layoutX="390.0" layoutY="133.0" onMousePressed="#VisualiserMPActuel" onMouseReleased="#hideMPActuel" size="20.0" />
+            <JFXButton fx:id="btnchgPass" layoutX="327.0" layoutY="294.0" onAction="#ChangerPass" text="Enregistrer les modifications" />
+            <Text layoutX="38.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nous vous conseillons d'utiliser un mot de passe sur que vous n'utilisez nulle part ailleurs" />
+            <JFXPasswordField fx:id="nvpass" layoutX="196.0" layoutY="161.0" prefHeight="31.0" prefWidth="218.0" />
+            <JFXPasswordField fx:id="cnvpass" layoutX="196.0" layoutY="213.0" onMouseClicked="#passStrength" prefHeight="31.0" prefWidth="218.0" />
+            <Label fx:id="lblfaible" layoutX="332.0" layoutY="167.0" prefHeight="21.0" prefWidth="45.0" />
+            <Text layoutX="67.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changer le mot de passe">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Text>
+            <FontAwesomeIconView glyphName="KEY" layoutX="35.0" layoutY="37.0" size="22" wrappingWidth="20.000000596046448" />
          </children>
       </Pane>
    </children>
