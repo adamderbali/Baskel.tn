@@ -79,6 +79,7 @@ public class HistoriqueCRUD {
             p.setString(1, datee);
             p.setInt(2, id);
             p.executeUpdate();
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

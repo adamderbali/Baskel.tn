@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.DetailsParticipantController">
    <children>
-      <TableView fx:id="tableAffichage1" layoutX="57.0" layoutY="103.0" prefHeight="195.0" prefWidth="471.0" stylesheets="@AffichageList.css">
+      <TableView fx:id="tableAffichage1" layoutX="57.0" layoutY="103.0" prefHeight="195.0" prefWidth="471.0" style="-fx-fixed-cell-size: 70;" stylesheets="@AffichageList.css">
         <columns>
           <TableColumn fx:id="colNom" prefWidth="144.0" text="Nom de participant" />
           <TableColumn fx:id="colPrenom" prefWidth="153.0" text="Prenom de participant" />
@@ -17,7 +17,7 @@
         </columns>
       </TableView>
       <Label layoutX="136.0" layoutY="78.0" prefHeight="17.0" prefWidth="190.0" text="Nombre des participation :" />
-      <JFXTextField fx:id="nbreP" layoutX="300.0" layoutY="61.0" prefHeight="17.0" prefWidth="135.0" />
+      <JFXTextField fx:id="nbreP" editable="false" focusColor="#00747f" layoutX="300.0" layoutY="61.0" prefHeight="25.0" prefWidth="24.0" />
       <JFXButton layoutX="258.0" layoutY="312.0" onAction="#ok" prefHeight="27.0" prefWidth="84.0" style="-fx-background-radius: 100px; -fx-border-radius: 100ox; -fx-border-color: #00747f;" text="OK" textFill="#00747f" />
    </children>
 </AnchorPane>

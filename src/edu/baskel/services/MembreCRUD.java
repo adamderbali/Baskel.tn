@@ -11,9 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -67,18 +70,18 @@ public class MembreCRUD {
 // update info d un membre
     public void updateMembre(Membre m) {
         try {
-            String requete = "UPDATE membre SET nom_u=?, prenom_u=?, adresse_u=?,email_u=?, sexe_u=?, date_u=?, mot_passe_u=?, num_tel_u=?, image_u=? WHERE id_u=? ";
-            PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(10, m.getId_u());
+            String requete = "UPDATE membre SET nom_u=?, prenom_u=?, adresse_u=?,email_u=?, sexe_u=?, date_u=?, num_tel_u=?, image_u=? WHERE id_u=? ";
+            PreparedStatement pst = cnx.prepareStatement(requete);//mot_passe_u=?,
+            pst.setInt(9, m.getId_u());
             pst.setString(1, m.getNom_u());
             pst.setString(2, m.getPrenom_u());
             pst.setString(3, m.getAdresse_u());
             pst.setString(4, m.getEmail_u());
             pst.setString(5, m.getSexe_u());
             pst.setDate(6, m.getDate_u());
-            pst.setString(7, m.getMot_passe_u());
-            pst.setString(8, m.getNum_tel_u());
-            pst.setString(9, m.getImage_u());
+            //pst.setString(7, m.getMot_passe_u());
+            pst.setString(7, m.getNum_tel_u());
+            pst.setString(8, m.getImage_u());
 
             pst.executeUpdate();
             System.out.println("personne modifié");
@@ -352,5 +355,41 @@ public class MembreCRUD {
         }
 
     }
+    //verif que loggedm est un reparateur
+    public boolean VerifReparateur() {
 
+        String req = "select * from reparateur where id_u=?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, iduser);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    //verif email mot de passe oublié
+    public boolean VerifEmailMpOublié(String email){
+        try {
+            String req = "SELECT * FROM membre Where email_u=?";
+            PreparedStatement per = cnx.prepareStatement(req);
+            per.setString(1, email);
+            ResultSet rs = per.executeQuery();
+            if(!rs.next()){
+                System.out.println("Aucun compte avec cette adresse");
+                return false;
+            }else{
+                System.out.println("Compte trouvé");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
 }

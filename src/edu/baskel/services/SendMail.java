@@ -25,7 +25,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 public class SendMail {
     
-    public static void envoiMail(String recp) throws Exception{
+   public static void envoiMail(String recp) throws Exception{
         System.out.println("Preparation mail");
         
         Properties properties = new Properties();
@@ -57,15 +57,16 @@ public class SendMail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(monCompte));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recp) );
-            message.setSubject("Confirmation participation");
-            message.setSubject("Confirmation participation");
-            message.setText("votre participation est confirmée");
+            message.setSubject("Annulation de l'evenement");
+            message.setSubject("Annulation de l'evenement");
+            message.setText("L'evenement que vous avez particpé est annulé ");
             return message;
         } catch (AddressException ex) {
             Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+    
     
     
     

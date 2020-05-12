@@ -17,14 +17,18 @@ import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
 import edu.baskel.services.SendMail;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -149,11 +153,13 @@ public class ListUpdDelByUserController implements Initializable {
             txtNom.setText(event.getNom_e());
             txtLieu.setText(event.getLieu_e());
             txtDescription.setText(event.getDescription_e());
-            //  txtDate
-         //     pathE.setText(event.getImage_e());
-            
-                img.setImage(image);
-                img.setPreserveRatio(true);
+          //  txtDate.setValue((LocalDate.parse(event.getDate_e())));
+            pathE.setText("file:/C:\\wamp\\www\\Baskel\\images\\" + event.getImage_e());
+            Image imgE;
+            imgE = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + event.getImage_e());
+            img.setImage(imgE);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            txtDate.setValue(LocalDate.parse(event.getDate_e(), formatter));
 
             }
 
@@ -207,14 +213,12 @@ public class ListUpdDelByUserController implements Initializable {
             /* test sur les champs vides ou non*/
 
             if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-                Alert alertChamps = new validationSaisie().getAlert("Verifier la saisie", "Les champs doit etre tout saisie");
-                alertChamps.showAndWait();
+                validationSaisie.notifInfo("Verification","Les champs doit etre tout saisie");
                 /* test sur les dates*/
             } else if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
 
                 System.out.println("------------------");
-                Alert alertDtae = new validationSaisie().getAlert("date", "La date saisie doit etre superieur à" + date_system);
-                alertDtae.showAndWait();
+                validationSaisie.notifInfo("Date", "La date saisie doit etre superieur à" + date_system);
             } else {
 
                 EvenementCRUD Ec = new EvenementCRUD();
@@ -222,8 +226,7 @@ public class ListUpdDelByUserController implements Initializable {
                         txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText()
                 );
                 Ec.updateEvenement(e);
-                Alert alertAdded = new validationSaisie().getAlert("Modification ok", "Evenement Modifié");
-                alertAdded.showAndWait();
+                 validationSaisie.notifConfirm("ok","Evenement Modifié");
                 actualiser();
 
                 txtNom.clear();
@@ -256,48 +259,47 @@ public class ListUpdDelByUserController implements Initializable {
 
     @FXML
     void supprimer(ActionEvent event) throws Exception {
-        int i;
+       
         ParticipationCrud Pc = new ParticipationCrud();
         EvenementCRUD Ec = new EvenementCRUD();
-      
+        
         System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-        if(validationSaisie.confrimSuppression()){
-          
+        if(validationSaisie.confrimSuppression("Information","Voulez vous supprimer cet evenement")){
         Pc.eventAnnuler(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
         Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
         Pc.supprimerParticipationE(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
         tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
-        
-        Alert alertDelete = new validationSaisie().getAlert("Suppression ok", "Evenement supprimé");
-        alertDelete.showAndWait();
+        validationSaisie.notifConfirm("ok", "Evenement supprimer");
         actualiser();     
 
         txtNom.clear();
         txtLieu.clear();
         txtDate.setValue(null);
         txtDescription.clear();
+        img.setVisible(false);
         pathE.clear();
         }
     }
 
-    @FXML
-    void telechargerPhoto(ActionEvent event) {
+     @FXML
 
-        FileChooser filechooser = new FileChooser();
-
-        filechooser.setTitle("Open file dialog");
-        Stage stage = (Stage) anchor.getScene().getWindow();
-        File file = filechooser.showOpenDialog(stage);
-
+    void telecharger(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        final Stage stage = new Stage();
+        File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
-            pathE.setText(file.getAbsolutePath());
-            System.out.println("" + file.getAbsolutePath());
-
+            String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
             image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
-            img.setImage(image);
-            img.setPreserveRatio(true);
-        }
 
+            pathE.setText(photo);
+            InputValidation u = new InputValidation();
+            String photo1;
+            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+            System.out.println(photo);
+            u.CopyImage(photo1, file.toPath().toString());
+            img.setImage(image);
+
+        }
     }
 
     @Override
@@ -308,6 +310,8 @@ public class ListUpdDelByUserController implements Initializable {
         filechooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Allfiles", "*.*"),
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
                 new FileChooser.ExtensionFilter("Text File", "*.txt"));
+        
+      
 
     }
 

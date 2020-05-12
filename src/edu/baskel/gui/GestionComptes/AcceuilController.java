@@ -5,6 +5,9 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.entities.Membre;
+import edu.baskel.services.MembreCRUD;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +17,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class
@@ -31,9 +38,13 @@ public class AcceuilController implements Initializable {
     private MenuItem btnMOnPRofil;
     @FXML
     private AnchorPane ANchorProfil;
-
     @FXML
     private AnchorPane anchorproincipal;
+    @FXML
+    private Circle Circle;
+
+    MembreCRUD mc = new MembreCRUD();
+    Membre l = SessionInfo.getLoggedM();
 
     /**
      * Initializes the controller class.
@@ -41,6 +52,10 @@ public class AcceuilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Circle.setStroke(Color.SEAGREEN);
+        Image imagelog;
+        imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
+        Circle.setFill(new ImagePattern(imagelog));
     }
 
     @FXML
@@ -51,9 +66,13 @@ public class AcceuilController implements Initializable {
 //afficher page profil a partir de l acceuil
     @FXML
     public void Profil(ActionEvent event) throws IOException {
-
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
-        ANchorProfil.getChildren().setAll(pane);
+        if (mc.VerifReparateur() == false) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
+            ANchorProfil.getChildren().setAll(pane);
+        } else if (mc.VerifReparateur() == true) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPageReparateur.fxml"));
+            ANchorProfil.getChildren().setAll(pane);
+        }
     }
 
     //se deconnecter a partir de l acceuil

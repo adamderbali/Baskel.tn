@@ -18,7 +18,7 @@ public class senMain {
      */
     public static void main(String[] args) throws Exception {
         
-        SendMail.envoiMail("njiwa.nousou@gmail.com");
+      //  SendMail.envoiMail("njiwa.nousou@gmail.com");
         
        
     }

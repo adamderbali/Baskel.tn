@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -60,9 +58,11 @@ public class ParticipationCrud {
     public boolean supprimerParticipationP(Participation p) {
 
         try {
-            String requete2 = "DELETE FROM participation where id_e=? AND id_u=?";
+           
+          String requete2 = "DELETE FROM participation where id_e=?";
+       
             PreparedStatement pst1 = cnx.prepareStatement(requete2);
-            pst1.setInt(2, p.getId_u());
+         //   pst1.setInt(2, p.getId_u());
             pst1.setInt(1, p.getId_e());
 
             pst1.executeUpdate();
@@ -74,6 +74,9 @@ public class ParticipationCrud {
         }
 
     }
+    
+    
+ 
 
       public boolean supprimerParticipationE(int id_e) {
 
@@ -230,10 +233,10 @@ public class ParticipationCrud {
     
     
       public void eventAnnuler(int id_e) throws Exception {
-      
+     
         MembreCRUD mc = new MembreCRUD();
         SendMail Sm = new SendMail();
-       
+  
         for (Participation p : displayEmailParticipant(id_e)) {
             
            
@@ -243,17 +246,19 @@ public class ParticipationCrud {
                 ResultSet res = prep.executeQuery();
 
                 if (res.next()) {
-
+           
                     String em = res.getString("email_u");
                     Sm.envoiMail(em);
                     System.out.println(em);
-                    
+                
 
                 } else {
                     System.out.println("Aucun participant");
+                
                 }
 
             } 
+   
         }
       
       public int nombreParticipation(int id_e){

@@ -11,19 +11,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 public class Esprit_Baskel extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ListParticipationParEventUser.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ListUpdDelByUser.fxml"));
 
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
         stage.show();
     }
+
     /**
-     * n
      *
      * @param args the command line arguments
      */

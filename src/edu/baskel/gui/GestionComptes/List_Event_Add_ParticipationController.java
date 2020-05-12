@@ -5,50 +5,39 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.google.zxing.qrcode.encoder.QRCode;
 import com.jfoenix.controls.JFXButton;
 
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
+
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.services.MailAttachement;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.Qrcode;
 import edu.baskel.services.SendMail;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import static javafx.collections.FXCollections.observableList;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import edu.baskel.utils.validationSaisie;
-import java.awt.Insets;
-import java.io.File;
-import static java.util.Collections.list;
-import java.util.function.Predicate;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.EventType;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
-import static jdk.nashorn.internal.objects.NativeString.search;
 
 public class List_Event_Add_ParticipationController implements Initializable {
 
@@ -70,7 +59,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
     private TableColumn<Evenement, String> colDescription;
 
     @FXML
-    private TableColumn<Evenement, String> ColImage;
+    private TableColumn<Evenement, ImageView> ColImage;
 
     @FXML
     private JFXButton participer;
@@ -106,8 +95,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-        //  ColImage.setCellValueFactory(new PropertyValueFactory<>("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e()));
-
+      //  ImageView eventPhoto = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
+        
+         
         ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
 
         tableAffichage.setItems(obser);
@@ -149,20 +139,21 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     void participerEvenement(ActionEvent event) throws Exception {
-
+       
         ParticipationCrud Pc = new ParticipationCrud();
+        Qrcode qr = new Qrcode();
+        MailAttachement ma = new MailAttachement();
         Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
         if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
             System.out.println();
-            Alert alertParticipation = new validationSaisie().getAlert("Echec", "Vous avez deja particpé a ce evenement");
-            alertParticipation.showAndWait();
+            validationSaisie.notifInfo("Information", "Vous avez deja particpé a ce evenement");
             actualiser();
         } else {
             Pc.ajouterParticipation(p);
-            SendMail Sm = new SendMail();
-            Sm.envoiMail("sabrine.zekri@esprit.tn");
-            Alert alertParticipationValidé = new validationSaisie().getAlert("ok", "Votre participation est confirmé ");
-            alertParticipationValidé.showAndWait();
+            qr.Create("nom= "+tableAffichage.getSelectionModel().getSelectedItem().getNom_e()+"Date= "+tableAffichage.getSelectionModel().getSelectedItem().getDate_e(), tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
+            ma.envoiMailQrcode("sabrine.zekri@esprit.tn", tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
+            validationSaisie.notifConfirm("ok", "Votre participation est confirmé et vous allez reçevoir un mail qui contient QrCode de votre participation");
+            System.out.println("okok++++okokok");
             actualiser();
         }
     }
@@ -194,7 +185,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
         }*/
 
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
