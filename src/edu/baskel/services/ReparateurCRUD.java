@@ -33,8 +33,8 @@ public class ReparateurCRUD {
 
     public void ajouterReparateur(Reparateur r) {
         try {
-            String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u)"
-                    + "VALUES(?,?,?,?,?,?,?,?)";
+            String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?)";
 
             String requete2 = "INSERT INTO reparateur (id_u,adresse_loc, nom_local,num_pro,latitude,longitude)"
                     + "VALUES(?,?,?,?,?,?)";
@@ -47,6 +47,7 @@ public class ReparateurCRUD {
             pst.setDate(6, r.getDate_u());
             pst.setString(7, r.getMot_passe_u());
             pst.setString(8, r.getNum_tel_u());
+            pst.setString(9, r.getImage_u());
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
