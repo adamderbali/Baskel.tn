@@ -73,7 +73,7 @@ public class MenuReparateurController implements Initializable {
         }
     }
 public static void MyGETRequest() throws IOException {
-    URL urlForGetRequest = new URL("https://gestion.cityc.fr/newConcept/wsapp/getVille.php");
+    URL urlForGetRequest = new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Rades+street&key=AIzaSyCZYEPM9CUkXDr9LxiO4BbHBm3GdN79b_s");
     String readLine = null;
     HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
     conection.setRequestMethod("GET");
