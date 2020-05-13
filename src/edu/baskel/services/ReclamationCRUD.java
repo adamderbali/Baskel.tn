@@ -177,10 +177,40 @@ public List<Membre> getlistMembre_ban() {
         return listeMembre_ban;
 
     }
+public List<Membre> listUser() {
+        List<Membre> listeMembre = new ArrayList<>();
+
+        try {
+            String requete = "SELECT* FROM membre where type_u='U' or type_u='R'";
+            Statement st = cnxs.createStatement();
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                Membre m = new Membre();
+                m.setId_u(rs.getInt(1));
+                m.setNom_u(rs.getString(2));
+                m.setPrenom_u(rs.getString(3));
+                m.setAdresse_u(rs.getString(4));
+                m.setEmail_u(rs.getString(5));
+                m.setSexe_u(rs.getString(6));
+                m.setDate_u(rs.getDate(7));
+                m.setMot_passe_u(rs.getString(8));
+                m.setNum_tel_u(rs.getString(9));
+                m.setImage_u(rs.getString(10));
+                m.setType_u(rs.getString(11));
+                m.setValidation_u(rs.getInt(12));
+                m.setNbr_ban_u(rs.getInt(13));
+                listeMembre.add(m);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listeMembre;
+
+    }
 public void Banner_user() throws Exception {
       
         MembreCRUD mc = new MembreCRUD();
-             
         
         BanCRUD bn = new BanCRUD();
         for (Membre m : getlistMembre_ban()) {
@@ -198,7 +228,7 @@ public void Banner_user() throws Exception {
 public void desactiverbannerUtilisateur(int id_u)
 {
         try {
-            String reqa1 = "UPDATE membre SET validation_u=1 and nbr_ban_u=0 WHERE id_u=? ";
+            String reqa1 = "UPDATE membre SET validation_u=1 , nbr_ban_u=0 WHERE id_u=? ";
             PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
             //pstmt.setInt(1,m.getId_u());
             //pstmt.setInt(1,m.getId_u());

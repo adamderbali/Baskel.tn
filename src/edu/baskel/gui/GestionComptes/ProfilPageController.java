@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
@@ -44,6 +45,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -162,10 +164,7 @@ public class ProfilPageController implements Initializable {
         txtshowc.setVisible(false);
         profildate.setVisible(false);
         informationMembre();
-        circle.setStroke(Color.SEAGREEN);
-        Image im;
-        im = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
-        circle.setFill(new ImagePattern(im));
+        TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
 
         if (l.getImage_u() != null) {
             System.out.println(l.getImage_u());

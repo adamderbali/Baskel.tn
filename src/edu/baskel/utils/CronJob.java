@@ -35,7 +35,7 @@ public class CronJob {
             
             Thread.sleep(100000);
             
-            //scheduler1.shutdown();
+            scheduler1.shutdown();
             
         }catch(Exception e){
             e.printStackTrace();

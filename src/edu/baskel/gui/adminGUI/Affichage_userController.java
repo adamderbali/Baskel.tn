@@ -103,9 +103,9 @@ public class Affichage_userController implements Initializable {
      * Initializes the controller class.
      */
     public void affichage_user() {
-        MembreCRUD Mc = new MembreCRUD();
+        ReclamationCRUD Mc = new ReclamationCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Mc.getlistMembre();
+        arrayList = (ArrayList) Mc.listUser();
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
 
@@ -203,9 +203,9 @@ public class Affichage_userController implements Initializable {
 
     @FXML
     private void searchBox(KeyEvent k) {
-        MembreCRUD Mc = new MembreCRUD();
+        ReclamationCRUD Mc = new ReclamationCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Mc.getlistMembre();
+        arrayList = (ArrayList) Mc.listUser();
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
 

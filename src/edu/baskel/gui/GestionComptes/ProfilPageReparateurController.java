@@ -6,7 +6,10 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
+import edu.baskel.entities.Reparateur;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.services.ReparateurCRUD;
+import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
@@ -43,6 +46,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -50,108 +54,112 @@ import javafx.stage.Stage;
  * @author dell
  */
 public class ProfilPageReparateurController implements Initializable {
-
+    
     @FXML
     private AnchorPane anchor;
-
+    
     @FXML
     private JFXTextField profilnom;
-
+    
     @FXML
     private JFXTextField profilprenom;
-
+    
     @FXML
     private JFXTextField profilmail;
-
+    
     @FXML
     private JFXTextField profiladresse;
-
+    
     @FXML
     private JFXTextField profildate;
-
+    
     @FXML
     private JFXTextField profilteleph;
-
+    
     @FXML
     private JFXTextField txtshow;
-
+    
     @FXML
     private JFXDatePicker nvdate;
-
+    
     @FXML
     private Button btnmodifier1;
-
+    
     @FXML
     private Button btnconfirmer1;
-
+    
     @FXML
     private ImageView imagev;
-
+    
     @FXML
     private Button btnimage;
-
+    
     @FXML
     private TextField thximage;
-
+    
     @FXML
     private JFXPasswordField nvpass;
-
+    
     @FXML
     private JFXTextField txtshowc;
-
+    
     @FXML
     private Label lblprofil;
-
+    
     @FXML
     private JFXPasswordField cnvpass;
     @FXML
     private JFXPasswordField actuelPass;
-
+    
     @FXML
     private JFXTextField txtshowActuel;
-
+    
     @FXML
     private FontAwesomeIconView chkmotdepasseActuel;
-
+    
     @FXML
     private JFXButton btnchgPass;
-
+    
     @FXML
     private Pane paneNomProfil;
-
+    
     @FXML
     private Button btnGenerale;
-
+    
     @FXML
     private Button btnSécurité;
-
+    
     @FXML
     private Pane PaneMotpass;
-
+    
     @FXML
     private Pane panePrincipale;
-
+    
     @FXML
     private Label lblfaible;
-
-
+    
     @FXML
-    private Text adrloc;
-
+    private JFXTextField adrloc;
+    
     @FXML
-    private Text telpro;
+    private JFXTextField telpro;
+    
     @FXML
     private FontAwesomeIconView chkmotdepasse;
-
+    
     @FXML
     private FontAwesomeIconView chkmotdepasse2;
-
+    
     private String photo = null;
     private File file;
     private Image image;
     Connection cnx;
     Membre l = SessionInfo.getLoggedM();
     MembreCRUD mrc = new MembreCRUD();
+    ReparateurCRUD rc = new ReparateurCRUD();
+    Reparateur r = rc.getReparateurById(l.getId_u());
+    
+    ;
 
     //afficher la photo de profil
     @Override
@@ -162,11 +170,12 @@ public class ProfilPageReparateurController implements Initializable {
         txtshowActuel.setVisible(false);
         txtshow.setVisible(false);
         txtshowc.setVisible(false);
-        profildate.setVisible(false);
-        informationMembre();
-
-        if (l.getImage_u() != null) {
-            System.out.println(l.getImage_u());
+        informationReparateur();
+        TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
+        TextFields.bindAutoCompletion(adrloc, AutoCompleteAdresse.getAdrGov());
+        
+        if (r.getImage_u() != null) {
+            System.out.println(r.getImage_u());
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
             //aspect 3D avec ombre pour l image
@@ -185,75 +194,78 @@ public class ProfilPageReparateurController implements Initializable {
     }
 
     //information du membre a afficher ds le profil
-    public void informationMembre() {
-        lblprofil.setText(l.getNom_u() + " " + l.getPrenom_u());
-        profilnom.setText(l.getNom_u());
-        profilprenom.setText(l.getPrenom_u());
-        profilmail.setText(l.getEmail_u());
-        profiladresse.setText(l.getAdresse_u());
-        nvdate.setValue(LocalDate.parse(l.getDate_u().toString()));
-        profilteleph.setText(l.getNum_tel_u());
-        thximage.setText(l.getImage_u());
+    public void informationReparateur() {
+        
+        lblprofil.setText(r.getNom_u() + " " + r.getPrenom_u());
+        profilnom.setText(r.getNom_u());
+        profilprenom.setText(r.getPrenom_u());
+        profilmail.setText(r.getEmail_u());
+        profiladresse.setText(r.getAdresse_u());
+        nvdate.setValue(LocalDate.parse(r.getDate_u().toString()));
+        profilteleph.setText(r.getNum_tel_u());
+        //thximage.setText(r.getImage_u());
+        adrloc.setText(r.getAdresse_lo());
+        telpro.setText(r.getNum_pro());
     }
-
+    
     @FXML
     public void chagerInfos2(ActionEvent event) {
         profiladresse.setEditable(true);
-        profildate.setEditable(true);
         profilmail.setEditable(true);
         profilnom.setEditable(true);
         profilprenom.setEditable(true);
         profilteleph.setEditable(true);
-        profildate.setEditable(true);
         nvdate.setEditable(true);
-
+        adrloc.setEditable(true);
+        telpro.setEditable(true);
+        
     }
-
+    
     @FXML
     public void VisualiserMP(MouseEvent event) {
         txtshow.setText(nvpass.getText());
         nvpass.setVisible(false);
         txtshow.setVisible(true);
     }
-
+    
     @FXML
     public void hideMP(MouseEvent event) {
         nvpass.setVisible(true);
         txtshow.setVisible(false);
     }
-
+    
     @FXML
     public void VisualiserCMP(MouseEvent event) {
         txtshowc.setText(cnvpass.getText());
         cnvpass.setVisible(false);
         txtshowc.setVisible(true);
     }
-
+    
     @FXML
     public void hideCMP(MouseEvent event) {
         cnvpass.setVisible(true);
         txtshowc.setVisible(false);
     }
-
+    
     @FXML
     void VisualiserMPActuel(MouseEvent event) {
         txtshowActuel.setText(actuelPass.getText());
         txtshowActuel.setVisible(true);
         actuelPass.setVisible(false);
     }
-
+    
     @FXML
     void hideMPActuel(MouseEvent event) {
         txtshowActuel.setVisible(false);
         actuelPass.setVisible(true);
     }
     
-     @FXML
+    @FXML
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
     }
-
+    
     @FXML
     void afficherOngletSecurité(ActionEvent event) {
         panePrincipale.setVisible(false);
@@ -286,13 +298,13 @@ public class ProfilPageReparateurController implements Initializable {
         if ((profilnom.getText().isEmpty()) | (profilprenom.getText().isEmpty()) | (profiladresse.getText().isEmpty())
                 | (profilmail.getText().isEmpty()) | (profilteleph.getText().isEmpty()) | nvd == null) {
             InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
-
+            
             return false;
         } else {
             return true;
         }
     }
-
+    
     public boolean verifDate() {
         LocalDate local = LocalDate.now();
         LocalDate d = nvdate.getValue();
@@ -301,13 +313,9 @@ public class ProfilPageReparateurController implements Initializable {
             return false;
         } else {
             System.out.println("passé");
-
         }
-
         return true;
     }
-
-   
 
     //confirmer les modification et les enregistrés
     @FXML
@@ -326,31 +334,39 @@ public class ProfilPageReparateurController implements Initializable {
                         if (InputValidation.PhoneNumber(profilteleph.getText()) == 0) {
                             InputValidation.notificationError("Numero Telephone", "Saisissez un numero de telephone valide");
                         } else {
-                            if (verifDate() == false) {
-                                InputValidation.notificationError("Date", "Saisissez une date valide");
+                            if (InputValidation.PhoneNumber(telpro.getText()) == 0) {
+                                InputValidation.notificationError("Numero Telephone", "Saisissez un numero de telephone professionnel valide");
                             } else {
-                                if (((!profilmail.getText().equals(l.getEmail_u()))&&(mrc.VerificationExistence(l) == false))) {
-                                    InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
+                                if (verifDate() == false) {
+                                    InputValidation.notificationError("Date", "Saisissez une date valide");
                                 } else {
-                                    if ((verifEmail.check(profilmail.getText())) == false) {
-                                        InputValidation.notificationError("Email", "Saisissez une adresse email existante");
+                                    if (((!profilmail.getText().equals(l.getEmail_u())) && (mrc.VerificationExistence(l) == false))) {
+                                        InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                     } else {
+                                        if ((verifEmail.check(profilmail.getText())) == false) {
+                                            InputValidation.notificationError("Email", "Saisissez une adresse email existante");
+                                        } else {
+                                            /*
+                                            Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
+                                                    profilmail.getText(), l.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
 
-                                        Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
-                                                profilmail.getText(), l.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
-
-                                        m1.setId_u(iduser);
-                                        mrc.updateMembre(m1);
-
-                                        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
-                                        Scene redirection_scene = new Scene(redirection_parent);
-                                        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                        app_stage.setScene(redirection_scene);
-                                        app_stage.show();
-                                        System.out.println("modifie");
-
+                                            m1.setId_u(iduser);
+                                            mrc.updateMembre(m1);
+                                             */Reparateur rr= new Reparateur(adrloc.getText(), telpro.getText()//nahi mot de passe
+                                                     , profilnom.getText(), profilprenom.getText(), profiladresse.getText()
+                                                     , profilmail.getText(), r.getSexe_u(), nvd, r.getMot_passe_u(), profilteleph.getText());
+                                             rr.setId_u(r.getId_u());
+                                            mrc.updateReparateurr2(rr);
+                                            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+                                            Scene redirection_scene = new Scene(redirection_parent);
+                                            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                            app_stage.setScene(redirection_scene);
+                                            app_stage.show();
+                                            System.out.println("modifie");
+                                            
+                                        }
+                                        
                                     }
-
                                 }
                             }
                         }
@@ -364,7 +380,7 @@ public class ProfilPageReparateurController implements Initializable {
     @FXML
     void passStrength(MouseEvent event
     ) {
-
+        
         if (InputValidation.calculatePasswordStrength(nvpass.getText()) < 6) {
             lblfaible.setText("faible");
             lblfaible.setTextFill(Color.RED);
@@ -383,21 +399,20 @@ public class ProfilPageReparateurController implements Initializable {
         if (InputValidation.HshPassword(actuelPass.getText(), "MD5").equals(l.getMot_passe_u())) {
             if (InputValidation.validPwd(nvpass.getText()) == 0) {
                 InputValidation.notificationError("Mot de passe", "Saisissez un mot de passe valide.");
-
+                
             } else {
-
+                
                 if ((InputValidation.HshPassword(nvpass.getText(), "MD5")).equals(InputValidation.HshPassword(cnvpass.getText(), "MD5"))) {
                     mrc.changerMP(l.getEmail_u(), InputValidation.HshPassword(nvpass.getText(), "MD5"));
                     InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
                 } else {
                     InputValidation.notificationError("Mot de passe", "La confirmation du mot de passe doit correspondre à votre nouveau mot de passe.");
-
+                    
                 }
             }
         } else {
             InputValidation.notificationError("Mot de passe", "Verifier votre mot de passe.");
-
+            
         }
     }
 }
-

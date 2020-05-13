@@ -6,7 +6,9 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
@@ -26,8 +28,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -38,35 +42,49 @@ import javafx.stage.Stage;
 public class NouveauMPController implements Initializable {
 
     @FXML
-    private PasswordField txtNvMp;
+    private JFXTextField txtshowpass;
 
     @FXML
-    private PasswordField txtCnvMp;
+    private JFXTextField txtshowcpass;
+
+    @FXML
+    private JFXPasswordField txtNvMp;
+
+    @FXML
+    private JFXPasswordField txtCnvMp;
+
+    @FXML
+    private FontAwesomeIconView chkmotdepasi;
+
+    @FXML
+    private FontAwesomeIconView chkCmotdepasi;
+
+    @FXML
+    private Label lblfaible;
 
     @FXML
     private JFXButton btnConfirmation;
 
     @FXML
     private Button btnSidentifier2;
-    
+
     @FXML
     private JFXTextField txtm;
-    
+
     Stage owner;
     Connection cnx = null;
     PreparedStatement pst = null;
     ResultSet res = null;
-    
 
     public void setTxtm(String txtmail) {
         this.txtm.setText(txtmail);
     }
 
-
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        txtshowpass.setVisible(false);
+        txtshowcpass.setVisible(false);
     }
 
     //cnx base de données
@@ -76,17 +94,66 @@ public class NouveauMPController implements Initializable {
 
     //verifier la correspondance et reinitialiser le mot de passe
     @FXML
-    public void changerMP(ActionEvent event) throws NoSuchAlgorithmException {
+    public void changerMP(ActionEvent event) throws NoSuchAlgorithmException, IOException {
         if (InputValidation.HshPassword(txtNvMp.getText(), "MD5").equals(InputValidation.HshPassword(txtCnvMp.getText(), "MD5"))) {
             MembreCRUD r = new MembreCRUD();
             r.changerMP(txtm.getText(), InputValidation.HshPassword(txtNvMp.getText(), "MD5"));
-            Alert alertnum = new InputValidation().getAlert("mot de passe", "Votre mot de passe a été réinitialisé !");
-            alertnum.showAndWait();
+            InputValidation.notificationsucces("Mot de passe", "Votre mot de passe a été réinitialisé !");
 
+            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+            Scene redirection_scene = new Scene(redirection_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(redirection_scene);
+            app_stage.show();
+            /*Alert alertnum = new InputValidation().getAlert("mot de passe", "Votre mot de passe a été réinitialisé !");
+            alertnum.showAndWait();*/
         } else {
-            Alert alertnum = new InputValidation().getAlert("mot de passe", "Verifier vos données !");
-            alertnum.showAndWait();
+            InputValidation.notificationError("Mot de passe", "Verifier vos données !");
+            //Alert alertnum = new InputValidation().getAlert("mot de passe", "Verifier vos données !");
+            //alertnum.showAndWait();
             System.out.println("Erreur ");
+        }
+    }
+
+    @FXML
+    public void VisualiserMP(MouseEvent event) {
+        txtshowpass.setText(txtNvMp.getText());
+        txtNvMp.setVisible(false);
+        txtshowpass.setVisible(true);
+    }
+
+    @FXML
+    public void hideMP(MouseEvent event) {
+        txtNvMp.setVisible(true);
+        txtshowpass.setVisible(false);
+    }
+
+    @FXML
+    public void VisualiserCMP(MouseEvent event) {
+        txtshowcpass.setText(txtCnvMp.getText());
+        txtCnvMp.setVisible(false);
+        txtshowcpass.setVisible(true);
+    }
+
+    @FXML
+    public void hideCMP(MouseEvent event) {
+        txtCnvMp.setVisible(true);
+        txtshowcpass.setVisible(false);
+    }
+
+    //verif password strength
+    @FXML
+    void passStrength(MouseEvent event) {
+
+        if (InputValidation.calculatePasswordStrength(txtNvMp.getText()) < 6) {
+            lblfaible.setText("faible");
+            lblfaible.setTextFill(Color.RED);
+        } else if ((InputValidation.calculatePasswordStrength(txtNvMp.getText()) > 6) && (InputValidation.calculatePasswordStrength(txtNvMp.getText()) <= 8)) {
+            lblfaible.setText("fmoyen");
+            lblfaible.setTextFill(Color.ORANGE);
+        } else {
+            lblfaible.setText("fort");
+            lblfaible.setTextFill(Color.GREEN);
         }
     }
 

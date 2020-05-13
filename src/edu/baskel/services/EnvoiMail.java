@@ -110,4 +110,42 @@ public class EnvoiMail {
 
     }
     
+    public void envoyerMailAdmin(String sender, String password , String sub ,String msge) {
+        try {
+            
+            System.out.println("Préparation de l envoie du mail");
+            String host = "smtp.gmail.com";
+            String user = sender;
+            String pass = password;
+            String to = "baskeltn395@gmail.com";
+            String subject = sub;
+            String message = msge ;
+            boolean sessionDebug = false;
+            Properties pros = System.getProperties();
+            pros.put("mail.smtp.starttls.enable", "true");
+            pros.put("mail.smtp.host", "host");
+            pros.put("mail.smtp.port", "587");
+            pros.put("mail.smtp.auth", "true");
+            pros.put("mail.smtp.starttls.required", "true");
+            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            Session mailSession = Session.getDefaultInstance(pros, null);
+            mailSession.setDebug(sessionDebug);
+            Message msg = new MimeMessage(mailSession);
+            msg.setFrom(new InternetAddress(user));
+            InternetAddress[] address = {new InternetAddress(to)};
+            msg.setRecipients(Message.RecipientType.TO, address);
+            msg.setSubject(subject);
+            msg.setText(message);
+            Transport transport = mailSession.getTransport("smtp");
+            transport.connect(host, user, pass);
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+            System.out.println("Email envoyé");
+            InputValidation.notificationsucces("succés", "le code a été envoyer verifier votre boite mail");
+
+        } catch (Exception ex) {
+
+        }
+    }
+    
 }
