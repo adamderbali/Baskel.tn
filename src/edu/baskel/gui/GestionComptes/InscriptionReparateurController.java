@@ -121,6 +121,7 @@ public class InscriptionReparateurController implements Initializable {
         txtnaissance.setValue(LocalDate.now());
 
         TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
+        TextFields.bindAutoCompletion(txtadrlocal, AutoCompleteAdresse.getAdrGov());
     }
 
     //validation champs vides

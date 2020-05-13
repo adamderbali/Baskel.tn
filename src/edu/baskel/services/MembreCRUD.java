@@ -89,6 +89,23 @@ public class MembreCRUD {
             System.out.println(ex.getMessage());
         }
     }
+    
+    public void updateReparateurr2(Reparateur r) {
+        try {
+            //Update membre
+            MembreCRUD mcrd = new MembreCRUD();
+            mcrd.updateMembre(r);
+            //Update Reparateur
+            String requete = "UPDATE reparateur SET adresse_loc=?, num_pro=? WHERE id_u=? ";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, r.getAdresse_lo());
+            pst.setString(2, r.getNum_pro());
+            pst.setInt(3, r.getId_u());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 
 //affichage de liste de tt les membres
     public List<Membre> getlistMembre() {

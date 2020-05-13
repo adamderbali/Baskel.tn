@@ -52,10 +52,14 @@ public class AcceuilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        /*if(l.getImage_u() != null){
         Circle.setStroke(Color.SEAGREEN);
         Image imagelog;
         imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
         Circle.setFill(new ImagePattern(imagelog));
+        }else{
+            Image defaut = new Image("file:/C:\\wamp\\www\\Baskel\\images\\profil.jpg" );
+        }*/
     }
 
     @FXML

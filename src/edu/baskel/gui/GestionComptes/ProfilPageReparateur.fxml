@@ -15,11 +15,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="639.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="639.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageReparateurController">
    <children>
       <Separator layoutX="11.0" layoutY="589.0" prefHeight="3.0" prefWidth="1021.0" style="-fx-background-color: #0096a4;" />
       <Pane fx:id="paneNomProfil" prefHeight="86.0" prefWidth="1042.0">
@@ -47,7 +46,7 @@
          </children>
       </VBox>
       <Separator layoutX="174.0" layoutY="78.0" orientation="VERTICAL" prefHeight="513.0" prefWidth="5.0" style="-fx-background-color: #0096a4;" />
-      <Pane fx:id="panePrincipale" layoutX="190.0" layoutY="78.0" prefHeight="421.0" prefWidth="842.0">
+      <Pane fx:id="panePrincipale" layoutX="190.0" layoutY="78.0" prefHeight="502.0" prefWidth="842.0">
          <children>
             <JFXTextField fx:id="profilnom" editable="false" layoutX="243.0" layoutY="59.0" />
             <JFXTextField fx:id="profilprenom" editable="false" layoutX="243.0" layoutY="108.0" />
@@ -87,14 +86,24 @@
             </Text>
             <Button fx:id="btnimage" layoutX="703.0" layoutY="221.0" mnemonicParsing="false" onAction="#filephoto" text="image" />
             <TextField fx:id="thximage" layoutX="534.0" layoutY="221.0" prefHeight="31.0" prefWidth="162.0" />
-            <Button fx:id="btnconfirmer1" layoutX="308.0" layoutY="380.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="207.0" text="Enregistrer les modifications" />
-            <Button fx:id="btnmodifier1" layoutX="38.0" layoutY="380.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="207.0" text="Modifier les informations" />
-            <JFXTextField fx:id="profildate" editable="false" layoutX="490.0" layoutY="395.0" />
+            <Button fx:id="btnconfirmer1" layoutX="323.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="207.0" text="Enregistrer les modifications" />
+            <Button fx:id="btnmodifier1" layoutX="53.0" layoutY="457.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="207.0" text="Modifier les informations" />
             <ImageView fx:id="imagev" fitHeight="172.0" fitWidth="200.0" layoutX="434.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="728.0" layoutY="108.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text layoutX="14.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse locale">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone professionnel">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <JFXTextField fx:id="adrloc" editable="false" layoutX="243.0" layoutY="353.0" />
+            <JFXTextField fx:id="telpro" editable="false" layoutX="243.0" layoutY="395.0" />
          </children>
       </Pane>
-      <Pane fx:id="PaneMotpass" layoutX="198.0" layoutY="136.0" prefHeight="474.0" prefWidth="828.0">
+      <Pane fx:id="PaneMotpass" layoutX="208.0" layoutY="146.0" prefHeight="474.0" prefWidth="828.0">
          <children>
             <Text layoutX="35.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau">
                <font>
@@ -102,13 +111,11 @@
                </font>
             </Text>
             <JFXTextField fx:id="txtshow" editable="false" layoutX="196.0" layoutY="162.0" prefHeight="31.0" prefWidth="218.0" />
-            <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="390.0" layoutY="184.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
             <Text layoutX="38.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmer">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Text>
-            <FontAwesomeIconView fx:id="chkmotdepasse2" glyphName="EYE" layoutX="390.0" layoutY="235.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" />
             <JFXTextField fx:id="txtshowc" editable="false" layoutX="196.0" layoutY="213.0" prefHeight="31.0" prefWidth="218.0" />
             <Text layoutX="35.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actuel">
                <font>
@@ -129,6 +136,8 @@
                </font>
             </Text>
             <FontAwesomeIconView glyphName="KEY" layoutX="35.0" layoutY="37.0" size="22" wrappingWidth="20.000000596046448" />
+            <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="390.0" layoutY="184.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
+            <FontAwesomeIconView fx:id="chkmotdepasse2" glyphName="EYE" layoutX="390.0" layoutY="235.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" />
          </children>
       </Pane>
    </children>

@@ -135,6 +135,8 @@ public class MotdepasseoubliéController implements Initializable {
             txtentermail.getScene().setRoot(root2);
         } else {
             System.out.println("code erroné");
+            InputValidation.notificationError("Code", "verifier le code envoyer");
+
         }
 
     }

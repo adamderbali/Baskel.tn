@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.NouveauMPController">
    <children>
-      <JFXButton fx:id="btnConfirmation" layoutX="248.0" layoutY="213.0" onAction="#changerMP" text="COnfirmer" />
+      <JFXButton fx:id="btnConfirmation" layoutX="243.0" layoutY="224.0" onAction="#changerMP" text="Enregistrer" />
       <Button fx:id="btnSidentifier2" layoutX="494.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backSidentifier2" text="S(identifier" />
-      <JFXTextField fx:id="txtm" layoutX="181.0" layoutY="30.0" promptText="Votre Mail" />
-      <PasswordField fx:id="txtNvMp" layoutX="188.0" layoutY="113.0" />
-      <PasswordField fx:id="txtCnvMp" layoutX="188.0" layoutY="176.0" />
+      <JFXTextField fx:id="txtm" editable="false" layoutX="204.0" layoutY="30.0" prefHeight="31.0" prefWidth="193.0" />
+      <Text layoutX="101.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau" />
+      <Text layoutX="101.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmer" />
+      <JFXTextField fx:id="txtshowpass" layoutX="205.0" layoutY="98.0" />
+      <JFXTextField fx:id="txtshowcpass" layoutX="205.0" layoutY="160.0" />
+      <JFXPasswordField fx:id="txtNvMp" layoutX="205.0" layoutY="98.0" prefHeight="31.0" prefWidth="193.0" />
+      <JFXPasswordField fx:id="txtCnvMp" layoutX="205.0" layoutY="160.0" onMouseClicked="#passStrength" prefHeight="31.0" prefWidth="193.0" />
+      <Label fx:id="lblfaible" layoutX="333.0" layoutY="102.0" prefHeight="21.0" prefWidth="43.0" />
+      <FontAwesomeIconView fx:id="chkmotdepasi" glyphName="EYE" layoutX="379.0" layoutY="120.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
+      <FontAwesomeIconView fx:id="chkCmotdepasi" glyphName="EYE" layoutX="379.0" layoutY="182.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" wrappingWidth="20.00000774860382" />
    </children>
 </AnchorPane>
