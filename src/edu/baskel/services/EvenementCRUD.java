@@ -6,14 +6,11 @@
 package edu.baskel.services;
 
 import edu.baskel.entities.Evenement;
-import edu.baskel.entities.Membre;
-import edu.baskel.entities.Participation;
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 

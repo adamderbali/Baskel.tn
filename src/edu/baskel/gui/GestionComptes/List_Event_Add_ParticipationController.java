@@ -5,19 +5,16 @@
  */
 package edu.baskel.gui.GestionComptes;
 
-import com.google.zxing.qrcode.encoder.QRCode;
 import com.jfoenix.controls.JFXButton;
-
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
-
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.MailAttachement;
 import edu.baskel.services.ParticipationCrud;
 import edu.baskel.services.Qrcode;
-import edu.baskel.services.SendMail;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,12 +29,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import edu.baskel.utils.validationSaisie;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 public class List_Event_Add_ParticipationController implements Initializable {
 
@@ -176,15 +180,24 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     void lancerAjout(ActionEvent event) {
-        /*
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("Ajouter_Evenement.fxml"));
-            rootPaneA.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+   FXMLLoader Loader = new FXMLLoader();
+                Loader.setLocation(getClass().getResource("Ajouter_Evenement.fxml"));
 
-    }
+                try {
+
+                    Loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(ListParticipationParEventUserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Ajouter_EvenementController ajouter_EvenementController = Loader.getController();
+
+                Parent p = Loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.show();
+                }
+
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

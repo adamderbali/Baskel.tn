@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class ParticipationCrud {
 
-    Connection cnx;
+    public static Connection cnx;
 
     public ParticipationCrud() {
 
@@ -74,10 +74,7 @@ public class ParticipationCrud {
         }
 
     }
-    
-    
  
-
       public boolean supprimerParticipationE(int id_e) {
 
         try {
@@ -163,8 +160,7 @@ public class ParticipationCrud {
                 p.setId_u(rs.getInt("id_u"));
                 p.setDate_insc(rs.getDate("date_insc"));
                 System.out.println("1-------------" + rs.getString("id_e"));
-
-              p.setMbre(m);*/
+                p.setMbre(m);*/
                 e.setMbre(m);
 
                 ListEventPaticipation.add(e);
@@ -232,7 +228,7 @@ public class ParticipationCrud {
     }
     
     
-      public void eventAnnuler(int id_e) throws Exception {
+    /*  public void eventAnnuler(int id_e) throws Exception {
      
         MembreCRUD mc = new MembreCRUD();
         SendMail Sm = new SendMail();
@@ -260,7 +256,7 @@ public class ParticipationCrud {
             } 
    
         }
-      
+      */
       public int nombreParticipation(int id_e){
               int nb=0;
               

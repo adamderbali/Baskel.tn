@@ -9,10 +9,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
-
-
 import edu.baskel.services.EvenementCRUD;
-import edu.baskel.services.SendMail;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
 import java.io.File;
@@ -101,8 +98,6 @@ public class Ajouter_EvenementController implements Initializable {
                 Ec.ajouterEvenement(e);  
               
                 validationSaisie.notifConfirm("ok", "Evenement ajouté");
-
-
                 txtNom.clear();
                 txtLieu.clear();
                 txtDate.setValue(null);
