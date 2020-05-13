@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,5 +14,6 @@
           <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
         </items>
       </MenuButton>
+      <Label fx:id="lblCntactezNous" layoutX="296.0" layoutY="14.0" onMouseClicked="#RedirectionContactezNs" text="contactez nous" />
    </children>
 </AnchorPane>

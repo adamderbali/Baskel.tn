@@ -15,13 +15,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -41,7 +47,7 @@ public class AcceuilController implements Initializable {
     @FXML
     private AnchorPane anchorproincipal;
     @FXML
-    private Circle Circle;
+    private Label lblCntactezNous;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -85,6 +91,16 @@ public class AcceuilController implements Initializable {
 
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
         ANchorProfil.getChildren().setAll(pane);
+    }
+
+    
+    @FXML
+    public void RedirectionContactezNs(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
     }
 
 }
