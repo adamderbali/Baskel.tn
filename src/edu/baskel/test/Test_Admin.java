@@ -21,16 +21,15 @@ public class Test_Admin         // TODO code application logic here
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
+        
             ReclamationCRUD m = new ReclamationCRUD();
             BanCRUD b= new BanCRUD();
-            m.Banner_user();
+            //m.Banner_user();
             //b.bannereExiste(6);
             //b.Reactive_ban();
             //System.out.println(b.getlist_ban());
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        
+        System.out.println(m.displayall_Rec());
         
     }
     

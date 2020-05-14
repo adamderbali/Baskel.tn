@@ -45,13 +45,20 @@ public class ReclamationCRUD {
             while (re.next()) {
                 Reclamation r = new Reclamation();
                 r.setId_rec(re.getInt("id_rec"));
-                r.setEtat_rec(re.getString("etat_rec"));
+                r.setId_u(re.getInt("id_u"));
+                r.setObjet_rec(re.getString("objet_rec"));
+                r.setDate_rec(re.getDate("date_rec"));
                 r.setDesc_r(re.getString("desc_r"));
-                try {
+                r.setId_ur(re.getInt("id_ur"));
+                r.setEtat_rec(re.getString("etat_rec"));
+                r.setEtat_rec2(re.getString("etat_rec2"));
+                
+                
+                /*try {
                     r.setDate_rec(new SimpleDateFormat("dd/MM/yyyy").parse(re.getString("date_rec")));
                 } catch (ParseException ex) {
                     System.err.println(ex.getMessage());
-                }
+                }*/
                 listeRecl.add(r);
 
             }
@@ -128,6 +135,16 @@ public boolean banexist (int id_u , int id_ur){
             ex.printStackTrace();
         }
 return false;
+}
+public void valider_admin(Reclamation rec){
+    try {
+            String reqa1 = "UPDATE Reclamation SET etat_rec2='OLD' WHERE id_rec=? ";
+            PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
+            pstmt.setInt(1,rec.getId_rec());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 }
 public void bannerUtilisateur(Membre m)
 {

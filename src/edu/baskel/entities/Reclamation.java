@@ -13,40 +13,28 @@ import java.util.Date;
  * @author Skander
  */
 public class Reclamation {
+
     private String desc_r;
     private int id_rec;
     private Date date_rec;
-    private String etat_rec; 
+    private String etat_rec;
     private String objet_rec;
     private int id_u;//RECLAMATEUR
     private int id_ur;//
+    private String etat_rec2;
 
-    public Reclamation(int id_u) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Reclamation() {
     }
 
-    public int getId_ur() {
-        return id_ur;
-    }
-    public void setId_ur(int id_ur) {
-        this.id_ur = id_ur;
-    }
-
-    public Reclamation(String desc_r, String objet_rec, int id_u, int id_ur) {
+    public Reclamation(String desc_r, int id_rec, Date date_rec, String etat_rec, String objet_rec, int id_u, int id_ur, String etat_rec2) {
         this.desc_r = desc_r;
+        this.id_rec = id_rec;
+        this.date_rec = date_rec;
+        this.etat_rec = etat_rec;
         this.objet_rec = objet_rec;
         this.id_u = id_u;
         this.id_ur = id_ur;
-    }
-
-    
-
-    public int getId_u() {
-        return id_u;
-    }
-
-    public void setId_u(int id_u) {
-        this.id_u = id_u;
+        this.etat_rec2 = etat_rec2;
     }
 
     public Reclamation(String desc_r, String objet_rec, int id_u) {
@@ -55,33 +43,10 @@ public class Reclamation {
         this.id_u = id_u;
     }
 
-    public Reclamation(String desc_r, String objet_rec) {
-        this.desc_r = desc_r;
-        this.objet_rec = objet_rec;
+    public Reclamation(String text, String text0, int id_ur, int id_u) {
     }
-
     
- 
-   
-    public String getObjet_rec() {
-        return objet_rec;
-    }
 
-    public void setObjet_rec(String objet_rec) {
-        this.objet_rec = objet_rec;
-    }
-
-    public Reclamation(String desc_r, Date date_rec, String etat_rec ) {
-        this.desc_r = desc_r;
-        this.date_rec = new Date();
-        this.etat_rec = etat_rec;
-        this.objet_rec= objet_rec;        
-    }
-
-    public Reclamation() {
-    }
-
-   
     public String getDesc_r() {
         return desc_r;
     }
@@ -101,7 +66,7 @@ public class Reclamation {
     public Date getDate_rec() {
         return date_rec;
     }
-/////t3ada 
+
     public void setDate_rec(Date date_rec) {
         this.date_rec = date_rec;
     }
@@ -114,8 +79,43 @@ public class Reclamation {
         this.etat_rec = etat_rec;
     }
 
+    public String getObjet_rec() {
+        return objet_rec;
+    }
+
+    public void setObjet_rec(String objet_rec) {
+        this.objet_rec = objet_rec;
+    }
+
+    public int getId_u() {
+        return id_u;
+    }
+
+    public void setId_u(int id_u) {
+        this.id_u = id_u;
+    }
+
+    public int getId_ur() {
+        return id_ur;
+    }
+
+    public void setId_ur(int id_ur) {
+        this.id_ur = id_ur;
+    }
+
+    
+
+    public void setEtat_rec2(String etat_rec2) {
+        this.etat_rec2 = etat_rec2;
+    }
+    public String getEtat_rec2() {
+        return etat_rec2;
+    }
+
     @Override
     public String toString() {
-        return "Reclamation{" + "desc_r=" + desc_r + ", id_rec=" + id_rec + ", date_rec=" + date_rec + ", etat_rec=" + etat_rec + '}';
-    } 
+        return "Reclamation{" + "desc_r=" + desc_r + ", id_rec=" + id_rec + ", date_rec=" + date_rec + ", etat_rec=" + etat_rec + ", objet_rec=" + objet_rec + ", id_u=" + id_u + ", id_ur=" + id_ur + ", etat_rec2=" + etat_rec2 + '}';
+    }
+    
+
 }
