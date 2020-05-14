@@ -31,8 +31,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -309,7 +307,7 @@ public class InscriptionController implements Initializable {
                                                     chkhomme.setSelected(false);
                                                     chkfemme.setSelected(false);
                                                     System.out.println("utilisateur ajouté");
-
+                                                   
                                                     InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
                                                     Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
                                                     Scene redirection_scene = new Scene(redirection_parent);

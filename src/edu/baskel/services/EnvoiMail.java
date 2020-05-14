@@ -93,7 +93,7 @@ public class EnvoiMail {
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
             System.out.println("Email envoyé");
-            InputValidation.notificationsucces("succés", "le code a été envoyer verifier votre boite mail");
+            InputValidation.notificationsucces("succés", "essage envoyé");
 
         } catch (Exception ex) {
 
@@ -110,13 +110,13 @@ public class EnvoiMail {
 
     }
     
-    public void envoyerMailAdmin(String sender, String password , String sub ,String msge) {
+    public void envoyerMailAdmin( String sub ,String msge) {
         try {
             
             System.out.println("Préparation de l envoie du mail");
             String host = "smtp.gmail.com";
-            String user = sender;
-            String pass = password;
+            String user = "baskelcontact@gmail.com";
+            String pass = "baskel.tn2020";
             String to = "baskeltn395@gmail.com";
             String subject = sub;
             String message = msge ;
@@ -141,7 +141,7 @@ public class EnvoiMail {
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
             System.out.println("Email envoyé");
-            InputValidation.notificationsucces("succés", "le code a été envoyer verifier votre boite mail");
+            InputValidation.notificationsucces("succés", "le mail a été envoyer avec succés");
 
         } catch (Exception ex) {
 

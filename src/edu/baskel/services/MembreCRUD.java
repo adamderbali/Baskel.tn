@@ -11,15 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
 
 /**
  *
@@ -30,6 +26,7 @@ public class MembreCRUD {
     Connection cnx;
     Membre membreLogged;
     private int val;
+    private int last_inserted_id;
 
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -40,7 +37,7 @@ public class MembreCRUD {
         try {
             String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u)"
                     + "VALUES(?,?,?,?,?,?,?,?,?)";
-            //historiqyue
+            //historique
             PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);//histo
             pst.setString(1, m.getNom_u());
             pst.setString(2, m.getPrenom_u());
@@ -51,21 +48,26 @@ public class MembreCRUD {
             pst.setString(7, m.getMot_passe_u());
             pst.setString(8, m.getNum_tel_u());
             pst.setString(9, m.getImage_u());
+            ;
 
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
+                m.setId_u(rs.getInt(1));
                 //get las id inserted for member
                 int last_inserted_id = rs.getInt(1);
                 HistoriqueCRUD hh = new HistoriqueCRUD();
                 hh.ajouterHistorique(last_inserted_id);
                 System.out.println("Historrique added!");
+                SessionInfo.setLoggedM(m);
+                System.out.println(m);
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
         return m;
     }
+    
 
 // update info d un membre
     public void updateMembre(Membre m) {

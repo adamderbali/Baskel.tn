@@ -31,13 +31,12 @@
       <Separator layoutX="3.0" layoutY="88.0" prefHeight="8.0" prefWidth="599.0" style="-fx-background-color: #0096a4#0096a4;" />
       <Pane layoutX="34.0" layoutY="107.0" prefHeight="575.0" prefWidth="544.0">
          <children>
-            <JFXTextField fx:id="txtEmail" focusColor="#0096a4" layoutX="42.0" layoutY="36.0" prefHeight="31.0" prefWidth="428.0" promptText="Adresse email" />
-            <JFXTextField fx:id="txtMP" focusColor="#0096a4" layoutX="42.0" layoutY="81.0" prefHeight="31.0" prefWidth="428.0" promptText="Mot de passe de votre adresse email" />
+            <JFXTextField fx:id="txtEmail" focusColor="#0096a4" layoutX="42.0" layoutY="36.0" prefHeight="31.0" prefWidth="428.0" promptText="Nom et prenom" />
+            <JFXTextField fx:id="txtMP" focusColor="#0096a4" layoutX="42.0" layoutY="81.0" prefHeight="31.0" prefWidth="428.0" promptText="Votre adresse email " />
             <JFXTextField fx:id="txtSujet" focusColor="#0096a4" layoutX="42.0" layoutY="125.0" prefHeight="31.0" prefWidth="428.0" promptText="Sujet" />
             <JFXTextArea fx:id="txtDescription" focusColor="#0096a4" layoutX="42.0" layoutY="190.0" prefHeight="257.0" prefWidth="428.0" promptText="Description" />
             <Text fill="#bf0000" layoutX="42.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos informations personnelles sont confidentielles et sécurisées." wrappingWidth="436.46142578125" />
             <FontAwesomeIconView glyphName="USER" layoutX="14.0" layoutY="62.0" size="20.0" text="" />
-            <FontAwesomeIconView glyphName="LOCK" layoutX="15.0" layoutY="107.0" size="20.0" />
             <Icons525View glyphName="BULLET" layoutX="13.0" layoutY="565.0" size="20" />
             <JFXButton fx:id="btnEnvoyer" layoutX="203.0" layoutY="473.0" onAction="#EnvoyerMail" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096a4;" text="Envoyer" textFill="WHITE" />
          </children>

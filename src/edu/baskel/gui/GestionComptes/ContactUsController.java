@@ -32,8 +32,9 @@ public class ContactUsController implements Initializable {
     private JFXTextArea txtDescription;
     @FXML
     private JFXButton btnEnvoyer;
-    
+
     EnvoiMail e = new EnvoiMail();
+
 
     /**
      * Initializes the controller class.
@@ -41,13 +42,12 @@ public class ContactUsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     public void EnvoyerMail(ActionEvent event) {
-        e.envoyerMailAdmin(txtEmail.getText(), txtMP.getText(), txtSujet.getText(), txtDescription.getText());
+        e.envoyerMailAdmin("Nom et prenom : " + txtEmail.getText() + "///" + "Adresse email : " + txtMP.getText()
+                + "///" + "Sujet : " + txtSujet.getText(), txtDescription.getText());
     }
-    
-    
-    
+
 }
