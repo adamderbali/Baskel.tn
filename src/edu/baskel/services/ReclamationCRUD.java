@@ -67,7 +67,81 @@ public class ReclamationCRUD {
         }
         return listeRecl;
     }
+    public List<Reclamation> displayall_Rec_valide() {
+        List<Reclamation> listeRec2 = new ArrayList<>();
 
+        try {
+            String request = "SELECT * FROM reclamation where etat_rec='Valide' and cond=1 ";
+            Statement st = cnxs.createStatement();
+            ResultSet re = st.executeQuery(request);
+            while (re.next()) {
+                Reclamation r = new Reclamation();
+                r.setId_rec(re.getInt("id_rec"));
+                r.setId_u(re.getInt("id_u"));
+                r.setObjet_rec(re.getString("objet_rec"));
+                r.setDate_rec(re.getDate("date_rec"));
+                r.setDesc_r(re.getString("desc_r"));
+                r.setId_ur(re.getInt("id_ur"));
+                r.setEtat_rec(re.getString("etat_rec"));
+                r.setEtat_rec2(re.getString("etat_rec2"));
+                r.setCondition(re.getInt("cond"));
+                
+                
+                /*try {
+                    r.setDate_rec(new SimpleDateFormat("dd/MM/yyyy").parse(re.getString("date_rec")));
+                } catch (ParseException ex) {
+                    System.err.println(ex.getMessage());
+                }*/
+                listeRec2.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return listeRec2;
+    }
+    public void update_admin(){
+        for(Reclamation rc:displayall_Rec_valide())
+        {
+            ajouterban2(rc.getId_ur());
+            System.out.println(rc.getId_ur());
+            updateban(rc.getId_rec());
+            
+    }
+    }
+     public void ajouterban2(int id) {
+        String query = null;
+        try {
+
+            query = "UPDATE membre SET nbr_ban_u=nbr_ban_u+1 WHERE id_u=?;";
+            PreparedStatement pstmt = cnxs.prepareStatement(query);
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+            System.err.println("Insert: OK!");
+
+        } catch (SQLException e) {
+            System.out.println("Insert reclamtion : Query error ->" + e.getMessage());
+        }
+     }
+     public void updateban(int id) {
+        String query = null;
+        try {
+
+            query = "update Reclamation set cond=0 WHERE id_rec=?;";
+            PreparedStatement pstmt = cnxs.prepareStatement(query);
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+            System.err.println("update : OK!");
+
+        } catch (SQLException e) {
+            System.out.println("update reclamtion : Query error ->" + e.getMessage());
+        }
+     }
     public void ajouterReclamation(Reclamation Reclam) {
 
         String query = null;
@@ -138,10 +212,13 @@ return false;
 }
 public void valider_admin(Reclamation rec){
     try {
-            String reqa1 = "UPDATE Reclamation SET etat_rec2='OLD' WHERE id_rec=? ";
+            String reqa1 = "UPDATE Reclamation SET etat_rec2=? , etat_rec=? WHERE id_rec=? ";
             PreparedStatement pstmt = cnxs.prepareStatement(reqa1);
-            pstmt.setInt(1,rec.getId_rec());
+            pstmt.setString(1,rec.getEtat_rec2());
+            pstmt.setString(2,rec.getEtat_rec());
+            pstmt.setInt(3,rec.getId_rec());
             pstmt.executeUpdate();
+            System.out.println("Modification Done ! ");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

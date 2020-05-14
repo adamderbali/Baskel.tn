@@ -22,6 +22,7 @@ public class BanAuto implements Job{
         System.out.println("Lennaaa ");
         System.out.println("wa9et   "+ new Date());
         try {
+            rcd.update_admin();
             rcd.Banner_user();
         } catch (Exception ex) {
             ex.printStackTrace();

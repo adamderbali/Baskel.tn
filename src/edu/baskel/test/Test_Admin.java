@@ -28,8 +28,8 @@ public class Test_Admin         // TODO code application logic here
             //b.bannereExiste(6);
             //b.Reactive_ban();
             //System.out.println(b.getlist_ban());
-        
         System.out.println(m.displayall_Rec());
+        m.update_admin();
         
     }
     
