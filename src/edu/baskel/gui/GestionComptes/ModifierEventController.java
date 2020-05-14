@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.gui.velo.Afficher_mes_velosController;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
@@ -22,9 +23,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javax.swing.text.TableView;
 
 /**
@@ -54,13 +57,11 @@ public class ModifierEventController implements Initializable {
     private JFXTextField idE;
     @FXML
     private TextField pathE;
-    
-    
-    public ModifierEventController() {
-    }
 
     
-    public void charger(int id_e,String nom_e,String lieu_e,String date_e,String description_e,String pathe){
+    
+   
+    public void charger(String nom_e,String lieu_e,String date_e,String description_e,String pathe){
       
         
         txtNom.setText(nom_e);
@@ -74,7 +75,32 @@ public class ModifierEventController implements Initializable {
            
     }
     
-    
+    //private final ListUpdDelByUserController controller1;
+         private Stage thisStage;
+     private final ListUpdDelByUserController controller1;
+     public ModifierEventController(ListUpdDelByUserController controller1) {
+        this.controller1 = controller1;
+
+        // Create the new stage
+        thisStage = new Stage();
+        
+        // Load the FXML file
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListUpdDelByUser.fxml"));
+
+            // Set this class as the controller
+            loader.setController(this);
+
+            // Load the scene
+            thisStage.setScene(new Scene(loader.load()));
+
+            // Setup the window/stage
+            //thisStage.setTitle("Passing Controllers Example - Layout2");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     void ValiderModif(ActionEvent event) {
         
@@ -93,24 +119,15 @@ public class ModifierEventController implements Initializable {
                     validationSaisie.notifInfo("Date", "La date saisie doit etre superieur à" + date_system);
                 } else {
                     
-                    ListUpdDelByUserController ld = new ListUpdDelByUserController();
+                 //   ListUpdDelByUserController ld = new ListUpdDelByUserController();
                     EvenementCRUD Ec = new EvenementCRUD();
-                   FXMLLoader Loader = new FXMLLoader();
-                Loader.setLocation(getClass().getResource("ListUpdDelByUser.fxml"));
-
-                try {
-
-                    Loader.load();
-                } catch (IOException ex) {
-                    Logger.getLogger(ListParticipationParEventUserController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ListUpdDelByUserController listUpdDelByUserController = Loader.getController();
-
-                    Evenement e = new Evenement(ld.getTableAffichage().getSelectionModel().getSelectedItem().getId_e(),
-                            txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText()
-                    );
+             
+                        ListUpdDelByUserController ld= new ListUpdDelByUserController();
+                      //  Evenement e = new Evenement(ld.getClickedEvenement().getId_e(),
+                         //   txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText()
+                  //  );
                     
-                    Ec.updateEvenement(e);
+                  //  Ec.updateEvenement(e);
                     validationSaisie.notifConfirm("ok", "Evenement Modifié");
                     
 

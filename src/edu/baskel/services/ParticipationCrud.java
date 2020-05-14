@@ -14,8 +14,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +33,7 @@ public class ParticipationCrud {
         cnx = ConnectionBD.getInstance().getCnx();
 
     }
-
+/* Ajout participation*/
     public void ajouterParticipation(Participation p) {
 
         try {
@@ -74,7 +77,7 @@ public class ParticipationCrud {
         }
 
     }
- 
+ /* suppression tous les participation de l'evenement supp*/
       public boolean supprimerParticipationE(int id_e) {
 
         try {
@@ -91,7 +94,7 @@ public class ParticipationCrud {
 
     }
     
-
+/*Affichage liste des eveenements par user*/
     public List<Participation> displayByUser(int id_u) {
 
         List<Participation> Listparticipation = new ArrayList<Participation>();
@@ -129,7 +132,7 @@ public class ParticipationCrud {
 
         return Listparticipation;
     }
-
+/* Affichage liste des participation par user*/
     public List<Evenement> displayParticipant(int id_u) {
 
         List<Evenement> ListEventPaticipation = new ArrayList<>();
@@ -174,7 +177,7 @@ public class ParticipationCrud {
 
         return ListEventPaticipation;
     }
-
+/*verification est ce que user a deja participé a cet evenement ou non*/
     public boolean verifierParticipation(int id_u, int id_e) {
 
         try {
@@ -257,6 +260,15 @@ public class ParticipationCrud {
    
         }
       */
+    
+    
+    
+    
+    
+    
+    
+    /*nombre des participant par evenement*/
+    
       public int nombreParticipation(int id_e){
               int nb=0;
               
@@ -280,7 +292,7 @@ public class ParticipationCrud {
       }
       
       
-      
+   /*Affichage list des participant par evenement*/   
     public List<Participation> displayParticipantList(int id_e) {
 
         List<Participation> ListEventPaticipation = new ArrayList<>();
@@ -322,7 +334,75 @@ public class ParticipationCrud {
 
         return ListEventPaticipation;
     }
+   /*Affichage liste des evenement where date evenement - sysdate =1*/ 
+    public List<Participation> displayPEmailDay(){
+        List<Participation> ListEmailEventDay = new ArrayList<Participation>();
+        try {
+            
+            
+            EvenementCRUD ec = new EvenementCRUD();
+           
+            String requete = "SELECT * from participation p JOIN evenement e on p.id_e=e.id_e where date_e-(DATE_FORMAT(SYSDATE(), '%d/%m/%y')) =1";
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+           
+            while (rs.next()) {
+                Evenement e = new Evenement();
+                
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                
+                
+                Participation p = new Participation();
+                
+                p.setId_e(rs.getInt("id_e"));
+                p.setId_u(rs.getInt("id_u"));
+                p.setEvent(e);
+                
+                ListEmailEventDay.add(p);
+                System.out.println("-------------"+ListEmailEventDay.toString());
+                
+            }
+            
+        } catch (SQLException ex) {
+             ex.printStackTrace();
+        }
+           return ListEmailEventDay;
+        }
     
+    /*rappel membre que l evenement aura lien demain*/
+     public void rappelEvent() throws Exception {
+     
+        MembreCRUD mc = new MembreCRUD();
+        SendMail Sm = new SendMail();
+  
+        for (Participation p : displayPEmailDay()) {
+            
+           
+                String sq1 = "SELECT * FROM membre WHERE id_u=?";
+                PreparedStatement prep = cnx.prepareStatement(sq1);
+                prep.setInt(1, p.getId_u());
+                ResultSet res = prep.executeQuery();
+
+                if (res.next()) {
+           
+                    String em = res.getString("email_u");
+                    Sm.envoiMailRappel(em);
+                    System.out.println(em);
+                
+
+                } else {
+                    System.out.println("Aucun participant");
+                
+                }
+
+            } 
+   
+        }
     
 
     }

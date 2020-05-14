@@ -145,6 +145,11 @@ public class Evenement {
         this.mbre = mbre;
     }
 
+    @Override
+    public String toString() {
+        return "Evenement{" + "image=" + image + ", id_e=" + id_e + ", nom_e=" + nom_e + ", lieu_e=" + lieu_e + ", date_e=" + date_e + ", description_e=" + description_e + ", image_e=" + image_e + ", id_u=" + id_u + ", mbre=" + mbre + '}';
+    }
+
    
 
 }

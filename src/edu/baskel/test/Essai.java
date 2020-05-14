@@ -26,7 +26,7 @@ public class Essai {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
+      
             ParticipationCrud Pc = new ParticipationCrud();
             // System.out.println(Pc.displayByUserP());
             
@@ -44,11 +44,6 @@ public class Essai {
 //  Qrcode cm = new Qrcode();
 //  cm.Create("nesrine", "sabrine2");
 
-MailAttachement ma = new MailAttachement();
-ma.envoiMailQrcode("sabrine.zekri@esprit.tn","sabrine2");
-        } catch (Exception ex) {
-            Logger.getLogger(Essai.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
   

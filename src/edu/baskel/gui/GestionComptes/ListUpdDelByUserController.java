@@ -145,7 +145,7 @@ public class ListUpdDelByUserController implements Initializable {
         /*  displayByUser(m.getId_u()*/
     
     
-    tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() { 
+ /*   tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() { 
             @Override
              
             public void handle(MouseEvent click) {
@@ -173,23 +173,15 @@ public class ListUpdDelByUserController implements Initializable {
             }
 
         });
-     actualiser();
+     actualiser();*/
     }
 
-    public void setTableAffichage(TableView<Evenement> tableAffichage) {
-        this.tableAffichage = tableAffichage;
-    }
-
-    public TableView<Evenement> getTableAffichage() {
-        return tableAffichage;
-    }
-    
   
-    /* 
+    
      
     Evenement event;
 
-    @FXML  chargerDonnee nraja3ha fil on mouse clicked fi table view 
+   @FXML
     void chargerDonnee() {
 
         event = tableAffichage.getSelectionModel().getSelectedItem();
@@ -210,7 +202,18 @@ public class ListUpdDelByUserController implements Initializable {
 
         }
     }
-*/
+    
+    public Evenement getClickedEvenement() {
+       return event;
+        
+    }
+    
+    public int getId() {
+       return event.getId_e();
+       
+    }
+     
+
     @FXML
     private void searchBox(KeyEvent event) {
 
@@ -249,8 +252,8 @@ public class ListUpdDelByUserController implements Initializable {
             tableAffichage.setItems(sortedList);
         });
     }
-/*
-    @FXML nraja3 ValiderModif fil on action
+
+    @FXML 
     void ValiderModif(ActionEvent event) {
 
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -288,7 +291,7 @@ public class ListUpdDelByUserController implements Initializable {
         }
     }
 
-    */
+    
    
     private void actualiser() {
 

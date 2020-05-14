@@ -68,6 +68,48 @@ public class SendMail {
     }
     
     
+     public static void envoiMailRappel(String recp) throws Exception{
+        System.out.println("Preparation mail");
+        
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        
+      String monCompte = "baskeltn395@gmail.com";
+      String password = "baskel.tn";
+      
+      Session session = Session.getDefaultInstance(properties, new Authenticator(){
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(monCompte, password);
+            }
+  
+      });     
+      
+      Message message = prepareMessage(session,monCompte,recp);
+      Transport.send(message);
+        System.out.println("Mail envoyé");
+ }      
+      
+
+    private static Message prepareMessage(Session session,String monCompte,String recp) throws MessagingException {
+        
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(monCompte));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recp) );
+            message.setSubject("Annulation de l'evenement");
+            message.setSubject("Annulation de l'evenement");
+            message.setText("Cher membre nous vous rappelons que  l'événement auquel vous souhaitez participer aura lieu demain");
+            return message;
+        } catch (AddressException ex) {
+            Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     
     
     }
