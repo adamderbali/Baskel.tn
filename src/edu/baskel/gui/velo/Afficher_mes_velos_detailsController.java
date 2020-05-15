@@ -85,6 +85,7 @@ public class Afficher_mes_velos_detailsController implements Initializable {
         Stage stage = (Stage) bachbutt.getScene().getWindow();
     // do what you have to do
     stage.close();
+    controller1.affichageVelo();
         /* try {
              //System.exit(0);
              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));

@@ -74,7 +74,16 @@ public class Afficher_mes_velosController implements Initializable {
 
     @FXML
     void consulterReservation(ActionEvent event) {
-
+             try {
+              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_reservations.fxml"));
+              Scene redirection_scene = new Scene(redirection_parent);
+              Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+              app_stage.setScene(redirection_scene);
+              app_stage.show();
+              //System.out.println("hello from my bikes");
+          } catch (IOException ex) {
+              ex.printStackTrace();
+          }
     }
 
     @FXML

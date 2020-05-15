@@ -30,8 +30,7 @@ import javafx.stage.Stage;
  *
  * @author Hela
  */
-public class Reserver_veloController implements Initializable {
-    
+public class ModifierReservationController implements Initializable {
     @FXML
     private DatePicker datepick;
 
@@ -39,51 +38,20 @@ public class Reserver_veloController implements Initializable {
     private TextField txtnbrh;
 
     @FXML
-    private Button reservbut;
+    private Button modifbut;
 
     @FXML
     private Button annbut;
-    
-    private Stage thisStage;
-    private final Afficher_detail_veloController controller1;
 
-    public Reserver_veloController(Afficher_detail_veloController controller1) {
-        this.controller1 = controller1;
-         // Create the new stage
-        thisStage = new Stage();
-        
-        // Load the FXML file
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Reserver_velo.fxml"));
-
-            // Set this class as the controller
-            loader.setController(this);
-
-            // Load the scene
-            thisStage.setScene(new Scene(loader.load()));
-
-            // Setup the window/stage
-            //thisStage.setTitle("Passing Controllers Example - Layout2");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-     public void showStage() {
-        thisStage.showAndWait();
-    }
-    
     @FXML
     void annuler(ActionEvent event) {
-            Stage stage = (Stage) annbut.getScene().getWindow();
+        Stage stage = (Stage) annbut.getScene().getWindow();
     // do what you have to do
     stage.close();
     }
-
     @FXML
-    void reserverVelo(ActionEvent event) {
-         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    void modifierReservation(ActionEvent event) {
+            String date_system = controller1.getReservation().getDate_res();
             String date = datepick.getEditor().getText();
         /* test sur les champs vides ou non*/
         if ((txtnbrh.getText().isEmpty()) | date.isEmpty() ) {
@@ -103,30 +71,71 @@ public class Reserver_veloController implements Initializable {
                 Alert alertDtae = new validationSaisie().getAlert("Erreur", "Veuillez entrer un nombre d'heures valide!");
                 alertDtae.showAndWait();
             }else{
-                int nums = Integer.parseInt(controller1.getEnteredText());
+                int id_res = controller1.getReservation().getId_res();
                 Reservation r = new Reservation();
-                r.setId_u(1);
-                r.setNum_serie(nums);
+                //r.setId_u(controller1.getReservation().getId_u());
+               // r.setNum_serie(controller1.getReservation().getNum_serie());
+                System.out.println("date"+date);
                 r.setDate_res(date);
                 r.setNbr_heure(Integer.parseInt(txtnbrh.getText()));
                 System.out.println("res"+r);
                 ReservationCRUD rc = new ReservationCRUD();
-                rc.ajouterReservation(r);
-                 Alert alertAdded = new validationSaisie().getAlert("Succés d'ajout", "Réservation ajoutée");
+                rc.modifierReservation(r, id_res);
+                 Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Réservation modifiée");
                 alertAdded.showAndWait();
-                Stage stage = (Stage) reservbut.getScene().getWindow();
+                Stage stage = (Stage) modifbut.getScene().getWindow();
                  // do what you have to do
                  stage.close();
-            }
+                 controller1.afficherReservation();
+    }
+        }}
+    private Stage thisStage;
+     private final Afficher_mes_reservationsController controller1;
+     
+    
+   
+    public ModifierReservationController(Afficher_mes_reservationsController controller1) {
+        this.controller1 = controller1;
+
+        // Create the new stage
+        thisStage = new Stage();
+        
+        // Load the FXML file
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReservation.fxml"));
+
+            // Set this class as the controller
+            loader.setController(this);
+
+            // Load the scene
+            thisStage.setScene(new Scene(loader.load()));
+
+            // Setup the window/stage
+            //thisStage.setTitle("Passing Controllers Example - Layout2");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
+    public void showStage() {
+        thisStage.showAndWait();
+    }
+    
+    public void afficher(){
+        System.out.println("ksd"+controller1.getReservation());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        datepick.setValue(LocalDate.parse(controller1.getReservation().getDate_res(), formatter));
+        
+        txtnbrh.setText(String.valueOf(controller1.getReservation().getNbr_heure()));
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        afficher();
     }    
     
 }

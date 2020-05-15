@@ -39,9 +39,9 @@ public class ReservationCRUD {
             while(rs.next()){
                 Reservation r = new Reservation();
                 r.setId_res(rs.getInt(1));
-                r.setDate_r(rs.getString("date_res"));
+                r.setDate_res(rs.getString("date_res"));
                 r.setNbr_heure(rs.getInt("nbr_heure"));
-                r.setDate_db_r(rs.getDate("date_db_res"));
+                r.setDate_db_res(rs.getDate("date_db_res"));
                 r.setNum_serie(rs.getInt("num_serie"));
                 r.setId_u(rs.getInt("id_u"));
                 
@@ -63,7 +63,7 @@ public class ReservationCRUD {
                
 
                PreparedStatement pst = cnx.prepareStatement(requete2);
-               pst.setString(1,r.getDate_r());
+               pst.setString(1,r.getDate_res());
                pst.setInt(2,r.getNbr_heure());
                pst.setInt(3,r.getNum_serie());
                pst.setInt(4,r.getId_u());
@@ -87,10 +87,10 @@ public class ReservationCRUD {
              String requete2 = "UPDATE reservation SET date_res=?,nbr_heure=?"
                      +" WHERE id_res=?";
              PreparedStatement pst2 = cnx.prepareStatement(requete2);
-             
-             pst2.setString(1,r.getDate_r());
+             System.out.println("re"+r);
+             pst2.setString(1,r.getDate_res());
                pst2.setInt(2,r.getNbr_heure());
-               pst2.setInt(3,r.getId_res());
+               pst2.setInt(3,id_res);
               
             
              pst2.executeUpdate();
