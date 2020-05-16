@@ -100,6 +100,9 @@ public class InscriptionController implements Initializable {
     private Label lblfaible;
     @FXML
     private JFXButton btnConnexion;
+    @FXML
+    private FontAwesomeIconView chkCmotdepasi;
+
     private PreparedStatement prep;
     private ResultSet res;
     private String photo = null;
@@ -161,20 +164,30 @@ public class InscriptionController implements Initializable {
     @FXML
     public void VisualiserMPI(MouseEvent event) {
         txtshowpass.setText(txtmotdepasse.getText());
-        txtshowcpass.setText(txtconfirmation.getText());
         txtmotdepasse.setVisible(false);
-        txtconfirmation.setVisible(false);
         txtshowpass.setVisible(true);
-        txtshowcpass.setVisible(true);
     }
 
     //cacher mot de passe
     @FXML
     public void hideMPI(MouseEvent event) {
         txtmotdepasse.setVisible(true);
-        txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
+    }
+
+    @FXML
+    public void VisualiserCMP(MouseEvent event) {
+        txtshowcpass.setText(txtconfirmation.getText());
+        txtconfirmation.setVisible(false);
+        txtshowcpass.setVisible(true);
+
+    }
+
+    @FXML
+    public void hideCMP(MouseEvent event) {
+        txtconfirmation.setVisible(true);
         txtshowcpass.setVisible(false);
+
     }
 
     //choisir sexe
@@ -307,7 +320,7 @@ public class InscriptionController implements Initializable {
                                                     chkhomme.setSelected(false);
                                                     chkfemme.setSelected(false);
                                                     System.out.println("utilisateur ajouté");
-                                                   
+
                                                     InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
                                                     Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
                                                     Scene redirection_scene = new Scene(redirection_parent);
@@ -339,7 +352,7 @@ public class InscriptionController implements Initializable {
         }
     }
 
-//page de profil
+//page de Connexion
     @FXML
     public void SidentifierPage(ActionEvent event
     ) {

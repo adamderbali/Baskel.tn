@@ -26,7 +26,7 @@ public class CronJob {
             
             Trigger trigger1 = TriggerBuilder.newTrigger()
                     .withIdentity("CronTrigger", "group1")
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0 12 * * ?"))//chaque minute  0 * * ? * *	// chaue heure 0 0 * ? * *	
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * *"))//chaque minute  0 * * ? * *	// chaue heure 0 0 * ? * *	
                     .build(); // chaue jr a 12pm 0 0 12 * * ?	//
             
             Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();

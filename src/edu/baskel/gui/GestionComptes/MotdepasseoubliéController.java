@@ -31,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -43,30 +44,16 @@ public class MotdepasseoubliéController implements Initializable {
 
     @FXML
     private Button btnenv;
-
     @FXML
     private TextField txtentermail;
-
     @FXML
     private TextField txtcode;
-
     @FXML
     private JFXButton btnverifycode;
-
     @FXML
-    private Button btnQuitter;
-
+    private ImageView Logout;
     @FXML
-    private Button btnDeconnexion;
-
-    @FXML
-    private Button btnSupp;
-    @FXML
-    private Button btnevenmn;
-    @FXML
-    private MenuItem itemSedeconnecter;
-    @FXML
-    private MenuButton menu;
+    private ImageView exit;
 
     Connection cnx = null;
     PreparedStatement prep = null;
@@ -102,28 +89,6 @@ public class MotdepasseoubliéController implements Initializable {
         }
     }
 
-    //page d authentification
-    @FXML
-    public void backSidentifier(MouseEvent event) throws IOException {
-        System.out.println(m.getImage_u());
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
-        Scene redirection_scene = new Scene(redirection_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(redirection_scene);
-        app_stage.show();
-
-    }
-
-    //page...
-    @FXML
-    void redirectionevenmn(ActionEvent event) throws IOException {
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
-        Scene redirection_scene = new Scene(redirection_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(redirection_scene);
-        app_stage.show();
-    }
-
     //varification code envoyé par mail
     @FXML
     public void verifierCode(ActionEvent event) throws IOException {
@@ -141,35 +106,22 @@ public class MotdepasseoubliéController implements Initializable {
 
     }
 
-    //supprimer son compte
+    //fermer l application
     @FXML
-    void supprimerCompte(ActionEvent event) {
-        MembreCRUD mr1 = new MembreCRUD();
-        Membre l = SessionInfo.getLoggedM();
-        mr1.supprimerMembre(l.getId_u());
+    void Quitter(MouseEvent event) {
+        Platform.exit();
+        mc.Deconnexion();
+
     }
 
-    //page d acceuil
+    //page d authentification
     @FXML
-    void SeDeconnecter(ActionEvent event) throws IOException {
-
+    void Deconnexion2(MouseEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
-        SessionInfo.setIduser(0);
-        SessionInfo.setLoggedM(null);
-        System.out.println(iduser);
-
-    }
-
-    //fermer l application
-    @FXML
-    void Quitter(ActionEvent event) {
-        Platform.exit();
-        SessionInfo.setIduser(0);
-        SessionInfo.setLoggedM(null);
     }
 
 }
