@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -50,11 +48,11 @@ public class ForumCRUD {
 
     }
 
-    public void supprimerForum(int id) {
+    public void supprimerForum(Forum1 f) {
         try {
             String requete = "DELETE FROM forum WHERE id_f=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, id);
+            pst.setInt(1, f.getId_f());
             pst.executeUpdate();
             System.out.println("forum supprimé");
         } catch (SQLException ex) {

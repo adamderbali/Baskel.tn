@@ -67,7 +67,6 @@ public class MembreCRUD {
         }
         return m;
     }
-    
 
 // update info d un membre
     public void updateMembre(Membre m) {
@@ -91,7 +90,7 @@ public class MembreCRUD {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void updateReparateurr2(Reparateur r) {
         try {
             //Update membre
@@ -181,6 +180,7 @@ public class MembreCRUD {
                 String prenomm = res.getString("prenom_u");
                 String telm = res.getString("num_tel_u");
                 String emailm = res.getString("email_u");
+                String sexem = res.getString("sexe_u");
                 String adressem = res.getString("adresse_u");
                 String mpassem = res.getString("mot_passe_u");
                 Date datem = res.getDate("date_u");
@@ -189,7 +189,7 @@ public class MembreCRUD {
                 int validationm = res.getInt("validation_u");
                 int nbr_banm = res.getInt("nbr_ban_u");
 
-                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, telm, datem,
+                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm,sexem , datem,
                         motdepasse, telm, imagem, typem, nbr_banm, validationm);
                 if (this.ValidationBan(emailm) != 0) {
                     SessionInfo.setLoggedM(membreLogged);
@@ -246,7 +246,6 @@ public class MembreCRUD {
             PreparedStatement pst = cnx.prepareStatement(requet);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            System.out.println("donné afficher");
             if (rs.next()) {
                 m.setId_u(rs.getInt("id_u"));
                 m.setNom_u(rs.getString("nom_u"));
@@ -374,6 +373,7 @@ public class MembreCRUD {
         }
 
     }
+
     //verif que loggedm est un reparateur
     public boolean VerifReparateur() {
 
@@ -383,7 +383,7 @@ public class MembreCRUD {
             pst.setInt(1, iduser);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                
+
                 return true;
             }
 
@@ -394,16 +394,16 @@ public class MembreCRUD {
     }
 
     //verif email mot de passe oublié
-    public boolean VerifEmailMpOublié(String email){
+    public boolean VerifEmailMpOublié(String email) {
         try {
             String req = "SELECT * FROM membre Where email_u=?";
             PreparedStatement per = cnx.prepareStatement(req);
             per.setString(1, email);
             ResultSet rs = per.executeQuery();
-            if(!rs.next()){
+            if (!rs.next()) {
                 System.out.println("Aucun compte avec cette adresse");
                 return false;
-            }else{
+            } else {
                 System.out.println("Compte trouvé");
             }
         } catch (SQLException ex) {
@@ -411,4 +411,10 @@ public class MembreCRUD {
         }
         return true;
     }
+    
+    public void Deconnexion(){
+        SessionInfo.setLoggedM(null);
+        SessionInfo.setIduser(0);
+    }
+
 }

@@ -97,11 +97,13 @@ public class InscriptionReparateurController implements Initializable {
     @FXML
     private JFXTextField txtshowcpass;
     @FXML
-    private Button btnprofil;
-    @FXML
     private JFXTextField txttelpro;
     @FXML
     private JFXTextField txtadrlocal;
+    @FXML
+    private JFXButton btnConnexion;
+    @FXML
+    private FontAwesomeIconView chkCmotdepasi;
 
     Connection cnx;
     private PreparedStatement prep;
@@ -160,24 +162,34 @@ public class InscriptionReparateurController implements Initializable {
         }
     }
 
-    //voir MP
+//voir mot de passe
     @FXML
     public void VisualiserMPI(MouseEvent event) {
         txtshowpass.setText(txtmotdepasse.getText());
-        txtshowcpass.setText(txtconfirmation.getText());
         txtmotdepasse.setVisible(false);
-        txtconfirmation.setVisible(false);
         txtshowpass.setVisible(true);
-        txtshowcpass.setVisible(true);
     }
 
-    //cacher MP
+    //cacher mot de passe
     @FXML
     public void hideMPI(MouseEvent event) {
         txtmotdepasse.setVisible(true);
-        txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
+    }
+
+    @FXML
+    public void VisualiserCMP(MouseEvent event) {
+        txtshowcpass.setText(txtconfirmation.getText());
+        txtconfirmation.setVisible(false);
+        txtshowcpass.setVisible(true);
+
+    }
+
+    @FXML
+    public void hideCMP(MouseEvent event) {
+        txtconfirmation.setVisible(true);
         txtshowcpass.setVisible(false);
+
     }
 
     //chosiir sexe
@@ -212,7 +224,7 @@ public class InscriptionReparateurController implements Initializable {
 
     // inscription d un reparateur
     @FXML
-    public void insertData(ActionEvent event) throws NoSuchAlgorithmException {
+    public void insertData(ActionEvent event) throws NoSuchAlgorithmException, IOException {
         MembreCRUD mr = new MembreCRUD();
         String nom = txtNom.getText();
         String prenom = txtPrenom.getText();
@@ -228,7 +240,7 @@ public class InscriptionReparateurController implements Initializable {
         String imge = txtimage.getText();
 //ne9es constructeur bel image f reparateur w blehc long w latitude w nom local
 //ne9sa image f ajouter reparateur
-        Reparateur r = new Reparateur(adrloc,null, telpro,null,null,2, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel,imge, "A");
+        Reparateur r = new Reparateur(adrloc, null, telpro, null, null, 2, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge, "A");
         if (validerchamps() == true) {
             if (InputValidation.validTextField(txtNom.getText())) {
                 Alert alertNom = new InputValidation().getAlert("Nom", "Saisissez votre nom");
@@ -296,6 +308,13 @@ public class InscriptionReparateurController implements Initializable {
                                                         txtadrlocal.clear();
                                                         System.out.println("Reparateur ajouté");
 
+                                                        InputValidation.notificationsucces("Inscription", "Inscription réussite , soyez le bienvenu");
+                                                        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+                                                        Scene redirection_scene = new Scene(redirection_parent);
+                                                        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                                        app_stage.setScene(redirection_scene);
+                                                        app_stage.show();
+
                                                     } else {
                                                         Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
                                                         alertnum.showAndWait();
@@ -319,12 +338,12 @@ public class InscriptionReparateurController implements Initializable {
         }
     }
 
-    //page profil
+    //page de Connexion
     @FXML
-    public void ProfilPage(ActionEvent event
+    public void SidentifierPage(ActionEvent event
     ) {
         try {
-            Parent redirection_parent = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
+            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);

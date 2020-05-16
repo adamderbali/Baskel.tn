@@ -54,102 +54,79 @@ import org.controlsfx.control.textfield.TextFields;
  * @author dell
  */
 public class ProfilPageReparateurController implements Initializable {
-    
+
     @FXML
     private AnchorPane anchor;
-    
     @FXML
     private JFXTextField profilnom;
-    
     @FXML
     private JFXTextField profilprenom;
-    
     @FXML
     private JFXTextField profilmail;
-    
     @FXML
     private JFXTextField profiladresse;
-    
     @FXML
     private JFXTextField profildate;
-    
     @FXML
     private JFXTextField profilteleph;
-    
     @FXML
     private JFXTextField txtshow;
-    
     @FXML
     private JFXDatePicker nvdate;
-    
     @FXML
     private Button btnmodifier1;
-    
     @FXML
     private Button btnconfirmer1;
-    
     @FXML
     private ImageView imagev;
-    
     @FXML
     private Button btnimage;
-    
     @FXML
     private TextField thximage;
-    
     @FXML
     private JFXPasswordField nvpass;
-    
     @FXML
     private JFXTextField txtshowc;
-    
     @FXML
     private Label lblprofil;
-    
     @FXML
     private JFXPasswordField cnvpass;
     @FXML
     private JFXPasswordField actuelPass;
-    
     @FXML
     private JFXTextField txtshowActuel;
-    
     @FXML
     private FontAwesomeIconView chkmotdepasseActuel;
-    
+
     @FXML
     private JFXButton btnchgPass;
-    
+
     @FXML
     private Pane paneNomProfil;
-    
+
     @FXML
     private Button btnGenerale;
-    
+
     @FXML
     private Button btnSécurité;
-    
+
     @FXML
     private Pane PaneMotpass;
-    
     @FXML
     private Pane panePrincipale;
-    
     @FXML
     private Label lblfaible;
-    
     @FXML
     private JFXTextField adrloc;
-    
     @FXML
     private JFXTextField telpro;
-    
     @FXML
     private FontAwesomeIconView chkmotdepasse;
-    
     @FXML
     private FontAwesomeIconView chkmotdepasse2;
-    
+    @FXML
+    private Button btnSupprimer;
+
     private String photo = null;
     private File file;
     private Image image;
@@ -158,12 +135,13 @@ public class ProfilPageReparateurController implements Initializable {
     MembreCRUD mrc = new MembreCRUD();
     ReparateurCRUD rc = new ReparateurCRUD();
     Reparateur r = rc.getReparateurById(l.getId_u());
-    
+
     ;
 
     //afficher la photo de profil
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        thximage.setVisible(false);
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
         actuelPass.setVisible(true);
@@ -173,7 +151,7 @@ public class ProfilPageReparateurController implements Initializable {
         informationReparateur();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         TextFields.bindAutoCompletion(adrloc, AutoCompleteAdresse.getAdrGov());
-        
+
         if (r.getImage_u() != null) {
             System.out.println(r.getImage_u());
             Image imagelog;
@@ -186,6 +164,17 @@ public class ProfilPageReparateurController implements Initializable {
             imagev.setEffect(new DropShadow(20, Color.BLACK));
             imagev.setImage(imagelog);
         }
+        if (l.getImage_u().equals("")) {
+            Image defaultt;
+            if (l.getSexe_u().equals("Femme")) {
+                defaultt = new Image("images\\femme.png");
+                imagev.setImage(defaultt);
+            }
+            if (l.getSexe_u().equals("Homme")) {
+                defaultt = new Image("images\\homme.png");
+                imagev.setImage(defaultt);
+            }
+        }
     }
 
     //connexion
@@ -195,7 +184,7 @@ public class ProfilPageReparateurController implements Initializable {
 
     //information du membre a afficher ds le profil
     public void informationReparateur() {
-        
+
         lblprofil.setText(r.getNom_u() + " " + r.getPrenom_u());
         profilnom.setText(r.getNom_u());
         profilprenom.setText(r.getPrenom_u());
@@ -203,11 +192,11 @@ public class ProfilPageReparateurController implements Initializable {
         profiladresse.setText(r.getAdresse_u());
         nvdate.setValue(LocalDate.parse(r.getDate_u().toString()));
         profilteleph.setText(r.getNum_tel_u());
-        //thximage.setText(r.getImage_u());
+        thximage.setText(r.getImage_u());
         adrloc.setText(r.getAdresse_lo());
         telpro.setText(r.getNum_pro());
     }
-    
+
     @FXML
     public void chagerInfos2(ActionEvent event) {
         profiladresse.setEditable(true);
@@ -218,54 +207,54 @@ public class ProfilPageReparateurController implements Initializable {
         nvdate.setEditable(true);
         adrloc.setEditable(true);
         telpro.setEditable(true);
-        
+
     }
-    
+
     @FXML
     public void VisualiserMP(MouseEvent event) {
         txtshow.setText(nvpass.getText());
         nvpass.setVisible(false);
         txtshow.setVisible(true);
     }
-    
+
     @FXML
     public void hideMP(MouseEvent event) {
         nvpass.setVisible(true);
         txtshow.setVisible(false);
     }
-    
+
     @FXML
     public void VisualiserCMP(MouseEvent event) {
         txtshowc.setText(cnvpass.getText());
         cnvpass.setVisible(false);
         txtshowc.setVisible(true);
     }
-    
+
     @FXML
     public void hideCMP(MouseEvent event) {
         cnvpass.setVisible(true);
         txtshowc.setVisible(false);
     }
-    
+
     @FXML
     void VisualiserMPActuel(MouseEvent event) {
         txtshowActuel.setText(actuelPass.getText());
         txtshowActuel.setVisible(true);
         actuelPass.setVisible(false);
     }
-    
+
     @FXML
     void hideMPActuel(MouseEvent event) {
         txtshowActuel.setVisible(false);
         actuelPass.setVisible(true);
     }
-    
+
     @FXML
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
     }
-    
+
     @FXML
     void afficherOngletSecurité(ActionEvent event) {
         panePrincipale.setVisible(false);
@@ -298,13 +287,13 @@ public class ProfilPageReparateurController implements Initializable {
         if ((profilnom.getText().isEmpty()) | (profilprenom.getText().isEmpty()) | (profiladresse.getText().isEmpty())
                 | (profilmail.getText().isEmpty()) | (profilteleph.getText().isEmpty()) | nvd == null) {
             InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
-            
+
             return false;
         } else {
             return true;
         }
     }
-    
+
     public boolean verifDate() {
         LocalDate local = LocalDate.now();
         LocalDate d = nvdate.getValue();
@@ -346,26 +335,26 @@ public class ProfilPageReparateurController implements Initializable {
                                         if ((verifEmail.check(profilmail.getText())) == false) {
                                             InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                         } else {
-                                            /*
-                                            Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
-                                                    profilmail.getText(), l.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
 
-                                            m1.setId_u(iduser);
-                                            mrc.updateMembre(m1);
-                                             */Reparateur rr= new Reparateur(adrloc.getText(), telpro.getText()//nahi mot de passe
-                                                     , profilnom.getText(), profilprenom.getText(), profiladresse.getText()
-                                                     , profilmail.getText(), r.getSexe_u(), nvd, r.getMot_passe_u(), profilteleph.getText());
-                                             rr.setId_u(r.getId_u());
+                                            Reparateur rr = new Reparateur(adrloc.getText(), null, telpro.getText(), null, null,
+                                                    profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
+                                                    profilmail.getText(), r.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
+                                            rr.setId_u(r.getId_u());
                                             mrc.updateReparateurr2(rr);
+
+                                            informationReparateur();
+
+                                            InputValidation.notificationsucces("Profil", "Vos modification sont enregistrés");
+
                                             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
                                             Scene redirection_scene = new Scene(redirection_parent);
                                             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                             app_stage.setScene(redirection_scene);
                                             app_stage.show();
                                             System.out.println("modifie");
-                                            
+
                                         }
-                                        
+
                                     }
                                 }
                             }
@@ -380,7 +369,7 @@ public class ProfilPageReparateurController implements Initializable {
     @FXML
     void passStrength(MouseEvent event
     ) {
-        
+
         if (InputValidation.calculatePasswordStrength(nvpass.getText()) < 6) {
             lblfaible.setText("faible");
             lblfaible.setTextFill(Color.RED);
@@ -399,20 +388,29 @@ public class ProfilPageReparateurController implements Initializable {
         if (InputValidation.HshPassword(actuelPass.getText(), "MD5").equals(l.getMot_passe_u())) {
             if (InputValidation.validPwd(nvpass.getText()) == 0) {
                 InputValidation.notificationError("Mot de passe", "Saisissez un mot de passe valide.");
-                
+
             } else {
-                
+
                 if ((InputValidation.HshPassword(nvpass.getText(), "MD5")).equals(InputValidation.HshPassword(cnvpass.getText(), "MD5"))) {
                     mrc.changerMP(l.getEmail_u(), InputValidation.HshPassword(nvpass.getText(), "MD5"));
                     InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
                 } else {
                     InputValidation.notificationError("Mot de passe", "La confirmation du mot de passe doit correspondre à votre nouveau mot de passe.");
-                    
+
                 }
             }
         } else {
             InputValidation.notificationError("Mot de passe", "Verifier votre mot de passe.");
-            
+
         }
     }
+
+    //supprimer son compte
+    @FXML
+    void supprimerCompte(ActionEvent event) {
+        MembreCRUD mr1 = new MembreCRUD();
+        Membre l = SessionInfo.getLoggedM();
+        mr1.supprimerMembre(l.getId_u());
+    }
+
 }

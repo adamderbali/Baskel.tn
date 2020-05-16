@@ -79,6 +79,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
+            <FontAwesomeIconView fx:id="chkCmotdepasi" glyphName="EYE" layoutX="337.0" layoutY="319.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" wrappingWidth="19.99999901652336" />
          </children>
       </Pane>
    </children>

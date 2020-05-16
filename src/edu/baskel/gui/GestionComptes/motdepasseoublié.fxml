@@ -3,28 +3,48 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="749.0" prefWidth="1118.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.MotdepasseoubliéController">
+<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.MotdepasseoubliéController">
    <children>
-      <Button fx:id="btnQuitter" layoutX="646.0" layoutY="172.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter" />
-      <ImageView fitHeight="482.0" fitWidth="407.0" layoutX="471.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="btnenv" layoutX="515.0" layoutY="157.0" mnemonicParsing="false" onAction="#envoyerMail" prefHeight="31.0" prefWidth="104.0" style="-fx-background-color: #0096a4#0096a4;" text="envoyer" textFill="WHITE" />
+      <Label layoutX="155.0" layoutY="162.0" prefHeight="21.0" prefWidth="138.0" text="Votre adresse e-mail" />
+      <Label layoutX="158.0" layoutY="260.0" prefHeight="21.0" prefWidth="138.0" text="Code de verification" />
+      <TextField fx:id="txtentermail" layoutX="302.0" layoutY="157.0" />
+      <TextField fx:id="txtcode" layoutX="302.0" layoutY="255.0" />
+      <JFXButton fx:id="btnverifycode" layoutX="515.0" layoutY="252.0" onAction="#verifierCode" style="-fx-background-color: #0096a4#0096a4;" text="Verifier code" textFill="WHITE" />
+      <Text layoutX="195.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retrouvez votre compte" wrappingWidth="505.6708984375">
+         <font>
+            <Font name="System Bold" size="41.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startY="0.5631067961165048">
+               <stops>
+                  <Stop color="#0096a4" />
+                  <Stop color="#5b5b5b" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Separator layoutX="5.0" layoutY="82.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="4.0" layoutY="528.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="24.0" layoutY="17.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/motdepasse.png" />
+            <Image url="@../../../../images/001-exit-1.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnback" layoutX="592.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#backSidentifier" text="login" />
-      <Button fx:id="btnenv" layoutX="246.0" layoutY="92.0" mnemonicParsing="false" onAction="#envoyerMail" text="envoyer" />
-      <Label layoutX="17.0" layoutY="46.0" prefHeight="21.0" prefWidth="138.0" text="Votre adresse email" />
-      <Label layoutX="21.0" layoutY="146.0" text="Code de verification" />
-      <TextField fx:id="txtentermail" layoutX="160.0" layoutY="43.0" />
-      <TextField fx:id="txtcode" layoutX="160.0" layoutY="141.0" />
-      <JFXButton fx:id="btnverifycode" layoutX="226.0" layoutY="194.0" onAction="#verifierCode" text="Verifier code" />
-      <Button fx:id="btnevenmn" layoutX="437.0" layoutY="92.0" mnemonicParsing="false" onAction="#redirectionevenmn" text="Acceuil" />
-      <Button fx:id="btnSupp" layoutX="557.0" layoutY="130.0" mnemonicParsing="false" onAction="#supprimerCompte" text="Supprimer" />
-      <Button fx:id="btnDeconnexion" layoutX="437.0" layoutY="156.0" mnemonicParsing="false" onAction="#SeDeconnecter" text="Deconnexion" />
+      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="802.0" layoutY="545.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/exitt.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
