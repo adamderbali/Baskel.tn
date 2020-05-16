@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -43,38 +45,32 @@ public class NouveauMPController implements Initializable {
 
     @FXML
     private JFXTextField txtshowpass;
-
     @FXML
     private JFXTextField txtshowcpass;
-
     @FXML
     private JFXPasswordField txtNvMp;
-
     @FXML
     private JFXPasswordField txtCnvMp;
-
     @FXML
     private FontAwesomeIconView chkmotdepasi;
-
     @FXML
     private FontAwesomeIconView chkCmotdepasi;
-
     @FXML
     private Label lblfaible;
-
     @FXML
     private JFXButton btnConfirmation;
-
-    @FXML
-    private Button btnSidentifier2;
-
     @FXML
     private JFXTextField txtm;
+    @FXML
+    private ImageView Logout;
+    @FXML
+    private ImageView exit;
 
     Stage owner;
     Connection cnx = null;
     PreparedStatement pst = null;
     ResultSet res = null;
+    MembreCRUD r = new MembreCRUD();
 
     public void setTxtm(String txtmail) {
         this.txtm.setText(txtmail);
@@ -83,6 +79,7 @@ public class NouveauMPController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        txtm.setVisible(false);
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
     }
@@ -96,7 +93,6 @@ public class NouveauMPController implements Initializable {
     @FXML
     public void changerMP(ActionEvent event) throws NoSuchAlgorithmException, IOException {
         if (InputValidation.HshPassword(txtNvMp.getText(), "MD5").equals(InputValidation.HshPassword(txtCnvMp.getText(), "MD5"))) {
-            MembreCRUD r = new MembreCRUD();
             r.changerMP(txtm.getText(), InputValidation.HshPassword(txtNvMp.getText(), "MD5"));
             InputValidation.notificationsucces("Mot de passe", "Votre mot de passe a été réinitialisé !");
 
@@ -157,15 +153,21 @@ public class NouveauMPController implements Initializable {
         }
     }
 
-    //page d authentification
     @FXML
-    public void backSidentifier2(MouseEvent event) throws IOException {
-
+    void Deconnexion2(MouseEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
+        r.Deconnexion();
+    }
+
+    //fermer l application
+    @FXML
+    void Quitter(MouseEvent event) {
+        Platform.exit();
+        r.Deconnexion();
 
     }
 

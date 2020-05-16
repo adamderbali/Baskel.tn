@@ -38,6 +38,15 @@ public class Reparateur extends Membre {
         this.longitude = longitude;
     }
 
+    public Reparateur(String adresse_lo, String local_nom, String num_pro, String latitude, String longitude, String nom_u, String prenom_u, String adresse_u, String email_u, String sexe_u, Date date_u, String num_tel_u, String image_u) {
+        super(nom_u, prenom_u, adresse_u, email_u, sexe_u, date_u, num_tel_u, image_u);
+        this.adresse_lo = adresse_lo;
+        this.local_nom = local_nom;
+        this.num_pro = num_pro;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Reparateur(String adrloc, String telpro) {
         adrloc = adrloc;
         telpro = telpro;

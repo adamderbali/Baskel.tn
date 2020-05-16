@@ -31,8 +31,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -102,6 +100,9 @@ public class InscriptionController implements Initializable {
     private Label lblfaible;
     @FXML
     private JFXButton btnConnexion;
+    @FXML
+    private FontAwesomeIconView chkCmotdepasi;
+
     private PreparedStatement prep;
     private ResultSet res;
     private String photo = null;
@@ -163,20 +164,30 @@ public class InscriptionController implements Initializable {
     @FXML
     public void VisualiserMPI(MouseEvent event) {
         txtshowpass.setText(txtmotdepasse.getText());
-        txtshowcpass.setText(txtconfirmation.getText());
         txtmotdepasse.setVisible(false);
-        txtconfirmation.setVisible(false);
         txtshowpass.setVisible(true);
-        txtshowcpass.setVisible(true);
     }
 
     //cacher mot de passe
     @FXML
     public void hideMPI(MouseEvent event) {
         txtmotdepasse.setVisible(true);
-        txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
+    }
+
+    @FXML
+    public void VisualiserCMP(MouseEvent event) {
+        txtshowcpass.setText(txtconfirmation.getText());
+        txtconfirmation.setVisible(false);
+        txtshowcpass.setVisible(true);
+
+    }
+
+    @FXML
+    public void hideCMP(MouseEvent event) {
+        txtconfirmation.setVisible(true);
         txtshowcpass.setVisible(false);
+
     }
 
     //choisir sexe
@@ -341,7 +352,7 @@ public class InscriptionController implements Initializable {
         }
     }
 
-//page de profil
+//page de Connexion
     @FXML
     public void SidentifierPage(ActionEvent event
     ) {

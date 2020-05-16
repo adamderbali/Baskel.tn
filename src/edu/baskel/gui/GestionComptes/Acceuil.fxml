@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="620.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
+<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="750.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
    <children>
-      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="30.0" prefHeight="639.0" prefWidth="1042.0" />
-      <MenuButton fx:id="btnCompte" layoutX="950.0" layoutY="-2.0" mnemonicParsing="false" text="Compte">
+      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="55.0" prefHeight="639.0" prefWidth="1042.0" />
+      <MenuButton fx:id="btnCompte" layoutX="944.0" layoutY="14.0" mnemonicParsing="false" text="Compte">
         <items>
           <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deco" text="Se deconnecter" />
           <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
         </items>
       </MenuButton>
-      <Label fx:id="lblCntactezNous" layoutX="296.0" layoutY="14.0" onMouseClicked="#RedirectionContactezNs" text="contactez nous" />
+      <Label fx:id="lblCntactezNous" layoutX="14.0" layoutY="708.0" onMouseClicked="#RedirectionContactezNs" text="Contactez nous">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <Rating fx:id="rateUs" layoutX="298.0" layoutY="703.0" />
+      <Text fx:id="evaluez" layoutX="196.0" layoutY="724.0" onMouseClicked="#AfficherStars" strokeType="OUTSIDE" strokeWidth="0.0" text="évaluez nous">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Text>
+      <JFXButton fx:id="btnEnvoyer" layoutX="489.0" layoutY="704.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
+      <Button fx:id="btnforum" layoutX="855.0" layoutY="14.0" mnemonicParsing="false" onAction="#forum" text="Forum" />
+      <Separator layoutX="6.0" layoutY="696.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="6.0" layoutY="53.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="14.0" layoutY="7.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/001-exit-1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="965.0" layoutY="703.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/exitt.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

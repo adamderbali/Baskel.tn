@@ -14,28 +14,28 @@ import java.sql.Date;
 public class Reservation {
     private int id_u;
     private int num_serie;
-    private String date_r;
+    private String date_res;
     private int nbr_heure;
-    private Date date_db_r;
+    private Date date_db_res;
     private int id_res;
 
     public Reservation() {
     }
 
-    public Reservation(int id_u,int num_serie, String date_r, int nbr_heure) {
+    public Reservation(int id_u,int num_serie, String date_res, int nbr_heure) {
         this.id_u = id_u;
         this.num_serie = num_serie;
-        this.date_r = date_r;
+        this.date_res = date_res;
         this.nbr_heure = nbr_heure;
         
     }
 
-    public Reservation(int id_u,int num_serie, String date_r, int nbr_heure, Date date_db_r) {
+    public Reservation(int id_u,int num_serie, String date_res, int nbr_heure, Date date_db_res) {
         this.id_u = id_u;
         this.num_serie = num_serie;
-        this.date_r = date_r;
+        this.date_res = date_res;
         this.nbr_heure = nbr_heure;
-        this.date_db_r = date_db_r;
+        this.date_db_res = date_db_res;
         
     }
 
@@ -58,13 +58,7 @@ public class Reservation {
 
    
 
-    public String getDate_r() {
-        return date_r;
-    }
-
-    public void setDate_r(String date_r) {
-        this.date_r = date_r;
-    }
+    
 
     public int getNbr_heure() {
         return nbr_heure;
@@ -74,13 +68,23 @@ public class Reservation {
         this.nbr_heure = nbr_heure;
     }
 
-    public Date getDate_db_r() {
-        return date_db_r;
+    public String getDate_res() {
+        return date_res;
     }
 
-    public void setDate_db_r(Date date_db_r) {
-        this.date_db_r = date_db_r;
+    public void setDate_res(String date_res) {
+        this.date_res = date_res;
     }
+
+    public Date getDate_db_res() {
+        return date_db_res;
+    }
+
+    public void setDate_db_res(Date date_db_res) {
+        this.date_db_res = date_db_res;
+    }
+
+   
 
     
 
@@ -94,8 +98,10 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" + "id_u=" + id_u + ", num_serie=" + num_serie + ", date_r=" + date_r + ", nbr_heure=" + nbr_heure + ", date_db_r=" + date_db_r + ", id_res=" + id_res + '}';
+        return "Reservation{" + "id_u=" + id_u + ", num_serie=" + num_serie + ", date_res=" + date_res + ", nbr_heure=" + nbr_heure + ", date_db_res=" + date_db_res + ", id_res=" + id_res + '}';
     }
+
+    
 
     
 

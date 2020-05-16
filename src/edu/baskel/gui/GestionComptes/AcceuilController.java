@@ -5,12 +5,14 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,16 +20,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
 
 /**
  * FXML Controller class
@@ -48,6 +50,18 @@ public class AcceuilController implements Initializable {
     private AnchorPane anchorproincipal;
     @FXML
     private Label lblCntactezNous;
+    @FXML
+    private Rating rateUs;
+    @FXML
+    private Text evaluez;
+    @FXML
+    private JFXButton btnEnvoyer;
+    @FXML
+    private Button btnforum;
+    @FXML
+    private ImageView Logout;
+    @FXML
+    private ImageView exit;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -57,15 +71,9 @@ public class AcceuilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        /*if(l.getImage_u() != null){
-        Circle.setStroke(Color.SEAGREEN);
-        Image imagelog;
-        imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
-        Circle.setFill(new ImagePattern(imagelog));
-        }else{
-            Image defaut = new Image("file:/C:\\wamp\\www\\Baskel\\images\\profil.jpg" );
-        }*/
+
+        rateUs.setVisible(false);
+        btnEnvoyer.setVisible(false);
     }
 
     @FXML
@@ -93,7 +101,23 @@ public class AcceuilController implements Initializable {
         ANchorProfil.getChildren().setAll(pane);
     }
 
-    
+    @FXML
+    void AfficherStars(MouseEvent event) {
+        rateUs.setVisible(true);
+        btnEnvoyer.setVisible(true);
+    }
+
+    @FXML
+    void EnvoyerNote(MouseEvent event) {
+        System.out.println("Rate" + "   " + l.getId_u() + "  " + rateUs.getRating());
+    }
+
+    @FXML
+    void HideRating(MouseEvent event) {
+        rateUs.setVisible(false);
+        btnEnvoyer.setVisible(false);
+    }
+
     @FXML
     public void RedirectionContactezNs(MouseEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
@@ -101,6 +125,33 @@ public class AcceuilController implements Initializable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
+    }
+
+    @FXML
+    void forum(ActionEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    void Deconnexion2(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+        mc.Deconnexion();
+    }
+    
+    //fermer l application
+    @FXML
+    void Quitter(MouseEvent event) {
+        Platform.exit();
+        mc.Deconnexion();
+
     }
 
 }

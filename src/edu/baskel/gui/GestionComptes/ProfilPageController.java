@@ -22,6 +22,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,8 +42,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -56,95 +55,70 @@ public class ProfilPageController implements Initializable {
 
     @FXML
     private AnchorPane anchor;
-
     @FXML
     private JFXTextField profilnom;
-
     @FXML
     private JFXTextField profilprenom;
-
     @FXML
     private JFXTextField profilmail;
-
     @FXML
     private JFXTextField profiladresse;
-
     @FXML
     private JFXTextField profildate;
-
     @FXML
     private JFXTextField profilteleph;
-
     @FXML
     private JFXTextField txtshow;
-
     @FXML
     private JFXDatePicker nvdate;
-
     @FXML
     private Button btnmodifier1;
-
     @FXML
     private Button btnconfirmer1;
-
     @FXML
     private ImageView imagev;
-
     @FXML
     private Button btnimage;
-
     @FXML
     private TextField thximage;
-
     @FXML
     private JFXPasswordField nvpass;
-
     @FXML
     private JFXTextField txtshowc;
-
     @FXML
     private Label lblprofil;
-
     @FXML
     private JFXPasswordField cnvpass;
     @FXML
     private JFXPasswordField actuelPass;
-
     @FXML
     private JFXTextField txtshowActuel;
-
     @FXML
     private FontAwesomeIconView chkmotdepasseActuel;
-
     @FXML
     private JFXButton btnchgPass;
-
     @FXML
     private Pane paneNomProfil;
-
     @FXML
     private Button btnGenerale;
-
     @FXML
     private Button btnSécurité;
-
     @FXML
     private Pane PaneMotpass;
-
     @FXML
     private Pane panePrincipale;
-
     @FXML
     private Label lblfaible;
-
-    @FXML
-    private Circle circle;
-
     @FXML
     private FontAwesomeIconView chkmotdepasse;
-
     @FXML
     private FontAwesomeIconView chkmotdepasse2;
+    @FXML
+    private Button btnSupprimer;
+    /*@FXML
+    private ImageView Logout;
+    @FXML
+    private ImageView exit;*/
 
     private String photo = null;
     private File file;
@@ -163,11 +137,11 @@ public class ProfilPageController implements Initializable {
         txtshow.setVisible(false);
         txtshowc.setVisible(false);
         profildate.setVisible(false);
+        thximage.setVisible(false);
         informationMembre();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
 
         if (l.getImage_u() != null) {
-            System.out.println(l.getImage_u());
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
             //aspect 3D avec ombre pour l image
@@ -178,6 +152,17 @@ public class ProfilPageController implements Initializable {
             imagev.setEffect(new DropShadow(20, Color.BLACK));
             imagev.setImage(imagelog);
 
+        }
+        if (l.getImage_u().equals("")) {
+            Image defaultt;
+            if (l.getSexe_u().equals("Femme")) {
+                defaultt = new Image("images\\femme.png");
+                imagev.setImage(defaultt);
+            }
+            if (l.getSexe_u().equals("Homme")) {
+                defaultt = new Image("images\\homme.png");
+                imagev.setImage(defaultt);
+            }
         }
     }
 
@@ -254,12 +239,16 @@ public class ProfilPageController implements Initializable {
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
+        imagev.setVisible(true);
+        btnimage.setVisible(true);
     }
 
     @FXML
     void afficherOngletSecurité(ActionEvent event) {
         panePrincipale.setVisible(false);
         PaneMotpass.setVisible(true);
+        imagev.setVisible(false);
+        btnimage.setVisible(false);
     }
 
     //changer la photo de profil
@@ -399,4 +388,31 @@ public class ProfilPageController implements Initializable {
 
         }
     }
+
+    //supprimer son compte
+    @FXML
+    void supprimerCompte(ActionEvent event) {
+        MembreCRUD mr1 = new MembreCRUD();
+        Membre l = SessionInfo.getLoggedM();
+        mr1.supprimerMembre(l.getId_u());
+    }
+
+    /*
+     @FXML
+    void Deconnexion2(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+        mrc.Deconnexion();
+    }
+    
+    //fermer l application
+    @FXML
+    void Quitter(MouseEvent event) {
+        Platform.exit();
+        mrc.Deconnexion();
+
+    }*/
 }

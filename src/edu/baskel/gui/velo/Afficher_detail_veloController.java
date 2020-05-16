@@ -86,13 +86,15 @@ public class Afficher_detail_veloController implements Initializable {
     void acheterVelo(ActionEvent event) {
            int nums = Integer.parseInt(controller1.getEnteredText());
             VeloCRUD vc = new VeloCRUD();
-            vc.louerOuAcheterVelo(1, nums);
+            System.out.println("etat"+lbletat.getText());
             if(lbletat.getText().equals("Non Disponible")){
                 Alert alertAdded = new validationSaisie().getAlert("Erreur", "Ce vélo n'est pas disponible");
             alertAdded.showAndWait();
-            }
+            }else{
+                vc.louerOuAcheterVelo(1, nums);
             Alert alertAdded = new validationSaisie().getAlert("Succés", "Ce vélo est réservé pour votre achat");
             alertAdded.showAndWait();
+            }
             Stage stage = (Stage) achatbut.getScene().getWindow();
             // do what you have to do
             stage.close();

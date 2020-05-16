@@ -119,6 +119,7 @@ public class ModifSuppVeloController implements Initializable {
                     Stage stage = (Stage) editbutt.getScene().getWindow();
                      // do what you have to do
                     stage.close();
+                    controller1.afficher();
                
                 
             }

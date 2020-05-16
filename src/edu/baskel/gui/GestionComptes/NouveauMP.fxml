@@ -4,24 +4,43 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.NouveauMPController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.NouveauMPController">
    <children>
-      <JFXButton fx:id="btnConfirmation" layoutX="243.0" layoutY="224.0" onAction="#changerMP" text="Enregistrer" />
-      <Button fx:id="btnSidentifier2" layoutX="494.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backSidentifier2" text="S(identifier" />
-      <JFXTextField fx:id="txtm" editable="false" layoutX="204.0" layoutY="30.0" prefHeight="31.0" prefWidth="193.0" />
-      <Text layoutX="101.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau" />
-      <Text layoutX="101.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmer" />
-      <JFXTextField fx:id="txtshowpass" layoutX="205.0" layoutY="98.0" />
-      <JFXTextField fx:id="txtshowcpass" layoutX="205.0" layoutY="160.0" />
-      <JFXPasswordField fx:id="txtNvMp" layoutX="205.0" layoutY="98.0" prefHeight="31.0" prefWidth="193.0" />
-      <JFXPasswordField fx:id="txtCnvMp" layoutX="205.0" layoutY="160.0" onMouseClicked="#passStrength" prefHeight="31.0" prefWidth="193.0" />
-      <Label fx:id="lblfaible" layoutX="333.0" layoutY="102.0" prefHeight="21.0" prefWidth="43.0" />
-      <FontAwesomeIconView fx:id="chkmotdepasi" glyphName="EYE" layoutX="379.0" layoutY="120.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
-      <FontAwesomeIconView fx:id="chkCmotdepasi" glyphName="EYE" layoutX="379.0" layoutY="182.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" wrappingWidth="20.00000774860382" />
+      <JFXButton fx:id="btnConfirmation" layoutX="356.0" layoutY="394.0" onAction="#changerMP" style="-fx-background-color: #0096a4;" text="Enregistrer" textFill="WHITE" />
+      <JFXTextField fx:id="txtm" editable="false" layoutX="280.0" layoutY="185.0" prefHeight="31.0" prefWidth="193.0" />
+      <Text layoutX="177.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau" />
+      <Text layoutX="177.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmer" />
+      <JFXTextField fx:id="txtshowpass" layoutX="259.0" layoutY="253.0" prefHeight="31.0" prefWidth="286.0" />
+      <JFXTextField fx:id="txtshowcpass" layoutX="259.0" layoutY="315.0" prefHeight="31.0" prefWidth="286.0" />
+      <JFXPasswordField fx:id="txtNvMp" layoutX="259.0" layoutY="253.0" prefHeight="31.0" prefWidth="286.0" />
+      <JFXPasswordField fx:id="txtCnvMp" layoutX="259.0" layoutY="315.0" onMouseClicked="#passStrength" prefHeight="31.0" prefWidth="286.0" />
+      <Label fx:id="lblfaible" layoutX="481.0" layoutY="257.0" prefHeight="21.0" prefWidth="43.0" />
+      <FontAwesomeIconView fx:id="chkmotdepasi" glyphName="EYE" layoutX="530.0" layoutY="275.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
+      <FontAwesomeIconView fx:id="chkCmotdepasi" glyphName="EYE" layoutX="530.0" layoutY="337.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" wrappingWidth="19.99999901652336" />
+      <Separator layoutX="11.0" layoutY="66.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="11.0" layoutY="499.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Text layoutX="177.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez un nouveau mot de passe">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="24.0" layoutY="14.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/001-exit-1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="816.0" layoutY="523.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/exitt.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

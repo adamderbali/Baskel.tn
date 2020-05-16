@@ -5,19 +5,15 @@
  */
 package edu.baskel.services;
 
-import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reparateur;
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
