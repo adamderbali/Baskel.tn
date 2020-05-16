@@ -7,6 +7,7 @@ import edu.baskel.entities.Forum1;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import java.io.File;
@@ -23,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -41,25 +43,22 @@ public class ForumFXMLController implements Initializable {
 
     @FXML
     private JFXListView<Forum1> listeforum;
-
     @FXML
     private JFXTextArea message;
-
-    ForumCRUD fs = new ForumCRUD();
-
-    private List<Forum1> forum;
-
     @FXML
     private Label lbl_titr;
-
     @FXML
     private ImageView retouraffich;
-
+    @FXML
+    private Button btnSupprimer;
     @FXML
     private FontAwesomeIconView btnActualiser;
     MembreCRUD mc = new MembreCRUD();
-
+    ForumCRUD fs = new ForumCRUD();
+    private List<Forum1> forum;
     Membre m = SessionInfo.getLoggedM();
+    private static final String DEFAULT_CONTROL_INNER_BACKGROUND = "derive(-fx-base,80%)";
+    private static final String HIGHLIGHTED_CONTROL_INNER_BACKGROUND = "derive(#98E0FB, 50%)";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,6 +71,7 @@ public class ForumFXMLController implements Initializable {
                     protected void updateItem(Forum1 e, boolean btl) {
                         super.updateItem(e, btl);
                         if (e != null) {
+
                             Image IMAGE_RUBY = null;
                             if (e.getImage_uf() != null) {
                                 IMAGE_RUBY = new Image("file:/C:\\wamp\\www\\baskel\\images\\" + e.getImage_uf());
@@ -108,21 +108,21 @@ public class ForumFXMLController implements Initializable {
                                 public void handle(MouseEvent event) {
                                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                                         Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
-                                        if(m.getId_u()==M.getId_u()){
-                                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                                        alert.setTitle("Confirmation ");
-                                        alert.setHeaderText("Supprimer ce  commentaire !?");
-                                        alert.setContentText("OK?");
-                                        Optional<ButtonType> result = alert.showAndWait();
-                                        if (result.get() == ButtonType.OK) {
-                                            fs.supprimerForum(M);
-                                            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-                                            alert1.setHeaderText("Votre commentaire a été supprimé avec succés ");
-                                            Optional<ButtonType> result1 = alert1.showAndWait();
+                                        if (m.getId_u() == M.getId_u()) {
+                                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                            alert.setTitle("Confirmation ");
+                                            alert.setHeaderText("Supprimer ce  commentaire !?");
+                                            alert.setContentText("OK?");
+                                            Optional<ButtonType> result = alert.showAndWait();
+                                            if (result.get() == ButtonType.OK) {
+                                                fs.supprimerForum(M);
+                                                Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                                                alert1.setHeaderText("Votre commentaire a été supprimé avec succés ");
+                                                Optional<ButtonType> result1 = alert1.showAndWait();
+                                            } else {
+                                                System.out.println("Rien");
+                                            }
                                         } else {
-                                            System.out.println("Rien");
-                                        }
-                                        }else{
                                             InputValidation.notificationError("Commentaire", "Vous ne pouver pas supprimer les commentaires des autres membres");
                                         }
                                     }
@@ -134,6 +134,10 @@ public class ForumFXMLController implements Initializable {
                                         + " ,  DATE : " + e.getDate_f()
                                         + "\n" + "Commantaire :  \n " + e.getText()
                                 );
+                                if (fs.getId_u() == m.getId_u()) {
+                                    setStyle("-fx-control-inner-background: " + HIGHLIGHTED_CONTROL_INNER_BACKGROUND + ";");
+
+                                }
                             }
                         }
                     }
@@ -148,13 +152,39 @@ public class ForumFXMLController implements Initializable {
 
     @FXML
     void envoyer(MouseEvent event) throws NoSuchAlgorithmException, IOException {
-        java.util.Date date_util = new java.util.Date();
-        java.sql.Date datee = new java.sql.Date(date_util.getTime());
-        Forum1 f = new Forum1(0, m.getId_u(), message.getText(), datee.toString(), m.getImage_u());
-        fs.ajouterForum(f);
-        message.clear();
-        actua();;
+        if (AutoCompleteAdresse.nb(message.getText()) == true) {
+            java.util.Date date_util = new java.util.Date();
+            java.sql.Date datee = new java.sql.Date(date_util.getTime());
+            Forum1 f = new Forum1(0, m.getId_u(), message.getText(), datee.toString(), m.getImage_u());
+            fs.ajouterForum(f);
+            InputValidation.notificationsucces("Commentaire", "Votre commentaire a été ajouter avec succés");
+            message.clear();
+            actua();
+        } else {
+            InputValidation.notificationError("Commentaire", "Nous n'acceptons pas les gros mots, soyez responsable svp!");
+        }
+    }
 
+    @FXML
+    void SupprimerCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
+        Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+        if (m.getId_u() == M.getId_u()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation ");
+            alert.setHeaderText("Supprimer ce  commentaire !?");
+            alert.setContentText("OK?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                fs.supprimerForum(M);
+                Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                alert1.setHeaderText("Votre commentaire a été supprimé avec succés ");
+                Optional<ButtonType> result1 = alert1.showAndWait();
+            } else {
+                System.out.println("Rien");
+            }
+        } else {
+            InputValidation.notificationError("Commentaire", "Vous ne pouver pas supprimer les commentaires des autres membres");
+        }
     }
 
     @FXML
@@ -206,6 +236,10 @@ public class ForumFXMLController implements Initializable {
                                         + " ,  DATE : " + e.getDate_f()
                                         + "\n" + "Commantaire :  \n " + e.getText()
                                 );
+                                if (fs.getId_u() == m.getId_u()) {
+                                    setStyle("-fx-control-inner-background: " + HIGHLIGHTED_CONTROL_INNER_BACKGROUND + ";");
+
+                                }
                             }
                         }
                     }
@@ -265,6 +299,10 @@ public class ForumFXMLController implements Initializable {
                                         + " ,  DATE : " + e.getDate_f()
                                         + "\n" + "Commantaire :  \n " + e.getText()
                                 );
+                                if (fs.getId_u() == m.getId_u()) {
+                                    setStyle("-fx-control-inner-background: " + HIGHLIGHTED_CONTROL_INNER_BACKGROUND + ";");
+
+                                }
                             }
                         }
                     }

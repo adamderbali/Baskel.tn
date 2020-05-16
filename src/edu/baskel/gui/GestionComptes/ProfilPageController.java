@@ -318,11 +318,11 @@ public class ProfilPageController implements Initializable {
                             if (verifDate() == false) {
                                 InputValidation.notificationError("Date", "Saisissez une date valide");
                             } else {
-                                if (((!profilmail.getText().equals(l.getEmail_u())) && (mrc.VerificationExistence(l) == false))) {
-                                    InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
+                                if ((verifEmail.check(profilmail.getText())) == false) {
+                                    InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                 } else {
-                                    if ((verifEmail.check(profilmail.getText())) == false) {
-                                        InputValidation.notificationError("Email", "Saisissez une adresse email existante");
+                                    if ((/*(!profilmail.getText().equals(l.getEmail_u())) &&*/(mrc.VerificationExistence(l) == false))) {
+                                        InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                     } else {
 
                                         Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
