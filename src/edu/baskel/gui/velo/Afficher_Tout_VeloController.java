@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +28,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
@@ -69,6 +73,9 @@ public class Afficher_Tout_VeloController implements Initializable {
     
      @FXML
     private Button myvbutt;
+     ObservableList o;
+     @FXML
+    private TextField search;
 
     @FXML
     void afficherMesVelos(ActionEvent event) {
@@ -123,7 +130,7 @@ public class Afficher_Tout_VeloController implements Initializable {
         VeloCRUD Vc =new VeloCRUD();
         ArrayList av;
         av=(ArrayList) Vc.afficherTout();
-        ObservableList o;
+        
         o= FXCollections.observableArrayList(av);
         
         
@@ -207,7 +214,38 @@ public class Afficher_Tout_VeloController implements Initializable {
     
     
     
-    
+    @FXML
+    private void searchBox(KeyEvent event) {
+        FilteredList<Velo> filterData = new FilteredList<>(o, p -> true);
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(v -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newValue.toLowerCase();
+                if (v.getModel().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+                if (String.valueOf(v.getNum_serie()).indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                if (v.getMarque().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                return false;
+
+            });
+
+            SortedList<Velo> sortedList = new SortedList<>(filterData);
+            sortedList.comparatorProperty().bind(TabAffVelo.comparatorProperty());
+            TabAffVelo.setItems(sortedList);
+        });
+    }
     
     
     

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,5 +28,7 @@
       </TableView>
       <AnchorPane fx:id="detailWin" layoutX="44.0" layoutY="216.0" prefHeight="631.0" prefWidth="953.0" />
       <Button fx:id="myvbutt" layoutX="104.0" layoutY="52.0" mnemonicParsing="false" onAction="#afficherMesVelos" text="Mes vélos" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+      <TextField fx:id="search"  layoutX="826.0" layoutY="52.0" onKeyTyped="#searchBox" prefHeight="31.0" prefWidth="365.0" promptText=" Rechercher par marque, model et numéro de série"  />
+       
    </children>
 </AnchorPane>

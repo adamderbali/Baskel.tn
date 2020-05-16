@@ -127,11 +127,26 @@ public class ModifSuppVeloController implements Initializable {
 
     @FXML
     void supprimervelo(ActionEvent event) {
+            if (validationSaisie.confrimSuppression("Information", "Voulez-vous vraiment supprimer ce vélo?")) {
             int nums = Integer.parseInt(controller1.getEnteredText());
             VeloCRUD Vc = new VeloCRUD();
             Vc.supprimerVelo(nums);
             Alert alertAdded = new validationSaisie().getAlert("Succés de suppression", "Vélo supprimé");
             alertAdded.showAndWait();
+            try {
+             //System.exit(0);
+             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));
+             Scene redirection_scene = new Scene(redirection_parent);
+             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+             app_stage.setScene(redirection_scene);
+             app_stage.show();
+         } catch (IOException ex) {
+             ex.printStackTrace();
+         }
+            Stage stage = (Stage) suppbutt.getScene().getWindow();
+                     // do what you have to do
+                    stage.close();
+            }
     }
 
     @FXML

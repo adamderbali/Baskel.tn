@@ -8,6 +8,7 @@ package edu.baskel.gui.velo;
 import edu.baskel.entities.Reservation;
 import edu.baskel.services.ReservationCRUD;
 import edu.baskel.services.VeloCRUD;
+import edu.baskel.utils.PDFdoc;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
@@ -87,12 +88,14 @@ public class Afficher_mes_reservationsController implements Initializable {
                Alert alertChamps = new validationSaisie().getAlert("Echec", "Veuillez selectionner une réservation");
             alertChamps.showAndWait();
            }else{
+                if (validationSaisie.confrimSuppression("Information", "Voulez-vous vraiment supprimer cette réservation?")) {
                int id_res =TabAffResv.getSelectionModel().getSelectedItem().getId_res() ;
                ReservationCRUD rc = new ReservationCRUD();
                 rc.annulerReservation(id_res);
                  Alert alertAdded = new validationSaisie().getAlert("Succés d'annulation", "Réservation annulée");
                 alertAdded.showAndWait();
                 this.afficherReservation();
+                }
            }
     }
 
@@ -117,6 +120,9 @@ public class Afficher_mes_reservationsController implements Initializable {
         ObservableList o;
         o= FXCollections.observableArrayList(av);
         //Reservation r =(Reservation)av.get(0);
+        System.out.println("res"+av.toString());
+        System.out.println("res"+listToString(av));
+        PDFdoc.PDFwriter(listToString(av));
         System.out.println("55"+o);
         Colnums.setCellValueFactory(new PropertyValueFactory <>("num_serie"));
        
@@ -132,6 +138,14 @@ public class Afficher_mes_reservationsController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    public static String listToString(ArrayList o) {
+    String result = "";
+    for (int i = 0; i < o.size(); i++) {
+        result += "\n\n" + o.get(i);
+    }
+    return result;
+}
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
