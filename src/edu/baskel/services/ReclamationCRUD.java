@@ -5,23 +5,19 @@
  */
 package edu.baskel.services;
 
-import com.gluonhq.impl.charm.a.b.b.m;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reclamation;
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -98,6 +94,56 @@ public class ReclamationCRUD {
             System.out.println(ex.getMessage());
         }
         return listeRec2;
+    }
+     public List<Reclamation> Reclamation_traitè() {
+        List<Reclamation> Listrec_trait = new ArrayList<>();
+
+        try {
+            String request = "SELECT * FROM reclamation where etat_rec2='OLD'";
+            Statement st = cnxs.createStatement();
+            ResultSet re = st.executeQuery(request);
+            while (re.next()) {
+                Reclamation r = new Reclamation();
+                r.setId_rec(re.getInt("id_rec"));
+                r.setId_u(re.getInt("id_u"));
+                r.setObjet_rec(re.getString("objet_rec"));
+                r.setDate_rec(re.getDate("date_rec"));
+                r.setDesc_r(re.getString("desc_r"));
+                r.setId_ur(re.getInt("id_ur"));
+                r.setEtat_rec(re.getString("etat_rec"));
+                r.setEtat_rec2(re.getString("etat_rec2"));
+                r.setCondition(re.getInt("cond"));
+                Listrec_trait.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return Listrec_trait;
+    }
+     public List<Reclamation> Reclamation_non_traitè() {
+        List<Reclamation> Listrec_non_trait = new ArrayList<>();
+
+        try {
+            String request = "SELECT * FROM reclamation where etat_rec2='NEW'";
+            Statement st = cnxs.createStatement();
+            ResultSet re = st.executeQuery(request);
+            while (re.next()) {
+                Reclamation r = new Reclamation();
+                r.setId_rec(re.getInt("id_rec"));
+                r.setId_u(re.getInt("id_u"));
+                r.setObjet_rec(re.getString("objet_rec"));
+                r.setDate_rec(re.getDate("date_rec"));
+                r.setDesc_r(re.getString("desc_r"));
+                r.setId_ur(re.getInt("id_ur"));
+                r.setEtat_rec(re.getString("etat_rec"));
+                r.setEtat_rec2(re.getString("etat_rec2"));
+                r.setCondition(re.getInt("cond"));
+                Listrec_non_trait.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return Listrec_non_trait;
     }
     public void update_admin(){
         for(Reclamation rc:displayall_Rec_valide())
