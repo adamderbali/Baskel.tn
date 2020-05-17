@@ -45,7 +45,7 @@ import javafx.stage.Stage;
  * @author dell
  */
 public class SidentifierController implements Initializable {
-
+    
     @FXML
     private TextField txtutilisateur;
     @FXML
@@ -70,19 +70,19 @@ public class SidentifierController implements Initializable {
     private JFXButton btnsinscrire1;
     @FXML
     private Label CDutil;
-
+    
     Preferences preferences;
     private int idu;
     Connection cnx = null;
     PreparedStatement prep = null;
     ResultSet res = null;
     HistoriqueCRUD hh = new HistoriqueCRUD();
-
+    
     public SidentifierController() {
         cnx = ConnectionBD.getInstance().getCnx();
-
+        
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtshowmp.setVisible(false);
@@ -92,7 +92,7 @@ public class SidentifierController implements Initializable {
             if (preferences.get("txtutilisateur", null) != null && !preferences.get("txtutilisateur", null).isEmpty()) {
                 txtutilisateur.setText(preferences.get("txtutilisateur", null));
                 txtmotdepasse.setText(preferences.get("txtmotdepasse", null));
-
+                rememberMe.setSelected(true);
             }
         }
     }
@@ -120,21 +120,20 @@ public class SidentifierController implements Initializable {
         
         if (mr.Verification(txtutilisateur.getText(), InputValidation.HshPassword(txtmotdepasse.getText(), "MD5")) != null) {
             if (mr.ValidationBan(txtutilisateur.getText()) != 0) {
-
+                
                 if (rememberMe.isSelected()) {
                     preferences.put("txtutilisateur", txtutilisateur.getText());
                     preferences.put("txtmotdepasse", txtmotdepasse.getText());
-
+                    
                 } else {
                     preferences.put("txtutilisateur", "");
                     preferences.put("txtmotdepasse", "");
-
                 }
                 Stage stage = (Stage) rememberMe.getScene().getWindow();
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
-
+                    
                 } catch (IOException ex) {
                 }
                 Scene scene = new Scene(root);
@@ -148,7 +147,6 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
                 hh.UpdateLastCnx(iduser);
-                //hh.LastCnx();//histo
             } else {
                 InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
 
@@ -160,21 +158,19 @@ public class SidentifierController implements Initializable {
 
             //Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
             //alertnum.showAndWait();
-
         }
     }
-
+    
     @FXML
     private void handleButtonAction(MouseEvent event) {
     }
+    
 
-    //Lire COnd d utilisations + mail historique***********************
+    //Lire COnd d utilisations 
     @FXML
     void LireCondUtil(MouseEvent event) throws Exception {
         PDF.pdfRead();
-        //hh.LastCnx();
-        //hh.UpdateLastCnx(iduser);
-
+        
     }
 
 //redirection pasge d inscription membre
@@ -185,7 +181,7 @@ public class SidentifierController implements Initializable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
-
+        
     }
 
 //redirection page inscription membre
@@ -196,19 +192,19 @@ public class SidentifierController implements Initializable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
-
+        
     }
 
 //page mot de passe oublié
     @FXML
     public void motdepasseOubliéid(MouseEvent event) throws IOException {
-
+        
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("motdepasseoublié.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
-
+        
     }
 
     /*@FXML
@@ -216,5 +212,4 @@ public class SidentifierController implements Initializable {
         FacebookLog fl = new FacebookLog();
         fl.fb();
     }*/
-
 }

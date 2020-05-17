@@ -126,6 +126,8 @@ public class ProfilPageReparateurController implements Initializable {
     private FontAwesomeIconView chkmotdepasse2;
     @FXML
     private Button btnSupprimer;
+    @FXML
+    private JFXTextField txtEmailVerif;
 
     private String photo = null;
     private File file;
@@ -148,6 +150,8 @@ public class ProfilPageReparateurController implements Initializable {
         txtshowActuel.setVisible(false);
         txtshow.setVisible(false);
         txtshowc.setVisible(false);
+        txtEmailVerif.setVisible(false);
+
         informationReparateur();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         TextFields.bindAutoCompletion(adrloc, AutoCompleteAdresse.getAdrGov());
@@ -329,11 +333,11 @@ public class ProfilPageReparateurController implements Initializable {
                                 if (verifDate() == false) {
                                     InputValidation.notificationError("Date", "Saisissez une date valide");
                                 } else {
-                                    if (((!profilmail.getText().equals(l.getEmail_u())) && (mrc.VerificationExistence(l) == false))) {
-                                        InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
+                                    if ((verifEmail.check(profilmail.getText())) == false) {
+                                        InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                     } else {
-                                        if ((verifEmail.check(profilmail.getText())) == false) {
-                                            InputValidation.notificationError("Email", "Saisissez une adresse email existante");
+                                        if (((!profilmail.getText().equals(txtEmailVerif.getText())) &&(mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
+                                            InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                         } else {
 
                                             Reparateur rr = new Reparateur(adrloc.getText(), null, telpro.getText(), null, null,

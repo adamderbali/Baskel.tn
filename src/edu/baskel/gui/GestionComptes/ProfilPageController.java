@@ -115,6 +115,8 @@ public class ProfilPageController implements Initializable {
     private FontAwesomeIconView chkmotdepasse2;
     @FXML
     private Button btnSupprimer;
+    @FXML
+    private JFXTextField txtEmailVerif;
     /*@FXML
     private ImageView Logout;
     @FXML
@@ -138,6 +140,7 @@ public class ProfilPageController implements Initializable {
         txtshowc.setVisible(false);
         profildate.setVisible(false);
         thximage.setVisible(false);
+        txtEmailVerif.setVisible(false);
         informationMembre();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
 
@@ -181,6 +184,7 @@ public class ProfilPageController implements Initializable {
         nvdate.setValue(LocalDate.parse(l.getDate_u().toString()));
         profilteleph.setText(l.getNum_tel_u());
         thximage.setText(l.getImage_u());
+        txtEmailVerif.setText(l.getEmail_u());
     }
 
     @FXML
@@ -321,7 +325,7 @@ public class ProfilPageController implements Initializable {
                                 if ((verifEmail.check(profilmail.getText())) == false) {
                                     InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                 } else {
-                                    if ((/*(!profilmail.getText().equals(l.getEmail_u())) &&*/(mrc.VerificationExistence(l) == false))) {
+                                    if (((!profilmail.getText().equals(txtEmailVerif.getText())) &&(mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
                                         InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                     } else {
 

@@ -125,9 +125,11 @@ public class InscriptionController implements Initializable {
 
 // validation champs non vides
     public boolean validerchamps() {
+        String dateV = txtnaissance.getEditor().getText();
+
         if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
                 | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
-                | (txtconfirmation.getText().isEmpty())) {
+                | (txtconfirmation.getText().isEmpty()) | dateV.isEmpty()) {
             InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
             /*Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur d'ajout");

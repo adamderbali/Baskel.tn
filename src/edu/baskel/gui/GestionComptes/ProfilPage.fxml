@@ -76,6 +76,7 @@
             <Button fx:id="btnconfirmer1" layoutX="308.0" layoutY="380.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #0096a4;" text="Enregistrer les modifications" textFill="#fffefe" />
             <Button fx:id="btnmodifier1" layoutX="38.0" layoutY="380.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #0096a4;" text="Modifier les informations" textFill="WHITE" />
             <JFXTextField fx:id="profildate" editable="false" layoutX="490.0" layoutY="395.0" />
+            <JFXTextField fx:id="txtEmailVerif" layoutX="243.0" layoutY="159.0" />
          </children>
       </Pane>
       <Label fx:id="lblprofil" layoutX="415.0" layoutY="140.0" prefHeight="77.0" prefWidth="467.0" text="adam derbali">
@@ -91,7 +92,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Pane fx:id="PaneMotpass" layoutX="205.0" layoutY="214.0" prefHeight="409.0" prefWidth="828.0">
+      <Pane fx:id="PaneMotpass" layoutX="215.0" layoutY="224.0" prefHeight="409.0" prefWidth="828.0">
          <children>
             <Text layoutX="35.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau">
                <font>

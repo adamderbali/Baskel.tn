@@ -222,6 +222,23 @@ public class MembreCRUD {
         }
         return true;
     }
+    
+    // verifaction s il ya deja un compte avec cette adresse mail au changement des information du profil
+    public boolean VerificationExistencePArEmail(String email) {
+        try {
+            String sq1 = "SELECT * FROM membre where email_u=?";
+            PreparedStatement prep = cnx.prepareStatement(sq1);
+            prep.setString(1,email);
+            ResultSet res = prep.executeQuery();
+            if (res.next()) {
+
+                return false;
+            }
+        } catch (Exception ex) {
+
+        }
+        return true;
+    }
 
 // ajouter user a l inscription
     public Membre AddUser(Membre user) {

@@ -176,9 +176,8 @@ public class ForumFXMLController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 fs.supprimerForum(M);
-                Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-                alert1.setHeaderText("Votre commentaire a été supprimé avec succés ");
-                Optional<ButtonType> result1 = alert1.showAndWait();
+                InputValidation.notificationsucces("ommentaire", "Votre commentaire a été supprimer avec succée");
+                actua();
             } else {
                 System.out.println("Rien");
             }

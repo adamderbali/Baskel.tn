@@ -24,7 +24,7 @@
       <Label layoutX="28.0" layoutY="673.0" text="Remarque : pour supprimer un commantaires cliquer 2 fois ou" textFill="RED" />
       <Button layoutX="474.0" layoutY="595.0" mnemonicParsing="false" onMouseClicked="#envoyer" prefHeight="62.0" prefWidth="74.0" text="Publier" />
       <FontAwesomeIconView fx:id="btnActualiser" fill="WHITE" glyphName="REFRESH" layoutX="505.0" layoutY="50.0" onMouseClicked="#actualiser" size="25" />
-      <Button fx:id="btnSupprimer" layoutX="479.0" layoutY="679.0" mnemonicParsing="false" text="Supprimer" />
+      <Button fx:id="btnSupprimer" layoutX="479.0" layoutY="679.0" mnemonicParsing="false" onMouseClicked="#SupprimerCom" text="Supprimer" />
       <Label layoutX="28.0" layoutY="700.0" text="selectionner le commenraire et appuyer sur le bouton supprimer" textFill="RED" />
    </children>
 </AnchorPane>
