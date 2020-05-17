@@ -5,6 +5,7 @@
  */
 package edu.baskel.services;
 
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reservation;
 import edu.baskel.entities.Velo;
 
@@ -55,6 +56,52 @@ public class ReservationCRUD {
         }
         return listeReservation;
    }
+       /* Afficher liste des réservations par user*/
+    public List<Reservation> afficherReservParU(int id_u) {
+
+        List<Reservation> ListReservVelo= new ArrayList<>();
+
+        try { String requete = "SELECT * FROM velo v join reservation r on v.num_serie = r.num_serie join membre m on r.id_u = m.id_u WHERE v.id_u=" + id_u;
+         
+            Statement pst = cnx.createStatement();
+            ResultSet rs = pst.executeQuery(requete);
+
+            while (rs.next()) {
+              Velo v = new Velo();
+              v.setNum_serie(rs.getInt("num_serie"));
+              v.setId_u(rs.getInt("id_u"));
+              Membre m = new Membre();
+                m.setId_u(rs.getInt("id_u"));
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                System.out.println("1-------------" + rs.getString("nom_u"));
+
+                Reservation r = new Reservation();
+                r.setNum_serie(rs.getInt("num_serie"));
+                r.setDate_res(rs.getString("date_res"));
+                r.setNbr_heure(rs.getInt("nbr_heure"));
+                r.setDate_db_res(rs.getDate("date_db_res"));
+
+            /*    Participation p = new Participation();
+                p.setId_e(rs.getInt("id_e"));
+                p.setId_u(rs.getInt("id_u"));
+                p.setDate_insc(rs.getDate("date_insc"));
+                System.out.println("1-------------" + rs.getString("id_e"));
+                p.setMbre(m);*/
+                r.setMembre(m);
+                r.setVelo(v);
+                ListReservVelo.add(r);
+                System.out.println("-----------" + ListReservVelo);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return ListReservVelo;
+    }
     /*ajout*/
     public void ajouterReservation(Reservation r){
            try {

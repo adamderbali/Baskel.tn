@@ -65,6 +65,20 @@ public class Afficher_mes_reservationsController implements Initializable {
     private Button back;
     
     @FXML
+    private Button butpdf;
+
+    
+
+    @FXML
+    void genererPDF(ActionEvent event) {
+        ReservationCRUD Rc =new ReservationCRUD();
+        ArrayList av;
+         av=(ArrayList) Rc.afficherReservation(1);
+            PDFdoc.PDFwriter(listToString(av));
+            Alert alertAdded = new validationSaisie().getAlert("Succés", "Un PDF contenant cette liste a été généré");
+                alertAdded.showAndWait();
+    }
+    @FXML
     void retour(ActionEvent event) {
        
     try {
@@ -122,7 +136,7 @@ public class Afficher_mes_reservationsController implements Initializable {
         //Reservation r =(Reservation)av.get(0);
         System.out.println("res"+av.toString());
         System.out.println("res"+listToString(av));
-        PDFdoc.PDFwriter(listToString(av));
+        //PDFdoc.PDFwriter(listToString(av));
         System.out.println("55"+o);
         Colnums.setCellValueFactory(new PropertyValueFactory <>("num_serie"));
        

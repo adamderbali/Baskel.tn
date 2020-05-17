@@ -18,7 +18,9 @@ public class Reservation {
     private int nbr_heure;
     private Date date_db_res;
     private int id_res;
-
+    private Membre membre;
+    private Velo velo;
+    
     public Reservation() {
     }
 
@@ -38,6 +40,14 @@ public class Reservation {
         this.date_db_res = date_db_res;
         
     }
+     public Reservation(int id_u,int num_serie, String date_res, int nbr_heure, Date date_db_res,Membre membre) {
+        this.id_u = id_u;
+        this.num_serie = num_serie;
+        this.date_res = date_res;
+        this.nbr_heure = nbr_heure;
+        this.date_db_res = date_db_res;
+        this.membre = membre;
+    }
 
     public int getId_u() {
         return id_u;
@@ -53,6 +63,22 @@ public class Reservation {
 
     public void setNum_serie(int num_serie) {
         this.num_serie = num_serie;
+    }
+
+    public Membre getMembre() {
+        return membre;
+    }
+
+    public void setMembre(Membre membre) {
+        this.membre = membre;
+    }
+
+    public Velo getVelo() {
+        return velo;
+    }
+
+    public void setVelo(Velo velo) {
+        this.velo = velo;
     }
     
 

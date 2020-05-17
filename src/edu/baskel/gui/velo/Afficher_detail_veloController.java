@@ -6,12 +6,16 @@
 package edu.baskel.gui.velo;
 
 import edu.baskel.entities.Velo;
+import edu.baskel.services.MailReservation;
 import edu.baskel.services.VeloCRUD;
+import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,6 +107,7 @@ public class Afficher_detail_veloController implements Initializable {
     void reserverVélo(ActionEvent event) {
             Reserver_veloController controller2 = new Reserver_veloController(this);
                      controller2.showStage();
+            
     }
     Velo v;
      public String getEnteredText() {

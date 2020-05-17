@@ -6,8 +6,10 @@
 package edu.baskel.gui.velo;
 
 import edu.baskel.entities.Reservation;
+import edu.baskel.services.MailReservation;
 import edu.baskel.services.ReservationCRUD;
 import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
@@ -112,8 +114,25 @@ public class Reserver_veloController implements Initializable {
                 System.out.println("res"+r);
                 ReservationCRUD rc = new ReservationCRUD();
                 rc.ajouterReservation(r);
-                 Alert alertAdded = new validationSaisie().getAlert("Succés d'ajout", "Réservation ajoutée");
+                Alert alertAdded = new validationSaisie().getAlert("Succés d'ajout", "Réservation ajoutée");
                 alertAdded.showAndWait();
+                /*****mail*****/
+                System.out.println("aaaaaa");
+                //String adrmail =  SessionInfo.getLoggedM().getEmail_u();
+                System.out.println("bbbbb");
+                 MailReservation mr =new MailReservation();
+                 System.out.println("ccccc");
+                try {
+                    System.out.println("dddd");
+                     mr.envoyerMail("hela.maroub@esprit.tn","Votre réservation pour le vélo "+controller1.getEnteredText()+" a été effectuée , Voici les informations de votre réservation : \n Date de réservation: "+r.getDate_res()+"\n Nombre d'heures: "+r.getNbr_heure()+"\n Date affectée à la réservation :"+date_system );
+                      //Sm.envoiMail(em, "Nous vous informons que l'evenement :" + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + " de date :" + tableAffichage.getSelectionModel().getSelectedItem().getDate_e() + " que vous avez participé est annulé");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                   System.out.println("erreur mail");
+                 }
+                System.out.println("eeeee");
+                 Alert alertAddedm = new validationSaisie().getAlert("Succés d'ajout", "Un mail contenant les informations vous sera envoyé");
+                alertAddedm.showAndWait();
                 Stage stage = (Stage) reservbut.getScene().getWindow();
                  // do what you have to do
                  stage.close();
