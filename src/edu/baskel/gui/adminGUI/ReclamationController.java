@@ -10,15 +10,20 @@ import edu.baskel.entities.Reclamation;
 import edu.baskel.services.ReclamationCRUD;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 import javafx.scene.control.Label;
 
@@ -26,11 +31,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import javafx.util.converter.DefaultStringConverter;
+import org.controlsfx.control.Notifications;
 
 
 /**
@@ -49,11 +58,11 @@ public class ReclamationController implements Initializable {
     @FXML
     private TableColumn<Reclamation, Integer> T_id_rec;
     @FXML
-    private TableColumn<Reclamation, Integer> T_id_u;
+    private TableColumn<Reclamation, String> T_id_u;
     @FXML
     private TableColumn<Reclamation, String> T_desc;
     @FXML
-    private TableColumn<Reclamation, Integer> T_id_ur;
+    private TableColumn<Reclamation, String> T_id_ur;
     @FXML
     private TableColumn<Reclamation, String> T_valida;
     @FXML
@@ -102,9 +111,9 @@ public class ReclamationController implements Initializable {
         Choix2.add("Valide");
         Choix2.add("Non_Valide");
         T_id_rec.setCellValueFactory(new PropertyValueFactory<>("id_rec"));
-        T_id_u.setCellValueFactory(new PropertyValueFactory<>("id_u"));
+        T_id_u.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getReclamateur().getNom_u() + " " + p.getValue().getReclamateur().getPrenom_u()));
         T_desc.setCellValueFactory(new PropertyValueFactory<>("desc_r"));
-        T_id_ur.setCellValueFactory(new PropertyValueFactory<>("id_ur"));
+        T_id_ur.setCellValueFactory((a) -> new ReadOnlyStringWrapper(a.getValue().getACCUSATEUR().getNom_u() + " " + a.getValue().getACCUSATEUR().getPrenom_u()));
         T_valida.setCellValueFactory(new PropertyValueFactory<>("etat_rec"));
         T_valida.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(),Choix2));
         T_valida.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Reclamation, String>>() {
@@ -168,9 +177,9 @@ public class ReclamationController implements Initializable {
         Choix2.add("Valide");
         Choix2.add("Non_Valide");*/
         T_id_rec.setCellValueFactory(new PropertyValueFactory<>("id_rec"));
-        T_id_u.setCellValueFactory(new PropertyValueFactory<>("id_u"));
+        T_id_u.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getReclamateur().getNom_u() + " " + p.getValue().getReclamateur().getPrenom_u()));
         T_desc.setCellValueFactory(new PropertyValueFactory<>("desc_r"));
-        T_id_ur.setCellValueFactory(new PropertyValueFactory<>("id_ur"));
+        T_id_ur.setCellValueFactory((a) -> new ReadOnlyStringWrapper(a.getValue().getACCUSATEUR().getNom_u() + " " + a.getValue().getACCUSATEUR().getPrenom_u()));
         /*T_valida.setCellValueFactory(new PropertyValueFactory<>("etat_rec"));
         T_valida.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(),Choix2));
         T_valida.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Reclamation, String>>() {
@@ -217,9 +226,9 @@ public class ReclamationController implements Initializable {
         Choix2.add("Valide");
         Choix2.add("Non_Valide");*/
         T_id_rec.setCellValueFactory(new PropertyValueFactory<>("id_rec"));
-        T_id_u.setCellValueFactory(new PropertyValueFactory<>("id_u"));
+        T_id_u.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getReclamateur().getNom_u() + " " + p.getValue().getReclamateur().getPrenom_u()));
         T_desc.setCellValueFactory(new PropertyValueFactory<>("desc_r"));
-        T_id_ur.setCellValueFactory(new PropertyValueFactory<>("id_ur"));
+        T_id_ur.setCellValueFactory((a) -> new ReadOnlyStringWrapper(a.getValue().getACCUSATEUR().getNom_u() + " " + a.getValue().getACCUSATEUR().getPrenom_u()));
         /*T_valida.setCellValueFactory(new PropertyValueFactory<>("etat_rec"));
         T_valida.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(),Choix2));
         T_valida.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Reclamation, String>>() {
@@ -268,12 +277,46 @@ public class ReclamationController implements Initializable {
 
     @FXML
     private void Modifier(ActionEvent event) {
+        Image image = new Image("/images/icons8-ok-128.png", true);
+
         ReclamationCRUD Rc = new ReclamationCRUD();
         
         Reclamation c = new Reclamation(tf_valadition.getText(),tf_etat.getText(),recla.getSelectionModel().getSelectedItem().getId_rec());
         Rc.valider_admin(c);
+        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText(" Vous voulez envoyer cette reclamation ?");
+                    alert.setContentText(" Appuyez vous sur OK si vous etes d'accord ");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+        Rc.valider_admin(c);
+        Notifications notificationBuilder = Notifications.create()
+                                .text(" Votre Modification a été effectuée").title("Modification").graphic(new ImageView(image)).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Done ! ");
+                            }
+
+                        });
+                        notificationBuilder.show();
+                    if (result.get() == ButtonType.CANCEL){
+                        Notifications notificationBuilder2 = Notifications.create()
+                                .text("  Votre Modification est annulée ").title("Modification").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Modification annulèe !");
+                            }
+
+                        });
+                        notificationBuilder2.showInformation();
+                    }
+                    }*/
     }
 
    
     
 }
+

@@ -23,6 +23,38 @@ public class Reclamation {
     private int id_ur;//
     private String etat_rec2;
     private int condition;
+    private Membre ACCUSATEUR;
+    private Membre Reclamateur;
+
+    public Reclamation(String desc_r, int id_rec, Date date_rec, String etat_rec, String objet_rec, int id_u, int id_ur, String etat_rec2, int condition, Membre membre) {
+        this.desc_r = desc_r;
+        this.id_rec = id_rec;
+        this.date_rec = date_rec;
+        this.etat_rec = etat_rec;
+        this.objet_rec = objet_rec;
+        this.id_u = id_u;
+        this.id_ur = id_ur;
+        this.etat_rec2 = etat_rec2;
+        this.condition = condition;
+    }
+
+    public Membre getACCUSATEUR() {
+        return ACCUSATEUR;
+    }
+
+    public void setACCUSATEUR(Membre ACCUSATEUR) {
+        this.ACCUSATEUR = ACCUSATEUR;
+    }
+
+    public Membre getReclamateur() {
+        return Reclamateur;
+    }
+
+    public void setReclamateur(Membre Reclamateur) {
+        this.Reclamateur = Reclamateur;
+    }
+
+   
 
     public Reclamation() {
     }

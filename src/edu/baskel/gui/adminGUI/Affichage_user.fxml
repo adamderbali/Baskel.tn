@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -19,34 +21,48 @@
             <TableColumn fx:id="email_user" prefWidth="394.0" text="Email" />
         </columns>
       </TableView>
-      <TextField fx:id="tf_nom_user" editable="false" layoutX="32.0" layoutY="482.0" promptText="Nom_user" />
-      <TextField fx:id="tf_prenom_user" editable="false" layoutX="32.0" layoutY="541.0" promptText="Prenom_user" />
-      <TextField fx:id="tf_email_user" editable="false" layoutX="32.0" layoutY="647.0" promptText="email_user" />
-      <Button fx:id="btn_rec" layoutX="442.0" layoutY="727.0" mnemonicParsing="false" onAction="#send_reclamation" prefHeight="65.0" prefWidth="187.0" text="Singaler" />
-      <TextField fx:id="tf_adresse_user" editable="false" layoutX="32.0" layoutY="593.0" promptText="adresse_user" />
-      <Label fx:id="tf_titre_rec" layoutX="303.0" layoutY="331.0" prefHeight="32.0" prefWidth="464.0" text="Votre reclamation nous interesse...">
+      <Button fx:id="btn_rec" layoutX="436.0" layoutY="744.0" mnemonicParsing="false" onAction="#send_reclamation" prefHeight="65.0" prefWidth="187.0" text="Singaler" />
+      <Label fx:id="tf_titre_rec" layoutX="406.0" layoutY="341.0" prefHeight="32.0" prefWidth="464.0" text="Votre reclamation nous interesse...">
          <font>
             <Font name="Agency FB" size="38.0" />
          </font>
       </Label>
-      <Label fx:id="label_aqui" layoutX="24.0" layoutY="403.0" prefHeight="51.0" prefWidth="195.0" text="A Qui Vous Reclamer ">
+      <Label fx:id="label_aqui" layoutX="22.0" layoutY="367.0" prefHeight="51.0" prefWidth="195.0" text="A Qui Vous Reclamer ">
          <font>
             <Font name="Agency FB Bold" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="label_objet" layoutX="303.0" layoutY="408.0" prefHeight="39.0" prefWidth="123.0" text="Objet : ">
+      <Label fx:id="label_objet" layoutX="406.0" layoutY="418.0" prefHeight="39.0" prefWidth="123.0" text="Objet : ">
          <font>
             <Font name="Agency FB Bold" size="32.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="tf_objet_rec" layoutX="384.0" layoutY="407.0" prefHeight="39.0" prefWidth="424.0" promptText="Saisie votre objet" />
-      <Label fx:id="label_desc_rec" layoutX="305.0" layoutY="480.0" prefHeight="39.0" prefWidth="159.0" text="Description : ">
+      <JFXTextField fx:id="tf_objet_rec" layoutX="487.0" layoutY="417.0" prefHeight="39.0" prefWidth="547.0" promptText="Saisie votre objet" />
+      <Label fx:id="label_desc_rec" layoutX="408.0" layoutY="490.0" prefHeight="39.0" prefWidth="159.0" text="Description : ">
          <font>
             <Font name="Agency FB Bold" size="32.0" />
          </font>
       </Label>
-      <JFXTextArea fx:id="textarea_rec" focusColor="#ffee73" layoutX="305.0" layoutY="538.0" prefHeight="168.0" prefWidth="570.0" promptText="Saisie Votre Description" />
+      <JFXTextArea fx:id="textarea_rec" focusColor="#ffee73" layoutX="408.0" layoutY="534.0" prefHeight="182.0" prefWidth="628.0" promptText="Saisie Votre Description" />
       <Label fx:id="text" layoutX="178.0" layoutY="767.0" prefHeight="18.0" prefWidth="5.0" />
-      <TextField fx:id="search_user" layoutX="354.0" layoutY="31.0" onKeyTyped="#searchBox" prefHeight="26.0" prefWidth="338.0" />
+      <TextField fx:id="search_user" layoutX="312.0" layoutY="18.0" onKeyTyped="#searchBox" prefHeight="39.0" prefWidth="380.0" promptText="Rechercher" />
+      <ImageView fitHeight="39.0" fitWidth="38.0" layoutX="268.0" layoutY="438.0">
+         <image>
+            <Image url="@../../../../images/user_50px.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="268.0" layoutY="534.0">
+         <image>
+            <Image url="@../../../../images/home_50px.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="30.0" layoutX="271.0" layoutY="616.0">
+         <image>
+            <Image url="@../../../../images/email_50px.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="tf_nom_user" editable="false" layoutX="23.0" layoutY="444.0" prefHeight="26.0" prefWidth="245.0" promptText="Name_User" />
+      <JFXTextField fx:id="tf_adresse_user" editable="false" layoutX="23.0" layoutY="536.0" prefHeight="26.0" prefWidth="245.0" promptText="Adresse_User" />
+      <JFXTextField fx:id="tf_email_user" editable="false" layoutX="22.0" layoutY="618.0" prefHeight="26.0" prefWidth="245.0" promptText="Email_User" />
    </children>
 </AnchorPane>

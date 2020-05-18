@@ -70,7 +70,7 @@
          </children>
       </Pane>
       <Button fx:id="bt_modif" layoutX="579.0" layoutY="746.0" mnemonicParsing="false" onAction="#Modifier" prefHeight="39.0" prefWidth="181.0" text="Modifier" />
-      <JFXTextField fx:id="tf_valadition" layoutX="382.0" layoutY="702.0" />
-      <JFXTextField fx:id="tf_etat" layoutX="770.0" layoutY="702.0" />
+      <JFXTextField fx:id="tf_valadition" disable="true" editable="false" layoutX="382.0" layoutY="702.0" opacity="0.0" />
+      <JFXTextField fx:id="tf_etat" disable="true" editable="false" layoutX="770.0" layoutY="702.0" opacity="0.0" />
    </children>
 </AnchorPane>

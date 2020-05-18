@@ -35,7 +35,7 @@ public class ReclamationCRUD {
         List<Reclamation> listeRecl = new ArrayList<>();
 
         try {
-            String request = "SELECT * FROM reclamation";
+            String request = "SELECT m.* , r.* ,mr.id_u as id_ur, mr.nom_u as nom_ur,mr.prenom_u as prenom_ur,mr.adresse_u as adresse_ur, mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur, mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur FROM membre m join reclamation r on m.id_u = r.id_u join membre mr on mr.id_u=r.id_ur";
             Statement st = cnxs.createStatement();
             ResultSet re = st.executeQuery(request);
             while (re.next()) {
@@ -48,6 +48,32 @@ public class ReclamationCRUD {
                 r.setId_ur(re.getInt("id_ur"));
                 r.setEtat_rec(re.getString("etat_rec"));
                 r.setEtat_rec2(re.getString("etat_rec2"));
+                Membre m = new Membre();
+                
+                m.setId_u(re.getInt("id_u"));
+                m.setNom_u(re.getString("nom_u"));
+                m.setPrenom_u(re.getString("prenom_u"));
+                m.setAdresse_u(re.getString("adresse_u"));
+                m.setEmail_u(re.getString("email_u"));
+                m.setSexe_u(re.getString("sexe_u"));
+                m.setDate_u(re.getDate("date_u"));
+                m.setMot_passe_u(re.getString("mot_passe_u"));
+                m.setNum_tel_u(re.getString("num_tel_u"));
+                m.setImage_u(re.getString("image_u"));
+                m.setType_u(re.getString("type_u"));
+                Membre mr = new Membre(); 
+                mr.setId_u(re.getInt("id_ur"));
+                mr.setNom_u(re.getString("nom_ur"));
+                mr.setPrenom_u(re.getString("prenom_ur"));
+                mr.setAdresse_u(re.getString("adresse_ur"));
+                mr.setEmail_u(re.getString("email_ur"));
+                mr.setSexe_u(re.getString("sexe_ur"));
+                mr.setDate_u(re.getDate("date_ur"));
+                mr.setMot_passe_u(re.getString("mot_passe_ur"));
+                mr.setNum_tel_u(re.getString("num_tel_ur"));
+                mr.setImage_u(re.getString("image_ur"));
+                mr.setType_u(re.getString("type_ur"));
+                
                 
                 
                 /*try {
@@ -55,6 +81,8 @@ public class ReclamationCRUD {
                 } catch (ParseException ex) {
                     System.err.println(ex.getMessage());
                 }*/
+                r.setReclamateur(m);
+                r.setACCUSATEUR(mr);
                 listeRecl.add(r);
 
             }
@@ -99,7 +127,7 @@ public class ReclamationCRUD {
         List<Reclamation> Listrec_trait = new ArrayList<>();
 
         try {
-            String request = "SELECT * FROM reclamation where etat_rec2='OLD'";
+            String request = "SELECT m.* , r.* ,mr.id_u as id_ur, mr.nom_u as nom_ur,mr.prenom_u as prenom_ur,mr.adresse_u as adresse_ur, mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur, mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur FROM membre m join reclamation r on m.id_u = r.id_u join membre mr on mr.id_u=r.id_ur where etat_rec2='OLD'";
             Statement st = cnxs.createStatement();
             ResultSet re = st.executeQuery(request);
             while (re.next()) {
@@ -113,6 +141,41 @@ public class ReclamationCRUD {
                 r.setEtat_rec(re.getString("etat_rec"));
                 r.setEtat_rec2(re.getString("etat_rec2"));
                 r.setCondition(re.getInt("cond"));
+                Membre m = new Membre();
+                
+                m.setId_u(re.getInt("id_u"));
+                m.setNom_u(re.getString("nom_u"));
+                m.setPrenom_u(re.getString("prenom_u"));
+                m.setAdresse_u(re.getString("adresse_u"));
+                m.setEmail_u(re.getString("email_u"));
+                m.setSexe_u(re.getString("sexe_u"));
+                m.setDate_u(re.getDate("date_u"));
+                m.setMot_passe_u(re.getString("mot_passe_u"));
+                m.setNum_tel_u(re.getString("num_tel_u"));
+                m.setImage_u(re.getString("image_u"));
+                m.setType_u(re.getString("type_u"));
+                Membre mr = new Membre(); 
+                mr.setId_u(re.getInt("id_ur"));
+                mr.setNom_u(re.getString("nom_ur"));
+                mr.setPrenom_u(re.getString("prenom_ur"));
+                mr.setAdresse_u(re.getString("adresse_ur"));
+                mr.setEmail_u(re.getString("email_ur"));
+                mr.setSexe_u(re.getString("sexe_ur"));
+                mr.setDate_u(re.getDate("date_ur"));
+                mr.setMot_passe_u(re.getString("mot_passe_ur"));
+                mr.setNum_tel_u(re.getString("num_tel_ur"));
+                mr.setImage_u(re.getString("image_ur"));
+                mr.setType_u(re.getString("type_ur"));
+                
+                
+                
+                /*try {
+                    r.setDate_rec(new SimpleDateFormat("dd/MM/yyyy").parse(re.getString("date_rec")));
+                } catch (ParseException ex) {
+                    System.err.println(ex.getMessage());
+                }*/
+                r.setReclamateur(m);
+                r.setACCUSATEUR(mr);
                 Listrec_trait.add(r);
             }
         } catch (SQLException ex) {
@@ -124,7 +187,7 @@ public class ReclamationCRUD {
         List<Reclamation> Listrec_non_trait = new ArrayList<>();
 
         try {
-            String request = "SELECT * FROM reclamation where etat_rec2='NEW'";
+            String request = "SELECT m.* , r.* ,mr.id_u as id_ur, mr.nom_u as nom_ur,mr.prenom_u as prenom_ur,mr.adresse_u as adresse_ur, mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur, mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur FROM membre m join reclamation r on m.id_u = r.id_u join membre mr on mr.id_u=r.id_ur where etat_rec2='NEW'";
             Statement st = cnxs.createStatement();
             ResultSet re = st.executeQuery(request);
             while (re.next()) {
@@ -138,6 +201,41 @@ public class ReclamationCRUD {
                 r.setEtat_rec(re.getString("etat_rec"));
                 r.setEtat_rec2(re.getString("etat_rec2"));
                 r.setCondition(re.getInt("cond"));
+                Membre m = new Membre();
+                
+                m.setId_u(re.getInt("id_u"));
+                m.setNom_u(re.getString("nom_u"));
+                m.setPrenom_u(re.getString("prenom_u"));
+                m.setAdresse_u(re.getString("adresse_u"));
+                m.setEmail_u(re.getString("email_u"));
+                m.setSexe_u(re.getString("sexe_u"));
+                m.setDate_u(re.getDate("date_u"));
+                m.setMot_passe_u(re.getString("mot_passe_u"));
+                m.setNum_tel_u(re.getString("num_tel_u"));
+                m.setImage_u(re.getString("image_u"));
+                m.setType_u(re.getString("type_u"));
+                Membre mr = new Membre(); 
+                mr.setId_u(re.getInt("id_ur"));
+                mr.setNom_u(re.getString("nom_ur"));
+                mr.setPrenom_u(re.getString("prenom_ur"));
+                mr.setAdresse_u(re.getString("adresse_ur"));
+                mr.setEmail_u(re.getString("email_ur"));
+                mr.setSexe_u(re.getString("sexe_ur"));
+                mr.setDate_u(re.getDate("date_ur"));
+                mr.setMot_passe_u(re.getString("mot_passe_ur"));
+                mr.setNum_tel_u(re.getString("num_tel_ur"));
+                mr.setImage_u(re.getString("image_ur"));
+                mr.setType_u(re.getString("type_ur"));
+                
+                
+                
+                /*try {
+                    r.setDate_rec(new SimpleDateFormat("dd/MM/yyyy").parse(re.getString("date_rec")));
+                } catch (ParseException ex) {
+                    System.err.println(ex.getMessage());
+                }*/
+                r.setReclamateur(m);
+                r.setACCUSATEUR(mr);
                 Listrec_non_trait.add(r);
             }
         } catch (SQLException ex) {

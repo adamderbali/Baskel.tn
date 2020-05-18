@@ -71,13 +71,11 @@ public class Affichage_userController implements Initializable {
     @FXML
     private TableColumn<Membre, String> email_user;
     @FXML
-    private TextField tf_nom_user;
+    private JFXTextField tf_nom_user;
     @FXML
-    private TextField tf_prenom_user;
+    private JFXTextField tf_email_user;
     @FXML
-    private TextField tf_email_user;
-    @FXML
-    private TextField tf_adresse_user;
+    private JFXTextField tf_adresse_user;
     @FXML
     private Button btn_rec;
     @FXML
@@ -124,8 +122,8 @@ public class Affichage_userController implements Initializable {
         user = table_user.getSelectionModel().getSelectedItem();
 
         if (user != null) {
-            tf_nom_user.setText(user.getNom_u());
-            tf_prenom_user.setText(user.getPrenom_u());
+            tf_nom_user.setText(user.getNom_u()+" "+user.getPrenom_u());
+            //tf_prenom_user.setText(user.getPrenom_u());
             tf_email_user.setText(user.getEmail_u());
             tf_adresse_user.setText(user.getAdresse_u());
             //tf_date_user.set(user.getDate_u());
