@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -35,18 +38,26 @@ public class ParticipationCrud {
     }
 /* Ajout participation*/
     public void ajouterParticipation(Participation p) {
-
+        // Evenement e = new Evenement();
         try {
             String req = "INSERT INTO participation (id_u,id_e)"
                     + "VALUES (?,?)";
-
             PreparedStatement pst = cnx.prepareStatement(req);
             /*    pst.setInt(1,p.getId_user());*/
             pst.setInt(1, p.getId_u());
             pst.setInt(2, p.getId_e());
-
             pst.executeUpdate();
-            System.out.println("Participation added!");
+            System.out.println("Participation added!"); 
+            
+          /*  String req1="UPDATE participation SET etat_p=? WHERE id_e=? AND id_u=?";
+            System.out.println("-----"+req1);
+            PreparedStatement pst1 = cnx.prepareStatement(req1);
+            pst1.setString(1,"Vous etes deja participant");
+            pst1.setInt(2,p.getId_e());
+            pst1.setInt(3,p.getId_u());
+            pst1.executeUpdate();
+            System.out.println("-----------okokok");*/
+           
 
         } catch (SQLException ex) {
             System.err.println("Erreur d'insertion");
@@ -113,12 +124,18 @@ public class ParticipationCrud {
                 e.setDate_e(rs.getString("date_e"));
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e"));
+                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                e.getImage().setFitWidth(210);
+                e.getImage().setFitHeight(110);
 
                 Participation p = new Participation();
 
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 p.setDate_insc(rs.getDate("date_insc"));
+                p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                p.getImage().setFitWidth(200);
+                p.getImage().setFitHeight(110);
 
                 p.setEvent(e);
 
@@ -355,6 +372,9 @@ public class ParticipationCrud {
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
                 e.setDescription_e(rs.getString("description_e"));
+                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                e.getImage().setFitWidth(200);
+                e.getImage().setFitHeight(110);
                 
                 
                 Participation p = new Participation();
@@ -362,6 +382,7 @@ public class ParticipationCrud {
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 p.setEvent(e);
+               
                 
                 ListEmailEventDay.add(p);
                 System.out.println("-------------"+ListEmailEventDay.toString());
@@ -404,6 +425,10 @@ public class ParticipationCrud {
    
         }
     
+     
+     
+     
+     
 
     }
     

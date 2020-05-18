@@ -100,8 +100,8 @@ public class SendMail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(monCompte));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recp) );
-            message.setSubject("Annulation de l'evenement");
-            message.setSubject("Annulation de l'evenement");
+            message.setSubject("Rappel");
+            message.setSubject("Rappel");
             message.setText("Cher membre nous vous rappelons que  l'événement auquel vous souhaitez participer aura lieu demain");
             return message;
         } catch (AddressException ex) {

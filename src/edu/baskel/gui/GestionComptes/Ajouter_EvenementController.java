@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -32,6 +33,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import edu.baskel.utils.validationSaisie;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import org.controlsfx.control.textfield.TextFields;
 
 public class Ajouter_EvenementController implements Initializable {
@@ -62,18 +68,42 @@ public class Ajouter_EvenementController implements Initializable {
 
     private Image image;
 
-    
+    @FXML
+    private JFXButton idRetour;
+
     @FXML
     private JFXTextField txtLieu;
-  
 
-    public Ajouter_EvenementController() {
+    private Stage thisStage;
 
+    private final List_Event_Add_ParticipationController controller1;
+
+    public Ajouter_EvenementController(List_Event_Add_ParticipationController controller1) {
+        this.controller1 = controller1;
+        thisStage = new Stage();
+        // Load the FXML file
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Ajouter_Evenement.fxml"));
+
+            // Set this class as the controller
+            loader.setController(this);
+
+            // Load the scene
+            thisStage.setScene(new Scene(loader.load()));
+
+            // Setup the window/stage
+            //thisStage.setTitle("Passing Controllers Example - Layout2");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void showStage() {
+        thisStage.showAndWait();
+    }
+
+
     /* Ajout evenement*/
-    
-   
     @FXML
     void ajouterEvenement(ActionEvent event) {
 
@@ -81,37 +111,37 @@ public class Ajouter_EvenementController implements Initializable {
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
         if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-             validationSaisie.notifInfo("Echec", "Tous les champs doivent etre saisis");
-       
-         
+            validationSaisie.notifInfo("Echec", "Tous les champs doivent etre saisis");
+
         } else {
             if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
 
                 System.out.println("------------------");
-                validationSaisie.notifInfo("Erreur","La date saisie doit etre superieur à" + date_system );
+                validationSaisie.notifInfo("Erreur", "La date saisie doit être au delà de" + date_system);
 
             } else {
-              
+
                 EvenementCRUD Ec = new EvenementCRUD();
                 Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
                         getText(), pathE.getText());
-                Ec.ajouterEvenement(e);  
-              
-                validationSaisie.notifConfirm("ok", "Evenement ajouté");
+                Ec.ajouterEvenement(e);
                 txtNom.clear();
                 txtLieu.clear();
                 txtDate.setValue(null);
                 txtDescription.clear();
                 pathE.clear();
                 img.setVisible(false);
+                   Stage stage = (Stage) idRetour.getScene().getWindow();
+                    stage.close();
+                controller1.actualiser();
+                  validationSaisie.notifConfirm("ok", "Evenement ajouté");
 
             }
         }
 
     }
 
-
-     @FXML
+    @FXML
 
     void telecharger(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -131,12 +161,18 @@ public class Ajouter_EvenementController implements Initializable {
 
         }
     }
+
+    @FXML
+    void retour(ActionEvent event) {
+        Stage stage = (Stage) idRetour.getScene().getWindow();
+        stage.close();
+        controller1.actualiser();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
-    
-    }
 
     }
 
-
+}

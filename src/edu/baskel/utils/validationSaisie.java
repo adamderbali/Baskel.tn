@@ -146,7 +146,7 @@ public class validationSaisie {
                .title(mes)
                .text(message)
                //.graphic(new ImageView(img))
-               .hideAfter(Duration.seconds(5))
+               .hideAfter(Duration.seconds(10))
                .position(Pos.CENTER)
                .onAction(new EventHandler<ActionEvent>() {
            @Override

@@ -6,6 +6,7 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
 import edu.baskel.utils.validationSaisie;
@@ -15,11 +16,16 @@ import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -49,6 +55,11 @@ public class Annulation_participationController implements Initializable {
 
     @FXML
     private TableColumn<Participation, String> colImage;
+     @FXML
+    private TableColumn<Participation, String> colDatePar;
+      @FXML
+    private TextField search;
+    
 
     @FXML
     private JFXButton participer;
@@ -68,7 +79,8 @@ public class Annulation_participationController implements Initializable {
         colLieu.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDate.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));
         colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
-        //   colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colDatePar.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
         tableAffichage.setItems(obser);
 
     }
@@ -77,25 +89,29 @@ public class Annulation_participationController implements Initializable {
     void annulerParticipation(ActionEvent event) {
 
         ParticipationCrud Pc = new ParticipationCrud();
-        System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+    //    System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+          if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
+            validationSaisie.notif("Participation", "Vous devez selectionné un evenement");}
+          else{
         if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
             if (Pc.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem()) == true)
             {    System.out.println("++++++OK oK");
                 tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
                 validationSaisie.notifConfirm("ok", "Participation annulée");
-                actualiser();
                 System.out.println("ok--------------------");
+                actualiser();
             }
             else {
                     System.out.println("----------erreur");
                     }
 
         }
-        
+          }
        
     }
 
     private void actualiser() {
+        
         ParticipationCrud parList = new ParticipationCrud();
         List<Participation> partListU = parList.displayByUser(7);
         ObservableList obser;
@@ -106,14 +122,53 @@ public class Annulation_participationController implements Initializable {
         colLieu.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDate.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));
         colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
-        //   colImage.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getImage_e()));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colDatePar.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
 
+    }
+    
+    @FXML
+    private void searchBox(KeyEvent event) {
+        ParticipationCrud parList = new ParticipationCrud();
+        List<Participation> partListU = parList.displayByUser(7);
+        ObservableList obser;
+        obser = FXCollections.observableArrayList(partListU);
+        FilteredList<Participation> filterData = new FilteredList<>(obser, p -> true);
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(e -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newValue.toLowerCase();
+                if (e.getEvent().getNom_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+                if (e.getEvent().getDate_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                if (e.getEvent().getLieu_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                return false;
+
+            });
+
+            SortedList<Participation> sortedList = new SortedList<>(filterData);
+            sortedList.comparatorProperty().bind(tableAffichage.comparatorProperty());
+            tableAffichage.setItems(sortedList);
+        });
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         affichageEvenementP();
+        actualiser();
 
     }
 

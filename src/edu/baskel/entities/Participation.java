@@ -7,6 +7,7 @@ package edu.baskel.entities;
 
 import java.util.Date;
 import java.util.logging.Logger;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -18,7 +19,8 @@ public class Participation {
     private Date date_insc;
     private Membre mbre;
     private Evenement event;
-
+     private ImageView image;
+ 
     public Participation(int id_e, int id_u, Date date_insc, Membre mbre, Evenement event) {
         this.id_e = id_e;
         this.id_u = id_u;
@@ -29,6 +31,8 @@ public class Participation {
 
     public Participation() {
     }
+
+
 
     public Participation(int id_e, int id_u, Date date_insc, Evenement event) {
         this.id_e = id_e;
@@ -47,6 +51,38 @@ public class Participation {
     public Participation(int id_e, int id_u) {
         this.id_e = id_e;
         this.id_u = id_u;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
+
+    public Participation(int id_e, int id_u, Date date_insc, Membre mbre, Evenement event, ImageView image) {
+        this.id_e = id_e;
+        this.id_u = id_u;
+        this.date_insc = date_insc;
+        this.mbre = mbre;
+        this.event = event;
+        this.image = image;
+    }
+
+    public Participation(int id_e, int id_u, Date date_insc, ImageView image) {
+        this.id_e = id_e;
+        this.id_u = id_u;
+        this.date_insc = date_insc;
+        this.image = image;
+    }
+
+    public Participation(int id_u, Date date_insc, Membre mbre, Evenement event, ImageView image) {
+        this.id_u = id_u;
+        this.date_insc = date_insc;
+        this.mbre = mbre;
+        this.event = event;
+        this.image = image;
     }
 
 
@@ -107,9 +143,12 @@ public class Participation {
 
     @Override
     public String toString() {
-        return "Participation{" + "id_e=" + id_e + ", id_u=" + id_u + ", date_insc=" + date_insc + ", mbre=" + mbre + ", event=" + event + '}';
+        return "Participation{" + "id_e=" + id_e + ", id_u=" + id_u + ", date_insc=" + date_insc + ", mbre=" + mbre + ", event=" + event + ", image=" + image + '}';
     }
 
+   
+
+  
    
     
     

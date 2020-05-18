@@ -58,8 +58,8 @@ public class DetailsParticipantController implements Initializable {
         TableColumn<Participation, String> c2 = new TableColumn<Participation, String>("first");
         //afficher le non du membre dnas la classe alertei
         nbreP.setText(String.valueOf(Pc.nombreParticipation(id_e)));
-        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u()));
-        colPrenom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getPrenom_u()));
+        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u()+" "+p.getValue().getMbre().getPrenom_u()));
+        //colPrenom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getPrenom_u()));
         colEmail.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getEmail_u()));
         tableAffichage1.setItems(obserE);
     

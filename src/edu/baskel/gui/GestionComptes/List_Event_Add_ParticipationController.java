@@ -14,7 +14,6 @@ import edu.baskel.services.MailAttachement;
 import edu.baskel.services.ParticipationCrud;
 import edu.baskel.services.Qrcode;
 import edu.baskel.utils.ConnectionBD;
-import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,19 +28,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import edu.baskel.utils.validationSaisie;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 public class List_Event_Add_ParticipationController implements Initializable {
 
@@ -58,12 +51,15 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private TableColumn<Evenement, String> ColDate;
-
+  
     @FXML
     private TableColumn<Evenement, String> colDescription;
+      @FXML
+    private TableColumn<Evenement, String> colEtat;
 
     @FXML
-    private TableColumn<Evenement, ImageView> ColImage;
+    private TableColumn<Evenement, String> ColImage;
+ 
 
     @FXML
     private JFXButton participer;
@@ -71,6 +67,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
     @FXML
     private JFXButton btnAjout;
     ObservableList obser;
+    ObservableList obser1;
 
     ImageView imagev;
     Membre m = SessionInfo.getLoggedM();
@@ -84,30 +81,69 @@ public class List_Event_Add_ParticipationController implements Initializable {
     }
 
     /*Affichage les champs dans le table view*/
-    public void affichageEvenement() {
+    public void affichageEvenement() throws Exception {
 
         EvenementCRUD Ec = new EvenementCRUD();
+       
+       // ParticipationCrud pc = new ParticipationCrud();
         Evenement e = new Evenement();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayAllList();
-        //ImageView imageEvent = new ImageView(new Image(this.getClass().getResourceAsStream("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+        ArrayList arrayList1;
 
-        //  ImageView photo = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
-        //  PropertyValueFactory<Evenement,ImageView> photo = new PropertyValueFactory<> (("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())) ;
+        arrayList = (ArrayList) Ec.displayAllListE(7);
+        arrayList1 = (ArrayList) Ec.displayAllListU(7);
+        System.out.println("------"+Ec.displayAllListU(7));
+     
+        arrayList.addAll(arrayList1);
+        System.out.println("-------------+++++++++++++------------"+arrayList);
+       
+         
         obser = FXCollections.observableArrayList(arrayList);
+        
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-      //  ImageView eventPhoto = new ImageView(new Image(this.getClass().getResourceAsStream(e.getImage_e())));
+        colEtat.setCellValueFactory(new PropertyValueFactory<>("etat_e"));
         
-         
-        ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
-
+        
+      
         tableAffichage.setItems(obser);
+       
+        
+       
+     
+            
+      
+        actualiser();
+        
+        
+  /*
+        tableAffichage.widthProperty().addListener(new ChangeListener<Number>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Number> source, Number oldWidth, Number newWidth)
+            {
+               
+                
+                //Don't show header
+                Pane header = (Pane) tableAffichage.lookup("TableHeaderRow");
+                if (header.isVisible()){
+                    header.setMaxHeight(0);
+                    header.setMinHeight(0);
+                    header.setPrefHeight(0);
+                    header.setVisible(false);
+                    
+                }
+            }
+        });*/
 
     }
-
+        
+  
+    
+                   
     @FXML
     private void searchBox(KeyEvent event) {
         FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);
@@ -141,67 +177,102 @@ public class List_Event_Add_ParticipationController implements Initializable {
         });
     }
 
+    public void desactive(){
+        
+      EvenementCRUD ev = new EvenementCRUD();
+      Evenement e = new Evenement();
+      
+      if(e.getEtat_e().getText()=="vous avez pas encore participé"){
+              
+              tableAffichage.setSelectionModel(null);
+              }
+         
+    }
+ 
+    
     @FXML
     void participerEvenement(ActionEvent event) throws Exception {
        
+
         ParticipationCrud Pc = new ParticipationCrud();
+       
         Qrcode qr = new Qrcode();
         MailAttachement ma = new MailAttachement();
-        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
-        if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
-            System.out.println();
-            validationSaisie.notifInfo("Information", "Vous avez deja particpé a ce evenement");
-            actualiser();
-        } else {
-            Pc.ajouterParticipation(p);
-            qr.Create("nom= "+tableAffichage.getSelectionModel().getSelectedItem().getNom_e()+"Date= "+tableAffichage.getSelectionModel().getSelectedItem().getDate_e(), tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
-            ma.envoiMailQrcode("sabrine.zekri@esprit.tn", tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
-            validationSaisie.notifConfirm("ok", "Votre participation est confirmé et vous allez reçevoir un mail qui contient QrCode de votre participation");
-            System.out.println("okok++++okokok");
-            actualiser();
+ 
+
+       
+         
+        if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
+            validationSaisie.notif("Participation", "Vous devez selectionné un evenement pour participer");
+        } else {Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
+        
+        
+       
+           if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
+                tableAffichage.getSelectionModel().setCellSelectionEnabled(true);
+                System.out.println();
+                validationSaisie.notifInfo("Information", "Vous avez deja particpé a cet evenement");
+                actualiser();
+            } else {
+                
+                Pc.ajouterParticipation(p);
+                qr.Create("nom= " + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + "Date= " + tableAffichage.getSelectionModel().getSelectedItem().getDate_e(), tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
+                ma.envoiMailQrcode("sabrine.zekri@esprit.tn", tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
+                validationSaisie.notifConfirm("ok", "Votre participation à l'evenement"+tableAffichage.getSelectionModel().getSelectedItem().getNom_e()+ " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
+                System.out.println("okok++++okokok");
+                actualiser();
+            }
         }
-    }
+}
+    
 
-    private void actualiser() {
-
-        EvenementCRUD Ec = new EvenementCRUD();
+    public void actualiser() {
+     EvenementCRUD Ec = new EvenementCRUD();
+             
+  Evenement e = new Evenement();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayAllList();
-        ObservableList obser;
+        ArrayList arrayList1;
+
+        arrayList = (ArrayList) Ec.displayAllListE(7);
+        arrayList1 = (ArrayList) Ec.displayAllListU(7);
+        System.out.println("------"+Ec.displayAllListU(7));
+     
+        arrayList.addAll(arrayList1);
+        System.out.println("-------------+++++++++++++------------"+arrayList);
         obser = FXCollections.observableArrayList(arrayList);
-        tableAffichage.setItems(obser);
+  
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-        ColImage.setCellValueFactory(new PropertyValueFactory<>("image_e"));
+        colEtat.setCellValueFactory(new PropertyValueFactory<>("etat_e"));
+       
+      
+      
+        tableAffichage.setItems(obser);
 
     }
 
     @FXML
     void lancerAjout(ActionEvent event) {
-   FXMLLoader Loader = new FXMLLoader();
-                Loader.setLocation(getClass().getResource("Ajouter_Evenement.fxml"));
 
-                try {
+        Ajouter_EvenementController controller2 = new Ajouter_EvenementController(this);
+        controller2.showStage();
 
-                    Loader.load();
-                } catch (IOException ex) {
-                    Logger.getLogger(ListParticipationParEventUserController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Ajouter_EvenementController ajouter_EvenementController = Loader.getController();
-
-                Parent p = Loader.getRoot();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(p));
-                stage.show();
-                }
-
-    
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        affichageEvenement();
+  
+        try {
+            affichageEvenement();
+        } catch (Exception ex) {
+            Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+         
+      
     }
 
 }

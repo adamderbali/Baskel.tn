@@ -44,6 +44,10 @@ public class Essai {
 //  Qrcode cm = new Qrcode();
 //  cm.Create("nesrine", "sabrine2");
 
+        EvenementCRUD ev = new EvenementCRUD();
+        System.out.println(ev.displayAllListU(7));
+        ev.desactiverCell(7);
+
     }
     
   

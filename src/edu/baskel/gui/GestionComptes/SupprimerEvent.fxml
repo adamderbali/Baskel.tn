@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="448.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutX="274.0" layoutY="22.0" prefHeight="429.0" prefWidth="319.0" style="-fx-border-color: #FFFFFF;" />
+      <ImageView fitHeight="462.0" fitWidth="600.0" layoutY="-1.0" opacity="0.31">
+         <image>
+            <Image url="@../../../../images/2.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img" fitHeight="95.0" fitWidth="139.0" focusTraversable="true" layoutX="309.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXTextField fx:id="txtNom" focusColor="#007782" layoutX="334.0" layoutY="83.0" prefHeight="25.0" prefWidth="200.0" promptText="Nom de l'evenement" unFocusColor="#007782" />
+      <JFXTextField fx:id="txtLieu" focusColor="#007782" layoutX="334.0" layoutY="127.0" prefHeight="25.0" prefWidth="200.0" promptText="Lieu de l'evenement" unFocusColor="#007782" />
+      <JFXTextArea fx:id="txtDescription" focusColor="#007782" layoutX="332.0" layoutY="177.0" prefHeight="43.0" prefWidth="211.0" promptText="Description de l'evenement" unFocusColor="#007782" />
+      <JFXDatePicker fx:id="txtDate" defaultColor="#007782" layoutX="332.0" layoutY="244.0" prefHeight="25.0" prefWidth="247.0" promptText="Date de l'evenement" />
+      <JFXButton fx:id="fermer" layoutX="574.0" layoutY="2.0" onAction="#retour" text="X" />
+      <Text layoutX="334.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer votre evenement">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#007782" />
+                  <Stop color="#1a1b1b" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <TextField fx:id="pathE" layoutX="456.0" layoutY="314.0" prefHeight="25.0" prefWidth="118.0" promptText="Url" style="-fx-border-color: #COCOCO; -fx-background-radius: 100px; -fx-border-radius: 100px;" stylesheets="@AjoutEvenement.css" />
+      <JFXButton fx:id="parcourrir" layoutX="475.0" layoutY="349.0" onAction="#telecharger" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parrcourrier" textFill="#007782" />
+      <JFXButton fx:id="idSupprimer" layoutX="401.0" layoutY="403.0" onAction="#supprimer" prefHeight="27.0" prefWidth="94.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Supprimer" textFill="#007782" />
+   </children>
+</AnchorPane>

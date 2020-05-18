@@ -26,7 +26,10 @@
 }
 
 
-
+.tableEtat .column .label{
+    
+    -fx-text-fill :#007782;
+}
 
 .table-view .column-header, .table-view .filler{
     -fx-size:40;
@@ -34,10 +37,15 @@
     
 }
 
-
+/*007782*/
 .table-row-cell:selected {
-       -fx-background-color: #007782;
-       -fx-table-cell-border-color: #007782;
+       -fx-background-color: #C0C0C0;
+       -fx-table-cell-border-color: #C0C0C0;
+}
+
+.colEtat:selected{
+    -fx-background-color: none;
+    -fx-table-cell-border-color: none;
 }
 
 .table-view {
@@ -46,9 +54,15 @@
 
 .table-view .table-cell{
        
-       -fx-font-size:12px; }
+       -fx-font-size:12px; 
+}
+
 
 .table-view {
     -fx-font-size:14px;
     
+ .tableEtat .table-column {
+  -fx-alignment: CENTER-RIGHT;
+}
+ 
 }
