@@ -2,6 +2,7 @@ package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
+import com.sun.javafx.css.CssError;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Forum1;
 import edu.baskel.entities.Membre;
@@ -14,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -36,6 +39,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -53,6 +57,19 @@ public class ForumFXMLController implements Initializable {
     private Button btnSupprimer;
     @FXML
     private FontAwesomeIconView btnActualiser;
+    @FXML
+    private Pane PaneProfilCom;
+    @FXML
+    private ImageView imgProCom;
+    @FXML
+    private Label lblNomPrenom;
+    @FXML
+    private Label lblage;
+    @FXML
+    private Label lbladresse;
+    @FXML
+    private Label lblsexe;
+
     MembreCRUD mc = new MembreCRUD();
     ForumCRUD fs = new ForumCRUD();
     private List<Forum1> forum;
@@ -62,6 +79,7 @@ public class ForumFXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        PaneProfilCom.setVisible(false);
         forum = fs.displayAll();
         if (forum != null) {
             ObservableList<Forum1> list = FXCollections.observableArrayList(forum);
@@ -108,7 +126,25 @@ public class ForumFXMLController implements Initializable {
                                 public void handle(MouseEvent event) {
                                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                                         Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
-                                        if (m.getId_u() == M.getId_u()) {
+                                        Membre mp = mc.AfficherMembreById(M.getId_u());
+                                        String d = mp.getDate_u().toString();
+                                        LocalDate l = LocalDate.parse(d);
+                                        LocalDate now = LocalDate.now();
+                                        Period diff = Period.between(l, now);
+                                        System.out.println(diff.getYears() + "years" + diff.getMonths() + "months" + diff.getDays() + "days");
+                                        lblNomPrenom.setText(mp.getNom_u() + " " + mp.getPrenom_u());
+                                        String age = String.valueOf(diff.getYears());
+                                        lblage.setText(age);
+                                        lbladresse.setText(mp.getAdresse_u());
+                                        lblsexe.setText(mp.getSexe_u());
+                                        System.out.println(mp.getSexe_u());
+                                        Image imag;
+                                        imag = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + mp.getImage_u());
+                                        imgProCom.setImage(imag);
+                                        if (m.getId_u() != M.getId_u()) {
+                                            PaneProfilCom.setVisible(true);
+                                        }
+                                        /* if (m.getId_u() == M.getId_u()) {
                                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                             alert.setTitle("Confirmation ");
                                             alert.setHeaderText("Supprimer ce  commentaire !?");
@@ -124,11 +160,17 @@ public class ForumFXMLController implements Initializable {
                                             }
                                         } else {
                                             InputValidation.notificationError("Commentaire", "Vous ne pouver pas supprimer les commentaires des autres membres");
-                                        }
+                                        }*/
                                     }
+                                    if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                                        PaneProfilCom.setVisible(false);
+                                    }
+
                                 }
-                            });
-                            if (e.getId_u() != 0) {
+                            }
+                            );
+                            if (e.getId_u()
+                                    != 0) {
                                 Membre fs = mc.AfficherMembreById(e.getId_u());
                                 setText("Membre  : " + fs.getNom_u() + " " + fs.getPrenom_u()
                                         + " ,  DATE : " + e.getDate_f()
@@ -144,12 +186,14 @@ public class ForumFXMLController implements Initializable {
                 };
 
                 return cell;
-            });
+            }
+            );
             listeforum.setItems(list);
 
         }
     }
 
+    //publier un commentaire
     @FXML
     void envoyer(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         if (AutoCompleteAdresse.nb(message.getText()) == true) {
@@ -165,6 +209,7 @@ public class ForumFXMLController implements Initializable {
         }
     }
 
+    //supprimer un commemntaire
     @FXML
     void SupprimerCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
@@ -186,8 +231,10 @@ public class ForumFXMLController implements Initializable {
         }
     }
 
+    //actulaiser liste commentaires
     @FXML
-    public void actualiser(MouseEvent event) {
+    public void actualiser(MouseEvent event
+    ) {
 
         forum = fs.displayAll();
         if (forum != null) {
@@ -250,6 +297,7 @@ public class ForumFXMLController implements Initializable {
 
         }
     }
+    //actualiser liste commentaire automatique
 
     public void actua() {
         forum = fs.displayAll();

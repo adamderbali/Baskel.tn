@@ -26,7 +26,7 @@ public class TacheHisto implements Job{
         System.out.println("adam");
         System.out.println("adam"+ new Date());
         try {
-            hh.LastCnx();
+            hh.LastCnx2();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

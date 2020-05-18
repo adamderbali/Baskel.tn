@@ -271,6 +271,7 @@ public class MembreCRUD {
                 m.setAdresse_u(rs.getString("adresse_u"));
                 m.setNum_tel_u(rs.getString("num_tel_u"));
                 m.setMot_passe_u(rs.getString("mot_passe_u"));
+                m.setSexe_u(rs.getString("sexe_u"));
                 m.setDate_u(rs.getDate("date_u"));
                 m.setImage_u(rs.getString("image_u"));
                 m.setType_u(rs.getString("type_u"));

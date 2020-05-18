@@ -62,7 +62,7 @@ public class EnvoiMail {
 
         }
     }
-     public void envoyerMailHistorique(String too) {
+     public void envoyerMailHistorique(String too, String msgs) {
         try {
             
             System.out.println("Préparation de l envoie du mail");
@@ -71,7 +71,7 @@ public class EnvoiMail {
             String pass = "baskel.tn";
             String to = too;
             String subject = "Connexion";
-            String message = "Votre derniére connexion date d il ya 7 jours" ;
+            String message = msgs ;
             boolean sessionDebug = false;
             Properties pros = System.getProperties();
             pros.put("mail.smtp.starttls.enable", "true");
