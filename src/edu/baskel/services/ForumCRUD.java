@@ -30,6 +30,7 @@ public class ForumCRUD {
         cnx = ConnectionBD.getInstance().getCnx();
     }
 
+    //ajouter commentaire
     public void ajouterForum(Forum1 f) {
         String req = "INSERT INTO forum (id_f, id_u ,text, date_f , image_uf) VALUES (?,?,?,?,?)";
 
@@ -48,6 +49,7 @@ public class ForumCRUD {
 
     }
 
+    //supprimer commentaire
     public void supprimerForum(Forum1 f) {
         try {
             String requete = "DELETE FROM forum WHERE id_f=?";
@@ -60,14 +62,16 @@ public class ForumCRUD {
         }
     }
 
-    public void updateForum(Forum1 f, int id) {
+    //modifier commentaire
+    public void updateForum(Forum1 f ,int id) {
         try {
-            String requete = "UPDATE forum SET valid_f=? WHERE id_f=? ";
+            String requete = "UPDATE forum SET text=? ,date_f=? WHERE id_f=? ";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, f.getValid_f());
-            pst.setInt(2, id);
+            pst.setString(1, f.getText());
+            pst.setString(2, f.getDate_f());
+            pst.setInt(3, id);
             pst.executeUpdate();
-            System.out.println("personne modifié");
+            System.out.println("forum modifié");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -98,6 +102,7 @@ public class ForumCRUD {
 
     }
 
+    //liste commentaires
     public List<Forum1> displayAllText() {
         List<Forum1> listeText = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
 
@@ -121,6 +126,7 @@ public class ForumCRUD {
 
     }
     
+    //siganler un commentaire
     public  boolean signalerforum (Forum1 f){
              String Requette = "UPDATE `forum` SET `Valid_f` = '0' WHERE `forum`.`id_f` = ?;";
               try {

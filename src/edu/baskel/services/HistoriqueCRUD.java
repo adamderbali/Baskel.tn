@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -176,13 +175,5 @@ public class HistoriqueCRUD {
 
     }
 
-    /*
-    public static void main(String[] args) throws Exception {
-        HistoriqueCRUD h = new HistoriqueCRUD();
-        // h.ajouterHistorique(23);
-        //h.LastCnx();
-        //    System.out.println(h.getlistHistorique());
-        h.LastCnx();
-
-    }*/
+    
 }

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.icons525.Icons525View?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
@@ -24,12 +25,12 @@
             <Font name="Metropolis-Medium" size="38.0" />
          </font>
       </Label>
-      <Label layoutX="28.0" layoutY="673.0" text="Remarque : pour supprimer un commantaires cliquer 2 fois ou" textFill="RED" />
+      <Label layoutX="28.0" layoutY="673.0" text="Remarque : pour afficher un profil  cliquer 2 fois" textFill="RED" />
       <Button layoutX="474.0" layoutY="595.0" mnemonicParsing="false" onMouseClicked="#envoyer" prefHeight="62.0" prefWidth="74.0" text="Publier" />
       <FontAwesomeIconView fx:id="btnActualiser" fill="WHITE" glyphName="REFRESH" layoutX="505.0" layoutY="50.0" onMouseClicked="#actualiser" size="25" />
       <Button fx:id="btnSupprimer" layoutX="479.0" layoutY="679.0" mnemonicParsing="false" onMouseClicked="#SupprimerCom" text="Supprimer" />
-      <Label layoutX="28.0" layoutY="700.0" text="selectionner le commenraire et appuyer sur le bouton supprimer" textFill="RED" />
-      <Pane fx:id="PaneProfilCom" layoutX="665.0" layoutY="76.0" prefHeight="409.0" prefWidth="454.0" style="-fx-background-color: #ffffff;">
+      <Label layoutX="28.0" layoutY="700.0" text="selectionner un commenraire et appuyer sur le bouton supprimer" textFill="RED" />
+      <Pane fx:id="PaneProfilCom" layoutX="665.0" layoutY="76.0" prefHeight="409.0" prefWidth="454.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 2;">
          <children>
             <ImageView fx:id="imgProCom" fitHeight="150.0" fitWidth="169.0" layoutX="271.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="lblNomPrenom" layoutX="22.0" layoutY="43.0" prefHeight="46.0" prefWidth="255.0">
@@ -37,25 +38,30 @@
                   <Font name="System Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="lblage" layoutX="156.0" layoutY="194.0" prefHeight="21.0" prefWidth="105.0" />
+            <Label fx:id="lblage" layoutX="143.0" layoutY="194.0" prefHeight="21.0" prefWidth="105.0" />
             <Label fx:id="lbladresse" layoutX="156.0" layoutY="260.0" prefHeight="21.0" prefWidth="268.0" />
-            <Label fx:id="lblsexe" layoutX="153.0" layoutY="316.0" prefHeight="21.0" prefWidth="111.0" />
-            <Text layoutX="66.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age">
+            <Label fx:id="lblsexe" layoutX="150.0" layoutY="326.0" prefHeight="21.0" prefWidth="111.0" />
+            <Text layoutX="46.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="66.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+            <Text layoutX="46.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="66.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexe">
+            <Text layoutX="46.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexe">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
+            <Icons525View glyphName="BULLET" layoutX="22.0" layoutY="211.0" size="17" />
+            <Icons525View glyphName="BULLET" layoutX="22.0" layoutY="277.0" size="17" />
+            <Icons525View glyphName="BULLET" layoutX="22.0" layoutY="344.0" size="17" />
          </children>
       </Pane>
+      <Button fx:id="btnModifié" layoutX="588.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#modifierCom" text="Modifier" />
+      <Button fx:id="btnEnregistré" layoutX="600.0" layoutY="648.0" mnemonicParsing="false" onMouseClicked="#EngmodifierCom" text="Enregistré" />
    </children>
 </AnchorPane>

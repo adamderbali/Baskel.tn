@@ -1,6 +1,5 @@
 package edu.baskel.utils;
 
-import java.awt.TrayIcon;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,15 +7,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.scene.control.Alert;
 import javafx.util.Duration;
-import javax.swing.InputVerifier;
-import net.bytebuddy.asm.Advice;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -43,20 +41,7 @@ public class InputValidation {
         return i;
     }
 
-    /*
-    public static int StrengthPwd(String mdp) {
-        int i = 0;
-        if (mdp.length() < 6) {
-            i = 1;
-        }
-        if (mdp.length() < 10) {
-            i = 2;
-        }
-        if (mdp.length() > 10) {
-            i = 3;
-        }
-        return i;
-    }*/
+    //validation email
     public static boolean validEmail(String email) {
         boolean status = false;
 
@@ -69,6 +54,7 @@ public class InputValidation {
         return status;
     }
 
+    //validation numero telephone
     public static int PhoneNumber(String ch) {
         int i = 0;
         if (ch.length() == 8) {
@@ -202,5 +188,41 @@ public class InputValidation {
 
     }
 
+// diffrence minute pour update commentaire
+    public static long dat(String start , String stop) {
+        SimpleDateFormat format = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+        String dateStart = start;
+        String dateStop = stop;
+        
+        Date d1 = null;
+        Date d2 = null;
+        try {
+            d1 = format.parse(dateStart);
+            d2 = format.parse(dateStop);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long diff = d2.getTime() - d1.getTime();
+        long diffSeconds = diff / 1000 % 60;
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000);
+
+        
+        return diffMinutes;
+
+    }
     
+    public static String dateCalendar(){
+        Calendar cal = Calendar.getInstance();
+        String da = String.valueOf(cal.get(Calendar.YEAR));
+        String da1 = String.valueOf(cal.get(Calendar.MONTH));
+        String da2 = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+        String da3 = String.valueOf(cal.get(Calendar.HOUR));
+        String da4 = String.valueOf(cal.get(Calendar.MINUTE));
+        String da5 = String.valueOf(cal.get(Calendar.SECOND));
+        String finaldate = da + "/" + da1 + "/" + da2 + " " + da3 + ":" + da4 + ":" + da5;
+        
+        return finaldate;
+    }
 }

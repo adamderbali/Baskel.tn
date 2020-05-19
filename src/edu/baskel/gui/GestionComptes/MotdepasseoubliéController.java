@@ -12,7 +12,6 @@ import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
-import static edu.baskel.utils.SessionInfo.iduser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -28,8 +27,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -65,6 +62,7 @@ public class MotdepasseoubliéController implements Initializable {
     int ran;
     Membre m = SessionInfo.getLoggedM();
     MembreCRUD mc = new MembreCRUD();
+    EnvoiMail e = new EnvoiMail();
 
     /**
      * Initializes the controller class.
@@ -78,8 +76,8 @@ public class MotdepasseoubliéController implements Initializable {
         cnx = ConnectionBD.getInstance().getCnx();
 
     }
-    EnvoiMail e = new EnvoiMail();
 
+    //envoyer le mail de reinitilisation mp
     @FXML
     public void envoyerMail(ActionEvent event) {
         if (mc.VerifEmailMpOublié(txtentermail.getText()) == true) {

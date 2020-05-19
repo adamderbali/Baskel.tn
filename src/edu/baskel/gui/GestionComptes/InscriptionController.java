@@ -83,9 +83,6 @@ public class InscriptionController implements Initializable {
     private AnchorPane anchor;
     @FXML
     private ImageView img;
-    private Image image;
-    /*@FXML
-    private Button btnprofil;*/
     @FXML
     private Pane btnreparateur;
     @FXML
@@ -106,6 +103,7 @@ public class InscriptionController implements Initializable {
     private PreparedStatement prep;
     private ResultSet res;
     private String photo = null;
+    private Image image;
     Connection cnx;
 
     public InscriptionController() {
@@ -177,6 +175,7 @@ public class InscriptionController implements Initializable {
         txtshowpass.setVisible(false);
     }
 
+    //visualiser cmp
     @FXML
     public void VisualiserCMP(MouseEvent event) {
         txtshowcpass.setText(txtconfirmation.getText());
@@ -185,6 +184,7 @@ public class InscriptionController implements Initializable {
 
     }
 
+    //cacher Cmp
     @FXML
     public void hideCMP(MouseEvent event) {
         txtconfirmation.setVisible(true);

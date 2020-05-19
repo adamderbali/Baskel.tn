@@ -430,6 +430,7 @@ public class MembreCRUD {
         return true;
     }
     
+    //se decconecter
     public void Deconnexion(){
         SessionInfo.setLoggedM(null);
         SessionInfo.setIduser(0);

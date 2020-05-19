@@ -44,6 +44,7 @@ public class ContactUsController implements Initializable {
         // TODO
     }
 
+    //mail de la part du membre 
     @FXML
     public void EnvoyerMail(ActionEvent event) {
         e.envoyerMailAdmin("Nom et prenom : " + txtEmail.getText() + "///" + "Adresse email : " + txtMP.getText()

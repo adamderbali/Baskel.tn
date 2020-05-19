@@ -2,7 +2,6 @@ package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
-import com.sun.javafx.css.CssError;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Forum1;
 import edu.baskel.entities.Membre;
@@ -70,6 +69,11 @@ public class ForumFXMLController implements Initializable {
     @FXML
     private Label lblsexe;
 
+    @FXML
+    private Button btnModifié;
+    @FXML
+    private Button btnEnregistré;
+
     MembreCRUD mc = new MembreCRUD();
     ForumCRUD fs = new ForumCRUD();
     private List<Forum1> forum;
@@ -131,36 +135,18 @@ public class ForumFXMLController implements Initializable {
                                         LocalDate l = LocalDate.parse(d);
                                         LocalDate now = LocalDate.now();
                                         Period diff = Period.between(l, now);
-                                        System.out.println(diff.getYears() + "years" + diff.getMonths() + "months" + diff.getDays() + "days");
                                         lblNomPrenom.setText(mp.getNom_u() + " " + mp.getPrenom_u());
                                         String age = String.valueOf(diff.getYears());
                                         lblage.setText(age);
                                         lbladresse.setText(mp.getAdresse_u());
                                         lblsexe.setText(mp.getSexe_u());
-                                        System.out.println(mp.getSexe_u());
                                         Image imag;
                                         imag = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + mp.getImage_u());
                                         imgProCom.setImage(imag);
                                         if (m.getId_u() != M.getId_u()) {
                                             PaneProfilCom.setVisible(true);
                                         }
-                                        /* if (m.getId_u() == M.getId_u()) {
-                                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                                            alert.setTitle("Confirmation ");
-                                            alert.setHeaderText("Supprimer ce  commentaire !?");
-                                            alert.setContentText("OK?");
-                                            Optional<ButtonType> result = alert.showAndWait();
-                                            if (result.get() == ButtonType.OK) {
-                                                fs.supprimerForum(M);
-                                                Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-                                                alert1.setHeaderText("Votre commentaire a été supprimé avec succés ");
-                                                Optional<ButtonType> result1 = alert1.showAndWait();
-                                            } else {
-                                                System.out.println("Rien");
-                                            }
-                                        } else {
-                                            InputValidation.notificationError("Commentaire", "Vous ne pouver pas supprimer les commentaires des autres membres");
-                                        }*/
+                                        
                                     }
                                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
                                         PaneProfilCom.setVisible(false);
@@ -197,9 +183,9 @@ public class ForumFXMLController implements Initializable {
     @FXML
     void envoyer(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         if (AutoCompleteAdresse.nb(message.getText()) == true) {
-            java.util.Date date_util = new java.util.Date();
-            java.sql.Date datee = new java.sql.Date(date_util.getTime());
-            Forum1 f = new Forum1(0, m.getId_u(), message.getText(), datee.toString(), m.getImage_u());
+            /*java.util.Date date_util = new java.util.Date();
+            java.sql.Date datee = new java.sql.Date(date_util.getTime());   datee.toString()*/
+            Forum1 f = new Forum1(0, m.getId_u(), message.getText(), InputValidation.dateCalendar(), m.getImage_u());
             fs.ajouterForum(f);
             InputValidation.notificationsucces("Commentaire", "Votre commentaire a été ajouter avec succés");
             message.clear();
@@ -358,6 +344,47 @@ public class ForumFXMLController implements Initializable {
                 return cell;
             });
             listeforum.setItems(list);
+
+        }
+    }
+
+    //Modifier un commentaire
+    @FXML
+    void modifierCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
+
+        Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+        if (f.getId_u() == m.getId_u()) {
+            if (InputValidation.dat(f.getDate_f(), InputValidation.dateCalendar()) < 3) {
+                message.setText(f.getText());
+
+            } else {
+                Alert alertnum = new InputValidation().getAlert("Commentaire", "Vous pouvez modifier le commentaire que dans les 3 minutes qui suivent la publication");
+                alertnum.showAndWait();
+            }
+        } else {
+            InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
+
+        }
+    }
+
+    //Enregistrer les modfications
+    @FXML
+    void EngmodifierCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
+        Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+        Forum1 f2 = new Forum1(message.getText(), InputValidation.dateCalendar());
+        if (f.getId_u() == m.getId_u()) {
+            if (AutoCompleteAdresse.nb(message.getText()) == true) {
+
+                fs.updateForum(f2, f.getId_f());
+                actua();
+
+                InputValidation.notificationsucces("Commentaire", "Modifications enregistrés");
+            } else {
+                InputValidation.notificationError("Commentaire", "Nous n'acceptons pas les gros mots, soyez responsable svp!");
+
+            }
+        } else {
+            InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
 
         }
     }

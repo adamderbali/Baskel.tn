@@ -27,10 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -111,6 +108,7 @@ public class NouveauMPController implements Initializable {
         }
     }
 
+    //voir mp
     @FXML
     public void VisualiserMP(MouseEvent event) {
         txtshowpass.setText(txtNvMp.getText());
@@ -118,12 +116,14 @@ public class NouveauMPController implements Initializable {
         txtshowpass.setVisible(true);
     }
 
+    //cacher mp
     @FXML
     public void hideMP(MouseEvent event) {
         txtNvMp.setVisible(true);
         txtshowpass.setVisible(false);
     }
 
+    //voir cmp
     @FXML
     public void VisualiserCMP(MouseEvent event) {
         txtshowcpass.setText(txtCnvMp.getText());
@@ -131,6 +131,7 @@ public class NouveauMPController implements Initializable {
         txtshowcpass.setVisible(true);
     }
 
+    //cacher cmp
     @FXML
     public void hideCMP(MouseEvent event) {
         txtCnvMp.setVisible(true);
@@ -153,6 +154,7 @@ public class NouveauMPController implements Initializable {
         }
     }
 
+    // page d authentification
     @FXML
     void Deconnexion2(MouseEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));

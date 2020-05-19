@@ -22,7 +22,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.UUID;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -143,7 +142,7 @@ public class ProfilPageController implements Initializable {
         txtEmailVerif.setVisible(false);
         informationMembre();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
-
+        //Photo de profil
         if (l.getImage_u() != null) {
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
@@ -187,6 +186,7 @@ public class ProfilPageController implements Initializable {
         txtEmailVerif.setText(l.getEmail_u());
     }
 
+    //charger les information
     @FXML
     public void chagerInfos2(ActionEvent event) {
         profiladresse.setEditable(true);
@@ -200,6 +200,7 @@ public class ProfilPageController implements Initializable {
 
     }
 
+    //voir mp
     @FXML
     public void VisualiserMP(MouseEvent event) {
         txtshow.setText(nvpass.getText());
@@ -207,12 +208,14 @@ public class ProfilPageController implements Initializable {
         txtshow.setVisible(true);
     }
 
+    //cacher mp
     @FXML
     public void hideMP(MouseEvent event) {
         nvpass.setVisible(true);
         txtshow.setVisible(false);
     }
 
+    //voir cmp
     @FXML
     public void VisualiserCMP(MouseEvent event) {
         txtshowc.setText(cnvpass.getText());
@@ -220,12 +223,14 @@ public class ProfilPageController implements Initializable {
         txtshowc.setVisible(true);
     }
 
+    //cacher cmp
     @FXML
     public void hideCMP(MouseEvent event) {
         cnvpass.setVisible(true);
         txtshowc.setVisible(false);
     }
 
+    //voir mp actuem
     @FXML
     void VisualiserMPActuel(MouseEvent event) {
         txtshowActuel.setText(actuelPass.getText());
@@ -233,12 +238,14 @@ public class ProfilPageController implements Initializable {
         actuelPass.setVisible(false);
     }
 
+    //cacher mp actuel
     @FXML
     void hideMPActuel(MouseEvent event) {
         txtshowActuel.setVisible(false);
         actuelPass.setVisible(true);
     }
 
+    //affichage onglet infos generals
     @FXML
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
@@ -247,6 +254,7 @@ public class ProfilPageController implements Initializable {
         btnimage.setVisible(true);
     }
 
+    //affichage onglet de securité
     @FXML
     void afficherOngletSecurité(ActionEvent event) {
         panePrincipale.setVisible(false);
@@ -288,6 +296,7 @@ public class ProfilPageController implements Initializable {
         }
     }
 
+    //verification date
     public boolean verifDate() {
         LocalDate local = LocalDate.now();
         LocalDate d = nvdate.getValue();
@@ -325,7 +334,7 @@ public class ProfilPageController implements Initializable {
                                 if ((verifEmail.check(profilmail.getText())) == false) {
                                     InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                 } else {
-                                    if (((!profilmail.getText().equals(txtEmailVerif.getText())) &&(mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
+                                    if (((!profilmail.getText().equals(txtEmailVerif.getText())) && (mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
                                         InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                     } else {
 

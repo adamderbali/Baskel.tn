@@ -13,7 +13,6 @@ import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
-import static edu.baskel.utils.SessionInfo.iduser;
 import edu.baskel.utils.verifEmail;
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +42,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -97,19 +95,14 @@ public class ProfilPageReparateurController implements Initializable {
     private JFXTextField txtshowActuel;
     @FXML
     private FontAwesomeIconView chkmotdepasseActuel;
-
     @FXML
     private JFXButton btnchgPass;
-
     @FXML
     private Pane paneNomProfil;
-
     @FXML
     private Button btnGenerale;
-
     @FXML
     private Button btnSécurité;
-
     @FXML
     private Pane PaneMotpass;
     @FXML
@@ -201,6 +194,7 @@ public class ProfilPageReparateurController implements Initializable {
         telpro.setText(r.getNum_pro());
     }
 
+    //charger infos de profil
     @FXML
     public void chagerInfos2(ActionEvent event) {
         profiladresse.setEditable(true);
@@ -214,6 +208,7 @@ public class ProfilPageReparateurController implements Initializable {
 
     }
 
+    //voir mp
     @FXML
     public void VisualiserMP(MouseEvent event) {
         txtshow.setText(nvpass.getText());
@@ -221,12 +216,14 @@ public class ProfilPageReparateurController implements Initializable {
         txtshow.setVisible(true);
     }
 
+    //cacher mp
     @FXML
     public void hideMP(MouseEvent event) {
         nvpass.setVisible(true);
         txtshow.setVisible(false);
     }
 
+    //voir cmp
     @FXML
     public void VisualiserCMP(MouseEvent event) {
         txtshowc.setText(cnvpass.getText());
@@ -234,12 +231,14 @@ public class ProfilPageReparateurController implements Initializable {
         txtshowc.setVisible(true);
     }
 
+    //cacher cmp
     @FXML
     public void hideCMP(MouseEvent event) {
         cnvpass.setVisible(true);
         txtshowc.setVisible(false);
     }
 
+    //voir mp actuel
     @FXML
     void VisualiserMPActuel(MouseEvent event) {
         txtshowActuel.setText(actuelPass.getText());
@@ -247,18 +246,21 @@ public class ProfilPageReparateurController implements Initializable {
         actuelPass.setVisible(false);
     }
 
+    //cacher mp actuel
     @FXML
     void hideMPActuel(MouseEvent event) {
         txtshowActuel.setVisible(false);
         actuelPass.setVisible(true);
     }
 
+    //afficher onglet infos generals
     @FXML
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
     }
 
+    //afficher onglet securité
     @FXML
     void afficherOngletSecurité(ActionEvent event) {
         panePrincipale.setVisible(false);
@@ -298,6 +300,7 @@ public class ProfilPageReparateurController implements Initializable {
         }
     }
 
+    //verif date
     public boolean verifDate() {
         LocalDate local = LocalDate.now();
         LocalDate d = nvdate.getValue();
@@ -336,7 +339,7 @@ public class ProfilPageReparateurController implements Initializable {
                                     if ((verifEmail.check(profilmail.getText())) == false) {
                                         InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                     } else {
-                                        if (((!profilmail.getText().equals(txtEmailVerif.getText())) &&(mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
+                                        if (((!profilmail.getText().equals(txtEmailVerif.getText())) && (mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
                                             InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                         } else {
 
@@ -348,7 +351,7 @@ public class ProfilPageReparateurController implements Initializable {
 
                                             informationReparateur();
 
-                                            InputValidation.notificationsucces("Profil", "Vos modification sont enregistrés");
+                                            InputValidation.notificationsucces("Profil", "Vos modifications sont enregistrés");
 
                                             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
                                             Scene redirection_scene = new Scene(redirection_parent);

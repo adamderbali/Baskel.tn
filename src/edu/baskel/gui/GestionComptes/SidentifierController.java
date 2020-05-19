@@ -147,7 +147,7 @@ public class SidentifierController implements Initializable {
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
                 hh.UpdateLastCnx(iduser);
-                System.out.println(mr.getlistMembre());
+                //System.out.println(mr.getlistMembre());
                 //hh.LastCnx2();
             } else {
                 InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
@@ -208,9 +208,5 @@ public class SidentifierController implements Initializable {
 
     }
 
-    /*@FXML
-    public void FacebooLogin(ActionEvent event) {
-        FacebookLog fl = new FacebookLog();
-        fl.fb();
-    }*/
+   
 }

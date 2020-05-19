@@ -26,8 +26,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import javafx.event.ActionEvent;
@@ -38,7 +36,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -177,6 +174,7 @@ public class InscriptionReparateurController implements Initializable {
         txtshowpass.setVisible(false);
     }
 
+    //visualiser cmp
     @FXML
     public void VisualiserCMP(MouseEvent event) {
         txtshowcpass.setText(txtconfirmation.getText());
@@ -185,6 +183,7 @@ public class InscriptionReparateurController implements Initializable {
 
     }
 
+    //cacher cmp 
     @FXML
     public void hideCMP(MouseEvent event) {
         txtconfirmation.setVisible(true);

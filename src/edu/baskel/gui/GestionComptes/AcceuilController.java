@@ -101,23 +101,27 @@ public class AcceuilController implements Initializable {
         ANchorProfil.getChildren().setAll(pane);
     }
 
+    //afficher star rate
     @FXML
     void AfficherStars(MouseEvent event) {
         rateUs.setVisible(true);
         btnEnvoyer.setVisible(true);
     }
 
+    //note star rate
     @FXML
     void EnvoyerNote(MouseEvent event) {
         System.out.println("Rate" + "   " + l.getId_u() + "  " + rateUs.getRating());
     }
 
+    //cacher star rate
     @FXML
     void HideRating(MouseEvent event) {
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
     }
 
+    //redirection contact us
     @FXML
     public void RedirectionContactezNs(MouseEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
@@ -127,6 +131,7 @@ public class AcceuilController implements Initializable {
         app_stage.show();
     }
 
+    //redirection forum
     @FXML
     void forum(ActionEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
@@ -136,6 +141,7 @@ public class AcceuilController implements Initializable {
         app_stage.show();
     }
 
+    //se decconnecter
     @FXML
     void Deconnexion2(MouseEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));

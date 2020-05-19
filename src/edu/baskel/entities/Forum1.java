@@ -30,6 +30,13 @@ private String image_uf;
         this.date_f = date_f;
     }
 
+    public Forum1(String text, String date_f) {
+        this.text = text;
+        this.date_f = date_f;
+    }
+    
+    
+
     public int getId_f() {
         return id_f;
     }
