@@ -27,6 +27,7 @@ public class MembreCRUD {
     Membre membreLogged;
     private int val;
     private int last_inserted_id;
+    ReparateurCRUD rc = new ReparateurCRUD();
 
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -193,10 +194,15 @@ public class MembreCRUD {
                         motdepasse, telm, imagem, typem, nbr_banm, validationm);
                 if (this.ValidationBan(emailm) != 0) {
                     SessionInfo.setLoggedM(membreLogged);
-
                     System.out.println(membreLogged);
-
                     System.out.println(iduser);
+                }
+                if(VerifReparateur()==true){
+                    Reparateur loggedRep = rc.getReparateurById(membreLogged.getId_u());
+                    System.out.println(loggedRep);
+                    SessionInfo.setLoggedR(loggedRep);
+                }else{
+                    System.out.println("instance membre");
                 }
             }
         } catch (SQLException ex) {

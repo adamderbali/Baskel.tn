@@ -6,17 +6,18 @@
 package edu.baskel.utils;
 
 import edu.baskel.entities.Membre;
+import edu.baskel.entities.Reparateur;
 
 /**
  *
  * @author dell
  */
 public final class SessionInfo {
-    public static Membre loggedM;
 
+    public static Membre loggedM;
+    public static Reparateur loggedR;//
     public static int iduser;
-    
-   private static SessionInfo instance;
+    private static SessionInfo instance;
 
     public SessionInfo() {
     }
@@ -39,6 +40,22 @@ public final class SessionInfo {
             instance = new SessionInfo(iduser);
         }
         return instance;
+    }
+//
+    public static Reparateur getLoggedR() {
+        return loggedR;
+    }
+//
+    public static void setLoggedR(Reparateur loggedR) {
+        SessionInfo.loggedR = loggedR;
+    }
+
+    public static SessionInfo getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(SessionInfo instance) {
+        SessionInfo.instance = instance;
     }
 
     public static void setIduser(int iduser) {

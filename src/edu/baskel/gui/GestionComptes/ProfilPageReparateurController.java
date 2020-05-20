@@ -129,7 +129,8 @@ public class ProfilPageReparateurController implements Initializable {
     Membre l = SessionInfo.getLoggedM();
     MembreCRUD mrc = new MembreCRUD();
     ReparateurCRUD rc = new ReparateurCRUD();
-    Reparateur r = rc.getReparateurById(l.getId_u());
+    //Reparateur r = rc.getReparateurById(l.getId_u());
+    Reparateur r = SessionInfo.getLoggedR();
 
     ;
 

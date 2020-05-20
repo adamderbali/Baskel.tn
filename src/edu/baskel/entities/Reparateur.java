@@ -29,6 +29,15 @@ public class Reparateur extends Membre {
         this.num_pro = num_pro;
     }
 
+    public Reparateur(String adresse_lo, String local_nom, String num_pro, String latitude, String longitude, int id_u, String nom_u, String prenom_u, String adresse_u, String email_u, String sexe_u, Date date_u, String mot_passe_u, String num_tel_u, String image_u, String type_u, int nbr_rec_u, int validation_u) {
+        super(id_u, nom_u, prenom_u, adresse_u, email_u, sexe_u, date_u, mot_passe_u, num_tel_u, image_u, type_u, nbr_rec_u, validation_u);
+        this.adresse_lo = adresse_lo;
+        this.local_nom = local_nom;
+        this.num_pro = num_pro;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Reparateur(String adresse_lo, String local_nom, String num_pro, String latitude, String longitude, int id_u, String nom_u, String prenom_u, String adresse_u, String email_u, String sexe_u, Date date_u, String mot_passe_u, String num_tel_u, String image_u, String type_u) {
         super(id_u, nom_u, prenom_u, adresse_u, email_u, sexe_u, date_u, mot_passe_u, num_tel_u, image_u, type_u);
         this.adresse_lo = adresse_lo;

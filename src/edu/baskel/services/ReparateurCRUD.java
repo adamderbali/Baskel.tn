@@ -7,6 +7,7 @@ package edu.baskel.services;
 
 import edu.baskel.entities.Reparateur;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.SessionInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,6 +59,17 @@ public class ReparateurCRUD {
                 pst2.setString(6, r.getLongitude());
                 pst2.executeUpdate();
                 System.out.println("Person added!");
+                //modif adam
+                r.setId_u(rs.getInt(1));
+                HistoriqueCRUD hh = new HistoriqueCRUD();
+                hh.ajouterHistorique(last_inserted_id);
+                System.out.println("Historrique added!");
+                SessionInfo.setLoggedM(r);
+                SessionInfo.setLoggedR(r);
+                System.out.println(r);
+                System.out.println(SessionInfo.getLoggedM());
+                
+                
             }
 
         } catch (SQLException ex) {
@@ -154,6 +166,8 @@ public class ReparateurCRUD {
                 r.setNum_tel_u(rs.getString(15));
                 r.setImage_u(rs.getString(16));
                 r.setType_u(rs.getString(17));
+                r.setValidation_u(rs.getInt(18));
+                r.setNbr_ban_u(rs.getInt(19));
                 System.out.println(r.toString());
             }
 
