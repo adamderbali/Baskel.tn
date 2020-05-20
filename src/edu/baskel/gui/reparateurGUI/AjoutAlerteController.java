@@ -6,6 +6,12 @@
 package edu.baskel.gui.reparateurGUI;
 
 
+
+import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
 import edu.baskel.entities.Alerte;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.AlerteCRUD;
@@ -21,12 +27,16 @@ import javafx.scene.control.TextField;
  *
  * @author ASUS
  */
-public class AjoutAlerteController implements Initializable {
+public class AjoutAlerteController implements Initializable, MapComponentInitializedListener {
 
     @FXML
     private TextField descalrt;
     @FXML
     private TextField adrss;
+    @FXML
+    private GoogleMapView mapView;
+    
+    private GoogleMap map;
     /**
      * Initializes the controller class.
      */
@@ -50,6 +60,28 @@ public class AjoutAlerteController implements Initializable {
         Membre m = new Membre(1);
         a.setMembre(m);
         alrtcrd.ajouterAlert(a);
+    }
+
+    @Override
+    public void mapInitialized() {
+        
+        
+        //Set the initial properties of the map.
+        MapOptions mapOptions = new MapOptions();
+        
+        mapOptions.center(new LatLong(47.6097, -122.3331))
+                .overviewMapControl(false)
+                .panControl(false)
+                .rotateControl(false)
+                .scaleControl(false)
+                .streetViewControl(false)
+                .zoomControl(false)
+                .zoom(12);
+                   
+        map = mapView.createMap(mapOptions);
+
+        
+       
     }
 
 }

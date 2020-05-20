@@ -24,7 +24,8 @@
             <Button mnemonicParsing="false" onAction="#golisteavis" text="Liste des avis" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#fetchapi" text="api fetch" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#godetailrep" text="details reparateur" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#ajouterAvis" text="Ajouter Avis" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#ajouterAlert" text="Ajouter Alert" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

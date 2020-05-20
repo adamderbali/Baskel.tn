@@ -96,7 +96,25 @@ public static void MyGETRequest() throws IOException {
 
     @FXML
     private void godetailrep(ActionEvent event) throws IOException {
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("DetailsReparateur.fxml"));
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("DetailsReparateur.fxml"));//AjouterAvis
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void ajouterAvis(ActionEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("AjouterAvis.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void ajouterAlert(ActionEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("AjoutAlerte.fxml"));//
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
