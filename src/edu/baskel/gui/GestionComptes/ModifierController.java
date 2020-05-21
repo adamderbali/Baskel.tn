@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
+import edu.baskel.utils.AutoCompleteNumber;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.validationSaisie;
 import java.io.File;
@@ -34,6 +35,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.rgb;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -44,8 +47,7 @@ import org.controlsfx.control.textfield.TextFields;
  * @author sabri
  */
 public class ModifierController implements Initializable {
-    
-     
+
     @FXML
     private JFXTextField txtNom;
 
@@ -66,26 +68,29 @@ public class ModifierController implements Initializable {
     private TextField pathE;
     @FXML
     private JFXTextField txtId;
-     Image image;
-     Image im;
-     
+    Image image;
+    Image im;
+
     @FXML
     private Button idValider;
-     @FXML
+
+    @FXML
+    private JFXTextField txtNombre;
+    @FXML
     private JFXButton fermer;
-         @FXML
+    @FXML
     private Button idEditer;
- 
-      @FXML
-    private JFXButton parcourrir;   
-    
+
+    @FXML
+    private JFXButton parcourrir;
+
     private Stage thisStage;
-    
+
     private final GererController controller1;
 
     public ModifierController(GererController controller1) {
         this.controller1 = controller1;
-        thisStage=new Stage();
+        thisStage = new Stage();
         // Load the FXML file
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Modifier.fxml"));
@@ -98,17 +103,16 @@ public class ModifierController implements Initializable {
 
             // Setup the window/stage
             //thisStage.setTitle("Passing Controllers Example - Layout2");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-   public void showStage() {
+
+    public void showStage() {
         thisStage.showAndWait();
     }
-   
-   public void affichageEvent(){
+
+    public void affichageEvent() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
@@ -116,21 +120,22 @@ public class ModifierController implements Initializable {
         arrayList = (ArrayList) Ec.displayByEvent(i);
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
-        Evenement ev =(Evenement)arrayList.get(0);
-        System.out.println("+++++++++++"+arrayList);
-        System.out.println("-------------"+ev);
+        Evenement ev = (Evenement) arrayList.get(0);
+        System.out.println("+++++++++++" + arrayList);
+        System.out.println("-------------" + ev);
         txtNom.setText(ev.getNom_e());
         txtLieu.setText(ev.getLieu_e());
         txtDate.setValue(LocalDate.parse(ev.getDate_e(), formatter));
         txtDescription.setText(ev.getDescription_e());
         pathE.setText(ev.getImage_e());
+        txtNombre.setText(String.valueOf(ev.getNbr_max_e()));
         Image imgE = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + ev.getImage_e());
         img.setImage(imgE);
         img.setVisible(true);
-        
-   }
-   
-   @FXML
+
+    }
+
+    /* @FXML
     void editerModif(ActionEvent event) {
         
          txtNom.setEditable(true);
@@ -140,12 +145,153 @@ public class ModifierController implements Initializable {
                   pathE.setEditable(true);
                   img.setVisible(true);
 
-    }
-   
+    }*/
     @FXML
     void ValiderModif(ActionEvent event) {
-        
-          String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String date = txtDate.getEditor().getText();
+        /* test sur les champs vides ou non*/
+        if (((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty()) && (txtDescription.getText().isEmpty()))) {
+            validationSaisie.notifInfo("Echec", "Tous les champs doivent etre saisis");
+            txtNom.setFocusColor(rgb(255, 0, 0));
+            txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtLieu.setFocusColor(rgb(255, 0, 0));
+            txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtDescription.setFocusColor(rgb(255, 0, 0));
+            txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtDate.setDefaultColor(Color.RED);
+            txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+
+        } else {
+            if ((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty())) {
+                validationSaisie.notifInfo("Echec", "Saisie nom et lieu de l'evenement");
+                txtNom.setFocusColor(rgb(255, 0, 0));
+                txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+                txtLieu.setFocusColor(rgb(255, 0, 0));
+                txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+            } else {
+                if ((txtNom.getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
+                    validationSaisie.notifInfo("Echec", "Saisie nom et description de l'evenement");
+                    txtNom.setFocusColor(rgb(255, 0, 0));
+                    txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+                    txtDescription.setFocusColor(rgb(255, 0, 0));
+                    txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+                } else {
+
+                    if ((txtNom.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                        validationSaisie.notifInfo("Echec", "Saisie nom et date de l'evenement");
+                        txtNom.setFocusColor(rgb(255, 0, 0));
+                        txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+                        txtDate.setDefaultColor(Color.RED);
+                        txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+                    } else {
+
+                        if ((txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                            validationSaisie.notifInfo("Echec", "Saisie lieu et date de l'evenement");
+                            txtLieu.setFocusColor(rgb(255, 0, 0));
+                            txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+                            txtDate.setDefaultColor(Color.RED);
+                            txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+                        } else {
+                            if ((txtLieu.getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
+                                validationSaisie.notifInfo("Echec", "Saisie lieu et description de l'evenement");
+                                txtLieu.setFocusColor(rgb(255, 0, 0));
+                                txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+                                txtDescription.setFocusColor(rgb(255, 0, 0));
+                                txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+                            } else {
+
+                                if ((txtDescription.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                                    validationSaisie.notifInfo("Echec", "Saisie description et date de l'evenement");
+                                    txtDescription.setFocusColor(rgb(255, 0, 0));
+                                    txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+                                    txtDate.setDefaultColor(Color.RED);
+                                    txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+                                } else {
+                                    if (validationSaisie.validTextField(txtNom.getText())) {
+                                        validationSaisie.notifInfo("Echec", "Saisie le nom de l'evenement");
+                                        txtNom.setFocusColor(rgb(255, 0, 0));
+                                        txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+
+                                    } else {
+                                        if (validationSaisie.validTextField(txtLieu.getText())) {
+
+                                            System.out.println("------------------");
+                                            validationSaisie.notifInfo("Echec", "Saisie lieu de l'evenement ");
+                                            txtLieu.setFocusColor(rgb(255, 0, 0));
+                                            txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+                                        } else {
+
+                                            if (validationSaisie.validTextField(txtDescription.getText())) {
+
+                                                System.out.println("------------------");
+                                                validationSaisie.notifInfo("Echec", "Saisie description de l'evenement");
+                                                txtDescription.setFocusColor(rgb(255, 0, 0));
+                                                txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+                                            } else {
+                                                if ((validationSaisie.validTextField(txtDate.getEditor().getText()))) {
+                                                    System.out.println("------------------");
+                                                    validationSaisie.notifInfo("Echec", "Saisie date de l'evenement");
+                                                    txtDate.setDefaultColor(rgb(255, 0, 0));
+                                                    txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                } else {
+                                                    if (validationSaisie.validDate(txtDate.getEditor().getText())) {
+                                                        validationSaisie.notifInfo("Erreur", "La date saisie doit être au delà de" + date_system);
+                                                        txtDate.setDefaultColor(rgb(255, 0, 0));
+                                                        txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                    } 
+                                                    else {
+                                                        if (validationSaisie.verifiNumberPart(txtNombre.getText()) == false) {
+                                                            validationSaisie.notifInfo("Echec", "Saisie un entier");
+                                                            txtNombre.setFocusColor(rgb(255, 0, 0));
+                                                            txtNombre.setStyle("-fx-prompt-text-fill: #C4151C");}
+                                                    else {
+
+                                                        EvenementCRUD Ec = new EvenementCRUD();
+
+                                                        int i = Integer.parseInt(controller1.getIdEvent());
+                                                        Evenement e = new Evenement(i,
+                                                                txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText(), Integer.parseInt(txtNombre.getText())
+                                                        );
+                                                        Ec.updateEvenement(e);
+
+                                                        // txtNom.clear();
+                                                        // txtLieu.clear();
+                                                        // txtDate.setValue(null);
+                                                        // txtDescription.clear();
+                                                        // pathE.clear();
+                                                        // img.setVisible(false);
+                                                        txtNom.setEditable(false);
+                                                        txtLieu.setEditable(false);
+                                                        txtDate.setEditable(false);
+                                                        txtDescription.setEditable(false);
+                                                        pathE.setEditable(false);
+                                                        txtNombre.setEditable(false);
+                                                        img.setVisible(true);
+                                                        // idEditer.setVisible(true);
+
+                                                        Stage stage = (Stage) fermer.getScene().getWindow();
+                                                        stage.close();
+                                                        controller1.actualiser();
+                                                        validationSaisie.notifConfirm("ok", "Evenement Modifié");
+
+                                                        //   Stage stage = (Stage) idValider.getScene().getWindow();
+                                                        //   stage.close();
+                                                        //   controller1.actualiser();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /*        String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String date = txtDate.getEditor().getText();
     
        
@@ -162,7 +308,7 @@ public class ModifierController implements Initializable {
                      
                     int i = Integer.parseInt(controller1.getIdEvent());
                     Evenement e = new Evenement(i,
-                            txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText()
+                            txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText(),Integer.parseInt(txtNombre.getText())
                     );
                     Ec.updateEvenement(e);
                    
@@ -177,6 +323,7 @@ public class ModifierController implements Initializable {
                   txtDate.setEditable(false);
                   txtDescription.setEditable(false);
                   pathE.setEditable(false);
+                  txtNombre.setEditable(false);
                   img.setVisible(true);
                  // idEditer.setVisible(true);
                        
@@ -193,25 +340,21 @@ public class ModifierController implements Initializable {
                 }
                 
             
-        }
-        
+        }*/
 
     }
-    
-       @FXML
+
+    @FXML
     void retour(ActionEvent event) {
-         Stage stage = (Stage) fermer.getScene().getWindow();
-                    stage.close();
-                    controller1.actualiser();
+        Stage stage = (Stage) fermer.getScene().getWindow();
+        stage.close();
+        controller1.actualiser();
     }
-
-    
-   
 
     @FXML
     void telecharger(ActionEvent event) throws IOException {
-        
-             FileChooser fileChooser = new FileChooser();
+
+        FileChooser fileChooser = new FileChooser();
         final Stage stage = new Stage();
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
@@ -230,12 +373,12 @@ public class ModifierController implements Initializable {
 
     }
 
-   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
+        TextFields.bindAutoCompletion(txtNombre, AutoCompleteNumber.getNbrPart());
         affichageEvent();
-        System.out.println("---------------------"+controller1.getIdEvent());
-    }    
-    
+        System.out.println("---------------------" + controller1.getIdEvent());
+    }
+
 }

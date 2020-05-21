@@ -80,7 +80,9 @@ public class SupprimerEventController implements Initializable {
 
     @FXML
     private Button idEditer;
-    
+    @FXML
+    private JFXTextField txtNombre;
+
     
     private Stage thisStage;
     
@@ -144,6 +146,7 @@ public class SupprimerEventController implements Initializable {
         txtDate.setValue(LocalDate.parse(ev.getDate_e(), formatter));
         txtDescription.setText(ev.getDescription_e());
         pathE.setText(ev.getImage_e());
+        txtNombre.setText(String.valueOf(ev.getNbr_max_e()));
         Image imgE = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + ev.getImage_e());
         img.setImage(imgE);
         img.setVisible(true);
@@ -209,6 +212,8 @@ public class SupprimerEventController implements Initializable {
                 img.setVisible(false);
                 pathE.clear();
                 pathE.setEditable(false);
+                txtNombre.clear();
+                txtNombre.setEditable(false);
                 idSupprimer.setVisible(false);
                
                 
@@ -228,7 +233,7 @@ public class SupprimerEventController implements Initializable {
     void telecharger(ActionEvent event) {
         
         TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
-        affichageEvent();
+      //  affichageEvent();
         System.out.println("---------------------"+controller1.getIdEvent());
 
     }

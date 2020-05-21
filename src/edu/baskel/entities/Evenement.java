@@ -27,10 +27,12 @@ public class Evenement {
     private String description_e;
     private String image_e;
     private int id_u;
-  
+    private int nbr_max_e;
     private Label etat_e;
     private Membre mbre;
     private Participation part;
+    private int nbr_participant;
+     private Label etat_p;
 
   
 
@@ -44,6 +46,67 @@ public class Evenement {
         this.image_e = image_e;
         this.id_u = id_u;
         this.part = part;
+    }
+
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int nbr_max_e, Label etat_e, int nbr_participant, Label etat_p) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.nbr_max_e = nbr_max_e;
+        this.etat_e = etat_e;
+        this.nbr_participant = nbr_participant;
+        this.etat_p = etat_p;
+    }
+
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, Label etat_e, int nbr_participant, Label etat_p) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+        this.etat_e = etat_e;
+        this.nbr_participant = nbr_participant;
+        this.etat_p = etat_p;
+    }
+    
+    
+
+    public Label getEtat_p() {
+        return etat_p;
+    }
+
+    public void setEtat_p(Label etat_p) {
+        this.etat_p = etat_p;
+    }
+    
+
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int nbr_max_e, Label etat_e, int nbr_participant,Label etat_p) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.nbr_max_e = nbr_max_e;
+        this.etat_e = etat_e;
+        this.nbr_participant = nbr_participant;
+        this.etat_p = etat_p;
+    }
+
+    public int getNbr_participant() {
+        return nbr_participant;
+    }
+
+    public void setNbr_participant(int nbr_participant) {
+        this.nbr_participant = nbr_participant;
     }
 
     public void setPart(Participation part) {
@@ -62,6 +125,64 @@ public class Evenement {
         this.etat_e = etat_e;
     }
 
+    public int getNbr_max_e() {
+        return nbr_max_e;
+    }
+
+    public void setNbr_max_e(int nbr_max_e) {
+        this.nbr_max_e = nbr_max_e;
+    }
+
+ 
+
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, Label etat_e,Label etat_p) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+        this.etat_e = etat_e;
+        this.etat_p = etat_p;
+    }
+
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+    }
+    
+     public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int nbr_max_e) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+     
+        this.nbr_max_e = nbr_max_e;
+    }
+
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, Label etat_e, Label etat_p) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.etat_e = etat_e;
+        this.etat_p = etat_p;
+    }
+
    
 
    
@@ -78,7 +199,7 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String etat_e) {
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String etat_e,String etat_p) {
         this.image = image;
         this.id_e = id_e;
         this.nom_e = nom_e;
@@ -86,9 +207,10 @@ public class Evenement {
         this.date_e = date_e;
         this.description_e = description_e;
         this.etat_e = new Label(etat_e);
+        this.etat_p = new Label(etat_p);
     }
 
-    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, String etat) {
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, String etat_e,String etat_p) {
         this.image = image;
         this.id_e = id_e;
         this.nom_e = nom_e;
@@ -96,7 +218,8 @@ public class Evenement {
         this.date_e = date_e;
         this.description_e = description_e;
         this.image_e = image_e;
-        this.etat_e = etat_e;
+        this.etat_e = new Label(etat_e);
+        this.etat_p = new Label(etat_p);
     }
 
     public Evenement(int id_e, String nom_e, String lieu_e, String description_e) {
@@ -122,15 +245,16 @@ public class Evenement {
         this.mbre = mbre;
     }
 
-    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u) {
-        this.id_e = id_e;
+    public Evenement(String nom_e, String lieu_e, String date_e, String description_e, String image_e, int nbr_max_e) {
         this.nom_e = nom_e;
         this.lieu_e = lieu_e;
         this.date_e = date_e;
         this.description_e = description_e;
         this.image_e = image_e;
-        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
     }
+
+ 
 
     public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e) {
         this.id_e = id_e;
@@ -219,7 +343,7 @@ public class Evenement {
 
     @Override
     public String toString() {
-        return "Evenement{" + "image=" + image + ", id_e=" + id_e + ", nom_e=" + nom_e + ", lieu_e=" + lieu_e + ", date_e=" + date_e + ", description_e=" + description_e + ", image_e=" + image_e + ", id_u=" + id_u + ", mbre=" + mbre + '}';
+        return "Evenement{" + "image=" + image + ", id_e=" + id_e + ", nom_e=" + nom_e + ", lieu_e=" + lieu_e + ", date_e=" + date_e + ", description_e=" + description_e + ", image_e=" + image_e + ", id_u=" + id_u + ", nbr_max_e=" + nbr_max_e + ", etat_e=" + etat_e + ", mbre=" + mbre + ", part=" + part + '}';
     }
 
    

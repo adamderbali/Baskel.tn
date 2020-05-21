@@ -29,7 +29,7 @@ public class CjEvent {
             
             Trigger trigger1 = TriggerBuilder.newTrigger()
                     .withIdentity("cronTrigger1","group1")
-                    .withSchedule(CronScheduleBuilder.cronSchedule(""))
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0/30"))
                     .build();
             
             Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
