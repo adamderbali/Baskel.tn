@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -83,11 +85,26 @@ public class BanCRUD {
             
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        
-        
+        }   
     }
-    public List<Ban> getlist_ban(){
+    public void Ban_Suppression(){
+        for (Ban b : getlist_ban_supp()) {
+            try {
+                String sq1 = "delete from membre where id_u in (select id_u from ban where ban_num_u>3)";
+                PreparedStatement prep2 = cnxs.prepareStatement(sq1);
+                //prep2.setInt(1, m.getId_u());
+                prep2.execute();
+                System.out.println("la suppression de user a etè bien effectué ");
+            } catch (SQLException ex) {
+ex.printStackTrace();            }
+            }
+        
+        }
+            
+        
+    
+  
+       public List<Ban> getlist_ban(){
     List<Ban> list_ban = new ArrayList<>();
         try {
             String rq="select * from ban ";
@@ -106,6 +123,26 @@ public class BanCRUD {
             ex.printStackTrace();
         }
         return list_ban;
+}
+    public List<Ban> getlist_ban_supp(){
+    List<Ban> list_ban_supp = new ArrayList<>();
+        try {
+            String rq="select * from ban where ban_num_u>=3";
+            Statement st = cnxs.createStatement();
+            ResultSet rs = st.executeQuery(rq);
+            while (rs.next()) {
+                Ban b = new Ban();
+                b.setDate_ban(rs.getDate("date_ban"));
+                b.setId_u(rs.getInt("id_u"));
+                b.setId_ban(rs.getInt("id_ban"));
+                b.setBan_num_u(rs.getInt("ban_num_u"));
+                list_ban_supp.add(b);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list_ban_supp;
 }
 
 

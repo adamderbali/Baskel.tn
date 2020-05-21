@@ -136,6 +136,18 @@ public class Affichage_userController implements Initializable {
 
         Image image = new Image("/images/icons8-ok-128.png", true);
         ReclamationCRUD s_rec = new ReclamationCRUD();
+        if (table_user.getSelectionModel().getSelectedItem() == null) {
+            Notifications notificationBuilder = Notifications.create()
+                                .text(" Pas de champs selectionée").title("Erreur").graphic(null).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Pas de champs selectionée");
+                            }
+
+                        });
+                        notificationBuilder.showError();
+        }
         if (textarea_rec.getText().isEmpty()) {
             Alert alertDesc = new InputValidation().getAlert("Description", "Saisissez votre Description de Reclamation ");
             alertDesc.showAndWait();
@@ -151,14 +163,14 @@ public class Affichage_userController implements Initializable {
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
-                        Reclamation reclamation = new Reclamation(textarea_rec.getText(), tf_objet_rec.getText(), 4, user.getId_u());
+                        Reclamation reclamation = new Reclamation(textarea_rec.getText(), tf_objet_rec.getText(), 8, user.getId_u());
                         s_rec.ajouterReclamation(reclamation);
                         MembreCRUD s_mem = new MembreCRUD();
                         Membre mem = new Membre(user.getId_u(), user.getNbr_rec_u());
                         s_mem.ajouterban(user.getId_u());
                         text.setText("");
                         Notifications notificationBuilder = Notifications.create()
-                                .text(" Votre Reclamation a été envoyer avec succés").title("Reclamation").graphic(new ImageView(image)).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                                .text(" Votre Reclamation a été envoyer avec succés").title("Reclamation").graphic(new ImageView(image)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
 
@@ -171,7 +183,7 @@ public class Affichage_userController implements Initializable {
                     }
                     if (result.get() == ButtonType.CANCEL) {
                         Notifications notificationBuilder2 = Notifications.create()
-                                .text("  Votre réclamation est  annulée ").title("Reclamation").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                                .text("  Votre réclamation est  annulée ").title("Reclamation").graphic(null).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
 
@@ -185,7 +197,7 @@ public class Affichage_userController implements Initializable {
                 } else {
                     Image image2 = new Image("/images/iconfinder_Error_381599.png", true);
                     Notifications notificationBuilder3 = Notifications.create()
-                            .text("Votre Reclamation deja existe ").title("Reclamation").graphic(new ImageView(image2)).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            .text("Votre Reclamation deja existe ").title("Reclamation").graphic(new ImageView(image2)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
 

@@ -278,11 +278,59 @@ public class ReclamationController implements Initializable {
     @FXML
     private void Modifier(ActionEvent event) {
         Image image = new Image("/images/icons8-ok-128.png", true);
-
         ReclamationCRUD Rc = new ReclamationCRUD();
+        if (recla.getSelectionModel().getSelectedItem() == null) {
+            Notifications notificationBuilder = Notifications.create()
+                                .text(" Pas de champs selectionée").title("Erreur").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Pas de champs selectionée");
+                            }
+
+                        });
+                        notificationBuilder.showError();
+        }
         
-        Reclamation c = new Reclamation(tf_valadition.getText(),tf_etat.getText(),recla.getSelectionModel().getSelectedItem().getId_rec());
-        Rc.valider_admin(c);
+           Reclamation c = new Reclamation(tf_valadition.getText(),tf_etat.getText(),recla.getSelectionModel().getSelectedItem().getId_rec());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText(" Vous voulez effecuter cette Modification ?");
+                    alert.setContentText(" Appuyez vous sur OK si vous etes d'accord ");
+                    Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == ButtonType.OK)
+        {
+            Rc.valider_admin(c);
+        Notifications notificationBuilder2 = Notifications.create()
+                                .text(" Votre Modification a été effectuée").title("Modification").graphic(new ImageView(image)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Done ! ");
+                            }
+
+                        });
+                        notificationBuilder2.show();
+                        Rc.valider_admin(c);
+        }
+        if(result.get() == ButtonType.CANCEL){
+            Notifications notificationBuilder3 = Notifications.create()
+                                .text("  Votre Modification est annulée ").title("Modification").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println("Modification annulèe !");
+                            }
+
+                        });
+                        notificationBuilder3.showInformation();
+                    }
+        }
+            
+        }
+    
+                        
         /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText(" Vous voulez envoyer cette reclamation ?");
@@ -314,9 +362,9 @@ public class ReclamationController implements Initializable {
                         notificationBuilder2.showInformation();
                     }
                     }*/
-    }
+    
 
    
     
-}
+
 
