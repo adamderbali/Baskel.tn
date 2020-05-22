@@ -16,19 +16,20 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="473.0" prefWidth="592.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane layoutX="286.0" layoutY="15.0" prefHeight="447.0" prefWidth="307.0" style="-fx-border-color: #FFFFFF;" />
-      <ImageView fitHeight="494.0" fitWidth="600.0" layoutY="-22.0" opacity="0.31" pickOnBounds="true" smooth="false">
+      <BorderPane layoutX="296.0" layoutY="25.0" prefHeight="447.0" prefWidth="307.0" style="-fx-border-color: #FFFFFF;" />
+      <ImageView fitHeight="494.0" fitWidth="610.0" layoutY="-12.0" opacity="0.31" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="txtNom" focusColor="#007782" layoutX="333.0" layoutY="72.0" prefHeight="25.0" prefWidth="199.0" promptText="Saisie le nom de l'evenement" />
-      <JFXTextField fx:id="txtLieu" focusColor="#007782" layoutX="333.0" layoutY="115.0" prefHeight="25.0" prefWidth="199.0" promptText="Saisie lieu de l'evenement" />
-      <JFXTextArea fx:id="txtDescription" focusColor="#007782" layoutX="331.0" layoutY="155.0" prefHeight="36.0" prefWidth="199.0" promptText="Description de  l'evenement" />
-      <JFXDatePicker fx:id="txtDate" defaultColor="#007782" layoutX="331.0" layoutY="257.0" prefHeight="25.0" prefWidth="240.0" promptText="Date de l'evenement" />
-      <TextField fx:id="pathE" layoutX="471.0" layoutY="314.0" prefHeight="25.0" prefWidth="118.0" promptText="Url" style="-fx-border-color: #COCOCO; -fx-background-radius: 100px; -fx-border-radius: 100px;" stylesheets="@AjoutEvenement.css" />
-      <JFXButton fx:id="fileChoose" layoutX="476.0" layoutY="360.0" onAction="#telecharger" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parrcourrier" textFill="#007782" />
-      <Text layoutX="326.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un nouveau evenement">
+      <JFXTextField fx:id="txtNom" focusColor="#007782" layoutX="343.0" layoutY="82.0" prefHeight="25.0" prefWidth="199.0" promptText="Saisie le nom de l'evenement" />
+      <JFXTextField fx:id="txtLieu" focusColor="#007782" layoutX="343.0" layoutY="125.0" prefHeight="25.0" prefWidth="199.0" promptText="Saisie lieu de l'evenement" />
+      <JFXTextArea fx:id="txtDescription" focusColor="#007782" layoutX="341.0" layoutY="165.0" prefHeight="36.0" prefWidth="199.0" promptText="Description de  l'evenement" />
+      <JFXDatePicker fx:id="txtDate" defaultColor="#007782" layoutX="341.0" layoutY="267.0" prefHeight="25.0" prefWidth="240.0" promptText="Date de l'evenement" />
+      <JFXTextField fx:id="txtNombre" focusColor="#007782" layoutX="341.0" layoutY="223.0" prefHeight="25.0" prefWidth="199.0" promptText="Nombre des participants" />
+      <TextField fx:id="pathE" layoutX="481.0" layoutY="324.0" prefHeight="25.0" prefWidth="118.0" promptText="Url" style="-fx-border-color: #COCOCO; -fx-background-radius: 100px; -fx-border-radius: 100px;" stylesheets="@AjoutEvenement.css" />
+      <JFXButton fx:id="fileChoose" layoutX="486.0" layoutY="370.0" onAction="#telecharger" prefHeight="27.0" prefWidth="84.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parcourir" textFill="#007782" />
+      <Text layoutX="342.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un evenement" wrappingWidth="221.818359375">
          <font>
             <Font size="18.0" />
          </font>
@@ -41,9 +42,12 @@
             </LinearGradient>
          </fill>
       </Text>
-      <JFXButton fx:id="idRetour" layoutX="574.0" onAction="#retour" prefHeight="17.0" prefWidth="24.0" text="X" />
-      <JFXButton layoutX="398.0" layoutY="411.0" onAction="#ajouterEvenement" prefHeight="27.0" prefWidth="90.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Valider" textFill="#007782" />
-      <ImageView fx:id="img" fitHeight="94.0" fitWidth="145.0" layoutX="316.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXTextField fx:id="txtNombre" focusColor="#007782" layoutX="333.0" layoutY="213.0" prefHeight="25.0" prefWidth="199.0" promptText="Nombre des participants" />
+      <JFXButton fx:id="idRetour" layoutX="584.0" layoutY="10.0" onAction="#retour" prefHeight="17.0" prefWidth="24.0" text="X" />
+      <JFXButton fx:id="idRetour" layoutX="408.0" layoutY="421.0" onAction="#ajouterEvenement" prefHeight="27.0" prefWidth="90.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Valider" textFill="#007782" />
+      <ImageView fx:id="img" fitHeight="94.0" fitWidth="145.0" layoutX="326.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="nom" layoutX="529.0" layoutY="82.0" text="*" textFill="#f80202" />
+      <JFXButton fx:id="lieu" layoutX="529.0" layoutY="125.0" text="*" textFill="#f80202" />
+      <JFXButton fx:id="description" layoutX="529.0" layoutY="171.0" text="*" textFill="#f80202" />
+      <JFXButton fx:id="date" layoutX="529.0" layoutY="267.0" text="*" textFill="#f80202" />
    </children>
 </AnchorPane>

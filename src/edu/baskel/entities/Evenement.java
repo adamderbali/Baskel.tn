@@ -33,6 +33,7 @@ public class Evenement {
     private Participation part;
     private int nbr_participant;
      private Label etat_p;
+     private Label pourcentage;
 
   
 
@@ -75,6 +76,14 @@ public class Evenement {
         this.etat_e = etat_e;
         this.nbr_participant = nbr_participant;
         this.etat_p = etat_p;
+    }
+
+    public Label getPourcentage() {
+        return pourcentage;
+    }
+
+    public void setPourcentage(Label pourcentage) {
+        this.pourcentage = pourcentage;
     }
     
     
@@ -220,6 +229,50 @@ public class Evenement {
         this.image_e = image_e;
         this.etat_e = new Label(etat_e);
         this.etat_p = new Label(etat_p);
+    }
+    
+     public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, String etat_e,String etat_p,String pourcentage) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.etat_e = new Label(etat_e);
+        this.etat_p = new Label(etat_p);
+        this.pourcentage = new Label();
+    }
+
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, Label etat_e, Membre mbre, Participation part, int nbr_participant, Label etat_p, Label pourcentage) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+        this.etat_e = etat_e;
+        this.mbre = mbre;
+        this.part = part;
+        this.nbr_participant = nbr_participant;
+        this.etat_p = etat_p;
+        this.pourcentage = pourcentage;
+    }
+
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, int nbr_participant, Label pourcentage) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+        this.nbr_participant = nbr_participant;
+        this.pourcentage = pourcentage;
     }
 
     public Evenement(int id_e, String nom_e, String lieu_e, String description_e) {

@@ -286,6 +286,27 @@ public class ParticipationCrud {
     
     
     /*nombre des participant par evenement*/
+    public float pourcentageEvent(int id_e){
+        float pe=(float) 0.0;
+        
+          try { 
+            String req1 = "SELECT nbr_participant * 100 / nbr_max_e FROM evenement WHERE id_e=? AND nbr_max_e!=0";
+            System.out.println("+++++++++++" + req1);
+            PreparedStatement pst = cnx.prepareStatement(req1);
+            pst.setInt(1, id_e);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+            pe = rs.getInt(1);
+            
+            System.out.println("----------"+pe);
+            } 
+        } catch (SQLException ex) {
+             ex.printStackTrace();
+        }
+          System.out.println("-------------"+pe);
+          return pe;
+        
+    }
     
       public int nombreParticipation(int id_e){
               int nb=0;
@@ -373,9 +394,9 @@ public class ParticipationCrud {
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
                 e.setDescription_e(rs.getString("description_e"));
-                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
-                e.getImage().setFitWidth(200);
-                e.getImage().setFitHeight(110);
+               // e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+               // e.getImage().setFitWidth(200);
+               // e.getImage().setFitHeight(110);
                 
                 
                 Participation p = new Participation();

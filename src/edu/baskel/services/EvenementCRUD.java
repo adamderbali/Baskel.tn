@@ -6,12 +6,15 @@
 package edu.baskel.services;
 
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
+import static edu.baskel.services.ParticipationCrud.cnx;
 import edu.baskel.utils.ConnectionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Label;
@@ -46,7 +49,7 @@ public class EvenementCRUD {
             pst.setInt(6, e.getNbr_max_e());
            
           
-             //pst.setInt(7, e.getId_u());
+           // pst.setInt(7, e.getId_u());
             pst.executeUpdate();
 
             System.out.println("Evenement added!");
@@ -531,7 +534,68 @@ public class EvenementCRUD {
         return Listevent;
     }
       
-     
+      public float pourcentageEvent(int nbr_participant,int nbr_max_e  ){
+          float pe = 0;
+        Evenement e = new Evenement();
+        EvenementCRUD ev = new EvenementCRUD();
+        if(nbr_participant!=0){
+        pe = (nbr_participant *100) / nbr_max_e ;}
+        
+        return pe;
+        
+    }
+      
+     public List<Evenement> displayParticipant(int id_u) {
+
+        List<Evenement> ListEventPaticipation = new ArrayList<>();
+         EvenementCRUD ev = new EvenementCRUD();
+        try { String requete = "SELECT * FROM  evenement e JOIN membre m ON m.id_u = e.id_u  WHERE e.id_u =" + id_u;
+         
+            Statement pst = cnx.createStatement();
+            ResultSet rs = pst.executeQuery(requete);
+
+            while (rs.next()) {
+
+              Membre m = new Membre();
+                m.setId_u(rs.getInt("id_u"));
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                System.out.println("1-------------" + rs.getString("nom_u"));
+
+                Evenement e = new Evenement();
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setNbr_max_e(rs.getInt("nbr_max_e"));
+                e.setNbr_participant(rs.getInt("nbr_participant"));
+                System.out.println("za3ma lehne zeda"+e.getNbr_participant());
+                String Pourcentage = String.valueOf(ev.pourcentageEvent(e.getNbr_participant(),e.getNbr_max_e()));
+                System.out.println("----------------------pourcentage affiché"+ev.pourcentageEvent(e.getNbr_participant(),e.getNbr_max_e()));
+                if(e.getNbr_max_e()!=0){
+                if (ev.pourcentageEvent(e.getNbr_participant(),e.getNbr_max_e())>= 50){
+                 e.setPourcentage(new Label(Pourcentage+" %"));
+                 e.getPourcentage().setTextFill(Color.web("#2e856e"));}
+                else if (ev.pourcentageEvent(e.getNbr_participant(),e.getNbr_max_e())< 50){
+                    e.setPourcentage(new Label(Pourcentage+" %"));
+                 e.getPourcentage().setTextFill(Color.web("#c4151c"));
+                }
+                }
+            
+                e.setMbre(m);
+
+                ListEventPaticipation.add(e);
+                System.out.println("-----------" + ListEventPaticipation);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return ListEventPaticipation;
+    }
   
     }
    

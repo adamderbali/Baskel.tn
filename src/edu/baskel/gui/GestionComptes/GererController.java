@@ -254,7 +254,7 @@ public class GererController implements Initializable {
     void ValiderModif(ActionEvent event) {
 
         if ((tableAffichage.getSelectionModel().getSelectedItem() == null)) {
-            validationSaisie.notif("Evenement", "Vous devez selectionné un evenement à modifier");
+            validationSaisie.notif("Evenement", "Vous devez selectionner un evenement à modifier");
         } else {
             ModifierController controller2 = new ModifierController(this);
             controller2.showStage();
@@ -266,7 +266,7 @@ public class GererController implements Initializable {
     void supprimer(ActionEvent event) throws Exception {
 
         if ((tableAffichage.getSelectionModel().getSelectedItem() == null)) {
-            validationSaisie.notif("Evenement", "Vous devez selectionné un evenement à supprimer");
+            validationSaisie.notif("Evenement", "Vous devez selectionner un evenement à supprimer");
         } else {
             SupprimerEventController controller3 = new SupprimerEventController(this);
             controller3.showStage();

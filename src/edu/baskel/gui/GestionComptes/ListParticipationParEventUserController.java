@@ -8,6 +8,7 @@ package edu.baskel.gui.GestionComptes;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Participation;
+import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
 import java.io.IOException;
 import java.net.URL;
@@ -59,17 +60,22 @@ public class ListParticipationParEventUserController implements Initializable {
 
     @FXML
     private TableColumn<Evenement, String> colDateE;
+      @FXML
+    private TableColumn<Evenement, String> colPourcentage;
 
     public void affichageParticip() {
 
-        ParticipationCrud Pc = new ParticipationCrud();
-        List<Evenement> partlst = Pc.displayParticipant(7);
+      //  ParticipationCrud Pc = new ParticipationCrud();
+        EvenementCRUD ev = new EvenementCRUD();
+     //   List<Evenement> partlst = Pc.displayParticipant(7);
+     List<Evenement> partlst = ev.displayParticipant(7);
         ObservableList obser;
         obser = FXCollections.observableArrayList(partlst);
         TableColumn<Evenement, String> c1 = new TableColumn<Evenement, String>("first");
         colNomE.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieuE.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         colDateE.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colPourcentage.setCellValueFactory(new PropertyValueFactory<>("pourcentage"));
         /*    colNomE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
         colLieuE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDateE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));*/

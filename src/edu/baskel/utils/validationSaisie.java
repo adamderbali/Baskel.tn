@@ -148,8 +148,9 @@ public class validationSaisie {
     }
 
     public static boolean verifiNumberPart(String nombre) {
-
+          
         try {
+            
             int i = Integer.parseInt(nombre);
             System.out.println("C'est un entier");
             return true;
@@ -157,7 +158,32 @@ public class validationSaisie {
         } catch (Exception e) {
             System.out.println("Je ne suis pas un entier, et alors ca te derange ?");
         }
-        return false;
+        
+    
+             return false;
     }
-
+    
+      public static int validNumberParticipant(String ch) {
+        int i = 0;
+        {
+            try {
+                i = Integer.parseInt(ch);
+            } catch (NumberFormatException e) {
+                return i;
+            }
+        }
+        return i;
+    }
+      
+        public static boolean validNumberParticipantU(String ch) {
+          int i;
+        {
+            try {
+                i = Integer.parseInt(ch);
+            } catch (NumberFormatException e) {
+                return true;
+            }
+        }
+        return true;
+    }
 }

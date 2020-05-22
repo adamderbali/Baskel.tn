@@ -33,7 +33,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
@@ -228,18 +227,21 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
         EvenementCRUD ev = new EvenementCRUD();
         ParticipationCrud Pc = new ParticipationCrud();
-        Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
         Qrcode qr = new Qrcode();
         MailAttachement ma = new MailAttachement();
 
         if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
-            validationSaisie.notif("Participation", "Vous devez selectionné un evenement pour participer");
+            validationSaisie.notif("Participation", "Vous devez selectionner un evenement pour participer");
         } else if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
+                    Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
+
             //  tableAffichage.getSelectionModel().setCellSelectionEnabled(true);
             System.out.println();
             validationSaisie.notifInfo("Information", "Vous avez deja particpé a cet evenement");
             actualiser();
         } else if (ev.verifierNbrMaxE(tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true) {
+          Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
+
             Pc.ajouterParticipation(p);
             qr.Create("nom= " + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + "Date= " + tableAffichage.getSelectionModel().getSelectedItem().getDate_e(), tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
             ma.envoiMailQrcode("sabrine.zekri@esprit.tn", tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
@@ -247,6 +249,8 @@ public class List_Event_Add_ParticipationController implements Initializable {
             System.out.println("okok++++okokok");
             actualiser();
         } else if (ev.verifierParticipant(tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true) {
+           Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
+
             Evenement e = new Evenement();   
             ev.nbrParticipant(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
             Pc.ajouterParticipation(p);
@@ -298,19 +302,20 @@ public class List_Event_Add_ParticipationController implements Initializable {
     void lancerAjout(ActionEvent event) {
         //btnAjout.setDisable(true);
         Ajouter_EvenementController controller2 = new Ajouter_EvenementController(this);
-        controller2.showStage();
-        
+            controller2.showStage();
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+     
+       actualiser();
         try {
             affichageEvenement();
         } catch (Exception ex) {
             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
 
     }
 
