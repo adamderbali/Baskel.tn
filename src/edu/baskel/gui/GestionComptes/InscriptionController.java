@@ -356,8 +356,7 @@ public class InscriptionController implements Initializable {
 
 //page de Connexion
     @FXML
-    public void SidentifierPage(ActionEvent event
-    ) {
+    public void SidentifierPage(ActionEvent event) {
         try {
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);

@@ -23,7 +23,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -41,6 +45,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class ForumFXMLController implements Initializable {
 
@@ -68,11 +73,12 @@ public class ForumFXMLController implements Initializable {
     private Label lbladresse;
     @FXML
     private Label lblsexe;
-
     @FXML
     private Button btnModifié;
     @FXML
     private Button btnEnregistré;
+    @FXML
+    private ImageView btnHome;
 
     MembreCRUD mc = new MembreCRUD();
     ForumCRUD fs = new ForumCRUD();
@@ -146,7 +152,7 @@ public class ForumFXMLController implements Initializable {
                                         if (m.getId_u() != M.getId_u()) {
                                             PaneProfilCom.setVisible(true);
                                         }
-                                        
+
                                     }
                                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
                                         PaneProfilCom.setVisible(false);
@@ -386,6 +392,21 @@ public class ForumFXMLController implements Initializable {
         } else {
             InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
 
+        }
+    }
+
+    @FXML
+    void HomeRed(MouseEvent event) {
+        try {
+            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+            Scene redirection_scene = new Scene(redirection_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(redirection_scene);
+            app_stage.setAlwaysOnTop(false);
+            app_stage.show();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
