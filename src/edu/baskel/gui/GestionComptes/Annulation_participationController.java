@@ -8,6 +8,7 @@ package edu.baskel.gui.GestionComptes;
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Participation;
+import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
 import edu.baskel.utils.validationSaisie;
 import java.net.URL;
@@ -87,7 +88,9 @@ public class Annulation_participationController implements Initializable {
 
     @FXML
     void annulerParticipation(ActionEvent event) {
-
+        Evenement e = new Evenement();
+        EvenementCRUD ev = new EvenementCRUD();
+               
         ParticipationCrud Pc = new ParticipationCrud();
     //    System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
           if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
@@ -95,20 +98,32 @@ public class Annulation_participationController implements Initializable {
           else{
         if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
             if (Pc.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem()) == true)
-            {    System.out.println("++++++OK oK");
+            {   
+              if(ev.verifierNbrMaxE(tableAffichage.getSelectionModel().getSelectedItem().getId_e())==true)  {
+                System.out.println("++++++OK oK");
                 tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
                 validationSaisie.notifConfirm("ok", "Participation annulée");
                 System.out.println("ok--------------------");
                 actualiser();
             }
-            else {
+              else if(ev.verifierNbrMaxE(tableAffichage.getSelectionModel().getSelectedItem().getId_e())==false){
+                 ev.nbrParticipantDelete(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+                System.out.println("++++++OK oK");
+                tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
+                validationSaisie.notifConfirm("ok", "Participation annulée");
+                System.out.println("ok--------------------");
+                actualiser();
+              }
+   
+        }
+                    
+              else {
                     System.out.println("----------erreur");
                     }
-
-        }
+            
           }
        
-    }
+    }}
 
     private void actualiser() {
         

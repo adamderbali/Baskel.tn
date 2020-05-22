@@ -45,11 +45,20 @@ public class Essai {
 //  cm.Create("nesrine", "sabrine2");
 
         EvenementCRUD ev = new EvenementCRUD();
-        System.out.println(ev.displayAllListU(7));
-        ev.desactiverCell(7);
-
+      //  Evenement e  = new Evenement(147, "sortie 17", "tunis", "25/10/2021", "marahbe", null, 20);
+       // ev.nbrParticipant(162);
+    
+      //  System.out.println(ev.displayAllListU(7));
+      //  ev.desactiverCell(7);
+    
+     if (ev.verifierSs(19, 0)==true){
+         System.out.println("ok");
+     }
+     else{
+         System.out.println("mafama chay");
+  
     }
     
   
-    
-}
+    }}
+

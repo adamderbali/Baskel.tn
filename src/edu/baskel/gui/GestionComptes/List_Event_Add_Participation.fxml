@@ -9,21 +9,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor1" onKeyTyped="#searchBox" prefHeight="650.0" prefWidth="1195.0" style="-fx-background-color: #FFFFFF;" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.List_Event_Add_ParticipationController">
+<AnchorPane id="AnchorPane" fx:id="anchor1" onKeyTyped="#searchBox" prefHeight="650.0" prefWidth="1226.0" style="-fx-background-color: #FFFFFF;" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.List_Event_Add_ParticipationController">
    <children>
-      <ImageView fitHeight="420.0" fitWidth="1145.0" layoutX="22.0" layoutY="127.0">
+      <ImageView fitHeight="420.0" fitWidth="1189.0" layoutX="22.0" layoutY="127.0">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <TableView fx:id="tableAffichage" layoutX="22.0" layoutY="126.0" opacity="0.74" prefHeight="420.0" prefWidth="1145.0" style="-fx-fixed-cell-size: 110;" stylesheets="@AffichageList.css">
+      <TableView fx:id="tableAffichage" layoutX="22.0" layoutY="126.0" opacity="0.74" prefHeight="420.0" prefWidth="1189.0" style="-fx-fixed-cell-size: 110;" stylesheets="@AffichageList.css">
         <columns>
-          <TableColumn fx:id="colNom" prefWidth="161.0" text="Nom de l'evenement" />
-          <TableColumn fx:id="colLieu" prefWidth="158.0" text="Lieu de l'evenement" />
-            <TableColumn fx:id="ColDate" prefWidth="187.0" text="Date de l'evenement" />
-            <TableColumn fx:id="colDescription" prefWidth="224.0" text="Description de l'evenement" />
-            <TableColumn fx:id="ColImage" prefWidth="228.0" text="Image " />
-            <TableColumn fx:id="colEtat" prefWidth="187.0" />
+          <TableColumn fx:id="colNom" prefWidth="144.99996948242188" text="Nom de l'evenement" />
+          <TableColumn fx:id="colLieu" prefWidth="129.0" text="Lieu de l'evenement" />
+            <TableColumn fx:id="ColDate" prefWidth="143.0" text="Date de l'evenement" />
+            <TableColumn fx:id="colDescription" prefWidth="181.0" text="Description de l'evenement" />
+            <TableColumn fx:id="ColImage" prefWidth="223.0" text="Image " />
+            <TableColumn fx:id="colEtat" prefWidth="175.0" />
+            <TableColumn fx:id="colnbrpart" prefWidth="192.0" />
         </columns>
       </TableView>
       <JFXButton fx:id="btnAjout" layoutX="974.0" layoutY="38.0" onAction="#lancerAjout" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Ajouter un evenement" textFill="#007782">
@@ -36,6 +37,6 @@
             <Font name="System Italic" size="13.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="search" focusColor="#007782" layoutX="22.0" layoutY="28.0" prefHeight="25.0" prefWidth="205.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
+      <JFXTextField fx:id="search" focusColor="#007782" layoutX="22.0" layoutY="28.0" onKeyTyped="#searchBox" prefHeight="25.0" prefWidth="205.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
    </children>
 </AnchorPane>

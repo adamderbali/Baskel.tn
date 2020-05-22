@@ -101,6 +101,9 @@ public class GererController implements Initializable {
 
     @FXML
     private ImageView imageV;
+    
+      @FXML
+    private TableColumn<Evenement, String> colNombre;
 
     @FXML
     private JFXTextField search;
@@ -167,6 +170,7 @@ public class GererController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
         tableAffichage.setItems(obser);
         /*  displayByUser(m.getId_u()*/
 
@@ -201,6 +205,7 @@ public class GererController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
         tableAffichage.setItems(obser);
 
     }

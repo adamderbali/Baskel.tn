@@ -124,6 +124,7 @@ public class ParticipationCrud {
                 e.setDate_e(rs.getString("date_e"));
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e"));
+                e.setNbr_max_e(rs.getInt("nbr_max_e"));
                 e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
                 e.getImage().setFitWidth(210);
                 e.getImage().setFitHeight(110);
