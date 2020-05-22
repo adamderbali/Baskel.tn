@@ -7,11 +7,16 @@ package edu.baskel.gui.adminGUI;
 
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Reclamation;
+import edu.baskel.entities.Statistique;
 import edu.baskel.services.ReclamationCRUD;
+import edu.baskel.services.StatCRUD;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -68,8 +73,6 @@ public class ReclamationController implements Initializable {
     @FXML
     private TableColumn<Reclamation, String> t_etat;
     @FXML
-    private AnchorPane pane_rec;
-    @FXML
     private VBox rec_vbox;
     @FXML
     private TableView<Reclamation> recla;
@@ -83,11 +86,13 @@ public class ReclamationController implements Initializable {
     @FXML
     private Button bt_modif;
     @FXML
-    private JFXTextField tf_id_rec;
-    @FXML
     private JFXTextField tf_valadition;
     @FXML
     private JFXTextField tf_etat;
+    @FXML
+    private AnchorPane Reception_admin;
+    @FXML
+    private JFXTextField tf_interface;
 
 
  
@@ -272,7 +277,14 @@ public class ReclamationController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        affichage_rec();
+        try {
+            affichage_rec();
+            StatCRUD sc  = new StatCRUD();
+            sc.Stat_methode("Reclamation_admin", 13);
+        } catch (SQLException ex) {
+ex.printStackTrace();        }
+       
+        
     }    
 
     @FXML
@@ -291,7 +303,7 @@ public class ReclamationController implements Initializable {
                         });
                         notificationBuilder.showError();
         }
-        
+        else{
            Reclamation c = new Reclamation(tf_valadition.getText(),tf_etat.getText(),recla.getSelectionModel().getSelectedItem().getId_rec());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation");
@@ -327,6 +339,7 @@ public class ReclamationController implements Initializable {
                         notificationBuilder3.showInformation();
                     }
         }
+    }
             
         }
     

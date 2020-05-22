@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane_rec" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="793.0" prefWidth="1189.0" style="-fx-background-color: #D8FCFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.adminGUI.ReclamationController">
+<AnchorPane fx:id="Reception_admin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="793.0" prefWidth="1189.0" style="-fx-background-color: #D8FCFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.adminGUI.ReclamationController">
    <children>
       <VBox fx:id="rec_vbox" layoutY="184.0" prefHeight="609.0" prefWidth="217.0" style="-fx-background-color: #D8FCFF;">
          <children>
@@ -72,5 +72,6 @@
       <Button fx:id="bt_modif" layoutX="579.0" layoutY="746.0" mnemonicParsing="false" onAction="#Modifier" prefHeight="39.0" prefWidth="181.0" text="Modifier" />
       <JFXTextField fx:id="tf_valadition" disable="true" editable="false" layoutX="382.0" layoutY="702.0" opacity="0.0" />
       <JFXTextField fx:id="tf_etat" disable="true" editable="false" layoutX="770.0" layoutY="702.0" opacity="0.0" />
+      <JFXTextField fx:id="tf_interface" layoutX="312.0" layoutY="715.0" opacity="0.0" text="Reception_admin" />
    </children>
 </AnchorPane>

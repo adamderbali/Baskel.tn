@@ -42,6 +42,7 @@ import org.controlsfx.control.Notifications;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.InputValidation;
 import static edu.baskel.utils.SmsTwillo.ACCOUNT_SID;
 import static edu.baskel.utils.SmsTwillo.AUTH_TOKEN;
@@ -60,8 +61,6 @@ import javafx.scene.input.KeyEvent;
  */
 public class Affichage_userController implements Initializable {
 
-    @FXML
-    private AnchorPane pane_user;
     @FXML
     private TableView<Membre> table_user;
     @FXML
@@ -96,6 +95,8 @@ public class Affichage_userController implements Initializable {
     ObservableList obser;
     @FXML
     private TextField search_user;
+    @FXML
+    private AnchorPane Reclamation_user;
 
     /**
      * Initializes the controller class.
@@ -148,6 +149,7 @@ public class Affichage_userController implements Initializable {
                         });
                         notificationBuilder.showError();
         }
+        else{
         if (textarea_rec.getText().isEmpty()) {
             Alert alertDesc = new InputValidation().getAlert("Description", "Saisissez votre Description de Reclamation ");
             alertDesc.showAndWait();
@@ -208,7 +210,7 @@ public class Affichage_userController implements Initializable {
                     notificationBuilder3.show();
                 }
             }
-        
+        }  
     }
 
     @FXML
@@ -249,7 +251,13 @@ public class Affichage_userController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        affichage_user();
+        try {
+            affichage_user();
+            StatCRUD sc  = new StatCRUD();
+            sc.Stat_methode("Affichage_user", 13);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
