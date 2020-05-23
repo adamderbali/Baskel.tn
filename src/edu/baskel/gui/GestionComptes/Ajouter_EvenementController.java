@@ -12,7 +12,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
-import edu.baskel.utils.AutoCompleteNumber;
+
 import edu.baskel.utils.InputValidation;
 import java.io.File;
 import java.io.IOException;
@@ -34,52 +34,57 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import edu.baskel.utils.validationSaisie;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.rgb;
 import org.controlsfx.control.textfield.TextFields;
 
 public class Ajouter_EvenementController implements Initializable {
 
+   
     @FXML
-    private AnchorPane fileChooser;
+    private AnchorPane anchor;
 
     @FXML
     private JFXTextField txtNom;
+
+    @FXML
+    private JFXTextField txtLieu;
 
     @FXML
     private JFXTextArea txtDescription;
 
     @FXML
     private JFXDatePicker txtDate;
-
+  Image image;
     @FXML
-    private Button fileChoose;
+    private JFXTextField txtNombre;
 
     @FXML
     private TextField pathE;
 
     @FXML
-    private JFXTextField txtNombre;
+    private JFXButton fileChoose;
 
-    @FXML
-    private AnchorPane anchor;
+   
 
     @FXML
     private ImageView img;
 
-    private Image image;
+    @FXML
+    private JFXButton nom;
 
     @FXML
+    private JFXButton lieu;
+     @FXML
     private JFXButton idRetour;
 
     @FXML
-    private JFXTextField txtLieu;
+    private JFXButton description;
+
+    @FXML
+    private JFXButton date;
 
     private Stage thisStage;
 
@@ -117,116 +122,200 @@ public class Ajouter_EvenementController implements Initializable {
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
-        if (((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty()) && (txtDescription.getText().isEmpty()))) {
+        if ((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
             validationSaisie.notifInfo("Echec", "Tous les champs doivent etre saisis");
             txtNom.setFocusColor(rgb(255, 0, 0));
+            txtNom.setUnFocusColor(rgb(255, 0, 0));
             txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
             txtLieu.setFocusColor(rgb(255, 0, 0));
+            txtLieu.setUnFocusColor(rgb(255, 0, 0));
             txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
             txtDescription.setFocusColor(rgb(255, 0, 0));
+            txtDescription.setUnFocusColor(rgb(255, 0, 0));
             txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
             txtDate.setDefaultColor(Color.RED);
             txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
 
+            /*  nom.setTextFill(rgb(255, 0, 0));
+            lieu.setTextFill(rgb(255, 0, 0));
+            description.setTextFill(rgb(255, 0, 0));
+            datee.setTextFill(rgb(255, 0, 0));*/
         } else {
-            if ((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty())) {
-                validationSaisie.notifInfo("Echec", "Saisie nom et lieu de l'evenement");
-                txtNom.setFocusColor(rgb(255, 0, 0));
-                txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+            if ((txtDescription.getText().isEmpty()) && (txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                validationSaisie.notifInfo("Echec", "Saisir le nom,le lieu et la date de l'evenement");
+                txtDescription.setFocusColor(rgb(255, 0, 0));
+                txtDescription.setUnFocusColor(rgb(255, 0, 0));
+                txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
                 txtLieu.setFocusColor(rgb(255, 0, 0));
+                txtLieu.setUnFocusColor(rgb(255, 0, 0));
                 txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
-            } else {
-                if ((txtNom.getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
-                    validationSaisie.notifInfo("Echec", "Saisie nom et description de l'evenement");
-                    txtNom.setFocusColor(rgb(255, 0, 0));
-                    txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
-                    txtDescription.setFocusColor(rgb(255, 0, 0));
-                    txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
-                } else {
+                txtDate.setDefaultColor(Color.RED);
+                txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
 
-                    if ((txtNom.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
-                        validationSaisie.notifInfo("Echec", "Saisie nom et date de l'evenement");
+            } else {
+                if ((txtDescription.getText().isEmpty()) && (txtLieu.getText().isEmpty()) && (txtNom.getText().isEmpty())) {
+                    validationSaisie.notifInfo("Echec", "Saisir le nom,la description et le lieu de l'evenement");
+                    txtDescription.setFocusColor(rgb(255, 0, 0));
+                    txtDescription.setUnFocusColor(rgb(255, 0, 0));
+                    txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+                    txtLieu.setFocusColor(rgb(255, 0, 0));
+                    txtLieu.setUnFocusColor(rgb(255, 0, 0));
+                    txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+                    txtNom.setFocusColor(rgb(255, 0, 0));
+                    txtNom.setUnFocusColor(rgb(255, 0, 0));
+                    txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+
+                } else {
+                    if ((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                        validationSaisie.notifInfo("Echec", "Saisir le nom,le lieu et la date de l'evenement");
                         txtNom.setFocusColor(rgb(255, 0, 0));
+                        txtNom.setUnFocusColor(rgb(255, 0, 0));
                         txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+                        txtLieu.setFocusColor(rgb(255, 0, 0));
+                        txtLieu.setUnFocusColor(rgb(255, 0, 0));
+                        txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
                         txtDate.setDefaultColor(Color.RED);
                         txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
-                    } else {
 
-                        if ((txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
-                            validationSaisie.notifInfo("Echec", "Saisie lieu et date de l'evenement");
-                            txtLieu.setFocusColor(rgb(255, 0, 0));
-                            txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+                    } else {
+                        if ((txtNom.getText().isEmpty()) && (txtDescription.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                            validationSaisie.notifInfo("Echec", "Saisir le nom,la description et la date de l'evenement");
+                            txtNom.setFocusColor(rgb(255, 0, 0));
+                            txtNom.setUnFocusColor(rgb(255, 0, 0));
+                            txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+                            txtDescription.setFocusColor(rgb(255, 0, 0));
+                            txtDescription.setUnFocusColor(rgb(255, 0, 0));
+                            txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
                             txtDate.setDefaultColor(Color.RED);
                             txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+
                         } else {
-                            if ((txtLieu.getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
-                                validationSaisie.notifInfo("Echec", "Saisie lieu et description de l'evenement");
+                            if ((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty())) {
+                                validationSaisie.notifInfo("Echec", "Saisir le nom et le lieu de l'evenement");
+                                txtNom.setFocusColor(rgb(255, 0, 0));
+                                txtNom.setUnFocusColor(rgb(255, 0, 0));
+                                txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
                                 txtLieu.setFocusColor(rgb(255, 0, 0));
+                                txtLieu.setUnFocusColor(rgb(255, 0, 0));
                                 txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
-                                txtDescription.setFocusColor(rgb(255, 0, 0));
-                                txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+
                             } else {
-
-                                if ((txtDescription.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
-                                    validationSaisie.notifInfo("Echec", "Saisie description et date de l'evenement");
+                                if ((txtNom.getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
+                                    validationSaisie.notifInfo("Echec", "Saisir le nom et la description de l'evenement");
+                                    txtNom.setFocusColor(rgb(255, 0, 0));
+                                    txtNom.setUnFocusColor(rgb(255, 0, 0));
+                                    txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
                                     txtDescription.setFocusColor(rgb(255, 0, 0));
+                                    txtDescription.setUnFocusColor(rgb(255, 0, 0));
                                     txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
-                                    txtDate.setDefaultColor(Color.RED);
-                                    txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+
                                 } else {
-                                    if (validationSaisie.validTextField(txtNom.getText())) {
-                                        validationSaisie.notifInfo("Echec", "Saisie le nom de l'evenement");
+
+                                    if ((txtNom.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                                        validationSaisie.notifInfo("Echec", "Saisir le nom et la date de l'evenement");
                                         txtNom.setFocusColor(rgb(255, 0, 0));
+                                        txtNom.setUnFocusColor(rgb(255, 0, 0));
                                         txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
-
+                                        txtDate.setDefaultColor(Color.RED);
+                                        txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
                                     } else {
-                                        if (validationSaisie.validTextField(txtLieu.getText())) {
 
-                                            System.out.println("------------------");
-                                            validationSaisie.notifInfo("Echec", "Saisie lieu de l'evenement ");
+                                        if ((txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                                            validationSaisie.notifInfo("Echec", "Saisir le lieu et la date de l'evenement");
+
                                             txtLieu.setFocusColor(rgb(255, 0, 0));
+                                            txtLieu.setUnFocusColor(rgb(255, 0, 0));
                                             txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+                                            txtDate.setDefaultColor(Color.RED);
+                                            txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
                                         } else {
+                                            if ((txtLieu.getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
+                                                validationSaisie.notifInfo("Echec", "Saisir le lieu et la description de l'evenement");
 
-                                            if (validationSaisie.validTextField(txtDescription.getText())) {
-
-                                                System.out.println("------------------");
-                                                validationSaisie.notifInfo("Echec", "Saisie description de l'evenement");
+                                                txtLieu.setFocusColor(rgb(255, 0, 0));
+                                                txtLieu.setUnFocusColor(rgb(255, 0, 0));
+                                                txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
                                                 txtDescription.setFocusColor(rgb(255, 0, 0));
+                                                txtDescription.setUnFocusColor(rgb(255, 0, 0));
                                                 txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+
                                             } else {
-                                                if ((validationSaisie.validTextField(txtDate.getEditor().getText()))) {
-                                                    System.out.println("------------------");
-                                                    validationSaisie.notifInfo("Echec", "Saisie date de l'evenement");
-                                                    txtDate.setDefaultColor(rgb(255, 0, 0));
+
+                                                if ((txtDescription.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty())) {
+                                                    validationSaisie.notifInfo("Echec", "Saisir la description et la date de l'evenement");
+                                                    txtNom.setFocusColor(rgb(255, 0, 0));
+
+                                                    txtDescription.setFocusColor(rgb(255, 0, 0));
+                                                    txtDescription.setUnFocusColor(rgb(255, 0, 0));
+                                                    txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                    txtDate.setDefaultColor(Color.RED);
                                                     txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
                                                 } else {
-                                                    if (validationSaisie.validDate(txtDate.getEditor().getText())) {
-                                                        validationSaisie.notifInfo("Erreur", "La date saisie doit être au delà de" + date_system);
-                                                        txtDate.setDefaultColor(rgb(255, 0, 0));
-                                                        txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
-                                                    } else {
-                                                        if (validationSaisie.verifiNumberPart(txtNombre.getText()) == false) {
-                                                            validationSaisie.notifInfo("Echec", "Saisie un entier");
-                                                            txtNombre.setFocusColor(rgb(255, 0, 0));
-                                                            txtNombre.setStyle("-fx-prompt-text-fill: #C4151C");
-                                                        } else {
-                                                            EvenementCRUD Ec = new EvenementCRUD();
-                                                            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                    getText(), pathE.getText(), Integer.parseInt(txtNombre.getText()));
-                                                            Ec.ajouterEvenement(e);
-                                                            txtNom.clear();
-                                                            txtLieu.clear();
-                                                            txtDate.setValue(null);
-                                                            txtDescription.clear();
-                                                            pathE.clear();
-                                                            txtNombre.clear();
-                                                            img.setVisible(false);
-                                                            Stage stage = (Stage) idRetour.getScene().getWindow();
-                                                            stage.close();
+                                                    if (validationSaisie.validTextField(txtNom.getText())) {
+                                                        validationSaisie.notifInfo("Echec", "Saisir le nom de l'evenement");
+                                                        txtNom.setFocusColor(rgb(255, 0, 0));
+                                                        txtNom.setUnFocusColor(rgb(255, 0, 0));
+                                                        txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
 
-                                                            controller1.actualiser();
-                                                            validationSaisie.notifConfirm("ok", "Evenement ajouté");
+                                                    } else {
+                                                        if (validationSaisie.validTextField(txtLieu.getText())) {
+
+                                                            System.out.println("------------------");
+                                                            validationSaisie.notifInfo("Echec", "Saisir le lieu de l'evenement ");
+                                                            txtNom.setFocusColor(rgb(255, 0, 0));
+
+                                                            txtLieu.setFocusColor(rgb(255, 0, 0));
+                                                            txtLieu.setUnFocusColor(rgb(255, 0, 0));
+                                                            txtLieu.setStyle("-fx-prompt-text-fill: #C4151C");
+
+                                                        } else {
+
+                                                            if (validationSaisie.validTextField(txtDescription.getText())) {
+
+                                                                System.out.println("------------------");
+                                                                validationSaisie.notifInfo("Echec", "Saisir la description de l'evenement");
+                                                                txtNom.setFocusColor(rgb(255, 0, 0));
+
+                                                                txtDescription.setFocusColor(rgb(255, 0, 0));
+                                                                txtDescription.setUnFocusColor(rgb(255, 0, 0));
+                                                                txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+
+                                                            } else {
+                                                                if ((validationSaisie.validTextField(txtDate.getEditor().getText()))) {
+                                                                    System.out.println("------------------");
+                                                                    validationSaisie.notifInfo("Echec", "Saisir la date de l'evenement");
+                                                                    txtNom.setFocusColor(rgb(255, 0, 0));
+
+                                                                    txtDate.setDefaultColor(Color.RED);
+                                                                    txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                                } else {
+                                                                    if (validationSaisie.validDate(txtDate.getEditor().getText())) {
+                                                                        validationSaisie.notifInfo("Erreur", "La date saisie doit être au delà de" + date_system);
+                                                                        txtDate.setDefaultColor(rgb(255, 0, 0));
+                                                                        txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                                    } 
+                             
+                                                                        else {
+                                                                            EvenementCRUD Ec = new EvenementCRUD();
+                                                                            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                                                                                    getText(), pathE.getText(), Integer.parseInt(txtNombre.getText()));
+                                                                            Ec.ajouterEvenement(e);
+                                                                            txtNom.clear();
+                                                                            txtLieu.clear();
+                                                                            txtDate.setValue(null);
+                                                                            txtDescription.clear();
+                                                                            pathE.clear();
+                                                                            txtNombre.clear();
+                                                                            img.setVisible(false);
+                                                                           Stage stage = (Stage) idRetour.getScene().getWindow();
+                                                                             stage.close();
+
+                                                                            controller1.actualiser();
+                                                                            validationSaisie.notifConfirm("ok", "Evenement ajouté");
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -240,41 +329,8 @@ public class Ajouter_EvenementController implements Initializable {
                 }
             }
         }
-        /*     String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String date = txtDate.getEditor().getText();
-        // test sur les champs vides ou non
-        if (((txtNom.getText().isEmpty()) | (txtLieu.getText().isEmpty()) | (txtDate.getEditor().getText().isEmpty()) | (txtDescription.getText().isEmpty()))) {
-            validationSaisie.notifInfo("Echec", "Tous les champs doivent etre saisis");
 
-        } else {
-            if ((validationSaisie.validDate(txtDate.getEditor().getText())) == true) {
-
-                System.out.println("------------------");
-                validationSaisie.notifInfo("Erreur", "La date saisie doit être au delà de" + date_system);
-
-            } else {
-                       
-                EvenementCRUD Ec = new EvenementCRUD();
-                Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                        getText(), pathE.getText(),Integer.parseInt(txtNombre.getText()));
-                Ec.ajouterEvenement(e);
-                txtNom.clear();
-                txtLieu.clear();
-                txtDate.setValue(null);
-                txtDescription.clear();
-                pathE.clear();
-                txtNombre.clear();
-                img.setVisible(false);
-                   Stage stage = (Stage) idRetour.getScene().getWindow();
-                    stage.close();
-                
-                 controller1.actualiser();
-                  validationSaisie.notifConfirm("ok", "Evenement ajouté");
-
-            }
-        }*/
-
-    }
+    
 
     @FXML
 
@@ -307,7 +363,7 @@ public class Ajouter_EvenementController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
-        TextFields.bindAutoCompletion(txtNombre, AutoCompleteNumber.getNbrPart());
+        
 
     }
 

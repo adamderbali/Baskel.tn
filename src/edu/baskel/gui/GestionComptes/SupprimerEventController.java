@@ -220,7 +220,7 @@ public class SupprimerEventController implements Initializable {
                     Stage stage = (Stage) fermer.getScene().getWindow();
                     stage.close();
                      controller1.actualiser();
-                    validationSaisie.notifConfirm("ok", "Evenement supprimer");
+                    validationSaisie.notifConfirm("ok", "Evenement supprimé");
             }
                
           

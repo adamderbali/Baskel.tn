@@ -28,7 +28,7 @@
       <JFXDatePicker fx:id="txtDate" defaultColor="#007782" layoutX="331.0" layoutY="257.0" prefHeight="25.0" prefWidth="240.0" promptText="Date de l'evenement" />
       <JFXTextField fx:id="txtNombre" focusColor="#007782" layoutX="331.0" layoutY="213.0" prefHeight="25.0" prefWidth="199.0" promptText="Nombre des participants" />
       <TextField fx:id="pathE" layoutX="471.0" layoutY="314.0" prefHeight="25.0" prefWidth="118.0" promptText="Url" style="-fx-border-color: #COCOCO; -fx-background-radius: 100px; -fx-border-radius: 100px;" stylesheets="@AjoutEvenement.css" />
-      <JFXButton fx:id="fileChoose" layoutX="476.0" layoutY="360.0" onAction="#telecharger" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parrcourrier" textFill="#007782" />
+      <JFXButton fx:id="fileChoose" layoutX="476.0" layoutY="360.0" onAction="#telecharger" prefHeight="27.0" prefWidth="84.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parcourir" textFill="#007782" />
       <Text layoutX="332.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier un evenement" wrappingWidth="221.818359375">
          <font>
             <Font size="18.0" />
@@ -45,5 +45,9 @@
       <JFXButton fx:id="fermer" layoutX="574.0" onAction="#retour" prefHeight="17.0" prefWidth="24.0" text="X" />
       <JFXButton fx:id="idValider" layoutX="398.0" layoutY="411.0" onAction="#ValiderModif" prefHeight="27.0" prefWidth="90.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Valider" textFill="#007782" />
       <ImageView fx:id="img" fitHeight="94.0" fitWidth="145.0" layoutX="316.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="nom" layoutX="519.0" layoutY="72.0" text="*" textFill="#f80202" />
+      <JFXButton fx:id="lieu" layoutX="519.0" layoutY="115.0" text="*" textFill="#f80202" />
+      <JFXButton fx:id="description" layoutX="519.0" layoutY="161.0" text="*" textFill="#f80202" />
+      <JFXButton fx:id="date" layoutX="519.0" layoutY="257.0" text="*" textFill="#f80202" />
    </children>
 </AnchorPane>

@@ -94,7 +94,7 @@ public class Annulation_participationController implements Initializable {
         ParticipationCrud Pc = new ParticipationCrud();
     //    System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
           if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
-            validationSaisie.notif("Participation", "Vous devez selectionné un evenement");}
+            validationSaisie.notif("Participation", "Vous devez selectionner un evenement");}
           else{
         if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
             if (Pc.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem()) == true)
@@ -114,7 +114,7 @@ public class Annulation_participationController implements Initializable {
                 System.out.println("ok--------------------");
                 actualiser();
               }
-   
+              actualiser();
         }
                     
               else {
@@ -139,6 +139,7 @@ public class Annulation_participationController implements Initializable {
         colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colDatePar.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
+        tableAffichage.setItems(obser);
 
     }
     

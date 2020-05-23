@@ -42,7 +42,7 @@
          </fill>
       </Text>
       <TextField fx:id="pathE" layoutX="457.0" layoutY="330.0" prefHeight="25.0" prefWidth="118.0" promptText="Url" style="-fx-border-color: #COCOCO; -fx-background-radius: 100px; -fx-border-radius: 100px;" stylesheets="@AjoutEvenement.css" />
-      <JFXButton fx:id="parcourrir" layoutX="475.0" layoutY="371.0" onAction="#telecharger" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parrcourrier" textFill="#007782" />
+      <JFXButton fx:id="parcourrir" layoutX="475.0" layoutY="371.0" onAction="#telecharger" prefHeight="27.0" prefWidth="78.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parcourir" textFill="#007782" />
       <JFXButton fx:id="idSupprimer" layoutX="401.0" layoutY="431.0" onAction="#supprimer" prefHeight="27.0" prefWidth="94.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Supprimer" textFill="#007782" />
       <JFXTextField fx:id="txtNombre" focusColor="#007782" layoutX="335.0" layoutY="233.0" prefHeight="25.0" prefWidth="211.0" promptText="Nombre des participants" />
    </children>

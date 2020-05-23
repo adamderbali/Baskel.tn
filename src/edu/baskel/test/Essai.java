@@ -51,14 +51,7 @@ public class Essai {
       //  System.out.println(ev.displayAllListU(7));
       //  ev.desactiverCell(7);
     
-     if (ev.verifierSs(19, 0)==true){
-         System.out.println("ok");
-     }
-     else{
-         System.out.println("mafama chay");
-  
+    ev.displayParticipant(7);
     }
-    
-  
-    }}
 
+}
