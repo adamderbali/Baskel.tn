@@ -110,8 +110,8 @@ public class ReclamationController implements Initializable {
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList2);
         Choix1 = FXCollections.observableArrayList();
-        Choix1.add("NEW");
-        Choix1.add("OLD");
+        Choix1.add("Traitée");
+        Choix1.add("Non traitée");
         Choix2 = FXCollections.observableArrayList();
         Choix2.add("Valide");
         Choix2.add("Non_Valide");

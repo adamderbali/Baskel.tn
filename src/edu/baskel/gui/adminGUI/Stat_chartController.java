@@ -31,6 +31,7 @@ public class Stat_chartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         StatCRUD sc = new StatCRUD();
+        PieChart pc = new PieChart();
         ObservableList<PieChart.Data> pieChartData
                 = FXCollections.observableArrayList(
                         new PieChart.Data("Reclamation_admin",sc.Reclamation_admin_nbr()),
@@ -38,6 +39,11 @@ public class Stat_chartController implements Initializable {
                         new PieChart.Data("Affichage_user",sc.affichage_user_nbr())               
                 );
         pie_chart.setData(pieChartData);
+        for(PieChart.Data data : pie_chart.getData())
+        {
+            data.nameProperty().set(data.getName()+" "+"%"+ data.getPieValue());
+        }
+        
                 
     }    
     

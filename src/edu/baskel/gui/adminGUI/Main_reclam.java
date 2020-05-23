@@ -28,7 +28,10 @@ public class Main_reclam extends Application {
             //Parent root = FXMLLoader.load(getClass().getResource("ban_user.fxml"));
             //ReclamationController
            //Parent root = FXMLLoader.load(getClass().getResource("Reclamation_admin.fxml"));
-           Parent root = FXMLLoader.load(getClass().getResource("Stat_chart.fxml"));
+           //Parent root = FXMLLoader.load(getClass().getResource("user_stat.fxml"));
+           Parent root = FXMLLoader.load(getClass().getResource("Statistique_interface.fxml"));
+
+          
             Scene scene = new Scene(root);
   
             primaryStage.setTitle("recc");
