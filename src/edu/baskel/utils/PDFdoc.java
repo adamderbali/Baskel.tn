@@ -11,8 +11,11 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  *
@@ -40,4 +43,11 @@ public class PDFdoc {
          e.printStackTrace();
       }
    }
+     public static void pdfRead() {
+        try {
+            Desktop.getDesktop().open(new File("C:\\xampp\\htdocs\\Baskel\\PDF\\Liste_Des_Reservations.pdf"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

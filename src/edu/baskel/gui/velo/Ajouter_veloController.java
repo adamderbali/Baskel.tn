@@ -8,6 +8,7 @@ package edu.baskel.gui.velo;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Velo;
 import edu.baskel.services.VeloCRUD;
+import edu.baskel.utils.AutoAnnee;
 import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import edu.baskel.utils.InputValidation;
@@ -20,7 +21,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -30,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -82,22 +88,33 @@ public class Ajouter_veloController implements Initializable {
      @FXML
     private ChoiceBox<String> statusbox;
     
-    Membre m = SessionInfo.getLoggedM();
+    //Membre m = SessionInfo.getLoggedM();
     
     /* Ajout evenement*/
     @FXML
     void ajouterVelo(ActionEvent event) {
 
+        System.out.println(txtnums.getText());
+        System.out.println(txtmarque.getText());
+        System.out.println(txtmodel.getText());
+        System.out.println(txtprix.getText());
+        System.out.println(txtann.getText());
+        System.out.println(statusbox.getValue());
+        System.out.println(txtim.getText());
+        System.out.println(txtdesc.getText());
         
         /* test sur les champs vides ou non*/
-        if (((txtnums.getText().isEmpty()) | (txtmarque.getText().isEmpty()) | (txtmodel.getText().isEmpty()) | (txtprix.getText().isEmpty()) | (txttype.getText().isEmpty()) | (txtann.getText().isEmpty()) | (statusbox.getValue().isEmpty()) | (txtim.getText().isEmpty()) | (txtdesc.getText().isEmpty()) )) {
+        if (((txtnums.getText().isEmpty()) | (txtmarque.getText().isEmpty()) | (txtmodel.getText().isEmpty()) | (txtprix.getText().isEmpty()) | (txttype.getText().isEmpty()) | (txtann.getText().isEmpty()) | (statusbox.getValue() ==null) | (txtim.getText().isEmpty()) | (txtdesc.getText().isEmpty()) )) {
             Alert alertChamps = new validationSaisie().getAlert("Echec", "Veuillez saisir tout les champs");
             alertChamps.showAndWait();
 
             
         } else {
             
-
+                if((InputValidation.Year(txtann.getText()))== 0){
+                    Alert alertChamps = new validationSaisie().getAlert("Echec", "Veuillez saisir une année valide");
+            alertChamps.showAndWait();
+             }else{
                 VeloCRUD Vc = new VeloCRUD();
                 Velo v = new Velo(Integer.parseInt(txtnums.getText()), txtmarque.getText(), txtmodel.getText(),Double.parseDouble(txtprix.getText()),txttype.getText(),txtann.getText(),statusbox.getValue(),txtdesc.getText(), txtim.getText());
                 System.out.println(v);
@@ -117,15 +134,41 @@ public class Ajouter_veloController implements Initializable {
                 img.setImage(null);
                 txtdesc.clear();
                 //img.setVisible(false);
+                try {
+             //System.exit(0);
+             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));
+             Scene redirection_scene = new Scene(redirection_parent);
+             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+             app_stage.setScene(redirection_scene);
+             app_stage.show();
+         } catch (IOException ex) {
+             ex.printStackTrace();
+         }
+            Stage stage = (Stage) txtbutajout.getScene().getWindow();
+                     // do what you have to do
+                    stage.close();
 
             }
-        
+        }
 
     }
     
     @FXML
     void annulerVelo(ActionEvent event) {
-             System.out.println(statusbox.getValue());
+         try {
+             //System.exit(0);
+             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));
+             Scene redirection_scene = new Scene(redirection_parent);
+             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+             app_stage.setScene(redirection_scene);
+             app_stage.show();
+         } catch (IOException ex) {
+             ex.printStackTrace();
+         }
+              Stage stage = (Stage) txtannul.getScene().getWindow();
+                     // do what you have to do
+                    stage.close();
+                    
     }
     @FXML
 
@@ -153,6 +196,7 @@ public class Ajouter_veloController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        TextFields.bindAutoCompletion(txtann, AutoAnnee.getAnnee());
         // TODO
         ObservableList<String> list = FXCollections.observableArrayList();
         list.addAll("A louer", "A vendre");

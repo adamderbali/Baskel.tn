@@ -231,7 +231,7 @@ public class VeloCRUD {
          try {
              String requete1 = "UPDATE velo SET etat_v=?,id_av=? WHERE num_serie=?";
              PreparedStatement pst1 = cnx.prepareStatement(requete1);
-             String etat="Non disponible";
+             String etat="Non Disponible";
              pst1.setString(1,etat);
              pst1.setInt(2,id_av);
              pst1.setInt(3,num_serie);

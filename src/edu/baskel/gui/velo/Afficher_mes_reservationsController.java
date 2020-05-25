@@ -77,6 +77,7 @@ public class Afficher_mes_reservationsController implements Initializable {
             PDFdoc.PDFwriter(listToString(av));
             Alert alertAdded = new validationSaisie().getAlert("Succés", "Un PDF contenant cette liste a été généré");
                 alertAdded.showAndWait();
+                PDFdoc.pdfRead();
     }
     @FXML
     void retour(ActionEvent event) {

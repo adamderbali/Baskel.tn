@@ -72,7 +72,26 @@ public class Afficher_mes_velosController implements Initializable {
 
      @FXML
     private Button allresbv;
+     
+     @FXML
+    private Button ajbut;
 
+    @FXML
+    void ajouterVelo(ActionEvent event) {
+        try {
+              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Ajouter_velo.fxml"));
+              Scene redirection_scene = new Scene(redirection_parent);
+              Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+              app_stage.setScene(redirection_scene);
+              app_stage.show();
+               Stage stage = (Stage) ajbut.getScene().getWindow();
+                // do what you have to do
+                 stage.close();
+              //System.out.println("hello from my bikes");
+          } catch (IOException ex) {
+              ex.printStackTrace();
+          }
+    }
      @FXML
     void consultertouteReservation(ActionEvent event) {
          try {

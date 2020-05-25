@@ -15,15 +15,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -81,8 +85,25 @@ public class ModifierReservationController implements Initializable {
                 System.out.println("res"+r);
                 ReservationCRUD rc = new ReservationCRUD();
                 rc.modifierReservation(r, id_res);
-                 Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Réservation modifiée");
-                alertAdded.showAndWait();
+                 //Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Réservation modifiée");
+               // alertAdded.showAndWait();
+                Notifications notificationBuilder = Notifications.create()
+                .title("Modification")
+                .text("Votre réservation a été modifiée!")
+                        .graphic(null)
+                //.graphic(new ImageView(img))
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.CENTER)
+                .onAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("clicked");
+                    }
+                });
+        //notificationBuilder.darkStyle();
+                System.out.println("khsdfkjsd");
+        notificationBuilder.showError();
+                System.out.println("sfsd");
                 Stage stage = (Stage) modifbut.getScene().getWindow();
                  // do what you have to do
                  stage.close();

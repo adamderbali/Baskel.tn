@@ -78,7 +78,17 @@ public class InputValidation {
         //System.out.println(i);
         return i;
     }
-
+     public static int Year(String ch) {
+        int i = 0;
+        if (ch.length() == 4) {
+            try {
+                i = Integer.parseInt(ch);
+            } catch (NumberFormatException e) {
+                return i;
+            }
+        }
+        return i;
+    }
 //alert d erreur
     public Alert getAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

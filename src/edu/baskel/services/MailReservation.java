@@ -30,8 +30,8 @@ public class MailReservation {
         properties.put("mail.smtp.host","smtp.gmail.com");
         properties.put("mail.smtp.port","587");
         
-      String monCompte = "baskeltn395@gmail.com";
-      String password = "baskel.tn";
+      String monCompte = "baskeltn123@gmail.com";
+      String password = "baskel12345";
       
       Session session = Session.getDefaultInstance(properties, new Authenticator(){
             @Override
@@ -54,6 +54,7 @@ public class MailReservation {
             message.setSubject("Réservation du vélo");
             
             message.setText(subject);
+            System.out.println(subject);
             return message;
         } catch (AddressException ex) {
            ex.printStackTrace();

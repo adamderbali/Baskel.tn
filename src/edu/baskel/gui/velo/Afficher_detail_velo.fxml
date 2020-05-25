@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="detailWin" prefHeight="887.0" prefWidth="1294.0" style="-fx-background-color: #a8b7ee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
@@ -20,7 +21,7 @@
             <Font size="44.0" />
          </font>
       </Label>
-      <ImageView fx:id="Imgvelo" fitHeight="293.0" fitWidth="277.0" layoutX="65.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="Imgvelo" fitHeight="293.0" fitWidth="277.0" layoutX="65.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" />
       <Label layoutX="86.0" layoutY="121.0" text="Numéro série :">
          <font>
             <Font size="24.0" />
@@ -45,7 +46,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="769.0" layoutY="342.0" text="TND">
+      <Label layoutX="872.0" layoutY="342.0" text="TND">
          <font>
             <Font size="24.0" />
          </font>
@@ -75,22 +76,22 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblmarq" alignment="CENTER" layoutX="644.0" layoutY="179.0" textFill="#101368">
+      <Label fx:id="lblmarq" alignment="CENTER" layoutX="670.0" layoutY="178.0" textFill="#101368">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblmodl" alignment="CENTER" layoutX="644.0" layoutY="259.0" textFill="#101368">
+      <Label fx:id="lblmodl" alignment="CENTER" layoutX="663.0" layoutY="259.0" textFill="#101368">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblprx" alignment="CENTER" layoutX="638.0" layoutY="342.0" textFill="#101368">
+      <Label fx:id="lblprx" alignment="CENTER" layoutX="670.0" layoutY="342.0" textFill="#101368">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbltyp" alignment="CENTER" layoutX="638.0" layoutY="409.0" textFill="#101368">
+      <Label fx:id="lbltyp" alignment="CENTER" layoutX="677.0" layoutY="409.0" textFill="#101368">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
@@ -100,17 +101,17 @@
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblstt" alignment="CENTER" layoutX="631.0" layoutY="546.0" textFill="#101368">
+      <Label fx:id="lblstt" alignment="CENTER" layoutX="678.0" layoutY="538.0" textFill="#101368">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbletat" alignment="CENTER" layoutX="625.0" layoutY="611.0" textFill="#101368">
+      <Label fx:id="lbletat" alignment="CENTER" layoutX="671.0" layoutY="601.0" textFill="#101368">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <TextArea fx:id="lbldsc" editable="false" layoutX="647.0" layoutY="680.0" prefHeight="177.0" prefWidth="513.0" />
+      <TextArea fx:id="lbldsc" editable="false" focusTraversable="false" layoutX="671.0" layoutY="681.0" prefHeight="177.0" prefWidth="513.0" />
      <Button fx:id="bachbutt" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" text="&lt; Retour" />
       <Button fx:id="resbut" layoutX="157.0" layoutY="769.0" mnemonicParsing="false" onAction="#reserverVélo" text="Réserver vélo" visible="false">
          <font>
@@ -122,5 +123,6 @@
             <Font size="23.0" />
          </font>
       </Button>
+      <StackPane layoutX="65.0" layoutY="195.0" prefHeight="208.0" prefWidth="277.0" style="-fx-border-color: blue;" />
    </children>
 </AnchorPane>

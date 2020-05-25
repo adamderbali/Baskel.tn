@@ -124,6 +124,10 @@ public class Reserver_veloController implements Initializable {
                  System.out.println("ccccc");
                 try {
                     System.out.println("dddd");
+                    System.out.println(controller1.getEnteredText());
+                    System.out.println(r.getDate_res());
+                    System.out.println(date_system);
+                    System.out.println(r.getNbr_heure());
                      mr.envoyerMail("hela.maroub@esprit.tn","Votre réservation pour le vélo "+controller1.getEnteredText()+" a été effectuée , Voici les informations de votre réservation : \n Date de réservation: "+r.getDate_res()+"\n Nombre d'heures: "+r.getNbr_heure()+"\n Date affectée à la réservation :"+date_system );
                       //Sm.envoiMail(em, "Nous vous informons que l'evenement :" + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + " de date :" + tableAffichage.getSelectionModel().getSelectedItem().getDate_e() + " que vous avez participé est annulé");
                 } catch (Exception ex) {

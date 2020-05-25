@@ -7,6 +7,7 @@ package edu.baskel.gui.velo;
 
 import edu.baskel.entities.Velo;
 import edu.baskel.services.VeloCRUD;
+import edu.baskel.utils.AutoAnnee;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.validationSaisie;
 import java.io.File;
@@ -32,6 +33,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 /**
  * FXML Controller class
  *
@@ -94,6 +96,7 @@ public class ModifSuppVeloController implements Initializable {
 
     @FXML
     void editerVelo(ActionEvent event) {
+            
             Velo vedit =new Velo();
             vedit.setNum_serie(Integer.parseInt(lblnums.getText()));
             vedit.setMarque(txtmarq.getText());
@@ -111,7 +114,10 @@ public class ModifSuppVeloController implements Initializable {
             alertChamps.showAndWait();
             }
             else{
-                
+                 if((InputValidation.Year(txtann.getText()))== 0){
+                    Alert alertChamps = new validationSaisie().getAlert("Echec", "Veuillez saisir une année valide");
+            alertChamps.showAndWait();
+             }else{
                     VeloCRUD Vc = new VeloCRUD();
                     Vc.modifierVelo(vedit, Integer.parseInt(lblnums.getText()));
                     Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Vélo modifié");
@@ -122,7 +128,7 @@ public class ModifSuppVeloController implements Initializable {
                     controller1.afficher();
                
                 
-            }
+            }}
     }
 
     @FXML
@@ -249,6 +255,7 @@ public class ModifSuppVeloController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        TextFields.bindAutoCompletion(txtann, AutoAnnee.getAnnee());
         // TODO
         //lblnums.setText(controller1.getEnteredText());
         afficher();
