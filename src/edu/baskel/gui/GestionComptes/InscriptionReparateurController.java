@@ -36,12 +36,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -101,6 +103,8 @@ public class InscriptionReparateurController implements Initializable {
     private JFXButton btnConnexion;
     @FXML
     private FontAwesomeIconView chkCmotdepasi;
+    @FXML
+    private Label lblfaible;
 
     Connection cnx;
     private PreparedStatement prep;
@@ -121,6 +125,25 @@ public class InscriptionReparateurController implements Initializable {
 
         TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
         TextFields.bindAutoCompletion(txtadrlocal, AutoCompleteAdresse.getAdrGov());
+    }
+    
+     //verif password strength
+    @FXML
+    void passStrength(MouseEvent event) {
+         if (!txtmotdepasse.getText().isEmpty()) {
+            if (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) < 6) {
+                lblfaible.setText("Faible");
+                lblfaible.setTextFill(Color.RED);
+            } else if ((InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) > 6) && (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) <= 8)) {
+                lblfaible.setText("Moyen");
+                lblfaible.setTextFill(Color.ORANGE);
+            } else {
+                lblfaible.setText("Fort");
+                lblfaible.setTextFill(Color.GREEN);
+            }
+        } else {
+            System.out.println("Pase de mot de passe");
+        }
     }
 
     //validation champs vides

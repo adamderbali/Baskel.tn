@@ -21,7 +21,7 @@
             <Font name="Metropolis-Medium" size="15.0" />
          </font>
       </JFXTextArea>
-      <Label fx:id="lbl_titr" layoutX="155.0" layoutY="14.0" text="Forum Baskel" textFill="#055e62">
+      <Label fx:id="lbl_titr" layoutX="235.0" layoutY="14.0" text="Tchat">
          <font>
             <Font name="Metropolis-Medium" size="38.0" />
          </font>

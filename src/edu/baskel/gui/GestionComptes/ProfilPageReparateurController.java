@@ -375,18 +375,20 @@ public class ProfilPageReparateurController implements Initializable {
 
     //password strenght
     @FXML
-    void passStrength(MouseEvent event
-    ) {
-
-        if (InputValidation.calculatePasswordStrength(nvpass.getText()) < 6) {
-            lblfaible.setText("faible");
-            lblfaible.setTextFill(Color.RED);
-        } else if ((InputValidation.calculatePasswordStrength(nvpass.getText()) > 6) && (InputValidation.calculatePasswordStrength(nvpass.getText()) <= 8)) {
-            lblfaible.setText("moyen");
-            lblfaible.setTextFill(Color.ORANGE);
+    void passStrength(MouseEvent event) {
+        if (!nvpass.getText().isEmpty()) {
+            if (InputValidation.calculatePasswordStrength(nvpass.getText()) < 6) {
+                lblfaible.setText("faible");
+                lblfaible.setTextFill(Color.RED);
+            } else if ((InputValidation.calculatePasswordStrength(nvpass.getText()) > 6) && (InputValidation.calculatePasswordStrength(nvpass.getText()) <= 8)) {
+                lblfaible.setText("moyen");
+                lblfaible.setTextFill(Color.ORANGE);
+            } else {
+                lblfaible.setText("fort");
+                lblfaible.setTextFill(Color.GREEN);
+            }
         } else {
-            lblfaible.setText("fort");
-            lblfaible.setTextFill(Color.GREEN);
+            System.out.println("Pas de mot de passe");
         }
     }
 

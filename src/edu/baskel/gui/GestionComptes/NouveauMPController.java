@@ -141,16 +141,19 @@ public class NouveauMPController implements Initializable {
     //verif password strength
     @FXML
     void passStrength(MouseEvent event) {
-
-        if (InputValidation.calculatePasswordStrength(txtNvMp.getText()) < 6) {
-            lblfaible.setText("faible");
-            lblfaible.setTextFill(Color.RED);
-        } else if ((InputValidation.calculatePasswordStrength(txtNvMp.getText()) > 6) && (InputValidation.calculatePasswordStrength(txtNvMp.getText()) <= 8)) {
-            lblfaible.setText("fmoyen");
-            lblfaible.setTextFill(Color.ORANGE);
+        if (!txtNvMp.getText().isEmpty()) {
+            if (InputValidation.calculatePasswordStrength(txtNvMp.getText()) < 6) {
+                lblfaible.setText("faible");
+                lblfaible.setTextFill(Color.RED);
+            } else if ((InputValidation.calculatePasswordStrength(txtNvMp.getText()) > 6) && (InputValidation.calculatePasswordStrength(txtNvMp.getText()) <= 8)) {
+                lblfaible.setText("fmoyen");
+                lblfaible.setTextFill(Color.ORANGE);
+            } else {
+                lblfaible.setText("fort");
+                lblfaible.setTextFill(Color.GREEN);
+            }
         } else {
-            lblfaible.setText("fort");
-            lblfaible.setTextFill(Color.GREEN);
+            System.out.println("Pas de mot de passe");
         }
     }
 

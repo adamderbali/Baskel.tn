@@ -225,16 +225,19 @@ public class InscriptionController implements Initializable {
     //verif password strength
     @FXML
     void passStrength(MouseEvent event) {
-
-        if (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) < 6) {
-            lblfaible.setText("faible");
-            lblfaible.setTextFill(Color.RED);
-        } else if ((InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) > 6) && (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) <= 8)) {
-            lblfaible.setText("fmoyen");
-            lblfaible.setTextFill(Color.ORANGE);
+        if (!txtmotdepasse.getText().isEmpty()) {
+            if (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) < 6) {
+                lblfaible.setText("Faible");
+                lblfaible.setTextFill(Color.RED);
+            } else if ((InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) > 6) && (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) <= 8)) {
+                lblfaible.setText("Moyen");
+                lblfaible.setTextFill(Color.ORANGE);
+            } else {
+                lblfaible.setText("Fort");
+                lblfaible.setTextFill(Color.GREEN);
+            }
         } else {
-            lblfaible.setText("fort");
-            lblfaible.setTextFill(Color.GREEN);
+            System.out.println("Pase de mot de passe");
         }
     }
 

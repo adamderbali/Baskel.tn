@@ -32,7 +32,7 @@
             <Font name="System Bold" size="15.0" />
          </font></Text>
       <JFXButton fx:id="btnEnvoyer" layoutX="489.0" layoutY="704.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
-      <Button fx:id="btnforum" layoutX="855.0" layoutY="14.0" mnemonicParsing="false" onAction="#forum" text="Forum" />
+      <Button fx:id="btnforum" layoutX="855.0" layoutY="14.0" mnemonicParsing="false" onAction="#forum" text="Tchat" />
       <Separator layoutX="6.0" layoutY="696.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
       <Separator layoutX="6.0" layoutY="53.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
       <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="14.0" layoutY="7.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">

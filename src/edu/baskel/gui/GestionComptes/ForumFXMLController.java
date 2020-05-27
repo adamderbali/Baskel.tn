@@ -161,8 +161,7 @@ public class ForumFXMLController implements Initializable {
                                 }
                             }
                             );
-                            if (e.getId_u()
-                                    != 0) {
+                            if (e.getId_u()!= 0) {
                                 Membre fs = mc.AfficherMembreById(e.getId_u());
                                 setText("Membre  : " + fs.getNom_u() + " " + fs.getPrenom_u()
                                         + " ,  DATE : " + e.getDate_f()
@@ -213,7 +212,7 @@ public class ForumFXMLController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 fs.supprimerForum(M);
-                InputValidation.notificationsucces("ommentaire", "Votre commentaire a été supprimer avec succée");
+                InputValidation.notificationsucces("Commentaire", "Votre commentaire a été supprimer avec succée");
                 actua();
             } else {
                 System.out.println("Rien");
@@ -272,7 +271,7 @@ public class ForumFXMLController implements Initializable {
                                 Membre fs = mc.AfficherMembreById(e.getId_u());
                                 setText("Membre  : " + fs.getNom_u() + " " + fs.getPrenom_u()
                                         + " ,  DATE : " + e.getDate_f()
-                                        + "\n" + "Commantaire :  \n " + e.getText()
+                                        + "\n" + "Commentaire :  \n " + e.getText()
                                 );
                                 if (fs.getId_u() == m.getId_u()) {
                                     setStyle("-fx-control-inner-background: " + HIGHLIGHTED_CONTROL_INNER_BACKGROUND + ";");
@@ -336,7 +335,7 @@ public class ForumFXMLController implements Initializable {
                                 Membre fs = mc.AfficherMembreById(e.getId_u());
                                 setText("Membre  : " + fs.getNom_u() + " " + fs.getPrenom_u()
                                         + " ,  DATE : " + e.getDate_f()
-                                        + "\n" + "Commantaire :  \n " + e.getText()
+                                        + "\n" + "Commentaire :  \n " + e.getText()
                                 );
                                 if (fs.getId_u() == m.getId_u()) {
                                     setStyle("-fx-control-inner-background: " + HIGHLIGHTED_CONTROL_INNER_BACKGROUND + ";");
