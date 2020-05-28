@@ -39,3 +39,8 @@
 -fx-effect: dropshadow(two-pass-box , rgb(10,101,107) ,15,0,0,0.1,3);
 -fx-background-width:10;
 }*/
+#bt_modif{
+    -fx-background-color:#0181e2;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 4;
+}

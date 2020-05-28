@@ -3,17 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.adminGUI;
+package edu.baskel.gui.GestionComptes;
 
 import edu.baskel.services.StatCRUD;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -24,6 +35,8 @@ public class Stat_chartController implements Initializable {
 
     @FXML
     private PieChart pie_chart;
+    @FXML
+    private AnchorPane pan_chart;
 
     /**
      * Initializes the controller class.
@@ -45,6 +58,28 @@ public class Stat_chartController implements Initializable {
         }
         
                 
-    }    
+    }
+    /*@FXML
+    public void goback(KeyEvent event){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("Statistique_interface.fxml"));
+            pan_chart.getChildren().setAll(pane);
+        } catch (IOException ex) {
+ex.printStackTrace();        }
+    }*/
+   
+  
+
+    @FXML
+    private void Goback(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Statistique_interface.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Statistique Interface");
+        app_stage.show();
+    }
+
+   
     
 }

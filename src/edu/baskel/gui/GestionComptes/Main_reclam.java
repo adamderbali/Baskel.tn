@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.adminGUI;
+package edu.baskel.gui.GestionComptes;
 
 import java.io.IOException;
 
@@ -29,7 +29,8 @@ public class Main_reclam extends Application {
             //ReclamationController
            //Parent root = FXMLLoader.load(getClass().getResource("Reclamation_admin.fxml"));
            //Parent root = FXMLLoader.load(getClass().getResource("user_stat.fxml"));
-           Parent root = FXMLLoader.load(getClass().getResource("Statistique_interface.fxml"));
+           //Parent root = FXMLLoader.load(getClass().getResource("Statistique_interface.fxml"));
+           Parent root = FXMLLoader.load(getClass().getResource("admin.fxml"));
 
           
             Scene scene = new Scene(root);
