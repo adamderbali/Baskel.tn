@@ -196,6 +196,7 @@ public class MembreCRUD {
                     SessionInfo.setLoggedM(membreLogged);
                     System.out.println(membreLogged);
                     System.out.println(iduser);
+                    //System.out.println(membreLogged.getType_u());
                 }
                 if(VerifReparateur()==true){
                     Reparateur loggedRep = rc.getReparateurById(membreLogged.getId_u());

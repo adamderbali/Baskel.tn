@@ -6,10 +6,12 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXTextField;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reclamation;
 import edu.baskel.entities.Statistique;
 import edu.baskel.services.ReclamationCRUD;
 import edu.baskel.services.StatCRUD;
+import edu.baskel.utils.SessionInfo;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -94,6 +96,7 @@ public class ReclamationController implements Initializable {
     private RadioButton rd_reclamation_traité;
     @FXML
     private RadioButton rd_reclamation_non_traité;
+    Membre ml = SessionInfo.getLoggedM();
 
     /**
      * Initializes the controller class.

@@ -62,6 +62,10 @@ public class AcceuilController implements Initializable {
     private ImageView Logout;
     @FXML
     private ImageView exit;
+    @FXML
+    private Button btnAdmin;
+    @FXML
+    private Button btnEvenements;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -74,6 +78,12 @@ public class AcceuilController implements Initializable {
 
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
+        /*if(l.getType_u().equals("A")){
+            System.out.println(l.getType_u());
+            btnAdmin.setVisible(true);
+        }else{
+            btnAdmin.setVisible(false);
+        }*/
     }
 
     @FXML
@@ -151,7 +161,21 @@ public class AcceuilController implements Initializable {
         app_stage.show();
         mc.Deconnexion();
     }
-    
+
+    @FXML
+    void RedirectionAdmin(ActionEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("admin.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    void RedirectionEevenements(ActionEvent event) {
+
+    }
+
     //fermer l application
     @FXML
     void Quitter(MouseEvent event) {

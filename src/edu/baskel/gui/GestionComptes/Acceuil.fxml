@@ -45,5 +45,7 @@
             <Image url="@../../../../images/exitt.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnAdmin" layoutX="328.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionAdmin" text="Admin" />
+      <Button fx:id="btnEvenements" layoutX="409.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionEevenements" text="Evenements" />
    </children>
 </AnchorPane>

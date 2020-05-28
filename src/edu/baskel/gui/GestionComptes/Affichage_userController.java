@@ -97,7 +97,7 @@ public class Affichage_userController implements Initializable {
     private TextField search_user;
     @FXML
     private AnchorPane Reclamation_user;
-
+    Membre ml = SessionInfo.getLoggedM();
     /**
      * Initializes the controller class.
      */
@@ -157,7 +157,7 @@ public class Affichage_userController implements Initializable {
                 Alert alertObjet = new InputValidation().getAlert("Objet", "Saisissez votre Objet de Reclamation ");
                 alertObjet.showAndWait();
             } else {
-                if (s_rec.banexist(4, user.getId_u()) == false) {
+                if (s_rec.banexist(ml.getId_u(), user.getId_u()) == false) {
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText(" Vous voulez envoyer cette reclamation ?");
