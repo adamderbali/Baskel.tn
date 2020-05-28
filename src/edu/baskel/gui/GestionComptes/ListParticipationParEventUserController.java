@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Participation;
@@ -19,11 +20,13 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -62,6 +65,11 @@ public class ListParticipationParEventUserController implements Initializable {
     private TableColumn<Evenement, String> colDateE;
       @FXML
     private TableColumn<Evenement, String> colPourcentage;
+      
+        @FXML
+    private JFXButton idRetour;
+
+   
 
     public void affichageParticip() {
 
@@ -76,7 +84,7 @@ public class ListParticipationParEventUserController implements Initializable {
         colLieuE.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         colDateE.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colPourcentage.setCellValueFactory(new PropertyValueFactory<>("pourcentage"));
-        /*    colNomE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
+        /*colNomE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
         colLieuE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDateE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));*/
         tableAffichage.setItems(obser);
@@ -107,6 +115,24 @@ public class ListParticipationParEventUserController implements Initializable {
             }
 
         });
+
+    }
+    
+     @FXML
+    void retour(ActionEvent event) {
+        
+        try {
+            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Gerer.fxml"));
+            Scene redirection_scene = new Scene(redirection_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(redirection_scene);
+            app_stage.setAlwaysOnTop(false);
+            app_stage.show();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
 
     }
 
