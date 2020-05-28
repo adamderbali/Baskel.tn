@@ -6,6 +6,7 @@
 package edu.baskel.entities;
 
 import java.util.Date;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -34,6 +35,7 @@ public class Evenement {
     private int nbr_participant;
      private Label etat_p;
      private Label pourcentage;
+     private Button btn;
 
   
 
@@ -47,6 +49,48 @@ public class Evenement {
         this.image_e = image_e;
         this.id_u = id_u;
         this.part = part;
+    }
+
+    public Button getBtn() {
+        return btn;
+    }
+
+    public void setBtn(Button btn) {
+        this.btn = btn;
+    }
+
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, Label etat_e, int nbr_participant, Label etat_p, Label pourcentage, Button btn) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+        this.etat_e = etat_e;
+        this.nbr_participant = nbr_participant;
+        this.etat_p = etat_p;
+        this.pourcentage = pourcentage;
+        this.btn = btn;
+    }
+
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, Membre mbre, int nbr_participant, Label etat_p, Label pourcentage, Button btn) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+        this.mbre = mbre;
+        this.nbr_participant = nbr_participant;
+        this.etat_p = etat_p;
+        this.pourcentage = pourcentage;
+        this.btn = btn;
     }
 
     public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int nbr_max_e, Label etat_e, int nbr_participant, Label etat_p) {

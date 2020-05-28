@@ -15,7 +15,7 @@ public class Esprit_Baskel extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ListParticipationParEventUser.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("List_Event_Add_Participation.fxml"));
 
         Scene scene = new Scene(root);
 

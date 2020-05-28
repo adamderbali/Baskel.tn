@@ -8,8 +8,10 @@ package edu.baskel.services;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
+import edu.baskel.gui.GestionComptes.List_Event_Add_ParticipationController;
 import static edu.baskel.services.ParticipationCrud.cnx;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.validationSaisie;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +19,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,10 +34,12 @@ import javafx.scene.paint.Color;
  * @author sabri
  */
 public class EvenementCRUD {
+    
 
     Connection cnx;
 
     public EvenementCRUD() {
+        
         cnx = ConnectionBD.getInstance().getCnx();
     }
 
@@ -40,7 +49,8 @@ public class EvenementCRUD {
         try {
             String requete = "INSERT INTO evenement (nom_e,lieu_e,date_e,description_e,image_e,nbr_max_e)"
                     + "VALUES (?,?,?,?,?,?)";
-            PreparedStatement pst = cnx.prepareStatement(requete);
+            PreparedStatement pst = cnx.prepareStatement(
+                    requete);
             pst.setString(1, e.getNom_e());
             pst.setString(2, e.getLieu_e());
             pst.setString(3, e.getDate_e());
@@ -164,7 +174,7 @@ public class EvenementCRUD {
           Evenement e = new Evenement();
           EvenementCRUD ev = new EvenementCRUD();
           
-          if(nbr_max_e==nbr_participant){
+          if((nbr_max_e==nbr_participant)&&(nbr_max_e!=0)){
               System.out.println("resultat ok");
               return true;
           }
@@ -293,6 +303,7 @@ public class EvenementCRUD {
             ResultSet rs = pst.executeQuery();
               while (rs.next()) {
                 Evenement e = new Evenement();
+                EvenementCRUD ev = new EvenementCRUD();
                
                 e.setId_e(rs.getInt("id_e"));
                 e.setNom_e(rs.getString("nom_e"));
@@ -301,20 +312,126 @@ public class EvenementCRUD {
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e")); 
                 e.setNbr_max_e(rs.getInt("nbr_max_e")); 
+                e.setNbr_participant(rs.getInt("nbr_participant"));
               //  e.setEtat_e(rs.getString("etat_e"));
+              
+               if(e.getImage_e()==null){
+                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\"+"velo.jpg")));
+                e.getImage().setFitWidth(220);
+                e.getImage().setFitHeight(110);  
+               }
+               else{
                 e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
                 e.getImage().setFitWidth(220);
                 e.getImage().setFitHeight(110);
-             /*   System.out.println("----"+e.getId_e());
-                Participation p = new Participation();
-                p.setId_e(rs.getInt("id_e"));
-                p.setId_u(rs.getInt("id_u"));
-                p.setEtat_p(rs.getString("etat_p"));
-                System.out.println("----"+p.getId_e());
-                System.out.println("----"+p.getEtat_p());
-                e.setPart(p);*/
-               // e.setEtat_e(new Label("vous etes deha participé"));
-              //  e.getEtat_e().setTextFill(Color.web("#2e856e"));
+               }   
+               if(ev.verifierS(e.getNbr_max_e())==true)
+               {  e.setEtat_p(new Label("La participation à cet evenement est illimité"));
+                 e.getEtat_p().setTextFill(Color.web("#2e856e"));
+                 System.out.println("Nombre ilimite "+e.getNbr_max_e());
+                System.out.println("Nombre atteint participant"+e.getNbr_participant());}
+               
+               else if(ev.verifierSsS(e.getNbr_max_e(), e.getNbr_participant())==true) {
+                   String reste = String.valueOf((e.getNbr_max_e())-(e.getNbr_participant()));
+                   e.setEtat_p(new Label("Il reste encore:"+reste+" places"));
+                 e.getEtat_p().setTextFill(Color.web("#2e856e"));
+                 System.out.println("Reste des place  "+e.getNbr_max_e());
+                System.out.println("Nombre atteint participant"+e.getNbr_participant());}
+             
+               else if(ev.verifierSs(e.getNbr_max_e(), e.getNbr_participant())==true) {
+                   e.setEtat_p(new Label("Evenement saturé"));
+                 e.getEtat_p().setTextFill(Color.web("#c4151c"));
+                
+                 System.out.println("Nombre atteint"+e.getNbr_max_e());
+                 System.out.println("Nombre atteint participant"+e.getNbr_participant());}
+                
+                 ParticipationCrud pc= new ParticipationCrud();
+                 if (pc.verifierParticipation(7,e.getId_e())==false){
+                      e.setBtn(new Button("Annuler participation"));
+                      
+                      e.getBtn().setOnAction((ActionEvent event) -> {
+                    
+      
+        ParticipationCrud Pc = new ParticipationCrud();
+
+          
+        if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
+            if (Pc.supprimerParticipationE(e.getId_e()) == true)
+            {   
+              if(ev.verifierNbrMaxE(e.getId_e())==true)  {
+                System.out.println("++++++OK oK");
+            
+                validationSaisie.notifConfirm("ok", "Participation annulée");
+                System.out.println("ok--------------------");
+               
+            }
+              else if(ev.verifierNbrMaxE(e.getId_e())==false){
+                 ev.nbrParticipantDelete(e.getId_e());
+                System.out.println("++++++OK oK");
+                
+                validationSaisie.notifConfirm("ok", "Participation annulée");
+                System.out.println("ok--------------------");
+               
+              }
+            
+        }
+                    
+              else {
+                    System.out.println("----------erreur");
+                    }
+            
+          }
+              
+                });
+                      
+                 }
+                 if(pc.verifierParticipation(7,e.getId_e())==true){
+                     
+                      e.setBtn(new Button("Participer"));
+                      
+                      
+                e.getBtn().setOnAction((ActionEvent event) -> {
+
+        ParticipationCrud Pc = new ParticipationCrud();
+        Qrcode qr = new Qrcode();
+        MailAttachement ma = new MailAttachement();
+
+         if (ev.verifierNbrMaxE(e.getId_e()) == true) {
+          Participation p = new Participation(e.getId_e(), 7);
+
+            Pc.ajouterParticipation(p);
+            qr.Create("nom= " + e.getNom_e() + "Date= " + e.getDate_e(), e.getNom_e());
+            try {
+                ma.envoiMailQrcode("sabrine.zekri@esprit.tn", e.getNom_e());
+            } catch (Exception ex) {
+                Logger.getLogger(EvenementCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + e.getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
+            System.out.println("okok++++okokok");
+           
+        } else if (ev.verifierParticipant(e.getId_e()) == true) {
+           Participation p = new Participation(e.getId_e(), 7);
+  
+            ev.nbrParticipant(e.getId_e());
+            Pc.ajouterParticipation(p);
+            qr.Create("nom= " + e.getNom_e() + "Date= " + e.getDate_e(), e.getNom_e());
+            try {
+                ma.envoiMailQrcode("sabrine.zekri@esprit.tn", e.getNom_e());
+            } catch (Exception ex) {
+                Logger.getLogger(EvenementCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" +e.getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
+            System.out.println("okok++++okokok");
+          
+        } else {
+            validationSaisie.notifInfo("Information", "Le nombre maximal de participations a été atteint");
+
+        }            
+     
+                        });
+             
+                 }
+                
                 Listevent.add(e);}
                 System.out.println("--------------+++++++++------------");
             
@@ -356,7 +473,7 @@ public class EvenementCRUD {
         return Listeventuser;
     }
 
-    /* Affichage liste des participant deans les evenement par user */
+    /* Affichage liste des participant  les evenement par user */
     
         public int nombreEvent(){
               int nb=0;
@@ -407,132 +524,9 @@ public class EvenementCRUD {
         }
         return Listeventuser;
     }
-  /* liste des evenement lkol ela eli mparticipi fehom user : id_u*/   
-      public List<Evenement> displayAllListE(int id_u) {
-       EvenementCRUD ev = new EvenementCRUD();
-        List<Evenement> Listevente = new ArrayList<Evenement>();
-        try {
-            String requete = "select * from evenement where id_e not IN(SELECT id_e from participation where id_u=?)";
-            PreparedStatement pst = cnx.prepareStatement(requete);
-             pst.setInt(1,id_u);
-            ResultSet rs = pst.executeQuery();
-              while (rs.next()) {
-                Evenement e = new Evenement();
-             //  "SELECT * FROM evenement WHERE nbr_max_e=0 AND id_e=?"
-            
-                e.setId_e(rs.getInt("id_e"));
-                e.setNom_e(rs.getString("nom_e"));
-                e.setLieu_e(rs.getString("lieu_e"));
-                e.setDate_e(rs.getString("date_e"));
-                e.setDescription_e(rs.getString("description_e"));
-                e.setImage_e(rs.getString("image_e")); 
-                e.setNbr_max_e(rs.getInt("nbr_max_e")); 
-                 e.setNbr_participant(rs.getInt("nbr_participant")); 
-              //  e.setEtat_e(rs.getString("etat_e"));
-              e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
-                e.getImage().setFitWidth(220);
-                e.getImage().setFitHeight(110);
-                e.setEtat_e(new Label("vous n'avez pas participé"));
-                e.getEtat_e().setTextFill(Color.web("#2e856e"));
-               
-               if(ev.verifierS(e.getNbr_max_e())==true)
-               {  e.setEtat_p(new Label("La participation à cet evenement est illimité"));
-                 e.getEtat_p().setTextFill(Color.web("#2e856e"));
-                 System.out.println("Nombre ilimite "+e.getNbr_max_e());
-                System.out.println("Nombre atteint participant"+e.getNbr_participant());}
-               
-               else if(ev.verifierSsS(e.getNbr_max_e(), e.getNbr_participant())==true) {
-                   String reste = String.valueOf((e.getNbr_max_e())-(e.getNbr_participant()));
-                   e.setEtat_p(new Label("Il reste encore:"+reste+" places"));
-                 e.getEtat_p().setTextFill(Color.web("#2e856e"));
-                 System.out.println("Reste des place  "+e.getNbr_max_e());
-                System.out.println("Nombre atteint participant"+e.getNbr_participant());}
-             
-               else if(ev.verifierSs(e.getNbr_max_e(), e.getNbr_participant())==true) {
-                   e.setEtat_p(new Label("Evenement saturé"));
-                 e.getEtat_p().setTextFill(Color.web("#c4151c"));
-                 System.out.println("Nombre atteint"+e.getNbr_max_e());
-                 System.out.println("Nombre atteint participant"+e.getNbr_participant());}
-               
-              
-                 
-                   Listevente.add(e);
-              }
-              //  System.out.println("----"+e.getId_e());
-              /*  Participation p = new Participation();
-                p.setId_e(rs.getInt("id_e"));
-                p.setId_u(rs.getInt("id_u"));
-                p.setEtat_p(rs.getString("etat_p"));
-                System.out.println("----"+p.getId_e());
-                System.out.println("----"+p.getEtat_p());
-                e.setPart(p);*/
-                
-               
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return Listevente;
-    }
-      
  
  
-    /* Affichage list mta3 les evenements eli mparticipi fehom user (id_u)*/ 
-      public List<Evenement> displayAllListU(int id_u) {
-
-        List<Evenement> Listevent = new ArrayList<Evenement>();
-        try {
-            String requete = "SELECT * from evenement e join participation p on p.id_e=e.id_e and p.id_u="+id_u;
-            PreparedStatement pst = cnx.prepareStatement(requete);
-           // pst.setInt(1,id_u);
-           // pst.setInt(1,id_u);
-            ResultSet rs = pst.executeQuery();
-              while (rs.next()) {
-                Evenement e = new Evenement();
-                EvenementCRUD ev = new EvenementCRUD();
-                e.setId_e(rs.getInt("id_e"));
-                e.setNom_e(rs.getString("nom_e"));
-                e.setLieu_e(rs.getString("lieu_e"));
-                e.setDate_e(rs.getString("date_e"));
-                e.setDescription_e(rs.getString("description_e"));
-                e.setImage_e(rs.getString("image_e")); 
-                e.setNbr_max_e(rs.getInt("nbr_max_e")); 
-                e.setNbr_participant(rs.getInt("nbr_participant")); 
-              //  e.setEtat_e(rs.getString("etat_e"));
-              e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
-                e.getImage().setFitWidth(220);
-                e.getImage().setFitHeight(110);
-                e.setEtat_e(new Label("vous etes deja participant"));
-                e.getEtat_e().setTextFill(Color.web("#2e856e"));
-                  e.getEtat_e().setTextFill(Color.web("#2e856e"));
-              if(ev.verifierS(e.getNbr_max_e())==true)
-               {  e.setEtat_p(new Label("La participation à cet evenement est illimité"));
-                 e.getEtat_p().setTextFill(Color.web("#2e856e"));
-                 System.out.println("Nombre ilimite "+e.getNbr_max_e());}
-              
-              else if(ev.verifierSsS(e.getNbr_max_e(), e.getNbr_participant())==true) {
-                  String reste = String.valueOf((e.getNbr_max_e())-(e.getNbr_participant()));
-                   e.setEtat_p(new Label("Il reste encore:"+reste+" places"));
-                 e.getEtat_p().setTextFill(Color.web("#2e856e"));
-                 System.out.println("Reste des place  "+e.getNbr_max_e());
-                System.out.println("Nombre atteint participant"+e.getNbr_participant());}
-             
-               else if(ev.verifierSs(e.getNbr_max_e(), e.getNbr_participant())==true) {
-                   e.setEtat_p(new Label("Evenement saturé"));
-                 e.getEtat_p().setTextFill(Color.web("#c4151c"));
-                 System.out.println("Nombre atteint"+e.getNbr_max_e());}
-               
-               
-                 
-                   Listevent.add(e);
-              }
-                System.out.println("--------------+++++++++****************"+Listevent);
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return Listevent;
-    }
+    
       
       public float pourcentageEvent(int nbr_participant,int nbr_max_e  ){
           float pe = 0;
@@ -581,8 +575,9 @@ public class EvenementCRUD {
                     e.setPourcentage(new Label(Pourcentage+" %"));
                  e.getPourcentage().setTextFill(Color.web("#c4151c"));
                 }
+                
                 }
-            
+                   
                 e.setMbre(m);
 
                 ListEventPaticipation.add(e);
@@ -596,6 +591,8 @@ public class EvenementCRUD {
 
         return ListEventPaticipation;
     }
+  
+     
   
     }
    

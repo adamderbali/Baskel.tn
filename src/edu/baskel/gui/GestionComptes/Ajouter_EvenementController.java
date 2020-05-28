@@ -35,6 +35,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import edu.baskel.utils.validationSaisie;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.rgb;
@@ -297,6 +298,7 @@ public class Ajouter_EvenementController implements Initializable {
                              
                                                                         else {
                                                                             EvenementCRUD Ec = new EvenementCRUD();
+                                                                          
                                                                             Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
                                                                                     getText(), pathE.getText(), Integer.parseInt(txtNombre.getText()));
                                                                             Ec.ajouterEvenement(e);
@@ -351,6 +353,7 @@ public class Ajouter_EvenementController implements Initializable {
             img.setImage(image);
 
         }
+      
     }
 
     @FXML
