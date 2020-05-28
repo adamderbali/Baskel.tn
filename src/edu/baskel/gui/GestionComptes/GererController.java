@@ -109,6 +109,7 @@ public class GererController implements Initializable {
     @FXML
     private JFXTextField search;
 
+
     ObservableList obser;
 
     public GererController() {
