@@ -280,7 +280,7 @@ public class ReclamationController implements Initializable {
         try {
             affichage_rec();
             StatCRUD sc = new StatCRUD();
-            sc.Stat_methode("Reclamation_admin", 13);
+            sc.Stat_methode("Reclamation_admin", ml.getId_u());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
