@@ -254,7 +254,7 @@ public class Affichage_userController implements Initializable {
         try {
             affichage_user();
             StatCRUD sc  = new StatCRUD();
-            sc.Stat_methode("Affichage_user", 13);
+            sc.Stat_methode("Affichage_user", ml.getId_u());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

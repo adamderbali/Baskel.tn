@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,6 +53,7 @@ public class User_statController implements Initializable {
     private CategoryAxis ID_user;
     @FXML
     private ImageView back;
+    Membre ml = SessionInfo.getLoggedM();
    
 
     public void conxstat() {

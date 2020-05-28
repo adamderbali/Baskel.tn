@@ -419,7 +419,7 @@ public List<Membre> listUser() {
         List<Membre> listeMembre = new ArrayList<>();
 
         try {
-            String requete = "SELECT* FROM membre where type_u='U' or type_u='R'";
+            String requete = "SELECT* FROM membre where type_u='U'";
             Statement st = cnxs.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
