@@ -110,7 +110,46 @@ public class SendMail {
         return null;
     }
     
-    
+    public static void envoiMailModification(String recp,String subjM) throws Exception{
+        System.out.println("Preparation mail");
+        
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        
+      String monCompte = "njiwa.nousou@gmail.com";
+      String password = "NesNaj2019";
+      
+      Session session = Session.getDefaultInstance(properties, new Authenticator(){
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(monCompte, password);
+            }
+  
+      });     
+       Message message = prepareMessageModification(session,monCompte,recp,subjM);
+      Transport.send(message);
+        System.out.println("Mail envoyé");
+ }      
+      
+
+    private static Message prepareMessageModification(Session session,String monCompte,String recp,String subjM) throws MessagingException {
+        
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(monCompte));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recp) );
+            message.setSubject("Modification date de l'evenement");
+            message.setSubject("Modification date de l'evenement");
+            message.setText(subjM);
+            return message;
+        } catch (AddressException ex) {
+            Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     }
     

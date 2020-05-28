@@ -66,8 +66,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
     @FXML
     private TableColumn<Evenement, String> ColImage;
 
-    @FXML
-    private JFXButton participer;
+   
 
     @FXML
     private JFXButton btnAjout;
@@ -78,6 +77,10 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private JFXTextField search;
+    
+    @FXML
+    private JFXButton actualiser;
+
 
     public List_Event_Add_ParticipationController() {
 
@@ -266,7 +269,36 @@ public class List_Event_Add_ParticipationController implements Initializable {
             }
         });*/
     }
+   
+    @FXML
+    void actualiserPage(ActionEvent event) {
+        
+        
+        EvenementCRUD Ec = new EvenementCRUD();
 
+        // ParticipationCrud pc = new ParticipationCrud();
+        Evenement e = new Evenement();
+        ArrayList arrayList;
+        // ArrayList arrayList1;
+
+        arrayList = (ArrayList) Ec.displayAllList();
+
+        // arrayList.addAll(arrayList1);
+        System.out.println("-------------+++++++++++++------------" + arrayList);
+
+        obser = FXCollections.observableArrayList(arrayList);
+
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+
+        colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
+
+        tableAffichage.setItems(obser);
+
+    }
    
     @FXML
     private void searchBox(KeyEvent event) {
@@ -302,10 +334,10 @@ public class List_Event_Add_ParticipationController implements Initializable {
     }
 
 
-    @FXML
+ /*   @FXML
     void participerEvenement(ActionEvent event) throws Exception {
 
-       /* EvenementCRUD ev = new EvenementCRUD();
+        EvenementCRUD ev = new EvenementCRUD();
         ParticipationCrud Pc = new ParticipationCrud();
         Qrcode qr = new Qrcode();
         MailAttachement ma = new MailAttachement();
@@ -344,8 +376,8 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
             //actualiseUpadate();
         }
-        actualiser();*/
-    }
+        actualiser();
+    }*/
 
     public void actualiser() {
 

@@ -315,8 +315,8 @@ public class EvenementCRUD {
                 e.setNbr_participant(rs.getInt("nbr_participant"));
               //  e.setEtat_e(rs.getString("etat_e"));
               
-               if(e.getImage_e()==null){
-                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\"+"velo.jpg")));
+               if(e.getImage_e().equals("")){
+                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
                 e.getImage().setFitWidth(220);
                 e.getImage().setFitHeight(110);  
                }
