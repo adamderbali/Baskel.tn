@@ -237,7 +237,7 @@ public class InscriptionController implements Initializable {
                 lblfaible.setTextFill(Color.GREEN);
             }
         } else {
-            System.out.println("Pase de mot de passe");
+            System.out.println("Pas de mot de passe");
         }
     }
 

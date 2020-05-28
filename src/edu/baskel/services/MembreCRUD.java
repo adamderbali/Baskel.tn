@@ -49,7 +49,7 @@ public class MembreCRUD {
             pst.setString(7, m.getMot_passe_u());
             pst.setString(8, m.getNum_tel_u());
             pst.setString(9, m.getImage_u());
-            ;
+            
 
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
