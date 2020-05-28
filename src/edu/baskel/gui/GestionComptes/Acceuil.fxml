@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="750.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
+<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="756.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
    <children>
-      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="55.0" prefHeight="639.0" prefWidth="1042.0" />
+      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="55.0" prefHeight="650.0" prefWidth="1234.0" />
       <MenuButton fx:id="btnCompte" layoutX="944.0" layoutY="14.0" mnemonicParsing="false" text="Compte">
         <items>
           <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deco" text="Se deconnecter" />
@@ -46,6 +46,12 @@
          </image>
       </ImageView>
       <Button fx:id="btnAdmin" layoutX="328.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionAdmin" text="Admin" />
-      <Button fx:id="btnEvenements" layoutX="409.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionEevenements" text="Evenements" />
+      <MenuButton fx:id="btnEvenements" layoutX="522.0" layoutY="14.0" mnemonicParsing="false" text="Evenements">
+        <items>
+          <MenuItem fx:id="btnConsulterEv" mnemonicParsing="false" onAction="#RedirectionConsulterEV" text="Consulter les evenements" />
+          <MenuItem fx:id="btnGererEv" mnemonicParsing="false" onAction="#RedirectionGererEvenemn" text="Gerer mes evenements" />
+        </items>
+      </MenuButton>
+      <Button fx:id="btnRec" layoutX="222.0" layoutY="14.0" mnemonicParsing="false" onAction="#REdirectionRec" text="Reclamations" />
    </children>
 </AnchorPane>

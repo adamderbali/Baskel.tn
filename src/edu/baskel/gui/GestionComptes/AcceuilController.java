@@ -65,7 +65,13 @@ public class AcceuilController implements Initializable {
     @FXML
     private Button btnAdmin;
     @FXML
-    private Button btnEvenements;
+    private MenuButton btnEvenements;
+    @FXML
+    private MenuItem btnConsulterEv;
+    @FXML
+    private MenuItem btnGererEv;
+    @FXML
+    private Button btnRec;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -172,8 +178,24 @@ public class AcceuilController implements Initializable {
     }
 
     @FXML
-    void RedirectionEevenements(ActionEvent event) {
+    void REdirectionRec(ActionEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_user.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+    }
 
+    @FXML
+    void RedirectionConsulterEV(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("List_Event_Add_Participation.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+    }
+
+    @FXML
+    void RedirectionGererEvenemn(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Gerer.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
     }
 
     //fermer l application

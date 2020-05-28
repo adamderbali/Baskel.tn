@@ -15,7 +15,7 @@
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <TableView fx:id="tableAffichage" layoutX="16.0" layoutY="106.0" onMouseClicked="#chargerDonnee" opacity="0.74" prefHeight="476.0" prefWidth="1103.0" style="-fx-fixed-cell-size: 110;" stylesheets="@AffichageListUser.css">
+      <TableView fx:id="tableAffichage" layoutX="16.0" layoutY="106.0" onMouseClicked="#chargerDonnee" opacity="0.74" prefHeight="476.0" prefWidth="1103.0" style="-fx-fixed-cell-size: 110;" stylesheets="@AffichageList.css">
         <columns>
           <TableColumn fx:id="colNom" prefWidth="135.0" text="Nom" />
           <TableColumn fx:id="colLieu" prefWidth="141.0" text="Lieu" />
@@ -28,5 +28,6 @@
       <JFXButton fx:id="valider" layoutX="395.0" layoutY="596.0" onAction="#ValiderModif" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Modifier" textFill="#00747f" />
       <JFXButton fx:id="supprimer" layoutX="571.0" layoutY="596.0" onAction="#supprimer" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Supprimer" textFill="#00747f" />
       <JFXTextField fx:id="search" focusColor="#007782" layoutX="18.0" layoutY="60.0" onKeyTyped="#searchBox" prefHeight="25.0" prefWidth="187.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
+      <JFXButton fx:id="detail" layoutX="970.0" layoutY="59.0" onAction="#detailEvent" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Detail des evenements" textFill="#00747f" />
    </children>
 </AnchorPane>

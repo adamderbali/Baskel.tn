@@ -30,7 +30,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import edu.baskel.utils.validationSaisie;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
@@ -39,7 +38,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Border;
 import javafx.util.Callback;
 
 public class List_Event_Add_ParticipationController implements Initializable {
@@ -66,8 +64,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
     @FXML
     private TableColumn<Evenement, String> ColImage;
 
-   
-
     @FXML
     private JFXButton btnAjout;
     ObservableList obser;
@@ -77,10 +73,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private JFXTextField search;
-    
+
     @FXML
     private JFXButton actualiser;
-
 
     public List_Event_Add_ParticipationController() {
 
@@ -110,7 +105,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         EvenementCRUD Ec = new EvenementCRUD();
 
         Qrcode qr = new Qrcode();
-        
+
         MailAttachement ma = new MailAttachement();
         ParticipationCrud pc = new ParticipationCrud();
         Evenement e = new Evenement();
@@ -142,29 +137,27 @@ public class List_Event_Add_ParticipationController implements Initializable {
             @Override
             public TableCell call(final TableColumn<Evenement, String> param) {
                 final TableCell<Evenement, String> cell = new TableCell<Evenement, String>() {
-        
+
                     @Override
                     public void updateItem(String item, boolean empty) {
-                         Evenement ee = getTableView().getItems().get(getIndex());
-                         Evenement eee= tableAffichage.getItems().get(getIndex());
-                         System.out.println("Marhbe si id "+eee);
+                        Evenement ee = getTableView().getItems().get(getIndex());
+                        Evenement eee = tableAffichage.getItems().get(getIndex());
+                        System.out.println("Marhbe si id " + eee);
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
                             setText(null);
-                            
-                            
-                        }
-                       
-                        else {
-                            
+
+                        } else {
+
                             if (pc.verifierParticipation(7, ee.getId_e()) == true) {
                                 final Button btn = new Button("Participer à l'evenement");
-                                       btn.setStyle("text-fill: #007782");
-                           
-                               if(Ec.verifierSs(ee.getNbr_max_e(), ee.getNbr_participant())==true){
-                                   btn.setDisable(true);
-                               }
+                                btn.setStyle("text-fill: #007782");
+
+                                if (Ec.verifierSs(ee.getNbr_max_e(), ee.getNbr_participant()) == true) {
+                                    btn.setDisable(true);
+                                    
+                                }
                                 btn.setOnAction(event -> {
                                     if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
                                         Participation p = new Participation(ee.getId_e(), 7);
@@ -176,9 +169,11 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
-                                        validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + ee.getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
+                                        validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + ee.getNom_e() + " a été bien confirmée. "
+                                                + "<br> Vous recevrez ultérieurement un message contenant le QR code de l'événement"
+                                                + " <br> auquel vous avez participé.");
                                         System.out.println("okok++++okokok");
-                                        
+
                                         actualiser();
                                     } else if (Ec.verifierParticipant(ee.getId_e()) == true) {
                                         Participation p = new Participation(ee.getId_e(), 7);
@@ -197,13 +192,13 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         actualiser();
                                     } else {
                                         validationSaisie.notifInfo("Information", "Le nombre maximal de participations a été atteint");
-                                            
+
                                         //actualiseUpadate();
                                     }
 
                                 });
                                 setGraphic(btn);
-                                
+
                                 setText(null);
                             } else if (pc.verifierParticipation(7, ee.getId_e()) == false) {
                                 final Button btn = new Button("Annuler participation");
@@ -269,11 +264,10 @@ public class List_Event_Add_ParticipationController implements Initializable {
             }
         });*/
     }
-   
+
     @FXML
     void actualiserPage(ActionEvent event) {
-        
-        
+
         EvenementCRUD Ec = new EvenementCRUD();
 
         // ParticipationCrud pc = new ParticipationCrud();
@@ -299,7 +293,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         tableAffichage.setItems(obser);
 
     }
-   
+
     @FXML
     private void searchBox(KeyEvent event) {
         FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);
@@ -334,7 +328,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
     }
 
 
- /*   @FXML
+    /*   @FXML
     void participerEvenement(ActionEvent event) throws Exception {
 
         EvenementCRUD ev = new EvenementCRUD();
@@ -378,7 +372,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
         }
         actualiser();
     }*/
-
     public void actualiser() {
 
         EvenementCRUD Ec = new EvenementCRUD();
