@@ -5,8 +5,10 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Velo;
 import edu.baskel.services.VeloCRUD;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -75,7 +77,7 @@ public class Afficher_mes_velosController implements Initializable {
      
      @FXML
     private Button ajbut;
-
+     Membre m = SessionInfo.getLoggedM();
     @FXML
     void ajouterVelo(ActionEvent event) {
         try {
@@ -163,7 +165,7 @@ public class Afficher_mes_velosController implements Initializable {
         System.out.println("hellooo");
         VeloCRUD Vc =new VeloCRUD();
         ArrayList av;
-        av=(ArrayList) Vc.afficherVeloUser(1);
+        av=(ArrayList) Vc.afficherVeloUser(m.getId_u());
         ObservableList o;
         o= FXCollections.observableArrayList(av);
         

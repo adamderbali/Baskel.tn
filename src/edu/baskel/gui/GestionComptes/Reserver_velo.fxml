@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="582.0" fitWidth="928.0" opacity="0.42" pickOnBounds="true">
          <image>
-            <Image url="file:/C:/Users/Hela/Downloads/pexels-photo-1595483.jpeg" />
+            <Image url="@../../../../images/pexels-photo-1595483.jpeg" />
          </image>
       </ImageView>
       <Pane layoutX="38.0" layoutY="31.0" prefHeight="516.0" prefWidth="851.0" style="-fx-border-color: black;">

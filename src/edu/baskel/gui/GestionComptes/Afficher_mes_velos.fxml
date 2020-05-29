@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="906.0" fitWidth="1298.0" opacity="0.51" pickOnBounds="true">
          <image>
-            <Image url="file:/C:/Users/Hela/Downloads/pexels-photo-1595483.jpeg" />
+            <Image url="@../../../../images/pexels-photo-1595483.jpeg" />
          </image>
       </ImageView>
       <TableView fx:id="TabAffVelo" layoutX="97.0" layoutY="106.0" onMouseClicked="#chargerDonnee" prefHeight="602.0" prefWidth="1087.0">

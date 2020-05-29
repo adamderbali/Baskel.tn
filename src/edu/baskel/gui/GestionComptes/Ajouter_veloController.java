@@ -88,7 +88,7 @@ public class Ajouter_veloController implements Initializable {
      @FXML
     private ChoiceBox<String> statusbox;
     
-    //Membre m = SessionInfo.getLoggedM();
+    Membre m = SessionInfo.getLoggedM();
     
     /* Ajout evenement*/
     @FXML
@@ -118,7 +118,7 @@ public class Ajouter_veloController implements Initializable {
                 VeloCRUD Vc = new VeloCRUD();
                 Velo v = new Velo(Integer.parseInt(txtnums.getText()), txtmarque.getText(), txtmodel.getText(),Double.parseDouble(txtprix.getText()),txttype.getText(),txtann.getText(),statusbox.getValue(),txtdesc.getText(), txtim.getText());
                 System.out.println(v);
-                Vc.ajouterVelo(v,1);
+                Vc.ajouterVelo(v,m.getId_u());
                 Alert alertAdded = new validationSaisie().getAlert("Succés d'ajout", "Vélo ajouté");
                 alertAdded.showAndWait();
 

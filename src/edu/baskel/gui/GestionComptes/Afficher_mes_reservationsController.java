@@ -5,10 +5,12 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reservation;
 import edu.baskel.services.ReservationCRUD;
 import edu.baskel.services.VeloCRUD;
 import edu.baskel.utils.PDFdoc;
+import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
@@ -67,13 +69,13 @@ public class Afficher_mes_reservationsController implements Initializable {
     @FXML
     private Button butpdf;
 
-    
+    Membre m = SessionInfo.getLoggedM();
 
     @FXML
     void genererPDF(ActionEvent event) {
         ReservationCRUD Rc =new ReservationCRUD();
         ArrayList av;
-         av=(ArrayList) Rc.afficherReservation(1);
+         av=(ArrayList) Rc.afficherReservation(m.getId_u());
             PDFdoc.PDFwriter(listToString(av));
             Alert alertAdded = new validationSaisie().getAlert("Succés", "Un PDF contenant cette liste a été généré");
                 alertAdded.showAndWait();
@@ -131,7 +133,7 @@ public class Afficher_mes_reservationsController implements Initializable {
     void afficherReservation(){
          ReservationCRUD Rc =new ReservationCRUD();
         ArrayList av;
-         av=(ArrayList) Rc.afficherReservation(1);
+         av=(ArrayList) Rc.afficherReservation(m.getId_u());
         ObservableList o;
         o= FXCollections.observableArrayList(av);
         //Reservation r =(Reservation)av.get(0);

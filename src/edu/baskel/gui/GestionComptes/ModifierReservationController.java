@@ -85,8 +85,8 @@ public class ModifierReservationController implements Initializable {
                 System.out.println("res"+r);
                 ReservationCRUD rc = new ReservationCRUD();
                 rc.modifierReservation(r, id_res);
-                 //Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Réservation modifiée");
-               // alertAdded.showAndWait();
+                 Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Réservation modifiée");
+                alertAdded.showAndWait();
                 Notifications notificationBuilder = Notifications.create()
                 .title("Modification")
                 .text("Votre réservation a été modifiée!")

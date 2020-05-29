@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Velo;
 import edu.baskel.services.MailReservation;
 import edu.baskel.services.VeloCRUD;
@@ -81,7 +82,7 @@ public class Afficher_detail_veloController implements Initializable {
      
      @FXML
     private Button resbut;
-
+     Membre m = SessionInfo.getLoggedM();
        
     @FXML
     private Button achatbut;
@@ -95,7 +96,7 @@ public class Afficher_detail_veloController implements Initializable {
                 Alert alertAdded = new validationSaisie().getAlert("Erreur", "Ce vélo n'est pas disponible");
             alertAdded.showAndWait();
             }else{
-                vc.louerOuAcheterVelo(1, nums);
+                vc.louerOuAcheterVelo(m.getId_u(), nums);
             Alert alertAdded = new validationSaisie().getAlert("Succés", "Ce vélo est réservé pour votre achat");
             alertAdded.showAndWait();
             }

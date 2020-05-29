@@ -5,8 +5,10 @@
  */
 package edu.baskel.gui.GestionComptes;
 
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reservation;
 import edu.baskel.services.ReservationCRUD;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -56,7 +58,8 @@ public class Afficher_Reservation_UserController implements Initializable {
 
     @FXML
     private Button back;
-
+    
+    Membre m = SessionInfo.getLoggedM();
     @FXML
     void retour(ActionEvent event) {
              try {
@@ -73,7 +76,7 @@ public class Afficher_Reservation_UserController implements Initializable {
     
     public void afficher(){
         ReservationCRUD resrvList = new ReservationCRUD();
-        List<Reservation> partListU = resrvList.afficherReservParU(2);
+        List<Reservation> partListU = resrvList.afficherReservParU(m.getId_u());
         ObservableList obser;
         obser = FXCollections.observableArrayList(partListU);
         TableColumn<Reservation, String> c1 = new TableColumn<Reservation, String>("first");
