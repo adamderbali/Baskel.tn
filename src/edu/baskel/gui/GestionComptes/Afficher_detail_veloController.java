@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.velo;
+package edu.baskel.gui.GestionComptes;
 
 import edu.baskel.entities.Velo;
 import edu.baskel.services.MailReservation;

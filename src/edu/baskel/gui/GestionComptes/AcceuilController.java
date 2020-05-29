@@ -72,6 +72,8 @@ public class AcceuilController implements Initializable {
     private MenuItem btnGererEv;
     @FXML
     private Button btnRec;
+    @FXML
+    private Button btnVelo;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -84,12 +86,12 @@ public class AcceuilController implements Initializable {
 
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
-        /*if(l.getType_u().equals("A")){
+        if (l.getType_u().equals("A")) {
             System.out.println(l.getType_u());
             btnAdmin.setVisible(true);
-        }else{
+        } else {
             btnAdmin.setVisible(false);
-        }*/
+        }
     }
 
     @FXML
@@ -196,6 +198,14 @@ public class AcceuilController implements Initializable {
     void RedirectionGererEvenemn(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Gerer.fxml"));
         ANchorProfil.getChildren().setAll(pane);
+    }
+
+    @FXML
+    void RedirectionVelos(ActionEvent event) throws IOException {
+        // AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/edu.baskel.gui.velo/Afficher_Tout_Velo.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Afficher_Tout_Velo.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+
     }
 
     //fermer l application
