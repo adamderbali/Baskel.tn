@@ -74,14 +74,21 @@ public class verifEmail {
     }
 
     public static boolean nb(String mail) {
-        String[] splitString = mail.split(" ");
+        String s = verifEmail.check(mail);
+        
+        String[] splitString = s.split(",");
+        
         for (String wordString : splitString) {
-            if (wordString.equalsIgnoreCase("Ok")) {
+            
+            System.out.println(wordString);
+            if (wordString.equalsIgnoreCase("{\"status\":\"Bad\"")) {
+                System.out.println("non");
                 return false;
             }
         }
+        System.out.println("oui");
         return true;
-
     }
+
 
 }
