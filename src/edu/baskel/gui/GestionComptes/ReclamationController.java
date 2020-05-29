@@ -12,6 +12,7 @@ import edu.baskel.entities.Statistique;
 import edu.baskel.services.ReclamationCRUD;
 import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,8 +26,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
@@ -42,9 +47,11 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javafx.util.converter.DefaultStringConverter;
@@ -69,8 +76,6 @@ public class ReclamationController implements Initializable {
     private TableColumn<Reclamation, String> T_valida;
     @FXML
     private TableColumn<Reclamation, String> t_etat;
-    @FXML
-    private VBox rec_vbox;
     @FXML
     private TableView<Reclamation> recla;
     @FXML
@@ -101,6 +106,7 @@ public class ReclamationController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
     public void affichage_rec() {
         ReclamationCRUD Mc = new ReclamationCRUD();
 
@@ -166,6 +172,7 @@ public class ReclamationController implements Initializable {
         }
     }
 
+    @FXML
     public void affichage_rec_trait() {
         ReclamationCRUD Mc = new ReclamationCRUD();
 
@@ -215,6 +222,7 @@ public class ReclamationController implements Initializable {
 
     }
 
+    @FXML
     public void affichage_rec_non_trait() {
         ReclamationCRUD Mc = new ReclamationCRUD();
 
@@ -351,7 +359,18 @@ public class ReclamationController implements Initializable {
         }
     }
 
-}
+    @FXML     
+    private void Goback(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("admin.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Admin");
+        app_stage.show();
+    }
+    }
+
+
 
 /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation");

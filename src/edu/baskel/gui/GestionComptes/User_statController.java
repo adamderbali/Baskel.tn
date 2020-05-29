@@ -73,7 +73,7 @@ public class User_statController implements Initializable {
         
         try {
             conxstat();
-            String query = "select nom_u , prenom_u ,nbr_visite from membre m inner join statistique s on m.Id_u=s.id_u order by nbr_visite desc limit 5";
+            String query = "select nom_u , prenom_u ,nbr_visite from membre m inner join statistique s on m.Id_u=s.id_u order by nbr_visite desc limit 4";
             XYChart.Series<String, Double> series = new XYChart.Series<>();
             ResultSet rs = cnxs.createStatement().executeQuery(query);
             while (rs.next()) {

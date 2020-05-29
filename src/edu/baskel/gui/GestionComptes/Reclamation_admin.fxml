@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -38,5 +40,10 @@
       </RadioButton>
       <RadioButton fx:id="rd_reclamation_traité" layoutX="528.0" layoutY="174.0" mnemonicParsing="false" onAction="#affichage_rec_trait" text="Reclamation traité" toggleGroup="$Mygroup" />
       <RadioButton fx:id="rd_reclamation_non_traité" layoutX="855.0" layoutY="174.0" mnemonicParsing="false" onAction="#affichage_rec_non_trait" text="Reclamation non traité" toggleGroup="$Mygroup" />
+      <ImageView fitHeight="65.0" fitWidth="73.0" layoutY="14.0" onMouseClicked="#Goback" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/go_back_80px.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

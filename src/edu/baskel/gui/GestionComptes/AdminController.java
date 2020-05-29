@@ -72,7 +72,6 @@ public class AdminController implements Initializable {
         app_stage.show();
         
     }
-    @FXML
     private void Stat(KeyEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Reclamation_admin.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
@@ -81,13 +80,22 @@ public class AdminController implements Initializable {
         app_stage.setTitle("Reclamation admin");
         app_stage.show();
     }
-     @FXML
     private void Rec_admin(KeyEvent event) throws IOException {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Reclamation_admin.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.setTitle("Reclamation admin");
+        app_stage.show();
+    }
+
+    @FXML
+    private void Goback(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Acceuil");
         app_stage.show();
     }
     

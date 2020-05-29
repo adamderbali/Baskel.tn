@@ -44,3 +44,8 @@
     -fx-text-fill: #ffffff;
     -fx-background-radius: 4;
 }
+#btn_rec{
+    -fx-background-color:#1298F4;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 4;
+}
