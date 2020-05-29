@@ -277,7 +277,7 @@ public class InscriptionReparateurController implements Initializable {
                         Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email valide");
                         alertEmail.showAndWait();
                     } else {//verif email vrai
-                        if ((verifEmail.check(txtemail.getText())) == false) {
+                        if ((verifEmail.nb(txtemail.getText())) == false) {
                             Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email existante");
                             alertEmail.showAndWait();
                         }
