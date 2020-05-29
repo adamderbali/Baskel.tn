@@ -303,7 +303,7 @@ public class InscriptionController implements Initializable {
                                         //alertnum.showAndWait();
                                         //txtnaissance.setValue(null);
                                     } else {//verif email vrai
-                                        if ((verifEmail.check(txtemail.getText())) == false) {
+                                        if ((verifEmail.nb(txtemail.getText())) == false) {
                                             InputValidation.notificationError("Email", "Saisissez une adresse email existante");
 
                                             //Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email existante");

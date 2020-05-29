@@ -337,7 +337,7 @@ public class ProfilPageReparateurController implements Initializable {
                                 if (verifDate() == false) {
                                     InputValidation.notificationError("Date", "Saisissez une date valide");
                                 } else {
-                                    if ((verifEmail.check(profilmail.getText())) == false) {
+                                    if ((verifEmail.nb(profilmail.getText())) == false) {
                                         InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                     } else {
                                         if (((!profilmail.getText().equals(txtEmailVerif.getText())) && (mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
