@@ -86,12 +86,12 @@ public class AcceuilController implements Initializable {
 
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
-        if (l.getType_u().equals("A")) {
+        /*if (l.getType_u().equals("A")) {
             System.out.println(l.getType_u());
             btnAdmin.setVisible(true);
         } else {
             btnAdmin.setVisible(false);
-        }
+        }*/
     }
 
     @FXML
