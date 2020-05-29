@@ -25,7 +25,7 @@
                           linear-gradient(to right, derive(-fx-bar-fill,30%), derive(-fx-bar-fill,-10%));
     -fx-background-radius: 5 0 0 5, 4 0 0 4, 3 0 0 3;
 }
-.default-color0.chart-bar { -fx-bar-fill: #f9d900; }
+.default-color0.chart-bar { -fx-bar-fill: #0181e2; }
 .default-color1.chart-bar { -fx-bar-fill: #a9e200; }
 .default-color2.chart-bar { -fx-bar-fill: #22bad9; }
 .default-color3.chart-bar { -fx-bar-fill: #0181e2; }
