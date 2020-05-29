@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.velo;
+package edu.baskel.gui.GestionComptes;
 
 import edu.baskel.entities.Velo;
 import edu.baskel.services.VeloCRUD;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,19 +28,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
+   
 /**
  * FXML Controller class
  *
  * @author Hela
  */
-public class Afficher_mes_velosController implements Initializable {
-    
-    
-     @FXML
+public class Afficher_Tout_VeloController implements Initializable {
+      @FXML
     private TableView<Velo> TabAffVelo;
 @FXML
     private TableColumn<Velo,String> ColImage;
@@ -64,81 +70,42 @@ public class Afficher_mes_velosController implements Initializable {
     
     @FXML
     private AnchorPane detailWin;
+    
      @FXML
-    private Button butTout;
-
+    private Button myvbutt;
+     ObservableList o;
      @FXML
-    private Button resbut;
-
-     @FXML
-    private Button allresbv;
-     
-     @FXML
-    private Button ajbut;
+    private TextField search;
 
     @FXML
-    void ajouterVelo(ActionEvent event) {
-        try {
-              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Ajouter_velo.fxml"));
+    void afficherMesVelos(ActionEvent event) {
+          try {
+              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_velos.fxml"));
               Scene redirection_scene = new Scene(redirection_parent);
               Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
               app_stage.setScene(redirection_scene);
               app_stage.show();
-               Stage stage = (Stage) ajbut.getScene().getWindow();
-                // do what you have to do
-                 stage.close();
-              //System.out.println("hello from my bikes");
-          } catch (IOException ex) {
-              ex.printStackTrace();
-          }
-    }
-     @FXML
-    void consultertouteReservation(ActionEvent event) {
-         try {
-              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_Reservation_User.fxml"));
-              Scene redirection_scene = new Scene(redirection_parent);
-              Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-              app_stage.setScene(redirection_scene);
-              app_stage.show();
-              //System.out.println("hello from my bikes");
-          } catch (IOException ex) {
-              ex.printStackTrace();
-          }
-    }
-    @FXML
-    void consulterReservation(ActionEvent event) {
-             try {
-              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_mes_reservations.fxml"));
-              Scene redirection_scene = new Scene(redirection_parent);
-              Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-              app_stage.setScene(redirection_scene);
-              app_stage.show();
-              //System.out.println("hello from my bikes");
+              System.out.println("hello from my bikes");
           } catch (IOException ex) {
               ex.printStackTrace();
           }
     }
 
-    @FXML
-    void consultertout(ActionEvent event) {
-            try {
-              Parent redirection_parent = FXMLLoader.load(getClass().getResource("Afficher_Tout_Velo.fxml"));
-              Scene redirection_scene = new Scene(redirection_parent);
-              Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-              app_stage.setScene(redirection_scene);
-              app_stage.show();
-              //System.out.println("hello from my bikes");
-          } catch (IOException ex) {
-              ex.printStackTrace();
-          }
-    }
-
-    public Afficher_mes_velosController() {
+    public Afficher_Tout_VeloController() {
     }
     
     
     
-   
+    
+    @FXML
+    void affichageDetail(ActionEvent event){
+          try {
+              AnchorPane pane = FXMLLoader.load(getClass().getResource("Afficher_detail_velo.fxml"));
+              detailWin.getChildren().setAll(pane);
+          } catch (IOException ex) {
+              ex.printStackTrace();
+          }
+    }
     
     Velo v;
     @FXML
@@ -160,11 +127,10 @@ public class Afficher_mes_velosController implements Initializable {
     public void affichageVelo() {
        // TableColumn buttn = new TableColumn("");
         //TabAffVelo.getColumns().add(buttn);
-        System.out.println("hellooo");
         VeloCRUD Vc =new VeloCRUD();
         ArrayList av;
-        av=(ArrayList) Vc.afficherVeloUser(1);
-        ObservableList o;
+        av=(ArrayList) Vc.afficherTout();
+        
         o= FXCollections.observableArrayList(av);
         
         
@@ -219,7 +185,7 @@ public class Afficher_mes_velosController implements Initializable {
                 Parent root;
                  //try {
                       
-                     Afficher_mes_velos_detailsController controller2 = new Afficher_mes_velos_detailsController(this);
+                     Afficher_detail_veloController controller2 = new Afficher_detail_veloController(this);
                      controller2.showStage();
                      
                      /*System.out.println(rowData);
@@ -244,14 +210,51 @@ public class Afficher_mes_velosController implements Initializable {
         
         
     }
+    
+    
+    
+    
+    @FXML
+    private void searchBox(KeyEvent event) {
+        FilteredList<Velo> filterData = new FilteredList<>(o, p -> true);
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(v -> {
 
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newValue.toLowerCase();
+                if (v.getModel().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+                if (String.valueOf(v.getNum_serie()).indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                if (v.getMarque().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                return false;
+
+            });
+
+            SortedList<Velo> sortedList = new SortedList<>(filterData);
+            sortedList.comparatorProperty().bind(TabAffVelo.comparatorProperty());
+            TabAffVelo.setItems(sortedList);
+        });
+    }
+    
+    
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("hiii");
-        affichageVelo();
+       affichageVelo();
     }    
     
 }
