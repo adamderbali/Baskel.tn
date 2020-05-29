@@ -420,6 +420,46 @@ public class EvenementCRUD {
         }
         return Listevent;
     }
+    
+     public List<Evenement> displayAllListAdmin() {
+
+        List<Evenement> Listevent = new ArrayList<Evenement>();
+        try {
+            String requete = "SELECT * FROM evenement";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            // pst.setInt(1,id_u);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Evenement e = new Evenement();
+                EvenementCRUD ev = new EvenementCRUD();
+
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
+         
+
+                if (e.getImage_e().equals("")) {
+                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.getImage().setFitWidth(220);
+                    e.getImage().setFitHeight(110);
+                } else {
+                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                    e.getImage().setFitWidth(220);
+                    e.getImage().setFitHeight(110);
+                }
+               
+                Listevent.add(e);
+            }
+            System.out.println("--------------+++++++++------------");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return Listevent;
+    }
  public List<Evenement> displayAllListNonPar(int id_u) {
 
         List<Evenement> Listevent = new ArrayList<Evenement>();

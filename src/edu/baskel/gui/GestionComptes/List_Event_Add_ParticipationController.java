@@ -163,7 +163,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
             public TableCell call(final TableColumn<Evenement, String> param) {
                 final TableCell<Evenement, String> cell = new TableCell<Evenement, String>() {
 
-                    final Button btn = new Button("Just Do It");
+                   // final Button btn = new Button("Just Do It");
 
                     @Override
                     public void updateItem(String item, boolean empty) {
@@ -175,7 +175,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
                             Evenement ee = getTableView().getItems().get(getIndex());
 
-                            if (pc.verifierParticipation(7, ee.getId_e()) == true) {
+                            if (pc.verifierParticipation(ml.getId_u(), ee.getId_e()) == true) {
                                 final Button btn = new Button("Participer à l'evenement");
                                 btn.setStyle("text-fill: #007782");
 
@@ -184,12 +184,12 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                 }
                                 btn.setOnAction(event -> {
                                     if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
-                                        Participation p = new Participation(ee.getId_e(), 7);
+                                        Participation p = new Participation(ee.getId_e(), ml.getId_u());
 
                                         pc.ajouterParticipation(p);
                                         qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
                                         try {
-                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
+                                            ma.envoiMailQrcode(ml.getEmail_u(), ee.getNom_e());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -200,7 +200,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
                                         actualiser();
                                     } else if (Ec.verifierParticipant(ee.getId_e()) == true) {
-                                        Participation p = new Participation(ee.getId_e(), 7);
+                                        Participation p = new Participation(ee.getId_e(), ml.getId_u());
 
                                         Evenement e = new Evenement();
                                         Ec.nbrParticipant(ee.getId_e());
@@ -209,7 +209,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         // System.out.println("++++++++++++++mail shih?" + ml.getEmail_u);
                                         try {
                                             validationSaisie.notifInfo("ok", "Mail en cours");
-                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
+                                            ma.envoiMailQrcode(ml.getEmail_u(), ee.getNom_e());
                                             //  System.out.println("++++++++++++++mail shih?" + ml.getEmail_u());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
@@ -227,7 +227,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                 setGraphic(btn);
 
                                 setText(null);
-                            } else if (pc.verifierParticipation(7, ee.getId_e()) == false) {
+                            } else if (pc.verifierParticipation(ml.getId_u(), ee.getId_e()) == false) {
                                 final Button btn = new Button("Annuler participation");
                                 btn.setOnAction(event -> {
 
@@ -405,7 +405,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         ArrayList arrayList;
         // ArrayList arrayList1;
 
-        arrayList = (ArrayList) Ec.displayAllListNonPar(7);
+        arrayList = (ArrayList) Ec.displayAllListNonPar(ml.getId_u());
 
         // arrayList.addAll(arrayList1);
         System.out.println("-------------+++++++++++++------------" + arrayList);
@@ -493,7 +493,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         ArrayList arrayList;
         // ArrayList arrayList1;
 
-        arrayList = (ArrayList) Ec.displayAllListOkPar(7);
+        arrayList = (ArrayList) Ec.displayAllListOkPar(ml.getId_u());
 
         // arrayList.addAll(arrayList1);
         System.out.println("-------------+++++++++++++------------" + arrayList);
@@ -541,19 +541,19 @@ public class List_Event_Add_ParticipationController implements Initializable {
                             final Button btn = new Button("Participer à l'evenement");
                             Evenement ee = getTableView().getItems().get(getIndex());
 
-                            if (pc.verifierParticipation(7, ee.getId_e()) == true) {
+                            if (pc.verifierParticipation(ml.getId_u(), ee.getId_e()) == true) {
 
                                 if (Ec.verifierSs(ee.getNbr_max_e(), ee.getNbr_participant()) == true) {
                                     btn.setDisable(true);
                                 }
                                 btn.setOnAction(event -> {
                                     if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
-                                        Participation p = new Participation(ee.getId_e(), 7);
+                                        Participation p = new Participation(ee.getId_e(), ml.getId_u());
 
                                         pc.ajouterParticipation(p);
                                         qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
                                         try {
-                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
+                                            ma.envoiMailQrcode(ml.getEmail_u(), ee.getNom_e());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -564,7 +564,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
                                         actualiser();
                                     } else if (Ec.verifierParticipant(ee.getId_e()) == true) {
-                                        Participation p = new Participation(ee.getId_e(), 7);
+                                        Participation p = new Participation(ee.getId_e(), ml.getId_u());
 
                                         Evenement e = new Evenement();
                                         Ec.nbrParticipant(ee.getId_e());
@@ -573,7 +573,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         // System.out.println("++++++++++++++mail shih?" + ml.getEmail_u);
                                         try {
                                             validationSaisie.notifInfo("ok", "Mail en cours");
-                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
+                                            ma.envoiMailQrcode(ml.getEmail_u(), ee.getNom_e());
                                             //  System.out.println("++++++++++++++mail shih?" + ml.getEmail_u());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
@@ -612,7 +612,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         ArrayList arrayList;
         // ArrayList arrayList1;
 
-        arrayList = (ArrayList) Ec.displayAllListNonPar(7);
+        arrayList = (ArrayList) Ec.displayAllListNonPar(ml.getId_u());
 
         // arrayList.addAll(arrayList1);
         System.out.println("-------------+++++++++++++------------" + arrayList);
@@ -637,7 +637,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         ArrayList arrayList;
         // ArrayList arrayList1;
 
-        arrayList = (ArrayList) Ec.displayAllListOkPar(7);
+        arrayList = (ArrayList) Ec.displayAllListOkPar(ml.getId_u());
 
         // arrayList.addAll(arrayList1);
         System.out.println("-------------+++++++++++++------------" + arrayList);

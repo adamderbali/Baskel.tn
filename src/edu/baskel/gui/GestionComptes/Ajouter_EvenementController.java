@@ -138,6 +138,7 @@ public class Ajouter_EvenementController implements Initializable {
             txtDescription.setFocusColor(rgb(255, 0, 0));
             txtDescription.setUnFocusColor(rgb(255, 0, 0));
             txtDescription.setStyle("-fx-prompt-text-fill: #C4151C");
+   
             txtDate.setDefaultColor(Color.RED);
             txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
 

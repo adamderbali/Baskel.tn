@@ -30,71 +30,55 @@ import javafx.stage.Stage;
  * @author sabri
  */
 public class DetailsParticipantController implements Initializable {
+
     Membre ml = SessionInfo.getLoggedM();
-      @FXML
+    @FXML
     private TableView<Participation> tableAffichage1;
 
     @FXML
-    private TableColumn<Participation,String> colNom;
+    private TableColumn<Participation, String> colNom;
 
     @FXML
-    private TableColumn<Participation,String> colPrenom;
+    private TableColumn<Participation, String> colEmail;
 
-    @FXML
-    private TableColumn<Participation,String> colEmail;
     
-    /*  @FXML
-    private TableColumn<Participation,String> colImage;*/
-
-
     @FXML
+    private TableColumn<Participation, String> colPhoto;
+  @FXML
     private JFXTextField nbreP;
-  
-
     public DetailsParticipantController() {
     }
 
-      public void affichageParticip(int id_e) { 
+    public void affichageParticip(int id_e) {
 
-    ParticipationCrud Pc = new ParticipationCrud();
+        ParticipationCrud Pc = new ParticipationCrud();
         List<Participation> partlst = Pc.displayParticipantList(id_e);
-        
+
         ObservableList obserE;
         obserE = FXCollections.observableArrayList(partlst);
         TableColumn<Participation, String> c2 = new TableColumn<Participation, String>("first");
         //afficher le non du membre dnas la classe alertei
         nbreP.setText(String.valueOf(Pc.nombreParticipation(id_e)));
-       
-        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u()+" "+p.getValue().getMbre().getPrenom_u()));
-        //colPrenom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getPrenom_u()));
+
+        colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u() + " " + p.getValue().getMbre().getPrenom_u()));
         colEmail.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getEmail_u()));
-       // colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colPhoto.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getImage_u()));
+
         tableAffichage1.setItems(obserE);
-    
-        
-     
 
- 
- 
-        
-       }
-         @FXML
-          void ok(ActionEvent event) {
-             
-              Stage stage = (Stage) tableAffichage1.getScene().getWindow();
-              stage.close();
-              
-          }
+    }
 
-    
-    
-    
+    @FXML
+    void ok(ActionEvent event) {
+
+        Stage stage = (Stage) tableAffichage1.getScene().getWindow();
+        stage.close();
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
-   
-    }    
-    
-    
-    
+
+    }
+
 }
