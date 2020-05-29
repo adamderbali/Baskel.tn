@@ -7,6 +7,7 @@ package edu.baskel.entities;
 
 import edu.baskel.utils.InputValidation;
 import java.sql.Date;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Membre {
     private int nbr_rec_u;
     private int validation_u;
     private InputValidation u ;
+    private ImageView image;
 
     public int getNbr_rec_u() {
         return nbr_rec_u;
@@ -162,6 +164,25 @@ public class Membre {
         this.image_u = image_u;
 
     }
+
+    public Membre(int id_u, String nom_u, String prenom_u, String email_u, String image_u, ImageView image) {
+        this.id_u = id_u;
+        this.nom_u = nom_u;
+        this.prenom_u = prenom_u;
+        this.email_u = email_u;
+        this.image_u = image_u;
+        this.image = image;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
+      
+      
 
     public int getId_u() {
         return id_u;

@@ -28,6 +28,7 @@ public class MembreCRUD {
     private int val;
     private int last_inserted_id;
     ReparateurCRUD rc = new ReparateurCRUD();
+    Membre l = SessionInfo.getLoggedM();
 
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -55,6 +56,7 @@ public class MembreCRUD {
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 m.setId_u(rs.getInt(1));
+                m.setType_u("U");
                 //get las id inserted for member
                 int last_inserted_id = rs.getInt(1);
                 HistoriqueCRUD hh = new HistoriqueCRUD();
@@ -195,7 +197,7 @@ public class MembreCRUD {
                 if (this.ValidationBan(emailm) != 0) {
                     SessionInfo.setLoggedM(membreLogged);
                     System.out.println(membreLogged);
-                    System.out.println(iduser);
+                    //System.out.println(iduser);
                     //System.out.println(membreLogged.getType_u());
                 }
                 if(VerifReparateur()==true){
@@ -433,6 +435,14 @@ public class MembreCRUD {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+        return true;
+    }
+    
+    public boolean TypeUser(){
+        if(l.getType_u().equals("A")){
+            System.out.println(l.getType_u());
+            return false;
         }
         return true;
     }

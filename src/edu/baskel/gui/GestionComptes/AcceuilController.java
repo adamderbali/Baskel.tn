@@ -86,12 +86,11 @@ public class AcceuilController implements Initializable {
 
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
-        /*if (l.getType_u().equals("A")) {
-            System.out.println(l.getType_u());
+        if (mc.TypeUser()==false) {
             btnAdmin.setVisible(true);
         } else {
             btnAdmin.setVisible(false);
-        }*/
+        }
     }
 
     @FXML
@@ -138,6 +137,7 @@ public class AcceuilController implements Initializable {
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
     }
+    
 
     //redirection contact us
     @FXML
