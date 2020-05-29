@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.MembreCRUD;
@@ -19,6 +20,7 @@ import edu.baskel.services.SendMail;
 import edu.baskel.utils.AutoCompleteAdresse;
 
 import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +57,7 @@ import org.controlsfx.control.textfield.TextFields;
  * @author sabri
  */
 public class ModifierController implements Initializable {
-
+    Membre ml = SessionInfo.getLoggedM();
     @FXML
     private JFXTextField txtNom;
 

@@ -37,6 +37,21 @@ public class Evenement {
      private Label pourcentage;
      private Button btn;
 
+    public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, Participation part, int nbr_participant, Label etat_p) {
+        this.image = image;
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+        this.part = part;
+        this.nbr_participant = nbr_participant;
+        this.etat_p = etat_p;
+    }
+
   
 
     public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, Participation part) {

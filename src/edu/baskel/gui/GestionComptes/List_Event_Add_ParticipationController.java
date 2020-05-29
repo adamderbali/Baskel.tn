@@ -6,6 +6,8 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
@@ -30,14 +32,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import edu.baskel.utils.validationSaisie;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class List_Event_Add_ParticipationController implements Initializable {
@@ -73,9 +82,15 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private JFXTextField search;
-
+    ObservableList obser1;
     @FXML
     private JFXButton actualiser;
+    Membre ml = SessionInfo.getLoggedM();
+    @FXML
+    private JFXCheckBox listPar;
+    @FXML
+    private JFXCheckBox list;
+   
 
     public List_Event_Add_ParticipationController() {
 
@@ -85,7 +100,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     Evenement e;
 
-    @FXML
     void chargerDonnee() {
         e = tableAffichage.getSelectionModel().getSelectedItem();
     }
@@ -128,9 +142,20 @@ public class List_Event_Add_ParticipationController implements Initializable {
         colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
 
         TableColumn actionCol = new TableColumn("");
-        actionCol.setPrefWidth(150);
         actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
 
+            public void handle(MouseEvent click) {
+                if ((click.getClickCount() == 1) && (Ec.verifierSs(tableAffichage.getSelectionModel().getSelectedItem().getNbr_max_e(), tableAffichage.getSelectionModel().getSelectedItem().getNbr_participant()) == true)
+                        && (pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true)) {
+
+                    validationSaisie.notifInfo("ok", "Le nombre maximal de participations a été atteint");
+
+                }
+            }
+
+        });
         Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>> cellFactory
                 = //
                 new Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>>() {
@@ -138,17 +163,17 @@ public class List_Event_Add_ParticipationController implements Initializable {
             public TableCell call(final TableColumn<Evenement, String> param) {
                 final TableCell<Evenement, String> cell = new TableCell<Evenement, String>() {
 
+                    final Button btn = new Button("Just Do It");
+
                     @Override
                     public void updateItem(String item, boolean empty) {
-                        Evenement ee = getTableView().getItems().get(getIndex());
-                        Evenement eee = tableAffichage.getItems().get(getIndex());
-                        System.out.println("Marhbe si id " + eee);
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
                             setText(null);
-
                         } else {
+
+                            Evenement ee = getTableView().getItems().get(getIndex());
 
                             if (pc.verifierParticipation(7, ee.getId_e()) == true) {
                                 final Button btn = new Button("Participer à l'evenement");
@@ -156,7 +181,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
                                 if (Ec.verifierSs(ee.getNbr_max_e(), ee.getNbr_participant()) == true) {
                                     btn.setDisable(true);
-                                    
                                 }
                                 btn.setOnAction(event -> {
                                     if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
@@ -165,7 +189,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         pc.ajouterParticipation(p);
                                         qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
                                         try {
-                                            ma.envoiMailQrcode("sabrine.zekri@esprit.tn", ee.getNom_e());
+                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -182,8 +206,11 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         Ec.nbrParticipant(ee.getId_e());
                                         pc.ajouterParticipation(p);
                                         qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
+                                        // System.out.println("++++++++++++++mail shih?" + ml.getEmail_u);
                                         try {
-                                            ma.envoiMailQrcode("sabrine.zekri@esprit.tn", ee.getNom_e());
+                                            validationSaisie.notifInfo("ok", "Mail en cours");
+                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
+                                            //  System.out.println("++++++++++++++mail shih?" + ml.getEmail_u());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -240,11 +267,12 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
         actionCol.setCellFactory(cellFactory);
 
+        tableAffichage.setItems(obser);
         tableAffichage.getColumns().addAll(actionCol);
 
-        tableAffichage.setItems(obser);
+    }
 
-        /*
+    /*
         tableAffichage.widthProperty().addListener(new ChangeListener<Number>()
         {
             @Override
@@ -263,8 +291,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
                 }
             }
         });*/
-    }
-
     @FXML
     void actualiserPage(ActionEvent event) {
 
@@ -296,7 +322,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private void searchBox(KeyEvent event) {
+
         FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);
+
         search.textProperty().addListener((observable, oldValue, newValue) -> {
             filterData.setPredicate(e -> {
 
@@ -322,56 +350,13 @@ public class List_Event_Add_ParticipationController implements Initializable {
             });
 
             SortedList<Evenement> sortedList = new SortedList<>(filterData);
+
             sortedList.comparatorProperty().bind(tableAffichage.comparatorProperty());
             tableAffichage.setItems(sortedList);
+
         });
     }
 
-
-    /*   @FXML
-    void participerEvenement(ActionEvent event) throws Exception {
-
-        EvenementCRUD ev = new EvenementCRUD();
-        ParticipationCrud Pc = new ParticipationCrud();
-        Qrcode qr = new Qrcode();
-        MailAttachement ma = new MailAttachement();
-
-        if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
-            validationSaisie.notif("Participation", "Vous devez selectionner un evenement pour participer");
-        } else if (Pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == false) {
-            Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
-
-            //  tableAffichage.getSelectionModel().setCellSelectionEnabled(true);
-            System.out.println();
-            validationSaisie.notifInfo("Information", "Vous avez deja particpé a cet evenement");
-            actualiser();
-        } else if (ev.verifierNbrMaxE(tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true) {
-            Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
-
-            Pc.ajouterParticipation(p);
-            qr.Create("nom= " + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + "Date= " + tableAffichage.getSelectionModel().getSelectedItem().getDate_e(), tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
-            ma.envoiMailQrcode("sabrine.zekri@esprit.tn", tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
-            validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
-            System.out.println("okok++++okokok");
-            actualiser();
-        } else if (ev.verifierParticipant(tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true) {
-            Participation p = new Participation(tableAffichage.getSelectionModel().getSelectedItem().getId_e(), 7);
-
-            Evenement e = new Evenement();
-            ev.nbrParticipant(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-            Pc.ajouterParticipation(p);
-            qr.Create("nom= " + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + "Date= " + tableAffichage.getSelectionModel().getSelectedItem().getDate_e(), tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
-            ma.envoiMailQrcode("sabrine.zekri@esprit.tn", tableAffichage.getSelectionModel().getSelectedItem().getNom_e());
-            validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
-            System.out.println("okok++++okokok");
-            actualiser();
-        } else {
-            validationSaisie.notifInfo("Information", "Le nombre maximal de participations a été atteint");
-
-            //actualiseUpadate();
-        }
-        actualiser();
-    }*/
     public void actualiser() {
 
         EvenementCRUD Ec = new EvenementCRUD();
@@ -411,6 +396,265 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     }
 
+    public void affichageEvenementP() throws Exception {
+
+        EvenementCRUD Ec = new EvenementCRUD();
+
+        ParticipationCrud pc = new ParticipationCrud();
+        Evenement e = new Evenement();
+        ArrayList arrayList;
+        // ArrayList arrayList1;
+
+        arrayList = (ArrayList) Ec.displayAllListNonPar(7);
+
+        // arrayList.addAll(arrayList1);
+        System.out.println("-------------+++++++++++++------------" + arrayList);
+
+        obser = FXCollections.observableArrayList(arrayList);
+
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+
+        colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
+
+        TableColumn actionCol = new TableColumn("");
+        actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+
+        Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>> cellFactory
+                = //
+                new Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>>() {
+            @Override
+            public TableCell call(final TableColumn<Evenement, String> param) {
+                final TableCell<Evenement, String> cell = new TableCell<Evenement, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            final Button btn = new Button("Annuler participation");
+                            btn.setOnAction(event -> {
+                                Evenement ee = getTableView().getItems().get(getIndex());
+                                if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
+                                    if (pc.supprimerParticipationE(ee.getId_e()) == true) {
+                                        if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
+                                            System.out.println("++++++OK oK");
+                                            // tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
+                                            validationSaisie.notifConfirm("ok", "Participation annulée");
+                                            System.out.println("ok--------------------");
+                                            actualiserAnnulation();
+                                        } else if (Ec.verifierNbrMaxE(ee.getId_e()) == false) {
+                                            Ec.nbrParticipantDelete(ee.getId_e());
+                                            System.out.println("++++++OK oK");
+                                            //tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
+                                            validationSaisie.notifConfirm("ok", "Participation annulée");
+                                            System.out.println("ok--------------------");
+                                            actualiserAnnulation();
+                                        }
+                                        actualiserAnnulation();
+                                    } else {
+                                        System.out.println("----------erreur");
+                                        actualiserAnnulation();
+                                    }
+
+                                }
+                                actualiserAnnulation();
+                            });
+                            setGraphic(btn);
+                            setText(null);
+                        }
+
+                    }
+                };
+                return cell;
+            }
+        };
+
+        // actionCol.setCellFactory(cellFactory);
+        tableAffichage.setItems(obser);
+        tableAffichage.getColumns().addAll(actionCol);
+
+    }
+
+    public void affichageEvenementOkP() throws Exception {
+
+        EvenementCRUD Ec = new EvenementCRUD();
+
+        Qrcode qr = new Qrcode();
+
+        MailAttachement ma = new MailAttachement();
+        ParticipationCrud pc = new ParticipationCrud();
+        Evenement e = new Evenement();
+        ArrayList arrayList;
+        // ArrayList arrayList1;
+
+        arrayList = (ArrayList) Ec.displayAllListOkPar(7);
+
+        // arrayList.addAll(arrayList1);
+        System.out.println("-------------+++++++++++++------------" + arrayList);
+
+        obser = FXCollections.observableArrayList(arrayList);
+
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+
+        colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
+
+        tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+
+            public void handle(MouseEvent click) {
+                if ((click.getClickCount() == 1) && (Ec.verifierSs(tableAffichage.getSelectionModel().getSelectedItem().getNbr_max_e(), tableAffichage.getSelectionModel().getSelectedItem().getNbr_participant()) == true)
+                        && (pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true)) {
+
+                    validationSaisie.notifInfo("ok", "Le nombre maximal de participations a été atteint");
+
+                }
+            }
+
+        });
+        TableColumn actionCol = new TableColumn("");
+        actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+
+        Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>> cellFactory
+                = //
+                new Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>>() {
+            @Override
+            public TableCell call(final TableColumn<Evenement, String> param) {
+                final TableCell<Evenement, String> cell = new TableCell<Evenement, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            final Button btn = new Button("Participer à l'evenement");
+                            Evenement ee = getTableView().getItems().get(getIndex());
+
+                            if (pc.verifierParticipation(7, ee.getId_e()) == true) {
+
+                                if (Ec.verifierSs(ee.getNbr_max_e(), ee.getNbr_participant()) == true) {
+                                    btn.setDisable(true);
+                                }
+                                btn.setOnAction(event -> {
+                                    if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
+                                        Participation p = new Participation(ee.getId_e(), 7);
+
+                                        pc.ajouterParticipation(p);
+                                        qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
+                                        try {
+                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
+                                        } catch (Exception ex) {
+                                            Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                        validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + ee.getNom_e() + " a été bien confirmée. "
+                                                + "<br> Vous recevrez ultérieurement un message contenant le QR code de l'événement"
+                                                + " <br> auquel vous avez participé.");
+                                        System.out.println("okok++++okokok");
+
+                                        actualiser();
+                                    } else if (Ec.verifierParticipant(ee.getId_e()) == true) {
+                                        Participation p = new Participation(ee.getId_e(), 7);
+
+                                        Evenement e = new Evenement();
+                                        Ec.nbrParticipant(ee.getId_e());
+                                        pc.ajouterParticipation(p);
+                                        qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
+                                        // System.out.println("++++++++++++++mail shih?" + ml.getEmail_u);
+                                        try {
+                                            validationSaisie.notifInfo("ok", "Mail en cours");
+                                            ma.envoiMailQrcode("sabrinezekri@yahoo.fr", ee.getNom_e());
+                                            //  System.out.println("++++++++++++++mail shih?" + ml.getEmail_u());
+                                        } catch (Exception ex) {
+                                            Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                        validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + ee.getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
+                                        System.out.println("okok++++okokok");
+                                        actualiser();
+                                    } else {
+                                        validationSaisie.notifInfo("Information", "Le nombre maximal de participations a été atteint");
+
+                                    }
+
+                                });
+                                setGraphic(btn);
+
+                                setText(null);
+
+                            }
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        //  actionCol.setCellFactory(cellFactory);
+        tableAffichage.setItems(obser);
+        tableAffichage.getColumns().addAll(actionCol);
+
+    }
+
+    public void actualiserAnnulation() {
+        EvenementCRUD Ec = new EvenementCRUD();
+        ParticipationCrud pc = new ParticipationCrud();
+        Evenement e = new Evenement();
+        ArrayList arrayList;
+        // ArrayList arrayList1;
+
+        arrayList = (ArrayList) Ec.displayAllListNonPar(7);
+
+        // arrayList.addAll(arrayList1);
+        System.out.println("-------------+++++++++++++------------" + arrayList);
+
+        obser = FXCollections.observableArrayList(arrayList);
+
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+
+        colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
+
+        tableAffichage.setItems(obser);
+    }
+
+    public void actualiserParticipation() {
+        EvenementCRUD Ec = new EvenementCRUD();
+        ParticipationCrud pc = new ParticipationCrud();
+        Evenement e = new Evenement();
+        ArrayList arrayList;
+        // ArrayList arrayList1;
+
+        arrayList = (ArrayList) Ec.displayAllListOkPar(7);
+
+        // arrayList.addAll(arrayList1);
+        System.out.println("-------------+++++++++++++------------" + arrayList);
+
+        obser = FXCollections.observableArrayList(arrayList);
+
+        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+
+        colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
+
+        tableAffichage.setItems(obser);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         StatCRUD sc = new StatCRUD();
@@ -420,6 +664,43 @@ public class List_Event_Add_ParticipationController implements Initializable {
             affichageEvenement();
         } catch (Exception ex) {
             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void listPar(ActionEvent event) {
+
+        if (listPar.isSelected()) {
+            try {
+                affichageEvenementP();
+            } catch (Exception ex) {
+                Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (list.isSelected()) {
+            try {
+                affichageEvenementOkP();
+            } catch (Exception ex) {
+                Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if ((!(listPar.isSelected())) && (!(list.isSelected()))) {
+            try {
+                affichageEvenement();
+            } catch (Exception ex) {
+                Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if ((listPar.isSelected()) && (list.isSelected())) {
+            try {
+                affichageEvenement();
+            } catch (Exception ex) {
+                Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

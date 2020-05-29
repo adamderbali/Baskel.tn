@@ -10,7 +10,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +45,7 @@ import javafx.stage.Stage;
  * @author sabri
  */
 public class GererController implements Initializable {
-    
+    Membre ml = SessionInfo.getLoggedM();
        @FXML
     private JFXButton detail;
 
@@ -164,7 +166,7 @@ public class GererController implements Initializable {
         EvenementCRUD Ec = new EvenementCRUD();
         Evenement e = new Evenement();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(7);
+        arrayList = (ArrayList) Ec.displayByUser(ml.getId_u());
 
         obser = FXCollections.observableArrayList(arrayList);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
@@ -199,7 +201,7 @@ public class GererController implements Initializable {
         EvenementCRUD Ec = new EvenementCRUD();
         Evenement e = new Evenement();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(7);
+        arrayList = (ArrayList) Ec.displayByUser(ml.getId_u());
 
         obser = FXCollections.observableArrayList(arrayList);
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
@@ -217,7 +219,7 @@ public class GererController implements Initializable {
 
         EvenementCRUD Ec = new EvenementCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayByUser(7);
+        arrayList = (ArrayList) Ec.displayByUser(ml.getId_u());
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
         FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);

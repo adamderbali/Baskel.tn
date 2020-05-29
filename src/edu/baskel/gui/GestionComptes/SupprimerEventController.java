@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.MembreCRUD;
@@ -17,6 +18,7 @@ import edu.baskel.services.ParticipationCrud;
 import static edu.baskel.services.ParticipationCrud.cnx;
 import edu.baskel.services.SendMail;
 import edu.baskel.utils.AutoCompleteAdresse;
+import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
@@ -83,7 +85,7 @@ public class SupprimerEventController implements Initializable {
     @FXML
     private JFXTextField txtNombre;
 
-    
+    Membre ml = SessionInfo.getLoggedM();
     private Stage thisStage;
     
     private final GererController controller1;

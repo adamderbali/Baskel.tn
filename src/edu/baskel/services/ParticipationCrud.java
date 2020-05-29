@@ -344,16 +344,33 @@ public class ParticipationCrud {
             ResultSet rs = pst.executeQuery(requete);
 
             while (rs.next()) {
-
+                 Participation p = new Participation();
                 Membre m = new Membre();
                 m.setId_u(rs.getInt("id_u"));
                 m.setNom_u(rs.getString("nom_u"));
                 m.setPrenom_u(rs.getString("prenom_u"));
                 m.setEmail_u(rs.getString("email_u"));
+                m.setImage_u(rs.getString("image_u"));
+                 /*   if ((m.getImage_u().equals(""))&&(m.getSexe_u().equals("Femme"))) {
+                    p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\femme.png")));
+                    p.getImage().setFitWidth(50);
+                    p.getImage().setFitHeight(60);
+                    
+                } else if ((m.getImage_u().equals(""))&&(m.getSexe_u().equals("Homme"))) {
+                    p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\Homme.png")));
+                    p.getImage().setFitWidth(50);
+                    p.getImage().setFitHeight(60);
+                    
+                }
+                    else {
+                    p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + m.getImage_u())));
+                    p.getImage().setFitWidth(50);
+                    p.getImage().setFitHeight(60);
+                }*/
                 System.out.println("1-------------" + rs.getString("nom_u"));
 
-                Participation p = new Participation();
-
+               
+                
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 p.setDate_insc(rs.getDate("date_insc"));

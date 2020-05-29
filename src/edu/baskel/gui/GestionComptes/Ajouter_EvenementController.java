@@ -10,10 +10,12 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 
 import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.SessionInfo;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -88,6 +90,8 @@ public class Ajouter_EvenementController implements Initializable {
     private JFXButton date;
 
     private Stage thisStage;
+    
+    Membre ml = SessionInfo.getLoggedM();
 
     private final List_Event_Add_ParticipationController controller1;
 
@@ -300,7 +304,7 @@ public class Ajouter_EvenementController implements Initializable {
                                                                             EvenementCRUD Ec = new EvenementCRUD();
                                                                           
                                                                             Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                                    getText(), pathE.getText(), Integer.parseInt(txtNombre.getText()));
+                                                                                    getText(), pathE.getText(),ml.getId_u(), Integer.parseInt(txtNombre.getText()));
                                                                             Ec.ajouterEvenement(e);
                                                                             txtNom.clear();
                                                                             txtLieu.clear();

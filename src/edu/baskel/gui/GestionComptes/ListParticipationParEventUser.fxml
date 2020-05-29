@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -9,12 +10,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ListParticipationParEventUserController">
    <children>
-      <ImageView fitHeight="373.0" fitWidth="671.0" layoutX="14.0" layoutY="88.0">
+      <ImageView fitHeight="413.0" fitWidth="671.0" layoutX="14.0" layoutY="88.0">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <TableView fx:id="tableAffichage" layoutX="14.0" layoutY="49.0" opacity="0.74" prefHeight="413.0" prefWidth="671.0" style="-fx-fixed-cell-size: 70;" stylesheets="@AffichageList.css">
+      <TableView fx:id="tableAffichage" layoutX="14.0" layoutY="88.0" opacity="0.74" prefHeight="413.0" prefWidth="671.0" style="-fx-fixed-cell-size: 70;" stylesheets="@AffichageList.css">
         <columns>
             <TableColumn fx:id="colNomE" prefWidth="174.0" text="Nom de l'evenement" />
             <TableColumn fx:id="colLieuE" prefWidth="156.0" text="Lieu de l'evenement" />
@@ -22,6 +23,7 @@
             <TableColumn fx:id="colPourcentage" prefWidth="170.0" text="Taux de participation" />
         </columns>
       </TableView>
-      <JFXButton fx:id="idRetour" layoutX="14.0" layoutY="14.0" onAction="#retour" prefHeight="27.0" prefWidth="56.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Retour" textFill="#00747f" />
+      <JFXButton fx:id="idRetour" layoutX="629.0" layoutY="35.0" onAction="#retour" prefHeight="27.0" prefWidth="56.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Retour" textFill="#00747f" />
+      <JFXTextField fx:id="search" focusColor="#007782" layoutX="14.0" layoutY="36.0" onKeyTyped="#searchBox" prefHeight="25.0" prefWidth="205.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
    </children>
 </AnchorPane>

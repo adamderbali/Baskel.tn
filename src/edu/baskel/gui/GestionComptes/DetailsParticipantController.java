@@ -6,8 +6,10 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXTextField;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.utils.SessionInfo;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,7 +30,7 @@ import javafx.stage.Stage;
  * @author sabri
  */
 public class DetailsParticipantController implements Initializable {
-    
+    Membre ml = SessionInfo.getLoggedM();
       @FXML
     private TableView<Participation> tableAffichage1;
 
@@ -40,6 +42,9 @@ public class DetailsParticipantController implements Initializable {
 
     @FXML
     private TableColumn<Participation,String> colEmail;
+    
+    /*  @FXML
+    private TableColumn<Participation,String> colImage;*/
 
 
     @FXML
@@ -63,6 +68,7 @@ public class DetailsParticipantController implements Initializable {
         colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u()+" "+p.getValue().getMbre().getPrenom_u()));
         //colPrenom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getPrenom_u()));
         colEmail.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getEmail_u()));
+       // colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         tableAffichage1.setItems(obserE);
     
         

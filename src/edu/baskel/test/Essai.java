@@ -48,10 +48,10 @@ public class Essai {
       //  Evenement e  = new Evenement(147, "sortie 17", "tunis", "25/10/2021", "marahbe", null, 20);
        // ev.nbrParticipant(162);
     
-      //  System.out.println(ev.displayAllListU(7));
+      System.out.println(ev.displayAllListNonPar(7));
       //  ev.desactiverCell(7);
     
-    ev.displayParticipant(7);
+ 
     }
 
 }

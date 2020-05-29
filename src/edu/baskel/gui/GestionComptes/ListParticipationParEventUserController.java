@@ -6,13 +6,17 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,6 +24,8 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,6 +38,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -41,7 +48,7 @@ import javafx.stage.Stage;
  * @author sabri
  */
 public class ListParticipationParEventUserController implements Initializable {
-
+   Membre ml = SessionInfo.getLoggedM();
     @FXML
     private JFXTextField search;
     @FXML
@@ -54,6 +61,14 @@ public class ListParticipationParEventUserController implements Initializable {
 
     @FXML
     private TableColumn<Participation, String> colEmail;*/
+    
+    
+    @FXML
+    private JFXCheckBox listeP;
+
+    @FXML
+    private JFXCheckBox listeE;
+
 
     @FXML
     private TableColumn<Evenement, String> colNomE;
@@ -76,10 +91,10 @@ public class ListParticipationParEventUserController implements Initializable {
       //  ParticipationCrud Pc = new ParticipationCrud();
         EvenementCRUD ev = new EvenementCRUD();
      //   List<Evenement> partlst = Pc.displayParticipant(7);
-     List<Evenement> partlst = ev.displayParticipant(7);
+     List<Evenement> partlst = ev.displayParticipant(ml.getId_u());
         ObservableList obser;
         obser = FXCollections.observableArrayList(partlst);
-        TableColumn<Evenement, String> c1 = new TableColumn<Evenement, String>("first");
+      //  TableColumn<Evenement, String> c1 = new TableColumn<Evenement, String>("first");
         colNomE.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieuE.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         colDateE.setCellValueFactory(new PropertyValueFactory<>("date_e"));
@@ -135,6 +150,52 @@ public class ListParticipationParEventUserController implements Initializable {
 
 
     }
+    
+    
+    @FXML
+    void searchBox(KeyEvent event) {
+        EvenementCRUD ev = new EvenementCRUD();
+        ArrayList arrayList;
+        arrayList = (ArrayList) ev.displayParticipant(ml.getId_u());
+       
+        ObservableList obser;
+        obser = FXCollections.observableArrayList(arrayList);
+         
+        FilteredList<Evenement> filterData = new FilteredList<>(obser, p -> true);
+       
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterData.setPredicate(e -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newValue.toLowerCase();
+                if (e.getNom_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+                if (e.getLieu_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                if (e.getDate_e().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+                return false;
+
+            });
+
+            SortedList<Evenement> sortedList = new SortedList<>(filterData);
+       
+            sortedList.comparatorProperty().bind(tableAffichage.comparatorProperty());
+            tableAffichage.setItems(sortedList);
+
+        });
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
