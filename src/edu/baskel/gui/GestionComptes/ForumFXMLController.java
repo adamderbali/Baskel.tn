@@ -101,12 +101,19 @@ public class ForumFXMLController implements Initializable {
                         if (e != null) {
 
                             Image IMAGE_RUBY = null;
-                            if (e.getImage_uf() != null) {
+                            if (!e.getImage_uf().equalsIgnoreCase("")) {
                                 IMAGE_RUBY = new Image("file:/C:\\wamp\\www\\baskel\\images\\" + e.getImage_uf());
+                                System.out.println("++++");
                             } else {
-                                System.out.println("image null");
-                                File file = new File("src\\images\\2.jpg");
-                                IMAGE_RUBY = new Image(file.toURI().toString());
+                                Membre l = mc.AfficherMembreById(e.getId_u());
+                                if (l.getSexe_u().equals("Femme")) {
+                                    File file = new File("src\\images\\femme.png");
+                                    IMAGE_RUBY = new Image(file.toURI().toString());
+                                }
+                                if (l.getSexe_u().equals("Homme")) {
+                                    File file = new File("src\\images\\homme.png");
+                                    IMAGE_RUBY = new Image(file.toURI().toString());
+                                }
                             }
                             ImageView imgview = new ImageView(IMAGE_RUBY);
                             setGraphic(imgview);
@@ -147,8 +154,23 @@ public class ForumFXMLController implements Initializable {
                                         lbladresse.setText(mp.getAdresse_u());
                                         lblsexe.setText(mp.getSexe_u());
                                         Image imag;
-                                        imag = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + mp.getImage_u());
-                                        imgProCom.setImage(imag);
+                                        if (!mp.getImage_u().equalsIgnoreCase("")) {
+                                            imag = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + mp.getImage_u());
+                                            imgProCom.setImage(imag);
+                                        } else {
+                                            if (mp.getSexe_u().equals("Femme")) {
+                                                File file = new File("src\\images\\femme.png");
+                                                imag = new Image(file.toURI().toString());
+                                                imgProCom.setImage(imag);
+
+                                            }
+                                            if (mp.getSexe_u().equals("Homme")) {
+                                                File file = new File("src\\images\\homme.png");
+                                                imag = new Image(file.toURI().toString());
+                                                imgProCom.setImage(imag);
+
+                                            }
+                                        }
                                         if (m.getId_u() != M.getId_u()) {
                                             PaneProfilCom.setVisible(true);
                                         }
@@ -161,7 +183,7 @@ public class ForumFXMLController implements Initializable {
                                 }
                             }
                             );
-                            if (e.getId_u()!= 0) {
+                            if (e.getId_u() != 0) {
                                 Membre fs = mc.AfficherMembreById(e.getId_u());
                                 setText("Membre  : " + fs.getNom_u() + " " + fs.getPrenom_u()
                                         + " ,  DATE : " + e.getDate_f()
@@ -187,38 +209,48 @@ public class ForumFXMLController implements Initializable {
     //publier un commentaire
     @FXML
     void envoyer(MouseEvent event) throws NoSuchAlgorithmException, IOException {
-        if (AutoCompleteAdresse.nb(message.getText()) == true) {
-            /*java.util.Date date_util = new java.util.Date();
+        if (!message.getText().isEmpty()) {
+            if (AutoCompleteAdresse.nb(message.getText()) == true) {
+                /*java.util.Date date_util = new java.util.Date();
             java.sql.Date datee = new java.sql.Date(date_util.getTime());   datee.toString()*/
-            Forum1 f = new Forum1(0, m.getId_u(), message.getText(), InputValidation.dateCalendar(), m.getImage_u());
-            fs.ajouterForum(f);
-            InputValidation.notificationsucces("Commentaire", "Votre commentaire a été ajouter avec succés");
-            message.clear();
-            actua();
+                Forum1 f = new Forum1(0, m.getId_u(), message.getText(), InputValidation.dateCalendar(), m.getImage_u());
+                fs.ajouterForum(f);
+                InputValidation.notificationsucces("Commentaire", "Votre commentaire a été ajouter avec succés");
+                message.clear();
+                actua();
+            } else {
+                InputValidation.notificationError("Commentaire", "Nous n'acceptons pas les gros mots, soyez responsable svp!");
+            }
         } else {
-            InputValidation.notificationError("Commentaire", "Nous n'acceptons pas les gros mots, soyez responsable svp!");
+            InputValidation.notificationError("Commentaire", "Champs commentaire vide");
+
         }
     }
 
     //supprimer un commemntaire
     @FXML
     void SupprimerCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
-        Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
-        if (m.getId_u() == M.getId_u()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation ");
-            alert.setHeaderText("Supprimer ce  commentaire !?");
-            alert.setContentText("OK?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                fs.supprimerForum(M);
-                InputValidation.notificationsucces("Commentaire", "Votre commentaire a été supprimer avec succée");
-                actua();
+        if (listeforum.getSelectionModel().getSelectedItem() != null) {
+            Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+            if (m.getId_u() == M.getId_u()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation ");
+                alert.setHeaderText("Supprimer ce  commentaire !?");
+                alert.setContentText("OK?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    fs.supprimerForum(M);
+                    InputValidation.notificationsucces("Commentaire", "Votre commentaire a été supprimer avec succée");
+                    actua();
+                } else {
+                    System.out.println("Rien");
+                }
             } else {
-                System.out.println("Rien");
+                InputValidation.notificationError("Commentaire", "Vous ne pouver pas supprimer les commentaires des autres membres");
             }
         } else {
-            InputValidation.notificationError("Commentaire", "Vous ne pouver pas supprimer les commentaires des autres membres");
+            InputValidation.notificationError("Commentaire", "Vous devez selectionner le commentaire a supprimer");
+
         }
     }
 
@@ -237,12 +269,19 @@ public class ForumFXMLController implements Initializable {
                         super.updateItem(e, btl);
                         if (e != null) {
                             Image IMAGE_RUBY = null;
-                            if (e.getImage_uf() != null) {
+                            if (!e.getImage_uf().equalsIgnoreCase("")) {
+                                System.out.println("+/-59");
                                 IMAGE_RUBY = new Image("file:/C:\\wamp\\www\\baskel\\images\\" + e.getImage_uf());
                             } else {
-                                System.out.println("image null");
-                                File file = new File("src\\images\\2.jpg");
-                                IMAGE_RUBY = new Image(file.toURI().toString());
+                                Membre l = mc.AfficherMembreById(e.getId_u());
+                                if (l.getSexe_u().equals("Femme")) {
+                                    File file = new File("src\\images\\femme.png");
+                                    IMAGE_RUBY = new Image(file.toURI().toString());
+                                }
+                                if (l.getSexe_u().equals("Homme")) {
+                                    File file = new File("src\\images\\homme.png");
+                                    IMAGE_RUBY = new Image(file.toURI().toString());
+                                }
                             }
                             ImageView imgview = new ImageView(IMAGE_RUBY);
                             setGraphic(imgview);
@@ -301,13 +340,24 @@ public class ForumFXMLController implements Initializable {
                         super.updateItem(e, btl);
                         if (e != null) {
                             Image IMAGE_RUBY = null;
-                            if (e.getImage_uf() != null) {
+                            if (!e.getImage_uf().equalsIgnoreCase("")) {
                                 IMAGE_RUBY = new Image("file:/C:\\wamp\\www\\baskel\\images\\" + e.getImage_uf());
                             } else {
-                                System.out.println("image null");
-                                File file = new File("src\\images\\2.jpg");
-                                IMAGE_RUBY = new Image(file.toURI().toString());
+                                Membre l = mc.AfficherMembreById(e.getId_u());
+                                if (l.getSexe_u().equals("Femme")) {
+                                    File file = new File("src\\images\\femme.png");
+                                    IMAGE_RUBY = new Image(file.toURI().toString());
+                                }
+                                if (l.getSexe_u().equals("Homme")) {
+                                    File file = new File("src\\images\\homme.png");
+                                    IMAGE_RUBY = new Image(file.toURI().toString());
+                                }
+
                             }
+                            /*System.out.println("image null");
+                                File file = new File("src\\images\\2.jpg");
+                                IMAGE_RUBY = new Image(file.toURI().toString());*/
+
                             ImageView imgview = new ImageView(IMAGE_RUBY);
                             setGraphic(imgview);
                             imgview.setFitHeight(70);
@@ -353,21 +403,25 @@ public class ForumFXMLController implements Initializable {
         }
     }
 
-    //Modifier un commentaire
+//Modifier un commentaire
     @FXML
     void modifierCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
+        if (listeforum.getSelectionModel().getSelectedItem() != null) {
+            Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+            if (f.getId_u() == m.getId_u()) {
+                if (InputValidation.dat(f.getDate_f(), InputValidation.dateCalendar()) < 3) {
+                    message.setText(f.getText());
 
-        Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
-        if (f.getId_u() == m.getId_u()) {
-            if (InputValidation.dat(f.getDate_f(), InputValidation.dateCalendar()) < 3) {
-                message.setText(f.getText());
-
+                } else {
+                    Alert alertnum = new InputValidation().getAlert("Commentaire", "Vous pouvez modifier le commentaire que dans les 3 minutes qui suivent la publication");
+                    alertnum.showAndWait();
+                }
             } else {
-                Alert alertnum = new InputValidation().getAlert("Commentaire", "Vous pouvez modifier le commentaire que dans les 3 minutes qui suivent la publication");
-                alertnum.showAndWait();
+                InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
+
             }
         } else {
-            InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
+            InputValidation.notificationError("Commentaire", "Vous devez selectionner le commentaire a modifier");
 
         }
     }

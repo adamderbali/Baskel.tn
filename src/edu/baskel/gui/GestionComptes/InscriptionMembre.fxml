@@ -40,31 +40,31 @@
                   </LinearGradient>
                </fill>
             </Text>
-            <JFXTextField fx:id="txtNom" focusColor="#0096a4" layoutX="43.0" layoutY="64.0" prefHeight="31.0" prefWidth="149.0" promptText="Nom" />
-            <JFXTextField fx:id="txtemail" focusColor="#0096a4" layoutX="44.0" layoutY="107.0" prefHeight="31.0" prefWidth="318.0" promptText="Adresse-mail" />
-            <JFXPasswordField fx:id="txtmotdepasse" focusColor="#0096a4" layoutX="44.0" layoutY="247.0" prefHeight="31.0" prefWidth="318.0" promptText="Mot de passe" />
+            <JFXTextField fx:id="txtNom" focusColor="#0096a4" layoutX="43.0" layoutY="64.0" onMouseClicked="#DefaultThemeNom" prefHeight="31.0" prefWidth="149.0" promptText="Nom" />
+            <JFXTextField fx:id="txtemail" focusColor="#0096a4" layoutX="44.0" layoutY="107.0" onMouseClicked="#DefaultThemeEmail" prefHeight="31.0" prefWidth="318.0" promptText="Adresse-mail" />
+            <JFXPasswordField fx:id="txtmotdepasse" focusColor="#0096a4" layoutX="44.0" layoutY="247.0" onMouseClicked="#DefaultThemeMotPass" prefHeight="31.0" prefWidth="318.0" promptText="Mot de passe" />
             <JFXPasswordField fx:id="txtconfirmation" focusColor="#0096a4" layoutX="44.0" layoutY="297.0" onMouseClicked="#passStrength" prefHeight="31.0" prefWidth="318.0" promptText="Confirmer mot de passe" />
             <Text layoutX="44.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexe">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <JFXTextField fx:id="txtPrenom" focusColor="#0096a4" layoutX="211.0" layoutY="64.0" prefHeight="31.0" prefWidth="149.0" promptText="Prénom" />
-            <JFXButton fx:id="btninscription" layoutX="45.0" layoutY="560.0" onAction="#InsertData1" prefHeight="41.0" prefWidth="168.0" style="-fx-background-color: #0096a4;" text="Inscription" textFill="WHITE">
+            <JFXTextField fx:id="txtPrenom" focusColor="#0096a4" layoutX="211.0" layoutY="64.0" onMouseClicked="#DefaultThemePrenom" prefHeight="31.0" prefWidth="149.0" promptText="Prénom" />
+            <JFXButton fx:id="btninscription" layoutX="44.0" layoutY="515.0" onAction="#InsertData1" prefHeight="41.0" prefWidth="168.0" style="-fx-background-color: #0096a4;" text="Inscription" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
             <JFXDatePicker fx:id="txtnaissance" defaultColor="#0096a4" layoutX="43.0" layoutY="344.0" prefHeight="31.0" prefWidth="318.0" promptText="Date de naissance" />
-            <JFXTextField fx:id="txttelephone" focusColor="#0096a4" layoutX="44.0" layoutY="154.0" prefHeight="31.0" prefWidth="318.0" promptText="Numéro télephone" />
-            <JFXTextField fx:id="txtAdresse" focusColor="#0096a4" layoutX="44.0" layoutY="198.0" prefHeight="31.0" prefWidth="318.0" promptText="Adresse" />
-            <JFXRadioButton fx:id="chkhomme" layoutX="54.0" layoutY="411.0" text="Homme">
+            <JFXTextField fx:id="txttelephone" focusColor="#0096a4" layoutX="44.0" layoutY="154.0" onMouseClicked="#DefaultThemeTele" prefHeight="31.0" prefWidth="318.0" promptText="Numéro télephone" />
+            <JFXTextField fx:id="txtAdresse" focusColor="#0096a4" layoutX="44.0" layoutY="198.0" onMouseClicked="#DefaultThemeAdresse" prefHeight="31.0" prefWidth="318.0" promptText="Adresse" />
+            <JFXRadioButton fx:id="chkhomme" layoutX="54.0" layoutY="411.0" onMouseClicked="#DefaultThemeSexeH" text="Homme">
                <toggleGroup>
                   <ToggleGroup fx:id="sexegrp" />
                </toggleGroup></JFXRadioButton>
-            <JFXRadioButton fx:id="chkfemme" layoutX="170.0" layoutY="411.0" text="Femme" toggleGroup="$sexegrp" />
-            <Separator layoutX="128.0" layoutY="539.0" prefHeight="5.0" prefWidth="200.0" />
-            <JFXButton fx:id="btnimage" layoutX="45.0" layoutY="494.0" onMouseClicked="#File" prefHeight="31.0" prefWidth="183.0" style="-fx-background-color: #0096a4;" text="Telecharger une image" textFill="WHITE">
+            <JFXRadioButton fx:id="chkfemme" layoutX="170.0" layoutY="411.0" onMouseClicked="#DefaultThemeSexeF" text="Femme" toggleGroup="$sexegrp" />
+            <Separator layoutX="127.0" layoutY="494.0" prefHeight="5.0" prefWidth="200.0" />
+            <JFXButton fx:id="btnimage" layoutX="44.0" layoutY="449.0" onMouseClicked="#File" prefHeight="31.0" prefWidth="183.0" style="-fx-background-color: #0096a4;" text="Importer une image" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></JFXButton>
@@ -74,7 +74,7 @@
             <JFXTextField fx:id="txtshowpass" layoutX="44.0" layoutY="247.0" prefHeight="31.0" prefWidth="318.0" promptText="Mot de passe" />
             <Label fx:id="lblfaible" layoutX="280.0" layoutY="251.0" prefHeight="21.0" prefWidth="48.0" />
             <JFXTextField fx:id="txtshowcpass" layoutX="44.0" layoutY="297.0" prefHeight="31.0" prefWidth="318.0" promptText="Confirmer mot de passe" />
-            <JFXButton fx:id="btnConnexion" layoutX="244.0" layoutY="560.0" onAction="#SidentifierPage" prefHeight="41.0" prefWidth="168.0" style="-fx-background-color: #0096a4;" text="Connexion" textFill="WHITE">
+            <JFXButton fx:id="btnConnexion" layoutX="243.0" layoutY="515.0" onAction="#SidentifierPage" prefHeight="41.0" prefWidth="168.0" style="-fx-background-color: #0096a4;" text="Connexion" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

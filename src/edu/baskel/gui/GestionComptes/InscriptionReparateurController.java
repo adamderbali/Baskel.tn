@@ -44,6 +44,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.rgb;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -122,15 +124,16 @@ public class InscriptionReparateurController implements Initializable {
         txtshowpass.setVisible(false);
         txtshowcpass.setVisible(false);
         txtnaissance.setValue(LocalDate.now());
+        txtimage.setVisible(false);
 
         TextFields.bindAutoCompletion(txtAdresse, AutoCompleteAdresse.getAdrGov());
         TextFields.bindAutoCompletion(txtadrlocal, AutoCompleteAdresse.getAdrGov());
     }
-    
-     //verif password strength
+
+    //verif password strength
     @FXML
     void passStrength(MouseEvent event) {
-         if (!txtmotdepasse.getText().isEmpty()) {
+        if (!txtmotdepasse.getText().isEmpty()) {
             if (InputValidation.calculatePasswordStrength(txtmotdepasse.getText()) < 6) {
                 lblfaible.setText("Faible");
                 lblfaible.setTextFill(Color.RED);
@@ -145,22 +148,96 @@ public class InscriptionReparateurController implements Initializable {
             System.out.println("Pase de mot de passe");
         }
     }
+// validation champs non vides
 
-    //validation champs vides
     public boolean validerchamps() {
-        if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
-                | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
-                | (txtconfirmation.getText().isEmpty())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Erreur d'ajout");
-            alert.setContentText("Les champs nom ,prenom,adresse, email, telephone,mot de passe et confirmation doivent etre tout remplis svp");
-            alert.show();
+        String dateV = txtnaissance.getEditor().getText();
+        if ((txtNom.getText().isEmpty()) && (txtPrenom.getText().isEmpty()) && (txtAdresse.getText().isEmpty())
+                && (txtemail.getText().isEmpty()) && (txttelephone.getText().isEmpty()) && (txtmotdepasse.getText().isEmpty())
+                && (txtconfirmation.getText().isEmpty()) && (sexeMembre().equals("")) && (txttelpro.getText().isEmpty()) && (txtadrlocal.getText().isEmpty())) {
+            InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
+            txtNom.setFocusColor(rgb(255, 0, 0));
+            txtNom.setUnFocusColor(rgb(255, 0, 0));
+            txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtPrenom.setFocusColor(rgb(255, 0, 0));
+            txtPrenom.setUnFocusColor(rgb(255, 0, 0));
+            txtPrenom.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtAdresse.setFocusColor(rgb(255, 0, 0));
+            txtAdresse.setUnFocusColor(rgb(255, 0, 0));
+            txtAdresse.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtemail.setFocusColor(rgb(255, 0, 0));
+            txtemail.setUnFocusColor(rgb(255, 0, 0));
+            txtemail.setStyle("-fx-prompt-text-fill: #C4151C");
+            txttelephone.setFocusColor(rgb(255, 0, 0));
+            txttelephone.setUnFocusColor(rgb(255, 0, 0));
+            txttelephone.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtmotdepasse.setFocusColor(rgb(255, 0, 0));
+            txtmotdepasse.setUnFocusColor(rgb(255, 0, 0));
+            txtmotdepasse.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtconfirmation.setFocusColor(rgb(255, 0, 0));
+            txtconfirmation.setUnFocusColor(rgb(255, 0, 0));
+            txtconfirmation.setStyle("-fx-prompt-text-fill: #C4151C");
+            chkhomme.setStyle("-fx-text-fill: #C4151C");
+            chkhomme.setSelectedColor(rgb(255, 0, 0));
+            chkhomme.setUnSelectedColor(rgb(255, 0, 0));
+            chkfemme.setStyle("-fx-text-fill: #C4151C");
+            chkfemme.setSelectedColor(rgb(255, 0, 0));
+            chkfemme.setUnSelectedColor(rgb(255, 0, 0));
+            txttelpro.setFocusColor(rgb(255, 0, 0));
+            txttelpro.setUnFocusColor(rgb(255, 0, 0));
+            txttelpro.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtadrlocal.setFocusColor(rgb(255, 0, 0));
+            txtadrlocal.setUnFocusColor(rgb(255, 0, 0));
+            txtadrlocal.setStyle("-fx-prompt-text-fill: #C4151C");
             return false;
+        } else if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
+                | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
+                | (txtconfirmation.getText().isEmpty()) | (sexeMembre().equals("")) | (txttelpro.getText().isEmpty())
+                | (txtadrlocal.getText().isEmpty())) {
+            InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
+
+            txtNom.setFocusColor(rgb(255, 0, 0));
+            txtNom.setUnFocusColor(rgb(255, 0, 0));
+            txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtPrenom.setFocusColor(rgb(255, 0, 0));
+            txtPrenom.setUnFocusColor(rgb(255, 0, 0));
+            txtPrenom.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtAdresse.setFocusColor(rgb(255, 0, 0));
+            txtAdresse.setUnFocusColor(rgb(255, 0, 0));
+            txtAdresse.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtemail.setFocusColor(rgb(255, 0, 0));
+            txtemail.setUnFocusColor(rgb(255, 0, 0));
+            txtemail.setStyle("-fx-prompt-text-fill: #C4151C");
+            txttelephone.setFocusColor(rgb(255, 0, 0));
+            txttelephone.setUnFocusColor(rgb(255, 0, 0));
+            txttelephone.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtmotdepasse.setFocusColor(rgb(255, 0, 0));
+            txtmotdepasse.setUnFocusColor(rgb(255, 0, 0));
+            txtmotdepasse.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtconfirmation.setFocusColor(rgb(255, 0, 0));
+            txtconfirmation.setUnFocusColor(rgb(255, 0, 0));
+            txtconfirmation.setStyle("-fx-prompt-text-fill: #C4151C");
+            chkhomme.setStyle("-fx-text-fill: #C4151C");
+            chkhomme.setSelectedColor(rgb(255, 0, 0));
+            chkhomme.setUnSelectedColor(rgb(255, 0, 0));
+            chkfemme.setStyle("-fx-text-fill: #C4151C");
+            chkfemme.setSelectedColor(rgb(255, 0, 0));
+            chkfemme.setUnSelectedColor(rgb(255, 0, 0));
+            txttelpro.setFocusColor(rgb(255, 0, 0));
+            txttelpro.setUnFocusColor(rgb(255, 0, 0));
+            txttelpro.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtadrlocal.setFocusColor(rgb(255, 0, 0));
+            txtadrlocal.setUnFocusColor(rgb(255, 0, 0));
+            txtadrlocal.setStyle("-fx-prompt-text-fill: #C4151C");
+            Def();
+            return false;
+
         } else {
             return true;
         }
     }
 
+   
 //pour l upload d une photo
     @FXML
     void telechargerPhoto(ActionEvent event) throws IOException {
@@ -264,49 +341,75 @@ public class InscriptionReparateurController implements Initializable {
         Reparateur r = new Reparateur(adrloc, null, telpro, null, null, 2, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge, "A");
         if (validerchamps() == true) {
             if (InputValidation.validTextField(txtNom.getText())) {
-                Alert alertNom = new InputValidation().getAlert("Nom", "Saisissez votre nom");
-                alertNom.showAndWait();
+                InputValidation.notificationError("Nom", "Saisissez votre nom");
+                txtNom.setFocusColor(rgb(255, 0, 0));
+                txtNom.setUnFocusColor(rgb(255, 0, 0));
+                txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
+                txtNom.setStyle("-fx-text-inner-color: red;");
             } else {
 
                 if (InputValidation.validTextField(txtPrenom.getText())) {
-                    Alert alertPrenom = new InputValidation().getAlert("Prenom", "Saisissez votre Prenom");
-                    alertPrenom.showAndWait();
+                    InputValidation.notificationError("Prenom", "Saisissez votre prenom");
+                    txtPrenom.setFocusColor(rgb(255, 0, 0));
+                    txtPrenom.setUnFocusColor(rgb(255, 0, 0));
+                    txtPrenom.setStyle("-fx-prompt-text-fill: #C4151C");
+                    txtPrenom.setStyle("-fx-text-inner-color: red;");
                 } else {
 
                     if (!InputValidation.validEmail(txtemail.getText())) {
-                        Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email valide");
-                        alertEmail.showAndWait();
+                        InputValidation.notificationError("Email", "Saisissez une adresse email valide");
+                        txtemail.setFocusColor(rgb(255, 0, 0));
+                        txtemail.setUnFocusColor(rgb(255, 0, 0));
+                        txtemail.setStyle("-fx-prompt-text-fill: #C4151C");
+                        txtemail.setStyle("-fx-text-inner-color: red;");
                     } else {//verif email vrai
-                        if ((verifEmail.nb(txtemail.getText())) == false) {
-                            Alert alertEmail = new InputValidation().getAlert("Email", "Saisissez une adresse email existante");
-                            alertEmail.showAndWait();
-                        }
-                        {
-                            if (InputValidation.validPwd(txtmotdepasse.getText()) == 0) {
-                                Alert alertnum = new InputValidation().getAlert("Mot de passe", "Saisissez un mot de passe valide");
-                                alertnum.showAndWait();
-                            } else {
-                                if (InputValidation.PhoneNumber(txttelephone.getText()) == 0) {
-                                    Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone valide");
-                                    alertnum.showAndWait();
-                                } else {
-                                    if (InputValidation.PhoneNumber(txttelpro.getText()) == 0) {
-                                        Alert alertnum = new InputValidation().getAlert("Numero Telephone", "Saisissez un numero de telephone professionnel valide");
-                                        alertnum.showAndWait();
-                                    } else {
-                                        if (InputValidation.validTextField(txtadrlocal.getText())) {
-                                            Alert alertNom = new InputValidation().getAlert("Nom", "Saisissez votre adresse du locale");
-                                            alertNom.showAndWait();
-                                        }
 
-                                        if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
-                                            Alert alertnum = new InputValidation().getAlert("sexe", "Saisissez votre sexe");
+                        if (InputValidation.validPwd(txtmotdepasse.getText()) == 0) {
+                            InputValidation.notificationError("Mot de passe", "Saisissez un mot de passe valide");
+                            txtmotdepasse.setFocusColor(rgb(255, 0, 0));
+                            txtmotdepasse.setUnFocusColor(rgb(255, 0, 0));
+                            txtmotdepasse.setStyle("-fx-prompt-text-fill: #C4151C");
+                            txtmotdepasse.setStyle("-fx-text-inner-color: red;");
+                        } else {
+                            if (InputValidation.PhoneNumber(txttelephone.getText()) == 0) {
+                                InputValidation.notificationError("Numero Telephone", "Saisissez un numero de telephone valide");
+                                txttelephone.setFocusColor(rgb(255, 0, 0));
+                                txttelephone.setUnFocusColor(rgb(255, 0, 0));
+                                txttelephone.setStyle("-fx-prompt-text-fill: #C4151C");
+                                txttelephone.setStyle("-fx-text-inner-color: red;");
+                            } else {
+                                if (InputValidation.PhoneNumber(txttelpro.getText()) == 0) {
+                                    InputValidation.notificationError("Numero Telephone", "Saisissez un numero de telephone valide");
+                                    txttelpro.setFocusColor(rgb(255, 0, 0));
+                                    txttelpro.setUnFocusColor(rgb(255, 0, 0));
+                                    txttelpro.setStyle("-fx-prompt-text-fill: #C4151C");
+                                    txttelpro.setStyle("-fx-text-inner-color: red;");
+                                } else {
+                                    if (InputValidation.validTextField(txtadrlocal.getText())) {
+                                        Alert alertNom = new InputValidation().getAlert("Nom", "Saisissez votre adresse du locale");
+                                        alertNom.showAndWait();
+                                    }
+
+                                    if (!(chkhomme.isSelected() | (chkfemme.isSelected()))) {
+                                        InputValidation.notificationError("sexe", "Saisissez votre sexe");
+                                        chkhomme.setStyle("-fx-text-fill: #C4151C");
+                                        chkhomme.setSelectedColor(rgb(255, 0, 0));
+                                        chkhomme.setUnSelectedColor(rgb(255, 0, 0));
+                                        chkfemme.setStyle("-fx-text-fill: #C4151C");
+                                        chkfemme.setSelectedColor(rgb(255, 0, 0));
+                                        chkfemme.setUnSelectedColor(rgb(255, 0, 0));
+                                    } else {
+                                        if (verifDate() == false) {
+                                            Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
                                             alertnum.showAndWait();
+                                            txtnaissance.setValue(null);
                                         } else {
-                                            if (verifDate() == false) {
-                                                Alert alertnum = new InputValidation().getAlert("Date", "Saisissez une date valide");
-                                                alertnum.showAndWait();
-                                                txtnaissance.setValue(null);
+                                            if ((verifEmail.nb(txtemail.getText())) == false) {
+                                                InputValidation.notificationError("Email", "Saisissez une adresse email existante");
+                                                txtemail.setFocusColor(rgb(255, 0, 0));
+                                                txtemail.setUnFocusColor(rgb(255, 0, 0));
+                                                txtemail.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                txtemail.setStyle("-fx-text-inner-color: red;");
                                             } else {
                                                 if (mr.VerificationExistence(r) == true) {
 
@@ -337,13 +440,22 @@ public class InscriptionReparateurController implements Initializable {
                                                         app_stage.show();
 
                                                     } else {
-                                                        Alert alertnum = new InputValidation().getAlert(" Mot de passe ", "verifier votre mot de passe");
-                                                        alertnum.showAndWait();
+                                                        InputValidation.notificationError(" Mot de passe ", "verifier votre mot de passe");
+                                                        txtmotdepasse.setFocusColor(rgb(255, 0, 0));
+                                                        txtmotdepasse.setUnFocusColor(rgb(255, 0, 0));
+                                                        txtmotdepasse.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                        txtmotdepasse.setStyle("-fx-text-inner-color: red;");
+                                                        txtconfirmation.setFocusColor(rgb(255, 0, 0));
+                                                        txtconfirmation.setUnFocusColor(rgb(255, 0, 0));
+                                                        txtconfirmation.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                        txtconfirmation.setStyle("-fx-text-inner-color: red;");
 
                                                     }
                                                 } else {
-                                                    Alert alertnum = new InputValidation().getAlert(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
-                                                    alertnum.showAndWait();
+                                                    InputValidation.notificationError(" Erreur d'inscription", "un compte est deja creer avec cette adresse");
+                                                    txtemail.setUnFocusColor(rgb(255, 0, 0));
+                                                    txtemail.setStyle("-fx-prompt-text-fill: #C4151C");
+                                                    txtemail.setStyle("-fx-text-inner-color: red;");
                                                 }
 
                                             }
@@ -373,6 +485,147 @@ public class InscriptionReparateurController implements Initializable {
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    public void DefaultThemeNom(MouseEvent event) {
+        txtNom.setStyle("");
+        txtNom.setFocusColor(Paint.valueOf("#0096a4"));
+        txtNom.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    @FXML
+    public void DefaultThemePrenom(MouseEvent event) {
+        txtPrenom.setStyle("");
+        txtPrenom.setFocusColor(Paint.valueOf("#0096a4"));
+        txtPrenom.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    @FXML
+    public void DefaultThemeEmail(MouseEvent event) {
+        txtemail.setStyle("");
+        txtemail.setFocusColor(Paint.valueOf("#0096a4"));
+        txtemail.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    @FXML
+    public void DefaultThemeTele(MouseEvent event) {
+        txttelephone.setStyle("");
+        txttelephone.setFocusColor(Paint.valueOf("#0096a4"));
+        txttelephone.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    @FXML
+    public void DefaultThemeAdresse(MouseEvent event) {
+        txtAdresse.setStyle("");
+        txtAdresse.setFocusColor(Paint.valueOf("#0096a4"));
+        txtAdresse.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    public void DefaultThemeTelPro(MouseEvent event) {
+        txttelpro.setStyle("");
+        txttelpro.setFocusColor(Paint.valueOf("#0096a4"));
+        txttelpro.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    public void DefaultThemeAdrloc(MouseEvent event) {
+        txtadrlocal.setStyle("");
+        txtadrlocal.setFocusColor(Paint.valueOf("#0096a4"));
+        txtadrlocal.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    @FXML
+    public void DefaultThemeMotPass(MouseEvent event) {
+        txtmotdepasse.setStyle("");
+        txtmotdepasse.setFocusColor(Paint.valueOf("#0096a4"));
+        txtmotdepasse.setUnFocusColor(Paint.valueOf("#0096a4"));
+        txtconfirmation.setStyle("");
+        txtconfirmation.setFocusColor(Paint.valueOf("#0096a4"));
+        txtconfirmation.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+    @FXML
+    public void DefaultThemeSexeH(MouseEvent event) {
+        chkhomme.setStyle("-fx-text-fill: #000000");
+        chkhomme.setSelectedColor(rgb(0, 150, 164));
+        chkhomme.setUnSelectedColor(rgb(0, 0, 0));
+        chkfemme.setStyle("-fx-text-fill: #000000");
+        chkfemme.setSelectedColor(rgb(0, 0, 0));
+        chkfemme.setUnSelectedColor(rgb(0, 0, 0));
+    }
+
+    @FXML
+    public void DefaultThemeSexeF(MouseEvent event) {
+        chkfemme.setStyle("-fx-text-fill: #000000");
+        chkfemme.setSelectedColor(rgb(0, 150, 164));
+        chkfemme.setUnSelectedColor(rgb(0, 0, 0));
+        chkhomme.setStyle("-fx-text-fill: #000000");
+        chkhomme.setSelectedColor(rgb(0, 0, 0));
+        chkhomme.setUnSelectedColor(rgb(0, 0, 0));
+    }
+
+    public void Def() {
+        if (!txtNom.getText().isEmpty()) {
+            txtNom.setStyle("");
+            txtNom.setFocusColor(Paint.valueOf("#0096a4"));
+            txtNom.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txtPrenom.getText().isEmpty()) {
+            txtPrenom.setStyle("");
+            txtPrenom.setFocusColor(Paint.valueOf("#0096a4"));
+            txtPrenom.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txtemail.getText().isEmpty()) {
+            txtemail.setStyle("");
+            txtemail.setFocusColor(Paint.valueOf("#0096a4"));
+            txtemail.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txtAdresse.getText().isEmpty()) {
+            txtAdresse.setStyle("");
+            txtAdresse.setFocusColor(Paint.valueOf("#0096a4"));
+            txtAdresse.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txttelephone.getText().isEmpty()) {
+            txttelephone.setStyle("");
+            txttelephone.setFocusColor(Paint.valueOf("#0096a4"));
+            txttelephone.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txtmotdepasse.getText().isEmpty()) {
+            txtmotdepasse.setStyle("");
+            txtmotdepasse.setFocusColor(Paint.valueOf("#0096a4"));
+            txtmotdepasse.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txtconfirmation.getText().isEmpty()) {
+            txtconfirmation.setStyle("");
+            txtconfirmation.setFocusColor(Paint.valueOf("#0096a4"));
+            txtconfirmation.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (chkhomme.isSelected()) {
+            chkhomme.setStyle("-fx-text-fill: #000000");
+            chkhomme.setSelectedColor(rgb(0, 150, 164));
+            chkhomme.setUnSelectedColor(rgb(0, 0, 0));
+            chkfemme.setStyle("-fx-text-fill: #000000");
+            chkfemme.setSelectedColor(rgb(0, 0, 0));
+            chkfemme.setUnSelectedColor(rgb(0, 0, 0));
+        }
+        if (chkfemme.isSelected()) {
+            chkfemme.setStyle("-fx-text-fill: #000000");
+            chkfemme.setSelectedColor(rgb(0, 150, 164));
+            chkfemme.setUnSelectedColor(rgb(0, 0, 0));
+            chkhomme.setStyle("-fx-text-fill: #000000");
+            chkhomme.setSelectedColor(rgb(0, 0, 0));
+            chkhomme.setUnSelectedColor(rgb(0, 0, 0));
+        }
+        if (!txttelpro.getText().isEmpty()) {
+            txttelpro.setStyle("");
+            txttelpro.setFocusColor(Paint.valueOf("#0096a4"));
+            txttelpro.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txtadrlocal.getText().isEmpty()) {
+            txtadrlocal.setStyle("");
+            txtadrlocal.setFocusColor(Paint.valueOf("#0096a4"));
+            txtadrlocal.setUnFocusColor(Paint.valueOf("#0096a4"));
         }
     }
 
