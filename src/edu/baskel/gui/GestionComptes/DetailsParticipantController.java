@@ -41,9 +41,7 @@ public class DetailsParticipantController implements Initializable {
     @FXML
     private TableColumn<Participation, String> colEmail;
 
-    
-    @FXML
-    private TableColumn<Participation, String> colPhoto;
+   
   @FXML
     private JFXTextField nbreP;
     public DetailsParticipantController() {
@@ -62,7 +60,7 @@ public class DetailsParticipantController implements Initializable {
 
         colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u() + " " + p.getValue().getMbre().getPrenom_u()));
         colEmail.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getEmail_u()));
-        colPhoto.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getImage_u()));
+       // colPhoto.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getImage_u()));
 
         tableAffichage1.setItems(obserE);
 

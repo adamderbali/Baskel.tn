@@ -8,10 +8,7 @@ package edu.baskel.services;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
-import edu.baskel.gui.GestionComptes.List_Event_Add_ParticipationController;
-import static edu.baskel.services.ParticipationCrud.cnx;
 import edu.baskel.utils.ConnectionBD;
-import edu.baskel.utils.validationSaisie;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,11 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.event.ActionEvent;
-import javafx.scene.chart.PieChart.Data;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -330,86 +322,7 @@ public class EvenementCRUD {
                     System.out.println("Nombre atteint" + e.getNbr_max_e());
                     System.out.println("Nombre atteint participant" + e.getNbr_participant());
                 }
-/*
-                ParticipationCrud pc = new ParticipationCrud();
-                if (pc.verifierParticipation(7, e.getId_e()) == false) {
-                    e.setBtn(new Button("Annuler participation"));
 
-                    e.getBtn().setOnAction((ActionEvent event) -> {
-
-                        ParticipationCrud Pc = new ParticipationCrud();
-
-                        if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
-                            if (Pc.supprimerParticipationE(e.getId_e()) == true) {
-                                if (ev.verifierNbrMaxE(e.getId_e()) == true) {
-                                    System.out.println("++++++OK oK");
-
-                                    validationSaisie.notifConfirm("ok", "Participation annulée");
-                                    System.out.println("ok--------------------");
-
-                                } else if (ev.verifierNbrMaxE(e.getId_e()) == false) {
-                                    ev.nbrParticipantDelete(e.getId_e());
-                                    System.out.println("++++++OK oK");
-
-                                    validationSaisie.notifConfirm("ok", "Participation annulée");
-                                    System.out.println("ok--------------------");
-
-                                }
-
-                            } else {
-                                System.out.println("----------erreur");
-                            }
-
-                        }
-
-                    });
-
-                }
-                if (pc.verifierParticipation(7, e.getId_e()) == true) {
-
-                    e.setBtn(new Button("Participer"));
-
-                    e.getBtn().setOnAction((ActionEvent event) -> {
-
-                        ParticipationCrud Pc = new ParticipationCrud();
-                        Qrcode qr = new Qrcode();
-                        MailAttachement ma = new MailAttachement();
-
-                        if (ev.verifierNbrMaxE(e.getId_e()) == true) {
-                            Participation p = new Participation(e.getId_e(), 7);
-
-                            Pc.ajouterParticipation(p);
-                            qr.Create("nom= " + e.getNom_e() + "Date= " + e.getDate_e(), e.getNom_e());
-                            try {
-                                ma.envoiMailQrcode("sabrine.zekri@esprit.tn", e.getNom_e());
-                            } catch (Exception ex) {
-                                Logger.getLogger(EvenementCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + e.getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
-                            System.out.println("okok++++okokok");
-
-                        } else if (ev.verifierParticipant(e.getId_e()) == true) {
-                            Participation p = new Participation(e.getId_e(), 7);
-
-                            ev.nbrParticipant(e.getId_e());
-                            Pc.ajouterParticipation(p);
-                            qr.Create("nom= " + e.getNom_e() + "Date= " + e.getDate_e(), e.getNom_e());
-                            try {
-                                ma.envoiMailQrcode("sabrine.zekri@esprit.tn", e.getNom_e());
-                            } catch (Exception ex) {
-                                Logger.getLogger(EvenementCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + e.getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
-                            System.out.println("okok++++okokok");
-
-                        } else {
-                            validationSaisie.notifInfo("Information", "Le nombre maximal de participations a été atteint");
-
-                        }
-
-                    });
-
-                }*/
 
                 Listevent.add(e);
             }
@@ -600,7 +513,7 @@ public class EvenementCRUD {
     //select * from evenement where id_u not in (select id_u from participation)
     /*liste des evenement eli creer par user:id_u*/
     public List<Evenement> displayByUser(int id_u) {
-
+//SELECT * FROM evenement ORDER BY STR_TO_DATE(date_e, '%d/%m/%Y')
         List<Evenement> Listeventuser = new ArrayList<>();
 
         try {
@@ -634,6 +547,40 @@ public class EvenementCRUD {
         return Listeventuser;
     }
 
+     public List<Evenement> displayByUserTrierDate(int id_u) {
+//SELECT * FROM evenement ORDER BY STR_TO_DATE(date_e, '%d/%m/%Y')
+        List<Evenement> Listeventuser = new ArrayList<>();
+
+        try {
+            String requete = "SELECT * FROM evenement WHERE id_u="+id_u+" ORDER BY STR_TO_DATE(date_e, '%d/%m/%Y')";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Evenement e = new Evenement();
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
+                e.setNbr_max_e(rs.getInt("nbr_max_e"));
+                 if (e.getImage_e().equals("")) {
+                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.getImage().setFitWidth(220);
+                    e.getImage().setFitHeight(110);
+                } else {
+                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                    e.getImage().setFitWidth(220);
+                    e.getImage().setFitHeight(110);
+                }
+                Listeventuser.add(e);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return Listeventuser;
+    }
     /* Affichage liste des participant  les evenement par user */
     public int nombreEvent() {
         int nb = 0;

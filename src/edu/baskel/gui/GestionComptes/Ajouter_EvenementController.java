@@ -39,6 +39,7 @@ import edu.baskel.utils.validationSaisie;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.rgb;
 import org.controlsfx.control.textfield.TextFields;
@@ -129,6 +130,7 @@ public class Ajouter_EvenementController implements Initializable {
         /* test sur les champs vides ou non*/
         if ((txtNom.getText().isEmpty()) && (txtLieu.getText().isEmpty()) && (txtDate.getEditor().getText().isEmpty()) && (txtDescription.getText().isEmpty())) {
             validationSaisie.notifInfo("Echec", "Tous les champs doivent etre saisis");
+          
             txtNom.setFocusColor(rgb(255, 0, 0));
             txtNom.setUnFocusColor(rgb(255, 0, 0));
             txtNom.setStyle("-fx-prompt-text-fill: #C4151C");
@@ -141,7 +143,8 @@ public class Ajouter_EvenementController implements Initializable {
    
             txtDate.setDefaultColor(Color.RED);
             txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
-
+            
+           
             /*  nom.setTextFill(rgb(255, 0, 0));
             lieu.setTextFill(rgb(255, 0, 0));
             description.setTextFill(rgb(255, 0, 0));
@@ -337,7 +340,43 @@ public class Ajouter_EvenementController implements Initializable {
             }
         }
 
-    
+        @FXML
+    void date(MouseEvent event) {
+        
+         txtDate.setDefaultColor(rgb(0, 150, 164));
+         txtDate.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+
+    @FXML
+    void description(MouseEvent event) {
+        
+        txtDescription.setFocusColor(rgb(0, 150, 164));
+                txtDescription.setUnFocusColor(rgb(77, 77, 77));
+                txtDescription.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+
+    @FXML
+    void lieu(MouseEvent event) {
+        
+          
+        txtLieu.setFocusColor(rgb(0, 150, 164));
+                txtLieu.setUnFocusColor(rgb(77, 77, 77));
+                txtLieu.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+
+    @FXML
+    void nom(MouseEvent event) {
+        
+          
+        txtNom.setFocusColor(rgb(0, 150, 164));
+                txtNom.setUnFocusColor(rgb(77, 77, 77));
+                txtNom.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+
 
     @FXML
 

@@ -45,6 +45,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.rgb;
 import javafx.stage.FileChooser;
@@ -490,6 +491,43 @@ public class ModifierController implements Initializable {
             
         }*/
     }
+    
+     @FXML
+    void description(MouseEvent event) {
+        
+        txtDescription.setFocusColor(rgb(0, 150, 164));
+                txtDescription.setUnFocusColor(rgb(77, 77, 77));
+                txtDescription.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+
+    @FXML
+    void lieu(MouseEvent event) {
+        
+          
+        txtLieu.setFocusColor(rgb(0, 150, 164));
+                txtLieu.setUnFocusColor(rgb(77, 77, 77));
+                txtLieu.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+
+    @FXML
+    void nom(MouseEvent event) {
+        
+          
+        txtNom.setFocusColor(rgb(0, 150, 164));
+                txtNom.setUnFocusColor(rgb(77, 77, 77));
+                txtNom.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+  @FXML
+    void date(MouseEvent event) {
+        
+         txtDate.setDefaultColor(rgb(0, 150, 164));
+         txtDate.setStyle("-fx-prompt-text-fill: #000000");
+
+    }
+
 
     @FXML
     void retour(ActionEvent event) {

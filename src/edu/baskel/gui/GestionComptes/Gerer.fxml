@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -27,7 +28,8 @@
       </TableView>
       <JFXButton fx:id="valider" layoutX="395.0" layoutY="596.0" onAction="#ValiderModif" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Modifier" textFill="#00747f" />
       <JFXButton fx:id="supprimer" layoutX="571.0" layoutY="596.0" onAction="#supprimer" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Supprimer" textFill="#00747f" />
-      <JFXTextField fx:id="search" focusColor="#007782" layoutX="18.0" layoutY="60.0" onKeyTyped="#searchBox" prefHeight="25.0" prefWidth="187.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
-      <JFXButton fx:id="detail" layoutX="970.0" layoutY="59.0" onAction="#detailEvent" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Detail des evenements" textFill="#00747f" />
+      <JFXTextField fx:id="search" focusColor="#007782" layoutX="18.0" layoutY="34.0" onKeyTyped="#searchBox" prefHeight="25.0" prefWidth="187.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
+      <JFXButton fx:id="detail" layoutX="972.0" layoutY="33.0" onAction="#detailEvent" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Detail des evenements" textFill="#00747f" />
+      <JFXCheckBox fx:id="dateTrie" checkedColor="#00747f" layoutX="18.0" layoutY="75.0" onAction="#dateTrie" text="Trier par date" unCheckedColor="SILVER" />
    </children>
 </AnchorPane>

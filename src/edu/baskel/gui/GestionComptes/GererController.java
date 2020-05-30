@@ -6,6 +6,7 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -71,26 +72,6 @@ public class GererController implements Initializable {
     @FXML
     private AnchorPane anchor;
 
-    @FXML
-    private JFXButton fileChoose;
-
-    @FXML
-    private JFXTextField txtNom;
-
-    @FXML
-    private JFXTextField txtLieu;
-
-    @FXML
-    private JFXDatePicker txtDate;
-
-    @FXML
-    private JFXTextArea txtDescription;
-
-    @FXML
-    private ImageView img;
-
-    @FXML
-    private TextField pathE;
 
     @FXML
     private JFXButton valider;
@@ -99,11 +80,6 @@ public class GererController implements Initializable {
     private JFXButton supprimer;
     Image image;
 
-    @FXML
-    private JFXButton modif;
-
-    @FXML
-    private ImageView imageV;
     
       @FXML
     private TableColumn<Evenement, String> colNombre;
@@ -113,6 +89,8 @@ public class GererController implements Initializable {
 
 
     ObservableList obser;
+    @FXML
+    private JFXCheckBox dateTrie;
 
     public GererController() {
 
@@ -124,29 +102,7 @@ public class GererController implements Initializable {
     void chargerDonnee() {
         e = tableAffichage.getSelectionModel().getSelectedItem();
 
-        /*   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-         Image imgE;  
-        if (e != null) {
-            txtNom.setText(e.getNom_e());
-          //  txtNom.setVisible(false);
-            txtLieu.setText(e.getLieu_e());
-         //   txtLieu.setVisible(false);
-            txtDescription.setText(e.getDescription_e());
-          //  txtDescription.setVisible(false);
-            txtDate.setValue(LocalDate.parse(e.getDate_e(), formatter));
-          //  txtDate.setVisible(false);
-            pathE.setText(e.getImage_e());
-           // pathE.setVisible(false);
-             
-            imgE = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e());
-            img.setImage(imgE);
-         //   img.setVisible(false);
-            
-             
-             System.out.println(e);
-             
-   
-        }*/
+      
     }
 
     public Evenement getClickedEvent() {
@@ -197,6 +153,22 @@ public class GererController implements Initializable {
          });*/
     }
 
+     public void affichageEvenementParDate() {
+        EvenementCRUD Ec = new EvenementCRUD();
+        Evenement e = new Evenement();
+        ArrayList arrayList;
+        arrayList = (ArrayList) Ec.displayByUserTrierDate(ml.getId_u());
+
+        obser = FXCollections.observableArrayList(arrayList);
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
+        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
+        tableAffichage.setItems(obser);
+      
+    }
     public void actualiser() {
         EvenementCRUD Ec = new EvenementCRUD();
         Evenement e = new Evenement();
@@ -213,6 +185,8 @@ public class GererController implements Initializable {
         tableAffichage.setItems(obser);
 
     }
+    
+    
 
     @FXML
     private void searchBox(KeyEvent event) {
@@ -299,6 +273,17 @@ public class GererController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         actualiser();
         affichageEvenement();
+    }
+
+    @FXML
+    private void dateTrie(ActionEvent event) {
+        
+        if(dateTrie.isSelected()){
+            affichageEvenementParDate();
+        }
+        if(!(dateTrie.isSelected())){
+            affichageEvenement();
+        }
     }
 
 }
