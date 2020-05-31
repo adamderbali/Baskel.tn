@@ -82,7 +82,7 @@ public class Evenement_adminController implements Initializable {
     @FXML
     private ImageView retour;
     @FXML
-    private TableColumn<?, ?> ColImage;
+    private TableColumn<Evenement, String> colImage;
 
     public void conxstat() {
         cnxs = ConnectionBD.getInstance().getCnx();
@@ -94,7 +94,6 @@ public class Evenement_adminController implements Initializable {
 
     }
 
-    @FXML
     void chargerDonnee() {
         e = tableAffichage.getSelectionModel().getSelectedItem();
 
@@ -115,17 +114,18 @@ public class Evenement_adminController implements Initializable {
         EvenementCRUD Ec = new EvenementCRUD();
         ReclamationCRUD RC = new ReclamationCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) RC.EventAllListAdmin();
+        arrayList = (ArrayList) Ec.displayAllListAdmin();
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
         colID.setCellValueFactory(new PropertyValueFactory<>("id_e"));
+        
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         colDesc.setCellValueFactory(new PropertyValueFactory<>("description_e"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
 
         tableAffichage.setItems(obser);
-        tableAffichage.setEditable(true);
-        System.out.println(tf_ide.getText());
+        //tableAffichage.setEditable(true);
 
     }
 
