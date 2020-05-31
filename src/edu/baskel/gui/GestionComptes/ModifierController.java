@@ -385,7 +385,7 @@ public class ModifierController implements Initializable {
 
                                                                                         if (res.next()) {
                                                                                             String em = res.getString("email_u");
-                                                                                            Sm.envoiMailModification(em, "Nous vous informons que la date l'evenement :" + controller1.getClickedEvent().getNom_e() + " auquel vous avez participé a été modifié :" + txtDate.getEditor().getText());
+                                                                                            Sm.envoiMailModification(em, "Nous vous informons que la date de l'evenement :" + controller1.getClickedEvent().getNom_e() + " auquel vous avez participé a été modifiée.La nouvelle date est fixée pour " + txtDate.getEditor().getText());
                                                                                             System.out.println(em);
                                                                                         } else {
                                                                                             System.out.println("Aucun participant");
