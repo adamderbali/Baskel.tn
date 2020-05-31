@@ -353,16 +353,13 @@ public class EvenementCRUD {
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e"));
          
-
-                if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
-                } else {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
-                    e.getImage().setFitWidth(220);
-                    e.getImage().setFitHeight(110);
-                }
+                
+                 
+                    
+                
                
                 Listevent.add(e);
             }

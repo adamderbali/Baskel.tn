@@ -49,3 +49,10 @@
     -fx-text-fill: #ffffff;
     -fx-background-radius: 4;
 }
+#btn_supprimer{
+    
+    -fx-background-color:lightblue;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 4;
+
+}

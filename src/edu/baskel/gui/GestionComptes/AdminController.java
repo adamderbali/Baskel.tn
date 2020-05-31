@@ -45,7 +45,14 @@ public class AdminController implements Initializable {
     }    
 
     @FXML
-    private void event(MouseEvent event) {
+    private void event(MouseEvent event) throws IOException {
+        
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Evenement_admin.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Evenement_admin");
+        app_stage.show();
     }
 
     @FXML
@@ -98,5 +105,15 @@ public class AdminController implements Initializable {
         app_stage.setTitle("Acceuil");
         app_stage.show();
     }
+
+    @FXML
+    private void event(KeyEvent event) throws IOException { 
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Evenement_admin.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Evenement_admin");
+        app_stage.show();
+    }
+    }
     
-}
