@@ -9,6 +9,7 @@ import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.utils.ConnectionBD;
+import edu.baskel.utils.SessionInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Label;
+import javafx.scene.control.SkinBase;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -26,7 +28,7 @@ import javafx.scene.paint.Color;
  * @author sabri
  */
 public class EvenementCRUD {
-
+ Membre ml = SessionInfo.getLoggedM();
     Connection cnx;
 
     public EvenementCRUD() {
@@ -165,6 +167,38 @@ public class EvenementCRUD {
             return false;
         }
     }
+    
+    public boolean listEventParMembre(int id_u,int id_e){
+        
+          Evenement e = new Evenement();
+        EvenementCRUD ev = new EvenementCRUD();
+        try {
+
+            String requete = "SELECT * FROM evenement where id_u=? AND id_e=?";
+
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, id_u);
+            pst.setInt(2, id_e);
+      
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                return true;
+
+            }
+            System.out.println("resultat trouvé");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("++++++++++++++++");
+            System.out.println("resultat non trouvé");
+        }
+        return false;
+
+    }
 
     public boolean verifierSsS(int nbr_max_e, int nbr_participant) {
         Evenement e = new Evenement();
@@ -276,15 +310,15 @@ public class EvenementCRUD {
 
         List<Evenement> Listevent = new ArrayList<Evenement>();
         try {
-            String requete = "SELECT * FROM evenement";
+            String requete = "select * from evenement where( STR_TO_DATE(date_e, '%d/%m/%Y'))> SYSDATE()";
             PreparedStatement pst = cnx.prepareStatement(requete);
             // pst.setInt(1,id_u);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Evenement e = new Evenement();
                 EvenementCRUD ev = new EvenementCRUD();
-
                 e.setId_e(rs.getInt("id_e"));
+                e.setId_u(rs.getInt("id_u"));
                 e.setNom_e(rs.getString("nom_e"));
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
@@ -304,6 +338,15 @@ public class EvenementCRUD {
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 }
+                
+                
+              if(ev.listEventParMembre(ml.getId_u(),e.getId_e())==true){
+                     e.setEtat_p(new Label("Vous etes l'organisateur\nde l'evenement"));
+                    e.getEtat_p().setTextFill(Color.web("#2e856e"));
+                    System.out.println("++++++++++++++++++ winou si id"+e.getId_u());
+                  System.out.println("za3ma id e yodhoher !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+e.getId_e());
+                   }
+              else{
                 if (ev.verifierS(e.getNbr_max_e()) == true) {
                     e.setEtat_p(new Label("La participation à cet evenement est illimité"));
                     e.getEtat_p().setTextFill(Color.web("#2e856e"));
@@ -322,6 +365,7 @@ public class EvenementCRUD {
                     System.out.println("Nombre atteint" + e.getNbr_max_e());
                     System.out.println("Nombre atteint participant" + e.getNbr_participant());
                 }
+              }
 
 
                 Listevent.add(e);
@@ -345,7 +389,7 @@ public class EvenementCRUD {
             while (rs.next()) {
                 Evenement e = new Evenement();
                 EvenementCRUD ev = new EvenementCRUD();
-
+             
                 e.setId_e(rs.getInt("id_e"));
                 e.setNom_e(rs.getString("nom_e"));
                 e.setLieu_e(rs.getString("lieu_e"));
@@ -375,15 +419,16 @@ public class EvenementCRUD {
         List<Evenement> Listevent = new ArrayList<Evenement>();
         try {
              
-            String requete = "select * from evenement e  inner join participation p on e.id_e=p.id_e where p.id_u="+id_u;
+            String requete = "select * from evenement e  inner join participation p on e.id_e=p.id_e where ( STR_TO_DATE(e.date_e, '%d/%m/%Y'))> SYSDATE() AND p.id_u="+id_u;
             Statement pst = cnx.createStatement();
            
             ResultSet rs = pst.executeQuery(requete);
             while (rs.next()) {
                 Evenement e = new Evenement();
                 EvenementCRUD ev = new EvenementCRUD();
-
+                
                 e.setId_e(rs.getInt("id_e"));
+                e.setId_u(rs.getInt("id_u"));
                 e.setNom_e(rs.getString("nom_e"));
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
@@ -403,6 +448,14 @@ public class EvenementCRUD {
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 }
+               
+                 if(ev.listEventParMembre(ml.getId_u(),e.getId_e())==true){
+                    e.setEtat_p(new Label("Vous etes l'organisateur\nde l'evenement"));
+                    e.getEtat_p().setTextFill(Color.web("#2e856e"));
+                    System.out.println("++++++++++++++++++ winou si id"+e.getId_u());
+                    
+                }
+                 else{
                if (ev.verifierS(e.getNbr_max_e()) == true) {
                     e.setEtat_p(new Label("La participation à cet evenement est illimité"));
                     e.getEtat_p().setTextFill(Color.web("#2e856e"));
@@ -421,6 +474,8 @@ public class EvenementCRUD {
                     System.out.println("Nombre atteint" + e.getNbr_max_e());
                     System.out.println("Nombre atteint participant" + e.getNbr_participant());
                 }
+               
+                 }
                
                Participation p = new Participation();
                 p.setId_u(rs.getInt("id_u"));
@@ -443,7 +498,7 @@ public class EvenementCRUD {
         List<Evenement> Listevent = new ArrayList<Evenement>();
         try {
              
-            String requete = "select * from evenement where id_e not in(SELECT id_e from participation where id_u="+id_u+")";
+            String requete = "select * from evenement where  ( STR_TO_DATE(date_e,'%d/%m/%Y'))> SYSDATE() AND id_e not in(SELECT id_e from participation where id_u="+id_u+")";
             Statement pst = cnx.createStatement();
            
             ResultSet rs = pst.executeQuery(requete);
@@ -452,6 +507,7 @@ public class EvenementCRUD {
                 EvenementCRUD ev = new EvenementCRUD();
 
                 e.setId_e(rs.getInt("id_e"));
+                e.setId_u(rs.getInt("id_u"));
                 e.setNom_e(rs.getString("nom_e"));
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
@@ -471,6 +527,12 @@ public class EvenementCRUD {
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 }
+               
+                if(ev.listEventParMembre(ml.getId_u(),e.getId_e())==true){
+                     e.setEtat_p(new Label("Vous etes l'organisateur\nde l'evenement"));
+                    e.getEtat_p().setTextFill(Color.web("#2e856e"));
+                    System.out.println("++++++++++++++++++ winou si id"+e.getId_u());}
+                else{
                if (ev.verifierS(e.getNbr_max_e()) == true) {
                     e.setEtat_p(new Label("La participation à cet evenement est illimité"));
                     e.getEtat_p().setTextFill(Color.web("#2e856e"));
@@ -488,6 +550,8 @@ public class EvenementCRUD {
 
                     System.out.println("Nombre atteint" + e.getNbr_max_e());
                     System.out.println("Nombre atteint participant" + e.getNbr_participant());
+                }
+               
                 }
                
             /*   Participation p = new Participation();
@@ -514,12 +578,13 @@ public class EvenementCRUD {
         List<Evenement> Listeventuser = new ArrayList<>();
 
         try {
-            String requete = "SELECT * FROM evenement WHERE id_u=" + id_u;
+            String requete = "SELECT * FROM evenement WHERE ( STR_TO_DATE(date_e,'%d/%m/%Y'))> SYSDATE() AND  id_u=" + id_u;
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
-
+        
             while (rs.next()) {
                 Evenement e = new Evenement();
+                
                 e.setId_e(rs.getInt("id_e"));
                 e.setNom_e(rs.getString("nom_e"));
                 e.setLieu_e(rs.getString("lieu_e"));
@@ -549,7 +614,7 @@ public class EvenementCRUD {
         List<Evenement> Listeventuser = new ArrayList<>();
 
         try {
-            String requete = "SELECT * FROM evenement WHERE id_u="+id_u+" ORDER BY STR_TO_DATE(date_e, '%d/%m/%Y')";
+            String requete = "SELECT * FROM evenement WHERE ( STR_TO_DATE(date_e,'%d/%m/%Y'))> SYSDATE()AND id_u="+id_u+" ORDER BY STR_TO_DATE(date_e, '%d/%m/%Y')";
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
 

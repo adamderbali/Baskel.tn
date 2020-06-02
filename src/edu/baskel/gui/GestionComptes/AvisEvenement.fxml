@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane id="AnchorPane" cacheShape="false" centerShape="false" prefHeight="267.0" prefWidth="580.0" scaleShape="false" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   
+   <children>
+      <ImageView fitHeight="364.0" fitWidth="618.0" layoutY="-1.0" opacity="0.31" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../../../../images/image.PNG" />
+         </image>
+      </ImageView>
+      <Text layoutX="342.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Donner votre avis" wrappingWidth="221.818359375">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#007782" />
+                  <Stop color="#1a1b1b" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <JFXButton layoutX="385.0" layoutY="222.0" onAction="#ajouterAvis" prefHeight="27.0" prefWidth="90.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Valider" textFill="#007782" />
+      <Rating fx:id="rate" layoutX="342.0" layoutY="165.0" prefHeight="32.0" prefWidth="199.0" />
+      <Label fx:id="msg" layoutX="92.0" layoutY="129.0" prefHeight="10.0" prefWidth="0.0" />
+      <JFXComboBox fx:id="comobox" focusColor="#007782" layoutX="331.0" layoutY="104.0" prefHeight="25.0" prefWidth="199.0" promptText="Choisir un evenement" />
+   </children>
+</AnchorPane>

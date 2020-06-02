@@ -7,7 +7,6 @@ package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
@@ -39,13 +38,16 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -64,6 +66,8 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
     @FXML
     private TableColumn<Evenement, String> ColDate;
+    @FXML
+    private TableColumn<Evenement, String> actionCol;
     @FXML
     private TableColumn<Evenement, String> colnbrpart;
 
@@ -90,7 +94,6 @@ public class List_Event_Add_ParticipationController implements Initializable {
     private JFXCheckBox listPar;
     @FXML
     private JFXCheckBox list;
-   
 
     public List_Event_Add_ParticipationController() {
 
@@ -138,11 +141,45 @@ public class List_Event_Add_ParticipationController implements Initializable {
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-
         colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
-
-        TableColumn actionCol = new TableColumn("");
         actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        colDescription.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        colNom.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNom.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        colLieu.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colLieu.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        ColDate.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(ColDate.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
         tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
 
@@ -152,10 +189,15 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
                     validationSaisie.notifInfo("ok", "Le nombre maximal de participations a été atteint");
 
+                } else if ((click.getClickCount() == 1) && (Ec.listEventParMembre(ml.getId_u(), tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true)) {
+
+                    validationSaisie.notifInfo("ok", "Vous etes l'organisateur de l'evenement");
+
                 }
             }
 
         });
+
         Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>> cellFactory
                 = //
                 new Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>>() {
@@ -163,8 +205,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
             public TableCell call(final TableColumn<Evenement, String> param) {
                 final TableCell<Evenement, String> cell = new TableCell<Evenement, String>() {
 
-                   // final Button btn = new Button("Just Do It");
-
+                    // final Button btn = new Button("Just Do It");
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -180,6 +221,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                 btn.setStyle("text-fill: #007782");
 
                                 if (Ec.verifierSs(ee.getNbr_max_e(), ee.getNbr_participant()) == true) {
+                                    btn.setDisable(true);
+                                }
+                                if (Ec.listEventParMembre(ml.getId_u(), ee.getId_e()) == true) {
                                     btn.setDisable(true);
                                 }
                                 btn.setOnAction(event -> {
@@ -229,6 +273,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                 setText(null);
                             } else if (pc.verifierParticipation(ml.getId_u(), ee.getId_e()) == false) {
                                 final Button btn = new Button("Annuler participation");
+                                if (Ec.listEventParMembre(ml.getId_u(), ee.getId_e()) == true) {
+                                    btn.setDisable(true);
+                                }
                                 btn.setOnAction(event -> {
 
                                     if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
@@ -268,7 +315,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         actionCol.setCellFactory(cellFactory);
 
         tableAffichage.setItems(obser);
-        tableAffichage.getColumns().addAll(actionCol);
+        //  tableAffichage.getColumns().addAll(actionCol);
 
     }
 
@@ -292,31 +339,19 @@ public class List_Event_Add_ParticipationController implements Initializable {
             }
         });*/
     @FXML
-    void actualiserPage(ActionEvent event) {
+    void consultarPar(ActionEvent event) {
 
-        EvenementCRUD Ec = new EvenementCRUD();
+        try {
+            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Annulation_participation.fxml"));
+            Scene redirection_scene = new Scene(redirection_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(redirection_scene);
+            app_stage.setAlwaysOnTop(false);
+            app_stage.show();
 
-        // ParticipationCrud pc = new ParticipationCrud();
-        Evenement e = new Evenement();
-        ArrayList arrayList;
-        // ArrayList arrayList1;
-
-        arrayList = (ArrayList) Ec.displayAllList();
-
-        // arrayList.addAll(arrayList1);
-        System.out.println("-------------+++++++++++++------------" + arrayList);
-
-        obser = FXCollections.observableArrayList(arrayList);
-
-        ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
-        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
-        colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
-        ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-
-        colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
-
-        tableAffichage.setItems(obser);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
 
@@ -407,21 +442,69 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
         arrayList = (ArrayList) Ec.displayAllListNonPar(ml.getId_u());
 
-        // arrayList.addAll(arrayList1);
         System.out.println("-------------+++++++++++++------------" + arrayList);
-
         obser = FXCollections.observableArrayList(arrayList);
-
         ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-
         colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
-
-        TableColumn actionCol = new TableColumn("");
         actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+         colDescription.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        colNom.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNom.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        colLieu.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colLieu.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        ColDate.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(ColDate.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+        tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+
+            public void handle(MouseEvent click) {
+                if ((click.getClickCount() == 1) && (Ec.verifierSs(tableAffichage.getSelectionModel().getSelectedItem().getNbr_max_e(), tableAffichage.getSelectionModel().getSelectedItem().getNbr_participant()) == true)
+                        && (pc.verifierParticipation(7, tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true)) {
+
+                    validationSaisie.notifInfo("ok", "Le nombre maximal de participations a été atteint");
+
+                } else if ((click.getClickCount() == 1) && (Ec.listEventParMembre(ml.getId_u(), tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true)) {
+
+                    validationSaisie.notifInfo("ok", "Vous etes l'organisateur de l'evenement");
+
+                }
+            }
+
+        });
 
         Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>> cellFactory
                 = //
@@ -437,9 +520,13 @@ public class List_Event_Add_ParticipationController implements Initializable {
                             setGraphic(null);
                             setText(null);
                         } else {
+                            Evenement ee = getTableView().getItems().get(getIndex());
                             final Button btn = new Button("Annuler participation");
+                            if (Ec.listEventParMembre(ml.getId_u(), ee.getId_e()) == true) {
+                                btn.setDisable(true);
+                            }
                             btn.setOnAction(event -> {
-                                Evenement ee = getTableView().getItems().get(getIndex());
+
                                 if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
                                     if (pc.supprimerParticipationE(ee.getId_e()) == true) {
                                         if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
@@ -475,10 +562,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
             }
         };
 
-        // actionCol.setCellFactory(cellFactory);
+        actionCol.setCellFactory(cellFactory);
         tableAffichage.setItems(obser);
-        tableAffichage.getColumns().addAll(actionCol);
-
+        //tableAffichage.getColumns().addAll(actionCol);
     }
 
     public void affichageEvenementOkP() throws Exception {
@@ -497,16 +583,49 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
         // arrayList.addAll(arrayList1);
         System.out.println("-------------+++++++++++++------------" + arrayList);
-
         obser = FXCollections.observableArrayList(arrayList);
-
         ColImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieu.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
-
         colnbrpart.setCellValueFactory(new PropertyValueFactory<>("etat_p"));
+          colDescription.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        colNom.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNom.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        colLieu.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colLieu.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        ColDate.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(ColDate.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
 
         tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -517,11 +636,16 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
                     validationSaisie.notifInfo("ok", "Le nombre maximal de participations a été atteint");
 
+                } else if ((click.getClickCount() == 1) && (Ec.listEventParMembre(ml.getId_u(), tableAffichage.getSelectionModel().getSelectedItem().getId_e()) == true)) {
+
+                    validationSaisie.notifInfo("ok", "Vous etes l'organisateur de l'evenement");
+
                 }
             }
 
         });
-        TableColumn actionCol = new TableColumn("");
+
+        // TableColumn actionCol = new TableColumn("");
         actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 
         Callback<TableColumn<Evenement, String>, TableCell<Evenement, String>> cellFactory
@@ -540,6 +664,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
                         } else {
                             final Button btn = new Button("Participer à l'evenement");
                             Evenement ee = getTableView().getItems().get(getIndex());
+                            if (Ec.listEventParMembre(ml.getId_u(), ee.getId_e()) == true) {
+                                btn.setDisable(true);
+                            }
 
                             if (pc.verifierParticipation(ml.getId_u(), ee.getId_e()) == true) {
 
@@ -562,7 +689,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                                 + " <br> auquel vous avez participé.");
                                         System.out.println("okok++++okokok");
 
-                                        actualiser();
+                                        actualiserParticipation();
                                     } else if (Ec.verifierParticipant(ee.getId_e()) == true) {
                                         Participation p = new Participation(ee.getId_e(), ml.getId_u());
 
@@ -580,12 +707,12 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         }
                                         validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + ee.getNom_e() + " a été bien confirmée. Vous recevrez ultérieurement un message  contenant le QR code de l'événement auquel vous avez participé.");
                                         System.out.println("okok++++okokok");
-                                        actualiser();
+                                        actualiserParticipation();
                                     } else {
                                         validationSaisie.notifInfo("Information", "Le nombre maximal de participations a été atteint");
 
                                     }
-
+                                    actualiserParticipation();
                                 });
                                 setGraphic(btn);
 
@@ -599,9 +726,9 @@ public class List_Event_Add_ParticipationController implements Initializable {
             }
         };
 
-        //  actionCol.setCellFactory(cellFactory);
+        actionCol.setCellFactory(cellFactory);
         tableAffichage.setItems(obser);
-        tableAffichage.getColumns().addAll(actionCol);
+        // tableAffichage.getColumns().addAll(actionCol);
 
     }
 

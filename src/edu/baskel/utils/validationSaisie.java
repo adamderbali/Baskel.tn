@@ -96,10 +96,10 @@ public class validationSaisie {
     public static void notif(String mes, String message) {
         Notifications notificationBuilder = Notifications.create()
                 .title(mes)
-                .text(message)
+                .text(message).darkStyle()
                 //.graphic(new ImageView(img))
                 .hideAfter(Duration.seconds(5))
-                .position(Pos.CENTER)
+              //  .position(Pos.CENTER)
                 .onAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -114,10 +114,10 @@ public class validationSaisie {
     public static void notifInfo(String mes, String message) {
         Notifications notificationBuilder = Notifications.create()
                 .title(mes)
-                .text(message)
+                .text(message).darkStyle()
                 //.graphic(new ImageView(img))
                 .hideAfter(Duration.seconds(5))
-                .position(Pos.CENTER)
+              //  .position(Pos.CENTER)
                 .onAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -132,10 +132,10 @@ public class validationSaisie {
     public static void notifConfirm(String mes, String message) {
         Notifications notificationBuilder = Notifications.create()
                 .title(mes)
-                .text(message)
+                .text(message).darkStyle()
                 //.graphic(new ImageView(img))
-                .hideAfter(Duration.seconds(10))
-                .position(Pos.CENTER)
+                .hideAfter(Duration.seconds(5))
+              //  .position(Pos.CENTER)
                 .onAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {

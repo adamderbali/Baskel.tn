@@ -30,6 +30,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,6 +40,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -46,11 +49,10 @@ import javafx.stage.Stage;
  * @author sabri
  */
 public class GererController implements Initializable {
-    Membre ml = SessionInfo.getLoggedM();
-       @FXML
-    private JFXButton detail;
 
-    
+    Membre ml = SessionInfo.getLoggedM();
+    @FXML
+    private JFXButton detail;
 
     @FXML
     private TableView<Evenement> tableAffichage;
@@ -72,7 +74,6 @@ public class GererController implements Initializable {
     @FXML
     private AnchorPane anchor;
 
-
     @FXML
     private JFXButton valider;
 
@@ -80,13 +81,11 @@ public class GererController implements Initializable {
     private JFXButton supprimer;
     Image image;
 
-    
-      @FXML
+    @FXML
     private TableColumn<Evenement, String> colNombre;
 
     @FXML
     private JFXTextField search;
-
 
     ObservableList obser;
     @FXML
@@ -102,7 +101,6 @@ public class GererController implements Initializable {
     void chargerDonnee() {
         e = tableAffichage.getSelectionModel().getSelectedItem();
 
-      
     }
 
     public Evenement getClickedEvent() {
@@ -131,6 +129,59 @@ public class GererController implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
+        colNom.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNom.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+        colLieu.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colLieu.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+        colDate.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDate.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        
+        
+        colDate.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDate.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+        colDescription.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+      
+      
         tableAffichage.setItems(obser);
         /*  displayByUser(m.getId_u()*/
 
@@ -153,7 +204,7 @@ public class GererController implements Initializable {
          });*/
     }
 
-     public void affichageEvenementParDate() {
+    public void affichageEvenementParDate() {
         EvenementCRUD Ec = new EvenementCRUD();
         Evenement e = new Evenement();
         ArrayList arrayList;
@@ -167,8 +218,9 @@ public class GererController implements Initializable {
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
         tableAffichage.setItems(obser);
-      
+
     }
+
     public void actualiser() {
         EvenementCRUD Ec = new EvenementCRUD();
         Evenement e = new Evenement();
@@ -182,11 +234,49 @@ public class GererController implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
+        colNom.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+        colLieu.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+        colDate.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+
+        colDescription.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDescription.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+   
         tableAffichage.setItems(obser);
 
     }
-    
-    
 
     @FXML
     private void searchBox(KeyEvent event) {
@@ -251,11 +341,10 @@ public class GererController implements Initializable {
         }
 
     }
-    
-   
+
     @FXML
     void detailEvent(ActionEvent event) {
-         try {
+        try {
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("ListParticipationParEventUser.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -277,11 +366,11 @@ public class GererController implements Initializable {
 
     @FXML
     private void dateTrie(ActionEvent event) {
-        
-        if(dateTrie.isSelected()){
+
+        if (dateTrie.isSelected()) {
             affichageEvenementParDate();
         }
-        if(!(dateTrie.isSelected())){
+        if (!(dateTrie.isSelected())) {
             affichageEvenement();
         }
     }
