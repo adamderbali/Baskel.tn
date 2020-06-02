@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.icons525.Icons525View?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -9,20 +11,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.Rating?>
 
 <AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="924.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
    <children>
-      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" prefHeight="760.0" prefWidth="1234.0" />
-      <MenuButton fx:id="btnCompte" layoutX="944.0" layoutY="14.0" mnemonicParsing="false" text="Compte">
-        <items>
-          <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deco" text="Se deconnecter" />
-          <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
-        </items>
-      </MenuButton>
-      <Label fx:id="lblCntactezNous" layoutX="44.0" layoutY="853.0" onMouseClicked="#RedirectionContactezNs" text="Contactez nous">
+      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" onMouseClicked="#PageFB" prefHeight="760.0" prefWidth="1234.0" />
+      <Label fx:id="lblCntactezNous" layoutX="58.0" layoutY="845.0" onMouseClicked="#RedirectionContactezNs" text="Contactez nous">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
@@ -32,9 +29,8 @@
             <Font name="System Bold" size="15.0" />
          </font></Text>
       <JFXButton fx:id="btnEnvoyer" layoutX="519.0" layoutY="849.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
-      <Button fx:id="btnforum" layoutX="855.0" layoutY="14.0" mnemonicParsing="false" onAction="#forum" text="Tchat" />
-      <Separator layoutX="36.0" layoutY="841.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Separator layoutX="6.0" layoutY="53.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="6.0" layoutY="816.0" prefHeight="5.0" prefWidth="1227.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="6.0" layoutY="53.0" prefHeight="5.0" prefWidth="1227.0" style="-fx-background-color: #0096a4#0096a4;" />
       <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="14.0" layoutY="7.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/001-exit-1.png" />
@@ -45,14 +41,35 @@
             <Image url="@../../../../images/exitt.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnAdmin" layoutX="328.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionAdmin" text="Admin" />
-      <MenuButton fx:id="btnEvenements" layoutX="522.0" layoutY="14.0" mnemonicParsing="false" text="Evenements">
-        <items>
-          <MenuItem fx:id="btnConsulterEv" mnemonicParsing="false" onAction="#RedirectionConsulterEV" text="Consulter les evenements" />
-          <MenuItem fx:id="btnGererEv" mnemonicParsing="false" onAction="#RedirectionGererEvenemn" text="Gerer mes evenements" />
-        </items>
-      </MenuButton>
-      <Button fx:id="btnRec" layoutX="222.0" layoutY="14.0" mnemonicParsing="false" onAction="#REdirectionRec" text="Reclamations" />
-      <Button fx:id="btnVelo" layoutX="116.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionVelos" text="Velos" />
+      <Icons525View fx:id="fbIcon" fill="#4940ff" glyphName="FACEBOOK2" layoutX="733.0" layoutY="875.0" onMouseClicked="#PageFB" size="25" text="" wrappingWidth="23.0" />
+      <HBox layoutX="137.0" prefHeight="53.0" prefWidth="734.0">
+         <children>
+            <Button fx:id="btnVelo" mnemonicParsing="false" onAction="#RedirectionVelos" prefHeight="68.0" prefWidth="122.0" text="Velos" />
+            <Button fx:id="btnRec" mnemonicParsing="false" onAction="#REdirectionRec" prefHeight="68.0" prefWidth="122.0" text="Reclamations" />
+            <MenuButton fx:id="btnEvenements" mnemonicParsing="false" prefHeight="68.0" prefWidth="122.0" text="Evenements">
+              <items>
+                <MenuItem fx:id="btnConsulterEv" mnemonicParsing="false" onAction="#RedirectionConsulterEV" text="Consulter les evenements" />
+                <MenuItem fx:id="btnGererEv" mnemonicParsing="false" onAction="#RedirectionGererEvenemn" text="Gerer mes evenements" />
+              </items>
+            </MenuButton>
+            <Button fx:id="btnforum" mnemonicParsing="false" onAction="#forum" prefHeight="68.0" prefWidth="122.0" text="Tchat">
+               <graphic>
+                  <FontAwesomeIconView glyphName="COMMENTS_ALT" size="25" />
+               </graphic></Button>
+            <MenuButton fx:id="btnCompte" mnemonicParsing="false" prefHeight="68.0" prefWidth="122.0" text="Compte">
+              <items>
+                <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deco" text="Se deconnecter" />
+                <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
+              </items>
+            </MenuButton>
+            <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#RedirectionAdmin" prefHeight="67.0" prefWidth="122.0" text="Admin" />
+         </children>
+      </HBox>
+      <Text layoutX="770.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoignez nous sur facebook">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView glyphName="ENVELOPE" layoutX="26.0" layoutY="860.0" size="20" />
    </children>
 </AnchorPane>

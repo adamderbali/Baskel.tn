@@ -21,7 +21,6 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="639.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageReparateurController">
    <children>
-      <Separator layoutX="11.0" layoutY="589.0" prefHeight="5.0" prefWidth="1021.0" style="-fx-background-color: #0096a4;" />
       <Pane fx:id="paneNomProfil" prefHeight="86.0" prefWidth="1042.0">
          <children>
             <Label fx:id="lblprofil" layoutX="368.0" prefHeight="77.0" prefWidth="500.0" text="adam derbali">

@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
+import edu.baskel.services.EnvoiMail;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
@@ -107,6 +108,7 @@ public class InscriptionController implements Initializable {
     private String photo = null;
     private Image image;
     Connection cnx;
+    EnvoiMail e = new EnvoiMail();
 
     public InscriptionController() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -258,10 +260,10 @@ public class InscriptionController implements Initializable {
         String message = "";
         if (chkhomme.isSelected()) {
             message += chkhomme.getText();
-
         }
         if (chkfemme.isSelected()) {
             message += chkfemme.getText();
+            
         }
         return message;
     }
@@ -402,6 +404,8 @@ public class InscriptionController implements Initializable {
 
                                                 if (motdepasse.equals(conmotdepasse)) {
                                                     mr.AddUser(m);
+                                                    e.envoyerMailHistorique(txtemail.getText(), "Bienvenue chez Baskel.tn");
+
                                                     txtNom.clear();
                                                     txtPrenom.clear();
                                                     txtnaissance.setValue(null);
