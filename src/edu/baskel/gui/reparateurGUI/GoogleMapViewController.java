@@ -5,8 +5,11 @@
  */
 package edu.baskel.gui.reparateurGUI;
 
-
-
+import com.lynden.gmapsfx.GoogleMapView;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
@@ -17,62 +20,30 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
-import edu.baskel.entities.Alerte;
-import edu.baskel.entities.Membre;
-import edu.baskel.services.AlerteCRUD;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
-
-
 
 /**
  * FXML Controller class
  *
  * @author ASUS
  */
-public class AjoutAlerteController implements Initializable, MapComponentInitializedListener {
+public class GoogleMapViewController implements Initializable, MapComponentInitializedListener {
 
-    @FXML
-    private TextField descalrt;
-    @FXML
-    private TextField adrss;
-    
-    private GoogleMap Gmap;
-    @FXML
-    private GoogleMapView mapView;
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private GoogleMapView mapView;
+
+    private GoogleMap Gmap;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            
-        } catch (Exception e) {
-        }
-
-    }
-
-    @FXML
-    void lancerAjout(ActionEvent event) {
-        AlerteCRUD alrtcrd = new AlerteCRUD();
-        Alerte a = new Alerte();
-        a.setAdresse_a(adrss.getText());
-        a.setLatitude_a("1221");
-        a.setLongitude_a("1151");
-        a.setDescription_a(descalrt.getText());
-        Membre m = new Membre(1);
-        a.setMembre(m);
-        alrtcrd.ajouterAlert(a);
+        mapView.addMapInializedListener(this);
     }
 
     @Override
     public void mapInitialized() {
-        
-       LatLong joeSmithLocation = new LatLong(36.8009, 10.1786);
+        LatLong joeSmithLocation = new LatLong(36.8009, 10.1786);
         LatLong joshAndersonLocation = new LatLong(47.6297, -122.3431);
         LatLong bobUnderwoodLocation = new LatLong(47.6397, -122.3031);
         LatLong tomChoiceLocation = new LatLong(47.6497, -122.3325);
@@ -128,8 +99,6 @@ public class AjoutAlerteController implements Initializable, MapComponentInitial
 
         InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
         fredWilkeInfoWindow.open(Gmap, fredWilkieMarker);
-        
-       
     }
 
 }
