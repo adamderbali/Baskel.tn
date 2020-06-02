@@ -123,7 +123,6 @@ public class AcceuilController implements Initializable {
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) btnCompte).getScene().getWindow();
-        //Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
         mc.Deconnexion();

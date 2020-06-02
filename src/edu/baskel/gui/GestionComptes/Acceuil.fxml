@@ -16,56 +16,63 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="924.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
+<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
    <children>
-      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" onMouseClicked="#PageFB" prefHeight="760.0" prefWidth="1234.0" />
+      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" onMouseClicked="#PageFB" prefHeight="760.0" prefWidth="1234.0">
+         <children>
+            <ImageView fitHeight="760.0" fitWidth="1234.0" opacity="0.8" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../images/bikeBG1.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
       <Label fx:id="lblCntactezNous" layoutX="58.0" layoutY="845.0" onMouseClicked="#RedirectionContactezNs" text="Contactez nous">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Rating fx:id="rateUs" layoutX="328.0" layoutY="848.0" />
-      <Text fx:id="evaluez" layoutX="226.0" layoutY="869.0" onMouseClicked="#AfficherStars" strokeType="OUTSIDE" strokeWidth="0.0" text="évaluez nous">
+      <Rating fx:id="rateUs" layoutX="578.0" layoutY="836.0" />
+      <Text fx:id="evaluez" layoutX="476.0" layoutY="857.0" onMouseClicked="#AfficherStars" strokeType="OUTSIDE" strokeWidth="0.0" text="évaluez nous">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Text>
-      <JFXButton fx:id="btnEnvoyer" layoutX="519.0" layoutY="849.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
+      <JFXButton fx:id="btnEnvoyer" layoutX="769.0" layoutY="837.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
       <Separator layoutX="6.0" layoutY="816.0" prefHeight="5.0" prefWidth="1227.0" style="-fx-background-color: #0096a4#0096a4;" />
       <Separator layoutX="6.0" layoutY="53.0" prefHeight="5.0" prefWidth="1227.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="14.0" layoutY="7.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/001-exit-1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="995.0" layoutY="848.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="1147.0" layoutY="835.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/exitt.png" />
          </image>
       </ImageView>
-      <Icons525View fx:id="fbIcon" fill="#4940ff" glyphName="FACEBOOK2" layoutX="733.0" layoutY="875.0" onMouseClicked="#PageFB" size="25" text="" wrappingWidth="23.0" />
-      <HBox layoutX="137.0" prefHeight="53.0" prefWidth="734.0">
+      <Icons525View fx:id="fbIcon" fill="#4940ff" glyphName="FACEBOOK2" layoutX="197.0" layoutY="863.0" onMouseClicked="#PageFB" size="25" text="" wrappingWidth="23.0" />
+      <HBox layoutX="6.0" prefHeight="53.0" prefWidth="1227.0">
          <children>
-            <Button fx:id="btnVelo" mnemonicParsing="false" onAction="#RedirectionVelos" prefHeight="68.0" prefWidth="122.0" text="Velos" />
-            <Button fx:id="btnRec" mnemonicParsing="false" onAction="#REdirectionRec" prefHeight="68.0" prefWidth="122.0" text="Reclamations" />
-            <MenuButton fx:id="btnEvenements" mnemonicParsing="false" prefHeight="68.0" prefWidth="122.0" text="Evenements">
+            <ImageView fx:id="Logout" fitHeight="52.0" fitWidth="52.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/001-exit-1.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnVelo" mnemonicParsing="false" onAction="#RedirectionVelos" prefHeight="53.0" prefWidth="190.0" text="Velos" />
+            <Button fx:id="btnRec" mnemonicParsing="false" onAction="#REdirectionRec" prefHeight="53.0" prefWidth="190.0" text="Reclamations" />
+            <MenuButton fx:id="btnEvenements" mnemonicParsing="false" prefHeight="53.0" prefWidth="190.0" text="Evenements">
               <items>
                 <MenuItem fx:id="btnConsulterEv" mnemonicParsing="false" onAction="#RedirectionConsulterEV" text="Consulter les evenements" />
                 <MenuItem fx:id="btnGererEv" mnemonicParsing="false" onAction="#RedirectionGererEvenemn" text="Gerer mes evenements" />
               </items>
             </MenuButton>
-            <Button fx:id="btnforum" mnemonicParsing="false" onAction="#forum" prefHeight="68.0" prefWidth="122.0" text="Tchat">
+            <Button fx:id="btnforum" mnemonicParsing="false" onAction="#forum" prefHeight="53.0" prefWidth="190.0" text="Tchat">
                <graphic>
                   <FontAwesomeIconView glyphName="COMMENTS_ALT" size="25" />
                </graphic></Button>
-            <MenuButton fx:id="btnCompte" mnemonicParsing="false" prefHeight="68.0" prefWidth="122.0" text="Compte">
+            <MenuButton fx:id="btnCompte" mnemonicParsing="false" prefHeight="53.0" prefWidth="190.0" text="Compte">
               <items>
                 <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deco" text="Se deconnecter" />
                 <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
               </items>
             </MenuButton>
-            <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#RedirectionAdmin" prefHeight="67.0" prefWidth="122.0" text="Admin" />
+            <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#RedirectionAdmin" prefHeight="53.0" prefWidth="247.0" text="Admin" />
          </children>
       </HBox>
-      <Text layoutX="770.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoignez nous sur facebook">
+      <Text layoutX="234.0" layoutY="858.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoignez nous sur facebook">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
