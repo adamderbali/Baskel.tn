@@ -8,8 +8,11 @@ package edu.baskel.gui.GestionComptes;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.utils.SessionInfo;
+import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -23,6 +26,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import static javafx.scene.paint.Color.rgb;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
@@ -64,7 +69,7 @@ public class AvisEvenementController implements Initializable {
 
     @FXML
     private Label msg;
-
+Membre ml = SessionInfo.getLoggedM();
     @FXML
     private JFXComboBox<String> comobox;
     ObservableList obser;
@@ -82,29 +87,44 @@ public class AvisEvenementController implements Initializable {
 
     @FXML
     void ajouterAvis(ActionEvent event) {
+       
         ParticipationCrud parList = new ParticipationCrud();
         String c = comobox.getValue();
+        if(c==null){
+            validationSaisie.notifInfo("Erreur", "Vous devez selectionner un evenement");
+             comobox.setFocusColor(rgb(255, 0, 0));
+                comobox.setUnFocusColor(rgb(255, 0, 0));
+                comobox.setStyle("-fx-prompt-text-fill: #C4151C");
+        }
         System.out.println("++++++" + c);
         int d = parList.displayEventParId(c);
         System.out.println("+++++++++++++++++++++++++++++++za3ma chnia id" + d);
 
         int r = (int) rate.getRating();
         ParticipationCrud pc = new ParticipationCrud();
-        Participation p = new Participation();
-        p.setNote_avis((int) rate.getRating());
-        p.setId_u(9);
-        p.setId_e(d);
-
+        Participation p = new Participation (d,ml.getId_u(),(int)rate.getRating());
         System.out.println(p.toString());
         pc.ajouterAvisEvent(p);
+      
+        
+    }
+    
+    
+    @FXML
+    void comobox(MouseEvent event) {
+
+        comobox.setFocusColor(rgb(0, 150, 164));
+        comobox.setUnFocusColor(rgb(77, 77, 77));
+        comobox.setStyle("-fx-prompt-text-fill: #000000");
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         comoboxNom();
-         rate.ratingProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+       /*  rate.ratingProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             msg.setText("Rating : " + newValue);
-        });
+        });*/
 
     }
 

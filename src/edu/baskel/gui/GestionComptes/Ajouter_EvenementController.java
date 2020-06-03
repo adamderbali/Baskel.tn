@@ -267,7 +267,6 @@ public class Ajouter_EvenementController implements Initializable {
 
                                                             System.out.println("------------------");
                                                             validationSaisie.notifInfo("Echec", "Saisir le lieu de l'evenement ");
-                                                            txtNom.setFocusColor(rgb(255, 0, 0));
 
                                                             txtLieu.setFocusColor(rgb(255, 0, 0));
                                                             txtLieu.setUnFocusColor(rgb(255, 0, 0));
@@ -300,23 +299,33 @@ public class Ajouter_EvenementController implements Initializable {
                                                                         txtDate.setDefaultColor(rgb(255, 0, 0));
                                                                         txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
                                                                     } else {
-                                                                        EvenementCRUD Ec = new EvenementCRUD();
+                                                                        EvenementCRUD Ev = new EvenementCRUD();
+                                                                        if (Ev.verifierNom(txtNom.getText()) == true) {
+                                                                            System.out.println("+++++++++za3ma mch 9a3ed yodkhel lehna jemla???"+txtNom.getText());
+                                                                            txtNom.setFocusColor(rgb(255, 0, 0));
+                                                                            txtNom.setUnFocusColor(rgb(255, 0, 0));
+                                                                            txtNom.setStyle("-fx-text-fill: #C4151C");
+                                                                            
+                                                                            validationSaisie.notifInfo("Erreur", "Le nom de l'evenement existe deja");
+                                                                        } else {
+                                                                            EvenementCRUD Ec = new EvenementCRUD();
 
-                                                                        Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                                getText(), pathE.getText(), ml.getId_u(), Integer.parseInt(txtNombre.getText()));
-                                                                        Ec.ajouterEvenement(e);
-                                                                        txtNom.clear();
-                                                                        txtLieu.clear();
-                                                                        txtDate.setValue(null);
-                                                                        txtDescription.clear();
-                                                                        pathE.clear();
-                                                                        txtNombre.clear();
-                                                                        img.setVisible(false);
-                                                                        Stage stage = (Stage) idRetour.getScene().getWindow();
-                                                                        stage.close();
+                                                                            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                                                                                    getText(), pathE.getText(), ml.getId_u(), Integer.parseInt(txtNombre.getText()));
+                                                                            Ec.ajouterEvenement(e);
+                                                                            txtNom.clear();
+                                                                            txtLieu.clear();
+                                                                            txtDate.setValue(null);
+                                                                            txtDescription.clear();
+                                                                            pathE.clear();
+                                                                            txtNombre.clear();
+                                                                            img.setVisible(false);
+                                                                            Stage stage = (Stage) idRetour.getScene().getWindow();
+                                                                            stage.close();
 
-                                                                        controller1.actualiser();
-                                                                        validationSaisie.notifConfirm("ok", "Evenement ajouté");
+                                                                            controller1.actualiser();
+                                                                            validationSaisie.notifConfirm("ok", "Evenement ajouté");
+                                                                        }
                                                                     }
                                                                 }
                                                             }

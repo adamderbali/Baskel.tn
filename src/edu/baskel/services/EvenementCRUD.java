@@ -22,6 +22,7 @@ import javafx.scene.control.SkinBase;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import org.controlsfx.control.Rating;
 
 /**
  *
@@ -123,6 +124,34 @@ public class EvenementCRUD {
             System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1, id_e);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                return true;
+
+            }
+            System.out.println("resultat trouvé");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("++++++++++++++++");
+            System.out.println("resultat non trouvé");
+        }
+        return false;
+    }
+    
+     public boolean verifierNom(String nom_e) {
+        Evenement e = new Evenement();
+        EvenementCRUD ev = new EvenementCRUD();
+        try {
+
+            String requete = "SELECT * FROM evenement WHERE nom_e=?";
+
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, nom_e);
 
             ResultSet rs = pst.executeQuery();
 
@@ -493,6 +522,77 @@ public class EvenementCRUD {
         return Listevent;
     }
     
+ 
+ 
+ 
+ 
+ 
+ public List<Evenement> historiqueEvent() {
+
+        List<Evenement> Listevent = new ArrayList<Evenement>();
+        try {
+             
+            String requete = "select * from evenement e inner join membre m on m.id_u=e.id_u where STR_TO_DATE(e.date_e,'%d/%m/%Y')< SYSDATE() ";
+
+            Statement pst = cnx.createStatement();
+           
+            ResultSet rs = pst.executeQuery(requete);
+            while (rs.next()) {
+                Evenement e = new Evenement();
+                EvenementCRUD ev = new EvenementCRUD();
+                
+                e.setId_e(rs.getInt("id_e"));
+                e.setId_u(rs.getInt("id_u"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
+                
+               
+                       
+               
+                System.out.println("----------------------moyAvis affiché" +ev.moyAvis(e.getId_e()));
+                 e.setRa(new Rating((int)ev.moyAvis(e.getId_e())));
+                 e.getRa().setRating((int)ev.moyAvis(e.getId_e()));
+                 e.getRa().setMax(5);
+                 e.getRa().setPrefHeight(2);
+                 e.getRa().setPrefWidth(2);
+                 e.getRa().setDisable(true);
+                //  e.setEtat_e(rs.getString("etat_e"));
+             
+                Membre m = new Membre();
+                m.setId_u(rs.getInt("id_u"));   
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                m.setImage_u(rs.getString("image_u"));
+                 m.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + m.getImage_u())));
+                    m.getImage().setFitWidth(220);
+                    m.getImage().setFitHeight(110);
+                e.setMbre(m);
+                Listevent.add(e);
+            }
+            System.out.println("--------------+++++++++------------");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return Listevent;
+    }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  public List<Evenement> displayAllListOkPar(int id_u) {
 
         List<Evenement> Listevent = new ArrayList<Evenement>();
@@ -647,7 +747,7 @@ public class EvenementCRUD {
     public int nombreEvent() {
         int nb = 0;
 
-        try {
+        try { 
             String req1 = "SELECT count(*) AS nombreEvent from evenement";
             System.out.println("+++++++++++" + req1);
             PreparedStatement pst = cnx.prepareStatement(req1);
@@ -665,6 +765,36 @@ public class EvenementCRUD {
         return nb;
 
     }
+    
+    
+    public float moyAvis(int id_e) {
+        float moy = 0;
+
+        try { 
+            String req1 = "select avg(note_avis) from participation where  IFNULL(note_avis, 0) AND id_e="+id_e;
+            System.out.println("+++++++++++" + req1);
+            PreparedStatement pst = cnx.prepareStatement(req1);
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                moy = rs.getFloat(1);
+
+                System.out.println("----------" + moy);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("-------------" + moy);
+        return moy;
+
+    }
+    
+    
+    
+    
+    
+    
+    
 
     public List<Evenement> displayByEvent(int id_e) {
 

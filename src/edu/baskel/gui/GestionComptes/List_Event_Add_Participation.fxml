@@ -34,7 +34,7 @@
          </font>
       </JFXButton>
       <JFXTextField fx:id="search" focusColor="#007782" layoutX="1.0" layoutY="35.0" onKeyTyped="#searchBox" prefHeight="25.0" prefWidth="205.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
-      <JFXButton fx:id="actualiser" layoutX="837.0" layoutY="59.0" onAction="#consultarPar" prefHeight="31.0" prefWidth="260.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Consulter historique de vos participations" textFill="#007782">
+      <JFXButton fx:id="consulterVosPar" layoutX="837.0" layoutY="59.0" onAction="#consultarPar" prefHeight="31.0" prefWidth="260.0" style="-fx-background-radius: 100px; -fx-border-color: #C0C0C0; -fx-border-radius: 100px;" text="Consulter historique de vos participations" textFill="#007782">
          <font>
             <Font name="System Italic" size="13.0" />
          </font>

@@ -191,7 +191,32 @@ public class ParticipationCrud {
         return Listparticipation;
     }
     
-    
+    public boolean vosParticipation(int id_u){
+        
+        boolean vp = false;
+       
+        try {
+            String req="select * from participation where id_u="+id_u;
+            PreparedStatement pst =cnx.prepareStatement(req);
+          
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()){
+                System.out.println("mawjoud hal user");
+                return true;
+                
+            }
+            
+            else {
+                System.out.println("hal user mch mawjoud");
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ParticipationCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return vp;
+        
+    }
     public List<Participation> displayByUserEvent(int id_e) {
 
         List<Participation> Listparticipation = new ArrayList<Participation>();
@@ -605,6 +630,7 @@ public class ParticipationCrud {
         }
            return ListEmailEventDay;
         }
+    
     
     /*rappel membre que l evenement aura lien demain*/
      public void rappelEvent() throws Exception {

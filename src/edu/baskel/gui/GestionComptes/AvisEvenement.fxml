@@ -35,7 +35,7 @@
       </Text>
       <JFXButton layoutX="385.0" layoutY="222.0" onAction="#ajouterAvis" prefHeight="27.0" prefWidth="90.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Valider" textFill="#007782" />
       <Rating fx:id="rate" layoutX="342.0" layoutY="165.0" prefHeight="32.0" prefWidth="199.0" />
-      <Label fx:id="msg" layoutX="92.0" layoutY="129.0" prefHeight="10.0" prefWidth="0.0" />
-      <JFXComboBox fx:id="comobox" focusColor="#007782" layoutX="331.0" layoutY="104.0" prefHeight="25.0" prefWidth="199.0" promptText="Choisir un evenement" />
+      <Label fx:id="msg" layoutX="331.0" layoutY="141.0" prefHeight="17.0" prefWidth="69.0" />
+      <JFXComboBox fx:id="comobox" focusColor="#007782" layoutX="331.0" layoutY="104.0" onMouseClicked="#comobox" prefHeight="25.0" prefWidth="199.0" promptText="Choisir un evenement" />
    </children>
 </AnchorPane>

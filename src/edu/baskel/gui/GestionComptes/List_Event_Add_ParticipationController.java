@@ -88,7 +88,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
     private JFXTextField search;
     ObservableList obser1;
     @FXML
-    private JFXButton actualiser;
+    private JFXButton consulterVosPar;
     Membre ml = SessionInfo.getLoggedM();
     @FXML
     private JFXCheckBox listPar;
@@ -115,7 +115,15 @@ public class List_Event_Add_ParticipationController implements Initializable {
         return String.valueOf(e.getId_e());
 
     }
-
+   public void desactiverButtonConsulterPar(){
+       ParticipationCrud pc = new ParticipationCrud();
+       if (pc.vosParticipation(ml.getId_u())==true){
+           consulterVosPar.setDisable(false);
+       }
+       else {
+            consulterVosPar.setDisable(true);
+       }
+   }
     /*Affichage les champs dans le table view*/
     public void affichageEvenement() throws Exception {
 
@@ -785,7 +793,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         StatCRUD sc = new StatCRUD();
-
+desactiverButtonConsulterPar();
         actualiser();
         try {
             affichageEvenement();
