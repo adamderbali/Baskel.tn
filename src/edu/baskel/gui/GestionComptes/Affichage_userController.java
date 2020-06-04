@@ -42,6 +42,7 @@ import org.controlsfx.control.Notifications;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import edu.baskel.services.EnvoiMail;
 import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.InputValidation;
 import static edu.baskel.utils.SmsTwillo.ACCOUNT_SID;
@@ -51,14 +52,17 @@ import java.util.Optional;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -167,7 +171,14 @@ public class Affichage_userController implements Initializable {
                 alertObjet.showAndWait();
             } else {
                 if (s_rec.banexist(ml.getId_u(), user.getId_u()) == false) {
+                    
                     Alert alert = new Alert(AlertType.CONFIRMATION);
+                    DialogPane pane = alert.getDialogPane();
+                    pane.setPrefHeight(150.0);
+                    alert.setWidth(pane.getWidth());
+                    Rectangle2D bounds = Screen.getPrimary().getBounds();
+                    alert.setX(bounds.getMaxX() - alert.getWidth());
+                    alert.setY(bounds.getMaxY() - pane.getPrefHeight());
                     alert.setTitle("Confirmation");
                     alert.setHeaderText(" Vous voulez envoyer cette reclamation ?");
                     alert.setContentText(" Appuyez vous sur OK si vous etes d'accord ");
@@ -179,7 +190,9 @@ public class Affichage_userController implements Initializable {
                         MembreCRUD s_mem = new MembreCRUD();
                         Membre mem = new Membre(user.getId_u(), user.getNbr_rec_u());
                         s_mem.ajouterban(user.getId_u());
-                        text.setText("");
+                        EnvoiMail em = new EnvoiMail();
+                        
+                        em.MailReclamationAdmin(ml.getNom_u()+" "+ml.getPrenom_u(),tf_objet_rec.getText());
                         Notifications notificationBuilder = Notifications.create()
                                 .text(" Votre Reclamation a été envoyer avec succés").title("Reclamation").graphic(new ImageView(image)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                             @Override
@@ -190,6 +203,7 @@ public class Affichage_userController implements Initializable {
 
                         });
                         notificationBuilder.show();
+                        
 
                     }
                     if (result.get() == ButtonType.CANCEL) {
