@@ -148,5 +148,41 @@ public class EnvoiMail {
 
         }
     }
+     public void MailReclamationAdmin(String reclameur , String obj) {
+        try {
+            
+            System.out.println("Préparation de l envoie du mail");
+            String host = "smtp.gmail.com";
+            String user = "baskelcontact@gmail.com";
+            String pass = "baskel.tn2020";
+            String to = "sopra.ps4@gmail.com";
+            String subject = ("Nouvelle Reclamation Ajouter à la boit de réception ");
+            String message = ("Vous avez reçu nouvelle Reclamation sur notre Boîte réception créée par le membre "+" "+reclameur+" \n \n l'objet de Reclamation est : "+obj+" ") ;
+            boolean sessionDebug = false;
+            Properties pros = System.getProperties();
+            pros.put("mail.smtp.starttls.enable", "true");
+            pros.put("mail.smtp.host", "host");
+            pros.put("mail.smtp.port", "587");
+            pros.put("mail.smtp.auth", "true");
+            pros.put("mail.smtp.starttls.required", "true");
+            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            Session mailSession = Session.getDefaultInstance(pros, null);
+            mailSession.setDebug(sessionDebug);
+            Message msg = new MimeMessage(mailSession);
+            msg.setFrom(new InternetAddress(user));
+            InternetAddress[] address = {new InternetAddress(to)};
+            msg.setRecipients(Message.RecipientType.TO, address);
+            msg.setSubject(subject);
+            msg.setText(message);
+            Transport transport = mailSession.getTransport("smtp");
+            transport.connect(host, user, pass);
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+            
+
+        } catch (Exception ex) {
+
+        }
+    }
     
 }

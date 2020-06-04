@@ -114,7 +114,8 @@ public class Evenement_adminController implements Initializable {
         EvenementCRUD Ec = new EvenementCRUD();
         ReclamationCRUD RC = new ReclamationCRUD();
         ArrayList arrayList;
-        arrayList = (ArrayList) Ec.displayAllListAdmin();
+        //arrayList = (ArrayList) Ec.displayAllListAdmin();
+        arrayList = (ArrayList) RC.EventAllListAdmin();
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList);
         colID.setCellValueFactory(new PropertyValueFactory<>("id_e"));
