@@ -60,6 +60,8 @@ public class HistoriqueDesEvenementsController implements Initializable {
 
     @FXML
     private TableColumn<Evenement, String> colAvis;
+    @FXML
+    private TableColumn<Evenement, String> colNomE;
 
     @FXML
     private JFXButton idRetour;
@@ -87,15 +89,13 @@ public class HistoriqueDesEvenementsController implements Initializable {
                     return true;
                 }
                 String typedText = newValue.toLowerCase();
-                if (e.getMbre().getNom_u().toLowerCase().indexOf(typedText) != -1) {
+             
+                 if ((e.getMbre().getNom_u().toLowerCase()+" "+e.getMbre().getPrenom_u().toLowerCase()).indexOf(typedText) != -1) {
 
                     return true;
                 }
 
-                if (e.getMbre().getPrenom_u().toLowerCase().indexOf(typedText) != -1) {
-
-                    return true;
-                }
+              
                  if (e.getLieu_e().toLowerCase().indexOf(typedText) != -1) {
 
                     return true;
@@ -125,10 +125,9 @@ public class HistoriqueDesEvenementsController implements Initializable {
         obser = FXCollections.observableArrayList(partlst);
         TableColumn<Evenement, String> c1 = new TableColumn<Evenement, String>("first");
         colLieuE.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
-        colDateE.setCellValueFactory(new PropertyValueFactory<>("date_e"));    
+        colDateE.setCellValueFactory(new PropertyValueFactory<>("date_e"));   
+        colNomE.setCellValueFactory(new PropertyValueFactory<>("nom_e"));    
         colAvis.setCellValueFactory(new PropertyValueFactory<>("ra"));    
-       
-
         colNomOrg.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u()+" "+ p.getValue().getMbre().getPrenom_u()));
         tableAffichage.setItems(obser);
 
@@ -141,7 +140,7 @@ public class HistoriqueDesEvenementsController implements Initializable {
             text.textProperty().bind(cell.itemProperty());
             return cell;
         });
-
+    
         colLieuE.setCellFactory(tc -> {
             TableCell cell = new TableCell<>();
             Text text = new Text();
@@ -161,6 +160,18 @@ public class HistoriqueDesEvenementsController implements Initializable {
             text.textProperty().bind(cell.itemProperty());
             return cell;
         });
+        
+       
+        colNomE.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNomE.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        
 
     }
 

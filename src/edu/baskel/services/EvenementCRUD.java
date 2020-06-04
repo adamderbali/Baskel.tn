@@ -544,23 +544,24 @@ public class EvenementCRUD {
                 e.setId_e(rs.getInt("id_e"));
                 e.setId_u(rs.getInt("id_u"));
                 e.setNom_e(rs.getString("nom_e"));
+                System.out.println("za3ma nom chnia fih"+e.getNom_e());
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e"));
-                
-               
-                       
-               
+
                 System.out.println("----------------------moyAvis affiché" +ev.moyAvis(e.getId_e()));
+                 
                  e.setRa(new Rating((int)ev.moyAvis(e.getId_e())));
-                 e.getRa().setRating((int)ev.moyAvis(e.getId_e()));
+                 e.getRa().setRating(ev.moyAvis(e.getId_e()));
                  e.getRa().setMax(5);
-                 e.getRa().setPrefHeight(2);
-                 e.getRa().setPrefWidth(2);
+                 e.getRa().setUpdateOnHover(true);
+                 e.getRa().setPartialRating(true);
+                
+                 // e.getRa().setPrefHeight(2);
+                //  e.getRa().setPrefWidth(2);
                  e.getRa().setDisable(true);
                 //  e.setEtat_e(rs.getString("etat_e"));
-             
                 Membre m = new Membre();
                 m.setId_u(rs.getInt("id_u"));   
                 m.setNom_u(rs.getString("nom_u"));
