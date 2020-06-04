@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Reparateur;
+import edu.baskel.services.EnvoiMail;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
@@ -112,6 +113,7 @@ public class InscriptionReparateurController implements Initializable {
     private PreparedStatement prep;
     private ResultSet res;
     Image image;
+    EnvoiMail e = new EnvoiMail();
 
     /**
      * Initializes the controller class.
@@ -416,6 +418,7 @@ public class InscriptionReparateurController implements Initializable {
                                                     if (motdepasse.equals(conmotdepasse)) {
                                                         ReparateurCRUD rr = new ReparateurCRUD();
                                                         rr.ajouterReparateur(r);
+                                                        e.envoyerMailHistorique(txtemail.getText(), "Bienvenue chez Baskel.tn");
                                                         //mr.adduser2(r);
                                                         txtNom.clear();
                                                         txtPrenom.clear();

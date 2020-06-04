@@ -21,7 +21,6 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="639.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageReparateurController">
    <children>
-      <Separator layoutX="11.0" layoutY="589.0" prefHeight="5.0" prefWidth="1021.0" style="-fx-background-color: #0096a4;" />
       <Pane fx:id="paneNomProfil" prefHeight="86.0" prefWidth="1042.0">
          <children>
             <Label fx:id="lblprofil" layoutX="368.0" prefHeight="77.0" prefWidth="500.0" text="adam derbali">
@@ -134,7 +133,7 @@
             <TextField fx:id="thximage" layoutX="530.0" layoutY="275.0" prefHeight="31.0" prefWidth="162.0" />
             <Button fx:id="btnconfirmer1" layoutX="323.0" layoutY="457.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="207.0" text="Enregistrer les modifications" />
             <Button fx:id="btnmodifier1" layoutX="53.0" layoutY="457.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="207.0" text="Modifier les informations" />
-            <ImageView fx:id="imagev" fitHeight="172.0" fitWidth="200.0" layoutX="434.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagev" fitHeight="172.0" fitWidth="200.0" layoutX="434.0" layoutY="22.0" pickOnBounds="true" />
             <Text layoutX="14.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse locale">
                <font>
                   <Font name="System Bold Italic" size="15.0" />

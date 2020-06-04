@@ -46,6 +46,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.rgb;
 import javafx.stage.FileChooser;
@@ -59,6 +60,12 @@ import org.controlsfx.control.textfield.TextFields;
  */
 public class ModifierController implements Initializable {
     Membre ml = SessionInfo.getLoggedM();
+    
+    Image image;
+    Image im;
+   @FXML
+    private AnchorPane anchor;
+
     @FXML
     private JFXTextField txtNom;
 
@@ -72,28 +79,34 @@ public class ModifierController implements Initializable {
     private JFXDatePicker txtDate;
 
     @FXML
-    private ImageView img;
-    @FXML
-    private JFXTextField idE;
+    private JFXTextField txtNombre;
+
     @FXML
     private TextField pathE;
-    @FXML
-    private JFXTextField txtId;
-    Image image;
-    Image im;
 
     @FXML
-    private Button idValider;
+    private JFXButton fileChoose;
 
-    @FXML
-    private JFXTextField txtNombre;
     @FXML
     private JFXButton fermer;
-    @FXML
-    private Button idEditer;
 
     @FXML
-    private JFXButton parcourrir;
+    private JFXButton idValider;
+
+    @FXML
+    private ImageView img;
+
+    @FXML
+    private JFXButton nom;
+
+    @FXML
+    private JFXButton lieu;
+
+    @FXML
+    private JFXButton description;
+
+    @FXML
+    private JFXButton date;
 
     private Stage thisStage;
 

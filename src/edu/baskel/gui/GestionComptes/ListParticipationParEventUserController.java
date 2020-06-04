@@ -35,11 +35,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -103,6 +106,36 @@ public class ListParticipationParEventUserController implements Initializable {
         colLieuE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDateE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));*/
         tableAffichage.setItems(obser);
+        
+        colNomE.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNomE.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        
+        colLieuE.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colLieuE.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        
+        colDateE.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDateE.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
 
         tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
