@@ -21,7 +21,6 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import netscape.javascript.JSObject;
 
 /**
@@ -105,7 +104,7 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
          fredWilkeInfoWindow.open(Gmap, fredWilkieMarker);*/
             Gmap.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
         LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
-        LOGGER.info("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
+                System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
     });
  
     }
