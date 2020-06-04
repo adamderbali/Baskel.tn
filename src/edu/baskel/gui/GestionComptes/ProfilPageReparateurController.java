@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reparateur;
+import edu.baskel.services.AvisCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
@@ -121,6 +122,8 @@ public class ProfilPageReparateurController implements Initializable {
     private Button btnSupprimer;
     @FXML
     private JFXTextField txtEmailVerif;
+    @FXML
+    private JFXTextField txtNote;
 
     private String photo = null;
     private File file;
@@ -131,8 +134,9 @@ public class ProfilPageReparateurController implements Initializable {
     ReparateurCRUD rc = new ReparateurCRUD();
     //Reparateur r = rc.getReparateurById(l.getId_u());
     Reparateur r = SessionInfo.getLoggedR();
+    AvisCRUD avcrd = new AvisCRUD();
 
-    ;
+    
 
     //afficher la photo de profil
     @Override
@@ -193,6 +197,7 @@ public class ProfilPageReparateurController implements Initializable {
         thximage.setText(r.getImage_u());
         adrloc.setText(r.getAdresse_lo());
         telpro.setText(r.getNum_pro());
+        txtNote.setText(String.valueOf(avcrd.getavgAvisperDep(r)));
     }
 
     //charger infos de profil

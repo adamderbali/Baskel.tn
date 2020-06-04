@@ -31,6 +31,8 @@ public class InputValidation {
     public static boolean validTextField(String test) {
         return test.equals("");
     }
+    
+    
 
     //valid password
     public static int validPwd(String mdp) {

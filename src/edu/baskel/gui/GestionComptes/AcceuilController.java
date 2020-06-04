@@ -165,11 +165,14 @@ public class AcceuilController implements Initializable {
     //redirection forum
     @FXML
     void forum(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+        /*
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
-        app_stage.show();
+        app_stage.show();*/
     }
 
     //se decconnecter

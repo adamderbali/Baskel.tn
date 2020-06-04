@@ -18,7 +18,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
    <children>
-      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" onMouseClicked="#PageFB" prefHeight="760.0" prefWidth="1240.0">
+      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" prefHeight="760.0" prefWidth="1240.0">
          <children>
             <ImageView fitHeight="760.0" fitWidth="1246.0" opacity="0.8" pickOnBounds="true">
                <image>
@@ -94,7 +94,7 @@
                </font></Button>
          </children>
       </HBox>
-      <Text layoutX="234.0" layoutY="858.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoignez nous sur facebook">
+      <Text layoutX="234.0" layoutY="858.0" onMouseClicked="#PageFB" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoignez nous sur facebook">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

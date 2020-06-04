@@ -89,6 +89,7 @@ public class ForumFXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         PaneProfilCom.setVisible(false);
         forum = fs.displayAll();
         if (forum != null) {
@@ -103,7 +104,6 @@ public class ForumFXMLController implements Initializable {
                             Image IMAGE_RUBY = null;
                             if (!e.getImage_uf().equalsIgnoreCase("")) {
                                 IMAGE_RUBY = new Image("file:/C:\\wamp\\www\\baskel\\images\\" + e.getImage_uf());
-                                System.out.println("++++");
                             } else {
                                 Membre l = mc.AfficherMembreById(e.getId_u());
                                 if (l.getSexe_u().equals("Femme")) {
@@ -211,8 +211,7 @@ public class ForumFXMLController implements Initializable {
     void envoyer(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         if (!message.getText().isEmpty()) {
             if (AutoCompleteAdresse.nb(message.getText()) == true) {
-                /*java.util.Date date_util = new java.util.Date();
-            java.sql.Date datee = new java.sql.Date(date_util.getTime());   datee.toString()*/
+                
                 Forum1 f = new Forum1(0, m.getId_u(), message.getText(), InputValidation.dateCalendar(), m.getImage_u());
                 fs.ajouterForum(f);
                 InputValidation.notificationsucces("Commentaire", "Votre commentaire a été ajouter avec succés");
@@ -413,8 +412,7 @@ public class ForumFXMLController implements Initializable {
                     message.setText(f.getText());
 
                 } else {
-                    Alert alertnum = new InputValidation().getAlert("Commentaire", "Vous pouvez modifier le commentaire que dans les 3 minutes qui suivent la publication");
-                    alertnum.showAndWait();
+                    InputValidation.notificationError("Commentaire", "Vous pouvez modifier le commentaire que dans les 3 minutes qui suivent la publication");
                 }
             } else {
                 InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
@@ -429,23 +427,39 @@ public class ForumFXMLController implements Initializable {
     //Enregistrer les modfications
     @FXML
     void EngmodifierCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
-        Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
-        Forum1 f2 = new Forum1(message.getText(), InputValidation.dateCalendar());
-        if (f.getId_u() == m.getId_u()) {
-            if (AutoCompleteAdresse.nb(message.getText()) == true) {
+        if (MessageVide() == true) {
 
-                fs.updateForum(f2, f.getId_f());
-                actua();
+            Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+            Forum1 f2 = new Forum1(message.getText(), InputValidation.dateCalendar());
 
-                InputValidation.notificationsucces("Commentaire", "Modifications enregistrés");
+            if (f.getId_u() == m.getId_u()) {
+
+                if (AutoCompleteAdresse.nb(message.getText()) == true) {
+
+                    fs.updateForum(f2, f.getId_f());
+                    actua();
+                    message.clear();
+
+                    InputValidation.notificationsucces("Commentaire", "Modifications enregistrés");
+                } else {
+                    InputValidation.notificationError("Commentaire", "Nous n'acceptons pas les gros mots, soyez responsable svp!");
+
+                }
             } else {
-                InputValidation.notificationError("Commentaire", "Nous n'acceptons pas les gros mots, soyez responsable svp!");
+                InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
 
             }
         } else {
-            InputValidation.notificationError("Commentaire", "Vous pouvez ne modifier que vos commentaires ");
-
+                InputValidation.notificationError("Commentaire", "Vous devez d'abord selectionner un commentaire");
         }
+
+    }
+
+    public boolean MessageVide() {
+        if (message.getText().isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     @FXML
