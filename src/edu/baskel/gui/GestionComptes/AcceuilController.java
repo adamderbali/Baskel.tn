@@ -29,8 +29,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +43,8 @@ public class AcceuilController implements Initializable {
 
     @FXML
     private MenuButton btnCompte;
+    @FXML
+    private Button btnReparateur;
     @FXML
     private MenuItem btnSEdeconnecter;
     @FXML
@@ -231,8 +231,14 @@ public class AcceuilController implements Initializable {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\dell\\Pictures\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.facebook.com/Baskel395/");
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
 
+    }
+
+    @FXML
+    void RedirectionReparateur(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../reparateurGUI/MenuReparateur.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
     }
 
 //fermer l application
