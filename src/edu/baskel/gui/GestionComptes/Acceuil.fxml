@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.icons525.Icons525View?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -9,50 +11,94 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="924.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
+<AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
    <children>
-      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" prefHeight="760.0" prefWidth="1234.0" />
-      <MenuButton fx:id="btnCompte" layoutX="944.0" layoutY="14.0" mnemonicParsing="false" text="Compte">
-        <items>
-          <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deco" text="Se deconnecter" />
-          <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
-        </items>
-      </MenuButton>
-      <Label fx:id="lblCntactezNous" layoutX="44.0" layoutY="853.0" onMouseClicked="#RedirectionContactezNs" text="Contactez nous">
+      <AnchorPane fx:id="ANchorProfil" layoutX="1.0" layoutY="58.0" prefHeight="760.0" prefWidth="1240.0">
+         <children>
+            <ImageView fitHeight="760.0" fitWidth="1246.0" opacity="0.8" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../images/bikeBG1.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <Label fx:id="lblCntactezNous" layoutX="58.0" layoutY="845.0" onMouseClicked="#RedirectionContactezNs" text="Contactez nous">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Rating fx:id="rateUs" layoutX="328.0" layoutY="848.0" />
-      <Text fx:id="evaluez" layoutX="226.0" layoutY="869.0" onMouseClicked="#AfficherStars" strokeType="OUTSIDE" strokeWidth="0.0" text="évaluez nous">
+      <Rating fx:id="rateUs" layoutX="578.0" layoutY="836.0" />
+      <Text fx:id="evaluez" layoutX="476.0" layoutY="857.0" onMouseClicked="#AfficherStars" strokeType="OUTSIDE" strokeWidth="0.0" text="évaluez nous">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Text>
-      <JFXButton fx:id="btnEnvoyer" layoutX="519.0" layoutY="849.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
-      <Button fx:id="btnforum" layoutX="855.0" layoutY="14.0" mnemonicParsing="false" onAction="#forum" text="Tchat" />
-      <Separator layoutX="36.0" layoutY="841.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Separator layoutX="6.0" layoutY="53.0" prefHeight="5.0" prefWidth="1031.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="14.0" layoutY="7.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../images/001-exit-1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="995.0" layoutY="848.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
+      <JFXButton fx:id="btnEnvoyer" layoutX="769.0" layoutY="837.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
+      <Separator layoutX="6.0" layoutY="816.0" prefHeight="5.0" prefWidth="1227.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="-1.0" layoutY="53.0" prefHeight="5.0" prefWidth="1247.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="1147.0" layoutY="835.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/exitt.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnAdmin" layoutX="328.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionAdmin" text="Admin" />
-      <MenuButton fx:id="btnEvenements" layoutX="522.0" layoutY="14.0" mnemonicParsing="false" text="Evenements">
-        <items>
-          <MenuItem fx:id="btnConsulterEv" mnemonicParsing="false" onAction="#RedirectionConsulterEV" text="Consulter les evenements" />
-          <MenuItem fx:id="btnGererEv" mnemonicParsing="false" onAction="#RedirectionGererEvenemn" text="Gerer mes evenements" />
-        </items>
-      </MenuButton>
-      <Button fx:id="btnRec" layoutX="222.0" layoutY="14.0" mnemonicParsing="false" onAction="#REdirectionRec" text="Reclamations" />
-      <Button fx:id="btnVelo" layoutX="116.0" layoutY="14.0" mnemonicParsing="false" onAction="#RedirectionVelos" text="Velos" />
+      <Icons525View fx:id="fbIcon" fill="#4940ff" glyphName="FACEBOOK2" layoutX="197.0" layoutY="863.0" onMouseClicked="#PageFB" size="25" text="" wrappingWidth="23.0" />
+      <HBox prefHeight="53.0" prefWidth="1246.0" style="-fx-background-color: #0096a4;">
+         <children>
+            <ImageView fx:id="Logout" fitHeight="52.0" fitWidth="62.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/001-exit-1.png" />
+               </image>
+            </ImageView>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Button fx:id="btnVelo" mnemonicParsing="false" onAction="#RedirectionVelos" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #0096a4;" text="Velos" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Button fx:id="btnRec" mnemonicParsing="false" onAction="#REdirectionRec" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #0096a4;" text="Reclamations" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Button fx:id="btnforum" mnemonicParsing="false" onAction="#forum" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #0096a4;" text="Tchat" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <MenuButton fx:id="btnEvenements" mnemonicParsing="false" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #0096a4;" text="Evenements" textAlignment="CENTER" textFill="WHITE">
+              <items>
+                <MenuItem fx:id="btnConsulterEv" mnemonicParsing="false" onAction="#RedirectionConsulterEV" text="Consulter les evenements" />
+                <MenuItem fx:id="btnGererEv" mnemonicParsing="false" onAction="#RedirectionGererEvenemn" text="Gerer mes evenements" />
+              </items>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </MenuButton>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <MenuButton fx:id="btnCompte" mnemonicParsing="false" prefHeight="53.0" prefWidth="190.0" style="-fx-background-color: #0096a4;" text="Compte" textFill="WHITE">
+              <items>
+                <MenuItem id="Se deconnecter" fx:id="btnSEdeconnecter" mnemonicParsing="false" onAction="#Deco" text="Se deconnecter" />
+                <MenuItem id="Mon profil" fx:id="btnMOnPRofil" mnemonicParsing="false" onAction="#Profil" text="Mon Profil" />
+              </items>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </MenuButton>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Button fx:id="btnReparateur" mnemonicParsing="false" onAction="#RedirectionReparateur" prefHeight="51.0" prefWidth="120.0" text="Reparateurs" />
+            <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#RedirectionAdmin" prefHeight="53.0" prefWidth="247.0" style="-fx-background-color: #0096a4;" text="Admin" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+         </children>
+      </HBox>
+      <Text layoutX="234.0" layoutY="858.0" onMouseClicked="#PageFB" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoignez nous sur facebook">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView glyphName="ENVELOPE" layoutX="26.0" layoutY="860.0" size="20" />
    </children>
 </AnchorPane>

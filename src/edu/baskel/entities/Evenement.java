@@ -5,12 +5,14 @@
  */
 package edu.baskel.entities;
 
+import com.restfb.types.webhook.RatingsRatingValue;
 import java.util.Date;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.controlsfx.control.Rating;
 
 /**
  *
@@ -36,6 +38,20 @@ public class Evenement {
      private Label etat_p;
      private Label pourcentage;
      private Button btn;
+     private Rating ra;
+     private RatingsRatingValue re;
+
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, Membre mbre, Rating ra) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.mbre = mbre;
+        this.ra = ra;
+    }
 
     public Evenement(ImageView image, int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e, Participation part, int nbr_participant, Label etat_p) {
         this.image = image;
@@ -50,6 +66,27 @@ public class Evenement {
         this.part = part;
         this.nbr_participant = nbr_participant;
         this.etat_p = etat_p;
+    }
+
+    public Rating getRa() {
+        return ra;
+    }
+
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, Membre mbre, Participation part, Rating ra) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.mbre = mbre;
+        this.part = part;
+        this.ra = ra;
+    }
+
+    public void setRa(Rating ra) {
+        this.ra = ra;
     }
 
   

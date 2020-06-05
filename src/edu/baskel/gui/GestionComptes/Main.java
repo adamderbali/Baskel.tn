@@ -5,7 +5,6 @@
  */
 package edu.baskel.gui.GestionComptes;
 
-import static edu.baskel.utils.CronJob.jobs;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;

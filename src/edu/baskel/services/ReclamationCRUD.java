@@ -5,6 +5,7 @@
  */
 package edu.baskel.services;
 
+import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reclamation;
 import edu.baskel.utils.ConnectionBD;
@@ -17,6 +18,8 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -477,7 +480,39 @@ public void desactiverbannerUtilisateur(int id_u)
             ex.printStackTrace();
         }
 }
- 
+ public List<Evenement> EventAllListAdmin() {
+
+        List<Evenement> Listevent = new ArrayList<Evenement>();
+        try {
+            String requete = "SELECT * FROM evenement";
+            PreparedStatement pst = cnxs.prepareStatement(requete);
+            // pst.setInt(1,id_u);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Evenement e = new Evenement();
+                EvenementCRUD ev = new EvenementCRUD();
+
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
+                
+               
+                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                    e.getImage().setFitWidth(220);
+                    e.getImage().setFitHeight(110);
+                
+               
+                Listevent.add(e);
+            }
+            System.out.println("--------------+++++++++------------");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return Listevent;
+    }
 
 
  

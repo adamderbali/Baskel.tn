@@ -47,9 +47,13 @@ public class Essai {
         EvenementCRUD ev = new EvenementCRUD();
       //  Evenement e  = new Evenement(147, "sortie 17", "tunis", "25/10/2021", "marahbe", null, 20);
        // ev.nbrParticipant(162);
-    
-      System.out.println(ev.displayAllListNonPar(7));
+
+      //  System.out.println(Pc.ListNom(9));
+      
       //  ev.desactiverCell(7);
+    //  Participation p = new Participation(177,9,1);
+    //  Pc.ajouterAvisEvent(p);
+        System.out.println(Pc.displayEventParId("Cyclisme à sousse"));
     
  
     }

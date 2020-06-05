@@ -6,6 +6,7 @@
 package edu.baskel.test;
 
 import edu.baskel.services.BanCRUD;
+import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ReclamationCRUD;
 import edu.baskel.services.StatCRUD;
 import java.sql.SQLException;
@@ -26,13 +27,16 @@ public class Test_Admin         // TODO code application logic here
         
         
             ReclamationCRUD m = new ReclamationCRUD();
-            StatCRUD sc = new StatCRUD();
+            /*StatCRUD sc = new StatCRUD();
             BanCRUD b= new BanCRUD();
             sc.Reclamation_admin_nbr();
             System.out.println("\t");
             sc.Reclamation_user_nbr();
             System.out.println("\t");
             sc.affichage_user_nbr();
+            System.out.println("\t");*/
+            
+            System.out.println(m.EventAllListAdmin());
             //try {
                 //m.Banner_user();
                 //b.bannereExiste(6);

@@ -6,6 +6,7 @@
 package edu.baskel.gui.GestionComptes;
 
 import edu.baskel.services.StatCRUD;
+import java.awt.Font;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -41,8 +43,10 @@ public class Stat_chartController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Font font = new Font("InfoErrataMsg", Font.BOLD, 60);
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         StatCRUD sc = new StatCRUD();
         PieChart pc = new PieChart();
         ObservableList<PieChart.Data> pieChartData
@@ -52,9 +56,10 @@ public class Stat_chartController implements Initializable {
                         new PieChart.Data("Affichage_user",sc.affichage_user_nbr())               
                 );
         pie_chart.setData(pieChartData);
+        
         for(PieChart.Data data : pie_chart.getData())
         {
-            data.nameProperty().set(data.getName()+" "+"%"+ data.getPieValue());
+            data.nameProperty().set(data.getName()+" "+"%"+data.getPieValue());
         }
         
                 

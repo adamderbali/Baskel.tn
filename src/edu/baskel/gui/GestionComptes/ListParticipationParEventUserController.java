@@ -35,11 +35,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -103,6 +106,36 @@ public class ListParticipationParEventUserController implements Initializable {
         colLieuE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDateE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));*/
         tableAffichage.setItems(obser);
+        
+        colNomE.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNomE.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        
+        colLieuE.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colLieuE.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        
+        colDateE.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colDateE.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
 
         tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -125,6 +158,7 @@ public class ListParticipationParEventUserController implements Initializable {
                 Parent p = Loader.getRoot();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
+                stage.setTitle("Details des participants");
                 stage.show();
                 }
             }
@@ -142,6 +176,7 @@ public class ListParticipationParEventUserController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
+            app_stage.setTitle("Gestion de vos evenements");
             app_stage.show();
 
         } catch (IOException ex) {

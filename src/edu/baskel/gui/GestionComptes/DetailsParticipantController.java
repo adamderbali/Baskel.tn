@@ -19,9 +19,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Control;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -61,6 +64,26 @@ public class DetailsParticipantController implements Initializable {
         colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getNom_u() + " " + p.getValue().getMbre().getPrenom_u()));
         colEmail.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getEmail_u()));
        // colPhoto.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getMbre().getImage_u()));
+ 
+        colNom.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colNom.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+        colEmail.setCellFactory(tc -> {
+            TableCell cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(colEmail.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
+       
 
         tableAffichage1.setItems(obserE);
 

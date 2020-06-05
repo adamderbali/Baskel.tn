@@ -6,6 +6,7 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.icons525.Icons525View;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.SessionInfo;
@@ -30,6 +31,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * FXML Controller class
@@ -40,6 +43,8 @@ public class AcceuilController implements Initializable {
 
     @FXML
     private MenuButton btnCompte;
+    @FXML
+    private Button btnReparateur;
     @FXML
     private MenuItem btnSEdeconnecter;
     @FXML
@@ -74,6 +79,8 @@ public class AcceuilController implements Initializable {
     private Button btnRec;
     @FXML
     private Button btnVelo;
+    @FXML
+    private Icons525View fbIcon;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -86,7 +93,7 @@ public class AcceuilController implements Initializable {
 
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
-        if (mc.TypeUser()==false) {
+        if (mc.TypeUser() == false) {
             btnAdmin.setVisible(true);
         } else {
             btnAdmin.setVisible(false);
@@ -113,9 +120,16 @@ public class AcceuilController implements Initializable {
     //se deconnecter a partir de l acceuil
     @FXML
     public void Deco(ActionEvent event) throws IOException {
-
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) btnCompte).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
+        mc.Deconnexion();
+        /*
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
         ANchorProfil.getChildren().setAll(pane);
+         */
     }
 
     //afficher star rate
@@ -137,7 +151,6 @@ public class AcceuilController implements Initializable {
         rateUs.setVisible(false);
         btnEnvoyer.setVisible(false);
     }
-    
 
     //redirection contact us
     @FXML
@@ -152,11 +165,14 @@ public class AcceuilController implements Initializable {
     //redirection forum
     @FXML
     void forum(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+        /*
         Parent redirection_parent = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
-        app_stage.show();
+        app_stage.show();*/
     }
 
     //se decconnecter
@@ -208,7 +224,27 @@ public class AcceuilController implements Initializable {
 
     }
 
-    //fermer l application
+    @FXML
+    void PageFB(MouseEvent event) {
+        /*    WebView vieww = new WebView();
+        final WebEngine web = vieww.getEngine();
+        String urlweb = "https://facebook.com/";
+        web.load(urlweb);
+        ANchorProfil.getChildren().setAll(vieww);*/
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\dell\\Pictures\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.facebook.com/Baskel395/");
+        //driver.manage().window().maximize();
+
+    }
+
+    @FXML
+    void RedirectionReparateur(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../reparateurGUI/MenuReparateur.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+    }
+
+//fermer l application
     @FXML
     void Quitter(MouseEvent event) {
         Platform.exit();

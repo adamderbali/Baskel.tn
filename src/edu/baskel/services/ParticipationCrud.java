@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.controlsfx.control.Rating;
 
 /**
  *
@@ -66,10 +68,32 @@ public class ParticipationCrud {
         }
     }
 
+      public void ajouterAvisEvent(Participation p) {
+        // Evenement e = new Evenement();
+        try {
+            String req = "UPDATE participation SET note_avis=?"
+                    + " WHERE id_e=? AND id_u=?";
+          PreparedStatement pst1 = cnx.prepareStatement(req);
+            pst1.setInt(1,p.getNote_avis());
+            pst1.setInt(2,p.getId_e());
+            pst1.setInt(3,p.getId_u());
+
+            pst1.executeUpdate();
+            System.out.println("nbr participant modifié");
+       
+           
+
+        } catch (SQLException ex) {
+            System.err.println("Erreur d'insertion");
+            ex.printStackTrace();
+
+        }
+    }
+
     /*
 
  /* suppression participation*/
-    public boolean supprimerParticipationP(Participation p) {
+    public void supprimerParticipationP(Participation p) {
 
         try {
            
@@ -81,10 +105,10 @@ public class ParticipationCrud {
 
             pst1.executeUpdate();
             System.out.println("Participation annulé!");
-            return true;
+          
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return false;
+         
         }
 
     }
@@ -110,7 +134,7 @@ public class ParticipationCrud {
 
         List<Participation> Listparticipation = new ArrayList<Participation>();
         try {
-            String requete = "SELECT * FROM evenement e join participation p on e.id_e = p.id_e WHERE p.id_u=" + id_u;
+            String requete = "SELECT * FROM evenement e join participation p on e.id_e = p.id_e WHERE( STR_TO_DATE(e.date_e,'%d/%m/%Y'))< SYSDATE() AND p.id_u=" + id_u;
             System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
@@ -125,7 +149,15 @@ public class ParticipationCrud {
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e"));
                 e.setNbr_max_e(rs.getInt("nbr_max_e"));
-                e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                  if (e.getImage_e().equals("")) {
+                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.getImage().setFitWidth(220);
+                    e.getImage().setFitHeight(110);
+                } else {
+                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                    e.getImage().setFitWidth(220);
+                    e.getImage().setFitHeight(110);
+                }
                 e.getImage().setFitWidth(210);
                 e.getImage().setFitHeight(110);
 
@@ -134,9 +166,83 @@ public class ParticipationCrud {
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 p.setDate_insc(rs.getDate("date_insc"));
-                p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
-                p.getImage().setFitWidth(200);
-                p.getImage().setFitHeight(110);
+                 if (e.getImage_e().equals("")) {
+                    p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    p.getImage().setFitWidth(220);
+                    p.getImage().setFitHeight(110);
+                } else {
+                    p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
+                    p.getImage().setFitWidth(220);
+                    p.getImage().setFitHeight(110);
+                }
+                 p.setChb(new CheckBox()); 
+                 p.setRa(new Rating());
+
+                p.setEvent(e);
+
+                Listparticipation.add(p);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return Listparticipation;
+    }
+    
+    public boolean vosParticipation(int id_u){
+        
+        boolean vp = false;
+       
+        try {
+            String req="select * from participation where id_u="+id_u;
+            PreparedStatement pst =cnx.prepareStatement(req);
+          
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()){
+                System.out.println("mawjoud hal user");
+                return true;
+                
+            }
+            
+            else {
+                System.out.println("hal user mch mawjoud");
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ParticipationCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return vp;
+        
+    }
+    public List<Participation> displayByUserEvent(int id_e) {
+
+        List<Participation> Listparticipation = new ArrayList<Participation>();
+        try {
+            String requete = "SELECT * FROM evenement e join participation p on e.id_e = p.id_e WHERE p.id_e="+id_e;
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("1-------------" + rs.getString("nom_e"));
+                Evenement e = new Evenement();
+                e.setId_e(rs.getInt("id_e"));
+                e.setNom_e(rs.getString("nom_e"));
+                e.setLieu_e(rs.getString("lieu_e"));
+                e.setDate_e(rs.getString("date_e"));
+                e.setDescription_e(rs.getString("description_e"));
+                e.setImage_e(rs.getString("image_e"));
+                e.setNbr_max_e(rs.getInt("nbr_max_e"));
+
+                Participation p = new Participation();
+
+                p.setId_e(rs.getInt("id_e"));
+                p.setId_u(rs.getInt("id_u"));
+                p.setDate_insc(rs.getDate("date_insc"));
+                
 
                 p.setEvent(e);
 
@@ -216,7 +322,98 @@ public class ParticipationCrud {
         return true;
 
     }
+     
+    public int displayEventParId(String nom_e) {
+  int di = 0;
+     //   List<Integer> ListNomEvent = new ArrayList<Integer>();
+        try {
+         
+            String requete = "SELECT * FROM evenement WHERE nom_e=?";
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1,nom_e);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+            
+              Evenement e = new Evenement();
+                     di = rs.getInt("id_e");
+              
+                
+               // ListNomEvent.add(id);
+               
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+      //  System.out.println("-------------"+ListNomEvent.toString());
+        return di;
+  
+    }
     
+    
+    
+    public List<Participation> displayEventParticipant(int i) {
+
+        List<Participation> ListNomEventPart = new ArrayList<Participation>();
+        try {
+           
+            String requete = "SELECT * FROM Participation WHERE id_u=?";
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1,i);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+            
+              Participation p = new Participation();
+
+                p.setId_e(rs.getInt("id_e"));
+                p.setId_u(rs.getInt("id_u"));
+                ListNomEventPart.add(p);
+                //System.out.println("-------------"+ListNomEventPart.toString());
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("-------------"+ListNomEventPart.toString());
+        return ListNomEventPart;
+  
+    }
+   public List<String> ListNom(int id_u){
+       List<String> ListNomEvent = new ArrayList<String>();
+       ParticipationCrud pc = new ParticipationCrud();
+     
+               
+
+                for (Participation p : pc.displayEventParticipant(id_u)) {
+
+                     try {
+                         String sq1 = "SELECT  * FROM evenement WHERE STR_TO_DATE(date_e,'%d/%m/%Y')< SYSDATE() and id_e=?";
+                         PreparedStatement prep = cnx.prepareStatement(sq1);
+                         prep.setInt(1, p.getId_e());
+                         ResultSet res = prep.executeQuery();
+                         
+                         while (res.next()) {
+                             
+                             String em = res.getString("nom_e");
+                           
+                             System.out.println("za3ma lehne"+em);
+                             ListNomEvent.add(em);
+                             System.out.println("tawa chnia lahkeya"+ListNomEvent);
+                         } 
+                           
+                             
+                         } catch (SQLException ex) {
+                             ex.printStackTrace();
+                     }
+                     
+                }
+                System.out.println("+++++++++++++++++++++++++++++++"+ListNomEvent);
+        return ListNomEvent;
+
+   }
     
     
     public List<Participation> displayEmailParticipant(int i) {
@@ -433,6 +630,7 @@ public class ParticipationCrud {
         }
            return ListEmailEventDay;
         }
+    
     
     /*rappel membre que l evenement aura lien demain*/
      public void rappelEvent() throws Exception {

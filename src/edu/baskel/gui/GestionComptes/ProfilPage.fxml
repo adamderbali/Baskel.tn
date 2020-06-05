@@ -23,7 +23,7 @@
    <children>
       <Pane fx:id="paneNomProfil" layoutX="195.0" layoutY="36.0" prefHeight="209.0" prefWidth="190.0">
          <children>
-            <ImageView fx:id="imagev" fitHeight="160.0" fitWidth="162.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagev" fitHeight="160.0" fitWidth="162.0" layoutX="14.0" pickOnBounds="true" />
             <Button fx:id="btnimage" layoutX="56.0" layoutY="164.0" mnemonicParsing="false" onAction="#filephoto" text="Photo de profil" />
          </children>
       </Pane>

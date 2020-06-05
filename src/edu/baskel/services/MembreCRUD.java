@@ -326,6 +326,39 @@ public class MembreCRUD {
         return m;
     }
 
+        //afficher un membre by id
+    public Membre AfficherMembreByEmail(String emaill) {
+        String requet = "SELECT * FROM membre WHERE email_u=?";
+        Membre m = new Membre();
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(requet);
+            pst.setString(1, emaill);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                m.setId_u(rs.getInt("id_u"));
+                m.setNom_u(rs.getString("nom_u"));
+                m.setPrenom_u(rs.getString("prenom_u"));
+                m.setEmail_u(rs.getString("email_u"));
+                m.setAdresse_u(rs.getString("adresse_u"));
+                m.setNum_tel_u(rs.getString("num_tel_u"));
+                m.setMot_passe_u(rs.getString("mot_passe_u"));
+                m.setSexe_u(rs.getString("sexe_u"));
+                m.setDate_u(rs.getDate("date_u"));
+                m.setImage_u(rs.getString("image_u"));
+                m.setType_u(rs.getString("type_u"));
+                m.setNbr_ban_u(rs.getInt("nbr_ban_u"));
+                m.setValidation_u(rs.getInt("validation_u"));
+
+            } else {
+                System.out.println("erreur d affcihage");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return m;
+    }
+    
     // veriffication par mot de passe avant la modif des info
     public boolean VerificationChgInfo(String mot_pas) {// ne9sa l hash********************
         try {
@@ -355,6 +388,9 @@ public class MembreCRUD {
             pst.setString(2, eml);
             pst.executeUpdate();
             System.out.println("reset done");
+            SessionInfo.setLoggedM(AfficherMembreByEmail(eml));
+            System.out.println(AfficherMembreByEmail(eml));
+            
         } catch (Exception ex) {
 
         }
