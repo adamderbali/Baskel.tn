@@ -21,8 +21,6 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
-import javafx.event.ActionEvent;
-import javafx.scene.control.TextField;
 import netscape.javascript.JSObject;
 
 /**
@@ -39,11 +37,6 @@ public class MapController implements Initializable, MapComponentInitializedList
     private GoogleMapView mapView;
 
     private GoogleMap Gmap;
-    @FXML
-    protected TextField latitude;
-
-    @FXML
-    protected TextField longitude;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,10 +72,6 @@ public class MapController implements Initializable, MapComponentInitializedList
         Gmap.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
-            latitude.setText(String.valueOf(ll.getLatitude()));
-            longitude.setText(String.valueOf(ll.getLongitude()));
-            System.out.println("haya chnia ya3tiw"+latitude);
-            System.out.println("haya chnia ya3tiw"+longitude);
             Gmap.clearMarkers();
             LatLong joeSmithLocation = new LatLong(ll.getLatitude(), ll.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
@@ -92,7 +81,5 @@ public class MapController implements Initializable, MapComponentInitializedList
         });
 
     }
-    
-   
 
 }
