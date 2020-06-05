@@ -356,7 +356,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
-            app_stage.setTitle("Historique de vos participation");
+            app_stage.setTitle("Historique de vos participations");
             app_stage.show();
 
         } catch (IOException ex) {

@@ -362,7 +362,8 @@ public class EvenementCRUD {
                     e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
-                } else {
+                }
+                else{
                     e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
