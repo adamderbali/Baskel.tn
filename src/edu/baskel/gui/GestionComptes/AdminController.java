@@ -65,9 +65,6 @@ public class AdminController implements Initializable {
         app_stage.show();
     }
 
-    @FXML
-    private void gest_velo(MouseEvent event) {
-    }
 
     @FXML
     private void stat(MouseEvent event) throws IOException {
@@ -113,6 +110,16 @@ public class AdminController implements Initializable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.setTitle("Evenement_admin");
+        app_stage.show();
+    }
+
+    @FXML
+    private void avis_Stat(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("avis_app.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("avis");
         app_stage.show();
     }
     }

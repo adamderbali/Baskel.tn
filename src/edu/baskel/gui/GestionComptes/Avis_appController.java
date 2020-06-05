@@ -6,7 +6,9 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXTextField;
+import edu.baskel.entities.Avis_admin;
 import edu.baskel.entities.Membre;
+import edu.baskel.services.AvisAdminCRUD;
 import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
 import static java.awt.Color.red;
@@ -51,10 +53,23 @@ public class Avis_appController implements Initializable {
     
     
     @FXML
-void btn_envoie()
+void btn_envoie() throws SQLException
 {
-    StatCRUD sc = new StatCRUD();
-    sc.Envoie_avis(avis_user.getRating(), commentaire_user.getText(),ml.getId_u());
+    AvisAdminCRUD sc = new AvisAdminCRUD();
+    if(
+            sc.verfication(ml.getId_u())== true)
+    {
+        Avis_admin aa = new Avis_admin(avis_user.getRating(),commentaire_user.getText(),ml.getId_u());
+        sc.update_avis(aa);
+        System.out.println("update oki");
+    }
+    else if (sc.verfication(ml.getId_u())== false )
+    {
+                Avis_admin ab = new Avis_admin(avis_user.getRating(),commentaire_user.getText(),ml.getId_u());
+                sc.insertion_avis(ab);
+System.out.println("Insertion oki");
+    }
+    
 }
  void EnvoyerNote(MouseEvent event) {
         System.out.println("Rate" + "   " + ml.getId_u() + "  " + avis_user.getRating());
@@ -77,7 +92,7 @@ void btn_envoie()
     {
         comm_note.setText("Bien");
     }
-    else if(avis_user.getRating()==2)
+    else if(avis_user.getRating()==5)
     {
         comm_note.setText("Parfait ! ");
     }
