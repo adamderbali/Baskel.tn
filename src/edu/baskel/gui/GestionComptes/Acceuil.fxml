@@ -71,6 +71,7 @@
               <items>
                 <MenuItem fx:id="btnConsulterEv" mnemonicParsing="false" onAction="#RedirectionConsulterEV" text="Consulter les evenements" />
                 <MenuItem fx:id="btnGererEv" mnemonicParsing="false" onAction="#RedirectionGererEvenemn" text="Gerer mes evenements" />
+                  <MenuItem fx:id="btnHistorique" mnemonicParsing="false" onAction="#COnsulterAvisEvent" text="Historique des évenements" />
               </items>
                <font>
                   <Font name="System Bold" size="15.0" />

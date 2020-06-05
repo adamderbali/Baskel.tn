@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor1" prefHeight="571.0" prefWidth="1098.0" style="-fx-background-color: #FFFFFF;" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.List_Event_Add_ParticipationController">
+<AnchorPane id="AnchorPane" fx:id="anchor1" prefHeight="571.0" prefWidth="1098.0" style="-fx-background-color: #FFFFFF;" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Evenements.List_Event_Add_ParticipationController">
    <children>
       <ImageView fitHeight="420.0" fitWidth="1097.0" layoutX="1.0" layoutY="100.0">
          <image>

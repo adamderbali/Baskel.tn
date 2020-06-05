@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="650.0" prefWidth="1135.0" stylesheets="@AffichageListUser.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.GererController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="650.0" prefWidth="1135.0" stylesheets="@AffichageListUser.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Evenements.GererController">
    <children>
       <ImageView fitHeight="469.0" fitWidth="1103.0" layoutX="18.0" layoutY="107.0">
          <image>

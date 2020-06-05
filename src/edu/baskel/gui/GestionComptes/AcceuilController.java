@@ -81,6 +81,8 @@ public class AcceuilController implements Initializable {
     private Button btnVelo;
     @FXML
     private Icons525View fbIcon;
+    @FXML
+    private MenuItem btnHistorique;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -206,13 +208,13 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void RedirectionConsulterEV(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("List_Event_Add_Participation.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../Evenements/List_Event_Add_Participation.fxml"));
         ANchorProfil.getChildren().setAll(pane);
     }
 
     @FXML
     void RedirectionGererEvenemn(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("Gerer.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../Evenements/Gerer.fxml"));
         ANchorProfil.getChildren().setAll(pane);
     }
 
@@ -241,6 +243,12 @@ public class AcceuilController implements Initializable {
     @FXML
     void RedirectionReparateur(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../reparateurGUI/MenuReparateur.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+    }
+
+    @FXML
+    void COnsulterAvisEvent(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../Evenements/Historique des evenements.fxml"));
         ANchorProfil.getChildren().setAll(pane);
     }
 
