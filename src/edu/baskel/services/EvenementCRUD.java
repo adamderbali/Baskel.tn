@@ -112,6 +112,36 @@ public class EvenementCRUD {
         return false;
 
     }
+    
+    
+      public boolean verifierGererEvent(int id_u) {
+        Evenement e = new Evenement();
+        EvenementCRUD ev = new EvenementCRUD();
+        try {
+
+            String requete = "SELECT * FROM evenement WHERE id_e=?";
+
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, id_u);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                return true;
+
+            }
+            System.out.println("resultat trouvé");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("++++++++++++++++");
+            System.out.println("resultat non trouvé");
+        }
+        return false;
+
+    }
 
     /* verifier ken fama evenement nbr_max_e =0 ya3ni membre madakhelch nbr eli yheb aih mta3 participant*/
     public boolean verifierNbrMaxE(int id_e) {

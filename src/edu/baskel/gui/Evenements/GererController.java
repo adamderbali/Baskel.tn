@@ -40,6 +40,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -100,6 +101,12 @@ public class GererController implements Initializable {
     ObservableList obser;
     @FXML
     private JFXCheckBox dateTrie;
+    
+    @FXML
+    private AnchorPane pasEvent;
+
+    @FXML
+    private Label label;
 
     public GererController() {
 
@@ -446,6 +453,9 @@ public class GererController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+       
+        
         tableAffichage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         actualiser();

@@ -194,6 +194,7 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void RedirectionGererEvenemn(ActionEvent event) throws IOException {
+       
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../Evenements/Gerer.fxml"));
         ANchorProfil.getChildren().setAll(pane);
     }
