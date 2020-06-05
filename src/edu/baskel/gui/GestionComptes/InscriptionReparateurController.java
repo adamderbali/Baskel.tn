@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Reparateur;
 import edu.baskel.services.EnvoiMail;
@@ -37,6 +38,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -108,12 +110,18 @@ public class InscriptionReparateurController implements Initializable {
     private FontAwesomeIconView chkCmotdepasi;
     @FXML
     private Label lblfaible;
+    @FXML
+    private Button btnMap;
+    @FXML
+    private AnchorPane anchorMap;
 
     Connection cnx;
     private PreparedStatement prep;
     private ResultSet res;
     Image image;
     EnvoiMail e = new EnvoiMail();
+    LatLong lm2;
+    GmapViewController gv = new GmapViewController();
 
     /**
      * Initializes the controller class.
@@ -121,6 +129,7 @@ public class InscriptionReparateurController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
         txtmotdepasse.setVisible(true);
         txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);
@@ -239,7 +248,6 @@ public class InscriptionReparateurController implements Initializable {
         }
     }
 
-   
 //pour l upload d une photo
     @FXML
     void telechargerPhoto(ActionEvent event) throws IOException {
@@ -630,6 +638,23 @@ public class InscriptionReparateurController implements Initializable {
             txtadrlocal.setFocusColor(Paint.valueOf("#0096a4"));
             txtadrlocal.setUnFocusColor(Paint.valueOf("#0096a4"));
         }
+    }
+
+    @FXML
+    void MapGoogle(ActionEvent event) throws IOException {
+        /*Parent redirection_parent = FXMLLoader.load(getClass().getResource("GmapView.fxml"));//
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();*/
+
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("GmapView.fxml"));
+        anchorMap.getChildren().setAll(pane);
+    }
+
+    public void setTxtadrlocal(String txtadrlocal) {
+        this.txtadrlocal.setText(txtadrlocal);
+
     }
 
 }

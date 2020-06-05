@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.reparateurGUI;
+package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -24,7 +24,6 @@ import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 
 /**
@@ -32,7 +31,7 @@ import netscape.javascript.JSObject;
  *
  * @author ASUS
  */
-public class GoogleMapViewController implements Initializable, MapComponentInitializedListener {
+public class MapController implements Initializable, MapComponentInitializedListener {
 
     /**
      * Initializes the controller class.
@@ -41,8 +40,14 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
     private GoogleMapView mapView;
 
     private GoogleMap Gmap;
-   
+    
+      @FXML
+    private TextField latitude;
 
+    @FXML
+    private TextField longitude;
+    @FXML
+    private JFXButton longLati;
 
 
     @Override
@@ -79,7 +84,10 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
         Gmap.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
-          
+            longitude.setText(String.valueOf(ll.getLongitude()));
+            latitude.setText(String.valueOf(ll.getLatitude()));
+            System.out.println("chnia feha za3ma"+latitude.getText());
+            System.out.println("chnia feha za3ma"+longitude.getText());
             Gmap.clearMarkers();
             LatLong joeSmithLocation = new LatLong(ll.getLatitude(), ll.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
@@ -90,6 +98,10 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
 
     }
     
-   
+     @FXML
+    void longLat(ActionEvent event) {
+      
+    }
+
 
 }
