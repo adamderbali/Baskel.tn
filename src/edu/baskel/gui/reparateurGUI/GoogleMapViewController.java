@@ -5,6 +5,7 @@
  */
 package edu.baskel.gui.reparateurGUI;
 
+import com.jfoenix.controls.JFXButton;
 import com.lynden.gmapsfx.GoogleMapView;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +22,9 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import javafx.event.ActionEvent;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 
 /**
@@ -37,6 +41,9 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
     private GoogleMapView mapView;
 
     private GoogleMap Gmap;
+   
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,6 +79,7 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
         Gmap.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
+          
             Gmap.clearMarkers();
             LatLong joeSmithLocation = new LatLong(ll.getLatitude(), ll.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
@@ -81,5 +89,7 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
         });
 
     }
+    
+   
 
 }

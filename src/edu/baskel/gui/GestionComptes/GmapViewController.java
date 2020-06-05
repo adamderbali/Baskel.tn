@@ -6,7 +6,6 @@
 package edu.baskel.gui.GestionComptes;
 
 import com.jfoenix.controls.JFXButton;
-import com.lynden.gmapsfx.GoogleMapView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -15,23 +14,27 @@ import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.javascript.object.InfoWindow;
-import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import netscape.javascript.JSObject;
 
 /**
  * FXML Controller class
  *
- * @author ASUS
+ * @author dell
  */
-public class MapController implements Initializable, MapComponentInitializedListener {
+public class GmapViewController implements Initializable, MapComponentInitializedListener {
 
     /**
      * Initializes the controller class.
@@ -40,19 +43,35 @@ public class MapController implements Initializable, MapComponentInitializedList
     private GoogleMapView mapView;
 
     private GoogleMap Gmap;
-    
-      @FXML
+
+    @FXML
     private TextField latitude;
 
     @FXML
     private TextField longitude;
     @FXML
     private JFXButton longLati;
-
+    public static String ff;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInializedListener(this);
+longLati.setOnAction(new EventHandler<ActionEvent>() {
+    @Override public void handle(ActionEvent e) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InscriptionReparateur.fxml"));
+        Parent root2;
+            root2 = loader.load();
+            InscriptionReparateurController nmp = loader.getController();
+        nmp.setTxtadrlocal(latitude.getText());
+        latitude.getScene().setRoot(root2);
+        } catch (IOException ex) {
+            Logger.getLogger(GmapViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+});
     }
 
     @Override
@@ -86,22 +105,42 @@ public class MapController implements Initializable, MapComponentInitializedList
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
             longitude.setText(String.valueOf(ll.getLongitude()));
             latitude.setText(String.valueOf(ll.getLatitude()));
-            System.out.println("chnia feha za3ma"+latitude.getText());
-            System.out.println("chnia feha za3ma"+longitude.getText());
+            GmapViewController.setFf(String.valueOf(ll.getLongitude()));
+            System.out.println(ff);
+            System.out.println("chnia feha za3ma" + latitude.getText());
+            System.out.println("chnia feha za3ma" + longitude.getText());
             Gmap.clearMarkers();
             LatLong joeSmithLocation = new LatLong(ll.getLatitude(), ll.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
             markerOptions1.position(joeSmithLocation);
             Marker joeSmithMarker = new Marker(markerOptions1);
             Gmap.addMarker(joeSmithMarker);
+            
         });
 
     }
     
-     @FXML
-    void longLat(ActionEvent event) {
-      
+    
+
+    @FXML
+    void longLat(ActionEvent event) throws IOException {
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("InscriptionReparateur.fxml"));
+        Parent root2 = loader.load();
+        InscriptionReparateurController nmp = loader.getController();
+        nmp.setTxtadrlocal(latitude.getText());
+        latitude.getScene().setRoot(root2);*/
+        System.out.println("**********************");
+        InscriptionReparateurController ir = new InscriptionReparateurController();
+        ir.setTxtadrlocal(longitude.getText());
     }
 
+    public static String getFf() {
+        return ff;
+    }
 
+    public static void setFf(String ff) {
+        GmapViewController.ff = ff;
+    }
+
+   
 }

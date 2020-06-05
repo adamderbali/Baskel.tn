@@ -42,12 +42,13 @@
             </LinearGradient>
          </fill>
       </Text>
-      <JFXButton fx:id="idRetour" layoutX="584.0" layoutY="10.0" onAction="#retour" prefHeight="17.0" prefWidth="24.0" text="X" />
+     
       <JFXButton fx:id="idRetour" layoutX="408.0" layoutY="421.0" onAction="#ajouterEvenement" prefHeight="27.0" prefWidth="90.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Valider" textFill="#007782" />
       <ImageView fx:id="img" fitHeight="94.0" fitWidth="111.0" layoutX="326.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true" />
       <JFXButton fx:id="nom" layoutX="529.0" layoutY="82.0" text="*" textFill="#f80202" />
       <JFXButton fx:id="lieu" layoutX="529.0" layoutY="125.0" text="*" textFill="#f80202" />
       <JFXButton fx:id="description" layoutX="529.0" layoutY="171.0" text="*" textFill="#f80202" />
       <JFXButton fx:id="date" layoutX="529.0" layoutY="267.0" text="*" textFill="#f80202" />
+      <JFXButton fx:id="idRetour1" layoutX="32.0" layoutY="122.0" onAction="#ajouterEvenement" prefHeight="27.0" prefWidth="90.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Valider" textFill="#007782" />
    </children>
 </AnchorPane>
