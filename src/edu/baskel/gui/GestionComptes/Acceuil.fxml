@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.icons525.Icons525View?>
 <?import javafx.scene.control.Button?>
@@ -14,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import org.controlsfx.control.Rating?>
 
 <AnchorPane id="AnchorPane" fx:id="anchorproincipal" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.AcceuilController">
    <children>
@@ -30,12 +28,6 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Rating fx:id="rateUs" layoutX="578.0" layoutY="836.0" />
-      <Text fx:id="evaluez" layoutX="476.0" layoutY="857.0" onMouseClicked="#AfficherStars" strokeType="OUTSIDE" strokeWidth="0.0" text="évaluez nous">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font></Text>
-      <JFXButton fx:id="btnEnvoyer" layoutX="769.0" layoutY="837.0" onMousePressed="#EnvoyerNote" onMouseReleased="#HideRating" text="Enoyer" />
       <Separator layoutX="6.0" layoutY="816.0" prefHeight="5.0" prefWidth="1227.0" style="-fx-background-color: #0096a4#0096a4;" />
       <Separator layoutX="-1.0" layoutY="53.0" prefHeight="5.0" prefWidth="1247.0" style="-fx-background-color: #0096a4#0096a4;" />
       <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="1147.0" layoutY="835.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
@@ -101,5 +93,6 @@
          </font>
       </Text>
       <FontAwesomeIconView glyphName="ENVELOPE" layoutX="26.0" layoutY="860.0" size="20" />
+      <Button fx:id="btnEvaluez" layoutX="479.0" layoutY="836.0" mnemonicParsing="false" onAction="#RediEval" text="Evaluez-nous" />
    </children>
 </AnchorPane>

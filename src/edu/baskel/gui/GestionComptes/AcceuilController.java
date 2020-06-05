@@ -83,6 +83,8 @@ public class AcceuilController implements Initializable {
     private Icons525View fbIcon;
     @FXML
     private MenuItem btnHistorique;
+    @FXML
+    private Button btnEvaluez;
 
     MembreCRUD mc = new MembreCRUD();
     Membre l = SessionInfo.getLoggedM();
@@ -93,8 +95,6 @@ public class AcceuilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        rateUs.setVisible(false);
-        btnEnvoyer.setVisible(false);
         if (mc.TypeUser() == false) {
             btnAdmin.setVisible(true);
         } else {
@@ -134,26 +134,6 @@ public class AcceuilController implements Initializable {
          */
     }
 
-    //afficher star rate
-    @FXML
-    void AfficherStars(MouseEvent event) {
-        rateUs.setVisible(true);
-        btnEnvoyer.setVisible(true);
-    }
-
-    //note star rate
-    @FXML
-    void EnvoyerNote(MouseEvent event) {
-        System.out.println("Rate" + "   " + l.getId_u() + "  " + rateUs.getRating());
-    }
-
-    //cacher star rate
-    @FXML
-    void HideRating(MouseEvent event) {
-        rateUs.setVisible(false);
-        btnEnvoyer.setVisible(false);
-    }
-
     //redirection contact us
     @FXML
     public void RedirectionContactezNs(MouseEvent event) throws IOException {
@@ -190,7 +170,7 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void RedirectionAdmin(ActionEvent event) throws IOException {
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("admin.fxml"));
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("../Admin/admin.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
@@ -199,7 +179,7 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void REdirectionRec(ActionEvent event) throws IOException {
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Affichage_user.fxml"));
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("../Admin/Affichage_user.fxml"));
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
@@ -250,6 +230,15 @@ public class AcceuilController implements Initializable {
     void COnsulterAvisEvent(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../Evenements/Historique des evenements.fxml"));
         ANchorProfil.getChildren().setAll(pane);
+    }
+
+    @FXML
+    void RediEval(ActionEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("../Admin/avis_app.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.show();
     }
 
 //fermer l application
