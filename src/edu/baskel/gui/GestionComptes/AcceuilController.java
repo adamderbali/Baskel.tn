@@ -219,7 +219,7 @@ public class AcceuilController implements Initializable {
     @FXML
     void RedirectionVelos(ActionEvent event) throws IOException {
         // AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/edu.baskel.gui.velo/Afficher_Tout_Velo.fxml"));
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../velo/Afficher_Tout_Velo.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Afficher_Tout_Velo.fxml"));
         ANchorProfil.getChildren().setAll(pane);
 
     }

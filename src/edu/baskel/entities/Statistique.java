@@ -17,18 +17,6 @@ public class Statistique {
     private int id_u;
     private int nbr_visite;
     Membre membre;
-   
-
-   
-
-    public Statistique(int id_stat, String id_interface, int id_u, int nbr_visite, Membre membre) {
-        this.id_stat = id_stat;
-        this.id_interface = id_interface;
-        this.id_u = id_u;
-        this.nbr_visite = nbr_visite;
-        this.membre = membre;
-       
-    }
 
     public Membre getMembre() {
         return membre;
@@ -38,7 +26,13 @@ public class Statistique {
         this.membre = membre;
     }
 
-    
+    public Statistique(int id_stat, String id_interface, int id_u, int nbr_visite, Membre membre) {
+        this.id_stat = id_stat;
+        this.id_interface = id_interface;
+        this.id_u = id_u;
+        this.nbr_visite = nbr_visite;
+        this.membre = membre;
+    }
 
     
     public int getNbr_visite() {

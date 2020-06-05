@@ -105,7 +105,6 @@ public class Ajouter_EvenementController implements Initializable {
 
             // Load the scene
             thisStage.setScene(new Scene(loader.load()));
-            thisStage.setTitle("Ajout evenement");
 
             // Setup the window/stage
             //thisStage.setTitle("Passing Controllers Example - Layout2");
@@ -122,7 +121,7 @@ public class Ajouter_EvenementController implements Initializable {
     /* Ajout evenement*/
     @FXML
     void ajouterEvenement(ActionEvent event) {
-       
+        txtNom.setDisable(true);
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
@@ -302,26 +301,18 @@ public class Ajouter_EvenementController implements Initializable {
                                                                     } else {
                                                                         EvenementCRUD Ev = new EvenementCRUD();
                                                                         if (Ev.verifierNom(txtNom.getText()) == true) {
-                                                                            System.out.println("+++++++++za3ma mch 9a3ed yodkhel lehna jemla???" + txtNom.getText());
+                                                                            System.out.println("+++++++++za3ma mch 9a3ed yodkhel lehna jemla???"+txtNom.getText());
                                                                             txtNom.setFocusColor(rgb(255, 0, 0));
                                                                             txtNom.setUnFocusColor(rgb(255, 0, 0));
                                                                             txtNom.setStyle("-fx-text-fill: #C4151C");
-
+                                                                            
                                                                             validationSaisie.notifInfo("Erreur", "Le nom de l'evenement existe deja");
                                                                         } else {
-                                                                            if(txtNombre.getText().equals("")){
-                                                                               EvenementCRUD Ec = new EvenementCRUD();
-                                                                            System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
-                                                                            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                                    getText(), pathE.getText(), ml.getId_u(),0);
-                                                                            Ec.ajouterEvenement(e); 
-                                                                            }
-                                                                            else{
                                                                             EvenementCRUD Ec = new EvenementCRUD();
-                                                                            System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
+
                                                                             Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
                                                                                     getText(), pathE.getText(), ml.getId_u(), Integer.parseInt(txtNombre.getText()));
-                                                                            Ec.ajouterEvenement(e);}
+                                                                            Ec.ajouterEvenement(e);
                                                                             txtNom.clear();
                                                                             txtLieu.clear();
                                                                             txtDate.setValue(null);

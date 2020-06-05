@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.baskel.gui.velo;
+package edu.baskel.gui.GestionComptes;
 
 import edu.baskel.entities.Reservation;
 import edu.baskel.services.ReservationCRUD;
 import edu.baskel.utils.InputValidation;
-import edu.baskel.utils.TrayIconDemo;
 import edu.baskel.utils.validationSaisie;
-import java.awt.AWTException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,9 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
-import tray.animations.AnimationType;
-import tray.notification.NotificationType;
-import tray.notification.TrayNotification;
 
 /**
  * FXML Controller class
@@ -93,27 +87,13 @@ public class ModifierReservationController implements Initializable {
                 rc.modifierReservation(r, id_res);
                  Alert alertAdded = new validationSaisie().getAlert("Succés de modification", "Réservation modifiée");
                 alertAdded.showAndWait();
-                
-                try {
-                    TrayIconDemo.notif();
-                } catch (AWTException ex) {
-                    ex.printStackTrace();
-                }
-                /*TrayNotification tray = new TrayNotification();
-                AnimationType type = AnimationType.POPUP;
-
-                tray.setAnimationType(type);
-                tray.setTitle("Succés de modification");
-                tray.setMessage("Réservation modifiée");
-                tray.setNotificationType(NotificationType.SUCCESS);
-                tray.showAndDismiss(Duration.millis(4000));*/
-                /*Notifications notificationBuilder = Notifications.create()
+                Notifications notificationBuilder = Notifications.create()
                 .title("Modification")
                 .text("Votre réservation a été modifiée!")
                         .graphic(null)
                 //.graphic(new ImageView(img))
                 .hideAfter(Duration.seconds(5))
-                .position(Pos.BOTTOM_LEFT)
+                .position(Pos.CENTER)
                 .onAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -122,7 +102,7 @@ public class ModifierReservationController implements Initializable {
                 });
         //notificationBuilder.darkStyle();
                 System.out.println("khsdfkjsd");
-        notificationBuilder.showError();*/
+        notificationBuilder.showError();
                 System.out.println("sfsd");
                 Stage stage = (Stage) modifbut.getScene().getWindow();
                  // do what you have to do

@@ -5,8 +5,6 @@
  */
 package edu.baskel.test;
 
-import edu.baskel.entities.Avis_admin;
-import edu.baskel.services.AvisAdminCRUD;
 import edu.baskel.services.BanCRUD;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ReclamationCRUD;
@@ -25,13 +23,10 @@ public class Test_Admin         // TODO code application logic here
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException {
-            //Avis_admin a = new Avis_admin(4.00,"skander", 15);
-            Avis_admin b = new Avis_admin(3.00, "skander", 15);
-
-            AvisAdminCRUD ev= new AvisAdminCRUD();
-            ev.update_avis(b);
-            //ev.insertion_avis(a);
+    public static void main(String[] args) {
+        
+        
+            ReclamationCRUD m = new ReclamationCRUD();
             /*StatCRUD sc = new StatCRUD();
             BanCRUD b= new BanCRUD();
             sc.Reclamation_admin_nbr();
@@ -41,6 +36,7 @@ public class Test_Admin         // TODO code application logic here
             sc.affichage_user_nbr();
             System.out.println("\t");*/
             
+            System.out.println(m.EventAllListAdmin());
             //try {
                 //m.Banner_user();
                 //b.bannereExiste(6);

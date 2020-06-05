@@ -23,7 +23,7 @@
             <Image url="@../../../../images/clipboard-file-document-paste-files-1-18886.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="velo" fitHeight="178.0" fitWidth="189.0" layoutX="501.0" layoutY="199.0" onMouseClicked="#avis_Stat">
+      <ImageView fx:id="velo" fitHeight="178.0" fitWidth="189.0" layoutX="501.0" layoutY="199.0" onMouseClicked="#gest_velo">
          <image>
             <Image url="@../../../../images/bikeshare_icon.png" />
          </image>

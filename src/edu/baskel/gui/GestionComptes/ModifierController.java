@@ -125,7 +125,7 @@ public class ModifierController implements Initializable {
 
             // Load the scene
             thisStage.setScene(new Scene(loader.load()));
-            thisStage.setTitle("Modifier evenement");
+
             // Setup the window/stage
             //thisStage.setTitle("Passing Controllers Example - Layout2");
         } catch (IOException e) {

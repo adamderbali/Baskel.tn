@@ -50,7 +50,6 @@ public class AvisEvenementController implements Initializable {
 
             // Load the scene
             thisStage.setScene(new Scene(loader.load()));
-            thisStage.setTitle("Exprimez votre avis");
 
             // Setup the window/stage
             //thisStage.setTitle("Passing Controllers Example - Layout2");
