@@ -144,6 +144,47 @@ public class StatCRUD {
         }
         return n2;
     }
+    private void insertion_avis(double avis, String commentaire , int id_u) throws SQLException{
+        String requete = "INSERT INTO statistique (note_avis,commentaire_avis,id_u) VALUES(?,?,?)";
+        PreparedStatement pst = cnxs.prepareStatement(requete);
+        pst.setDouble(1, avis);
+        pst.setString(2, commentaire);
+        pst.setInt(3, id_u);
+
+        pst.executeUpdate();
+    }
+     private void update_avis( String commentaire,double avis , int id_u) throws SQLException{
+        String requete = "UPDATE statistique SET  commentaire_avis='" + commentaire + "' and note_avis ='" + avis + "' where id_u='" + id_u + "'";
+        PreparedStatement pst = cnxs.prepareStatement(requete);
+        pst.setString(1, commentaire);
+        pst.setDouble(2, avis);
+
+        pst.setInt(3, id_u);
+
+        pst.executeUpdate();
+    }
+     public void Envoie_avis(double avis, String commentaire , int id_u){
+        try {
+            String reqa4 = "Select commentaire_avis , note_avis from ban where id_u='"+id_u+"'";
+            PreparedStatement pstmt = cnxs.prepareStatement(reqa4);
+            //pstmt.setInt(1,id_u);
+            //pstmt.executeQuery(reqa4);
+            ResultSet res = pstmt.executeQuery(reqa4);
+            if(!res.next())
+            {
+                update_avis(commentaire,avis,id_u);
+                System.out.println("insertion de Membre "+id_u+"  validée");
+            }
+            else{
+                insertion_avis(avis,commentaire,id_u);
+                System.out.println("Update de Membre "+id_u+"  validée");
+
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }   
+    }
     
     }
    
