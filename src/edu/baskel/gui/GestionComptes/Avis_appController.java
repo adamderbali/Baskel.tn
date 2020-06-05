@@ -20,8 +20,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import org.controlsfx.control.Rating;
 
@@ -39,7 +41,7 @@ public class Avis_appController implements Initializable {
     @FXML
     private Button bt_envoie;
     @FXML
-    private JFXTextField comm_note;
+    private Label comm_note;
     Membre ml = SessionInfo.getLoggedM();
 
 
@@ -78,22 +80,23 @@ System.out.println("Insertion oki");
     private void afficher_rat(MouseEvent event){
     if(avis_user.getRating()==1)
     {
+        comm_note.setTextFill(Color.web("#FF0000"));
         comm_note.setText("Mauvaise");
     }
     else if(avis_user.getRating()==2)
-    {
+    {   comm_note.setTextFill(Color.web("#FF4900"));
         comm_note.setText("Assez bien");
     }
     else if(avis_user.getRating()==3)
-    {
+    {   comm_note.setTextFill(Color.web("#FFCC00"));
         comm_note.setText("Passable");
     }
     else if(avis_user.getRating()==4)
-    {
+    {comm_note.setTextFill(Color.web("#A6F87E"));
         comm_note.setText("Bien");
     }
     else if(avis_user.getRating()==5)
-    {
+    {   comm_note.setTextFill(Color.web("#096a09"));
         comm_note.setText("Parfait ! ");
     }
 }
