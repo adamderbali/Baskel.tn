@@ -21,6 +21,9 @@ import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import edu.baskel.entities.Reparateur;
+import edu.baskel.services.ReparateurCRUD;
+import java.util.List;
 import netscape.javascript.JSObject;
 
 /**
@@ -37,6 +40,8 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
     private GoogleMapView mapView;
 
     private GoogleMap Gmap;
+    
+    LatLong globallatlong ;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -77,8 +82,21 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
             MarkerOptions markerOptions1 = new MarkerOptions();
             markerOptions1.position(joeSmithLocation);
             Marker joeSmithMarker = new Marker(markerOptions1);
+            this.globallatlong=new LatLong(ll.getLatitude(), ll.getLongitude());
             Gmap.addMarker(joeSmithMarker);
         });
+        
+        ReparateurCRUD rcrd = new ReparateurCRUD();
+        List<Reparateur> lstrep = rcrd.getListeReparateur();
+        
+        for (Reparateur r : lstrep){
+            LatLong ll = new LatLong(Double.parseDouble(r.getLatitude()), Double.parseDouble(r.getLongitude()));
+            MarkerOptions markerOptions1 = new MarkerOptions();
+            markerOptions1.position(ll);
+            Marker marker = new Marker(markerOptions1);
+            marker.setTitle(r.getNum_pro());
+            Gmap.addMarker(marker);
+        }
 
     }
 
