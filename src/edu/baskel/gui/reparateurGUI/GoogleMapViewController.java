@@ -85,7 +85,7 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
             this.globallatlong=new LatLong(ll.getLatitude(), ll.getLongitude());
             Gmap.addMarker(joeSmithMarker);
         });
-        
+        //show markers on maps
         ReparateurCRUD rcrd = new ReparateurCRUD();
         List<Reparateur> lstrep = rcrd.getListeReparateur();
         
