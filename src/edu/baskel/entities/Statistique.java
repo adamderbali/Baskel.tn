@@ -17,6 +17,34 @@ public class Statistique {
     private int id_u;
     private int nbr_visite;
     Membre membre;
+    private double note;
+    private String commentaire;
+
+    public double getNote() {
+        return note;
+    }
+
+    public void setNote(double note) {
+        this.note = note;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public Statistique(int id_stat, String id_interface, int id_u, int nbr_visite, Membre membre, double note, String commentaire) {
+        this.id_stat = id_stat;
+        this.id_interface = id_interface;
+        this.id_u = id_u;
+        this.nbr_visite = nbr_visite;
+        this.membre = membre;
+        this.note = note;
+        this.commentaire = commentaire;
+    }
 
     public Membre getMembre() {
         return membre;
