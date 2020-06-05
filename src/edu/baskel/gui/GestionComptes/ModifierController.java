@@ -59,11 +59,12 @@ import org.controlsfx.control.textfield.TextFields;
  * @author sabri
  */
 public class ModifierController implements Initializable {
+
     Membre ml = SessionInfo.getLoggedM();
-    
+
     Image image;
     Image im;
-   @FXML
+    @FXML
     private AnchorPane anchor;
 
     @FXML
@@ -504,43 +505,41 @@ public class ModifierController implements Initializable {
             
         }*/
     }
-    
-     @FXML
+
+    @FXML
     void description(MouseEvent event) {
-        
+
         txtDescription.setFocusColor(rgb(0, 150, 164));
-                txtDescription.setUnFocusColor(rgb(77, 77, 77));
-                txtDescription.setStyle("-fx-prompt-text-fill: #000000");
+        txtDescription.setUnFocusColor(rgb(77, 77, 77));
+        txtDescription.setStyle("-fx-prompt-text-fill: #000000");
 
     }
 
     @FXML
     void lieu(MouseEvent event) {
-        
-          
+
         txtLieu.setFocusColor(rgb(0, 150, 164));
-                txtLieu.setUnFocusColor(rgb(77, 77, 77));
-                txtLieu.setStyle("-fx-prompt-text-fill: #000000");
+        txtLieu.setUnFocusColor(rgb(77, 77, 77));
+        txtLieu.setStyle("-fx-prompt-text-fill: #000000");
 
     }
 
     @FXML
     void nom(MouseEvent event) {
-        
-          
+
         txtNom.setFocusColor(rgb(0, 150, 164));
-                txtNom.setUnFocusColor(rgb(77, 77, 77));
-                txtNom.setStyle("-fx-prompt-text-fill: #000000");
+        txtNom.setUnFocusColor(rgb(77, 77, 77));
+        txtNom.setStyle("-fx-prompt-text-fill: #000000");
 
     }
-  @FXML
+
+    @FXML
     void date(MouseEvent event) {
-        
-         txtDate.setDefaultColor(rgb(0, 150, 164));
-         txtDate.setStyle("-fx-prompt-text-fill: #000000");
+
+        txtDate.setDefaultColor(rgb(0, 150, 164));
+        txtDate.setStyle("-fx-prompt-text-fill: #000000");
 
     }
-
 
     @FXML
     void retour(ActionEvent event) {
