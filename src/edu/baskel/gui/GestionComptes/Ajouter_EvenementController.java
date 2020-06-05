@@ -121,7 +121,7 @@ public class Ajouter_EvenementController implements Initializable {
     /* Ajout evenement*/
     @FXML
     void ajouterEvenement(ActionEvent event) {
-
+        txtNom.setDisable(true);
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/

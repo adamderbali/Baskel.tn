@@ -50,6 +50,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.apache.log4j.helpers.Loader;
 
 public class List_Event_Add_ParticipationController implements Initializable {
 
@@ -355,6 +356,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
+            app_stage.setTitle("Historique de vos participation");
             app_stage.show();
 
         } catch (IOException ex) {
@@ -435,7 +437,11 @@ public class List_Event_Add_ParticipationController implements Initializable {
     void lancerAjout(ActionEvent event) {
         //btnAjout.setDisable(true);
         Ajouter_EvenementController controller2 = new Ajouter_EvenementController(this);
+        
         controller2.showStage();
+        
+        
+        
 
     }
 

@@ -350,6 +350,7 @@ public class GererController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
+            app_stage.setTitle("Details de vos evenements");
             app_stage.show();
 
         } catch (IOException ex) {

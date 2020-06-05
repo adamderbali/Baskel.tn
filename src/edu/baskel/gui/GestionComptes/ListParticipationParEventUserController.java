@@ -158,6 +158,7 @@ public class ListParticipationParEventUserController implements Initializable {
                 Parent p = Loader.getRoot();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(p));
+                stage.setTitle("Details des participants");
                 stage.show();
                 }
             }
@@ -175,6 +176,7 @@ public class ListParticipationParEventUserController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
+            app_stage.setTitle("Gestion de vos evenements");
             app_stage.show();
 
         } catch (IOException ex) {

@@ -789,13 +789,7 @@ public class EvenementCRUD {
         return moy;
 
     }
-    
-    
-    
-    
-    
-    
-    
+
 
     public List<Evenement> displayByEvent(int id_e) {
 
