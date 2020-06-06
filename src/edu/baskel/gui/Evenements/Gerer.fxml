@@ -3,15 +3,19 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="650.0" prefWidth="1135.0" stylesheets="@AffichageListUser.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Evenements.GererController">
    <children>
-      <ImageView fitHeight="469.0" fitWidth="1103.0" layoutX="18.0" layoutY="107.0">
+      <ImageView fx:id="imageVelo" fitHeight="469.0" fitWidth="1097.0" layoutX="18.0" layoutY="107.0">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
@@ -27,6 +31,19 @@
         </columns>
       </TableView>
       <JFXButton fx:id="valider" layoutX="395.0" layoutY="596.0" onAction="#ValiderModif" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Modifier" textFill="#00747f" />
+      <Label fx:id="label" alignment="CENTER_RIGHT" text="Vous n'avez pas encore des evenements" translateX="470.0" translateY="330.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#00747f" />
+                  <Stop color="#0a0a0a" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
       <JFXButton fx:id="supprimer" layoutX="571.0" layoutY="596.0" onAction="#supprimer" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" text="Supprimer" textFill="#00747f" />
       <JFXTextField fx:id="search" focusColor="#007782" layoutX="18.0" layoutY="34.0" onKeyTyped="#searchBox" prefHeight="25.0" prefWidth="187.0" promptText=" Rechercher par nom,lieu et date" unFocusColor="#007782" />
       <JFXButton fx:id="detail" layoutX="972.0" layoutY="33.0" onAction="#detailEvent" prefHeight="27.0" prefWidth="149.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="Detail des evenements" textFill="#00747f" />

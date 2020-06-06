@@ -7,11 +7,14 @@ package edu.baskel.gui.Evenements;
 
 import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Evenement;
+import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.awt.Checkbox;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,19 +28,26 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -58,10 +68,9 @@ public class Annulation_participationController implements Initializable {
 
     @FXML
     private TableColumn<Participation, String> colDate;
-
-
-    /*  @FXML
-    private TableColumn<Participation, String> colAvis;*/
+    
+    @FXML
+    private ImageView imagePar;
     @FXML
     private TableColumn<Participation, String> colLieu;
 
@@ -80,14 +89,16 @@ public class Annulation_participationController implements Initializable {
 
     @FXML
     private JFXButton annuler;
+ 
+
     
      @FXML
     private JFXButton donnerAvis;
-
+     Membre ml = SessionInfo.getLoggedM();
     public Annulation_participationController() {
     }
    
-
+ 
     public void affichageEvenementP() {
 
         ParticipationCrud parList = new ParticipationCrud();
@@ -192,10 +203,12 @@ public class Annulation_participationController implements Initializable {
                         obser.removeAll(p);
                         System.out.println("ok--------------------");
                         actualiser();
+                       
 
                     }
                     validationSaisie.notifConfirm("ok", "Participation annulée");
                     actualiser();
+                 
                 }
             }
             System.out.println("makouchit chay");
@@ -270,9 +283,11 @@ public class Annulation_participationController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+     
         tableAffichage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         affichageEvenementP();
         actualiser();
+        
 
     }
 

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -300,44 +301,52 @@ public class Ajouter_EvenementController implements Initializable {
                                                                         txtDate.setDefaultColor(rgb(255, 0, 0));
                                                                         txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
                                                                     } else {
-                                                                        EvenementCRUD Ev = new EvenementCRUD();
-                                                                        if (Ev.verifierNom(txtNom.getText()) == true) {
-                                                                            System.out.println("+++++++++za3ma mch 9a3ed yodkhel lehna jemla???" + txtNom.getText());
-                                                                            txtNom.setFocusColor(rgb(255, 0, 0));
-                                                                            txtNom.setUnFocusColor(rgb(255, 0, 0));
-                                                                            txtNom.setStyle("-fx-text-fill: #C4151C");
-
-                                                                            validationSaisie.notifInfo("Erreur", "Le nom de l'evenement existe deja");
-                                                                        } else {
-                                                                            if(txtNombre.getText().equals("")){
-                                                                               EvenementCRUD Ec = new EvenementCRUD();
-                                                                            System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
-                                                                            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                                    getText(), pathE.getText(), ml.getId_u(),0);
-                                                                            Ec.ajouterEvenement(e); 
-                                                                            }
-                                                                            else{
-                                                                            EvenementCRUD Ec = new EvenementCRUD();
-                                                                            System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
-                                                                            Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                                    getText(), pathE.getText(), ml.getId_u(), Integer.parseInt(txtNombre.getText()));
-                                                                            Ec.ajouterEvenement(e);}
-                                                                            txtNom.clear();
-                                                                            txtLieu.clear();
-                                                                            txtDate.setValue(null);
-                                                                            txtDescription.clear();
-                                                                            pathE.clear();
-                                                                            txtNombre.clear();
-                                                                            img.setVisible(false);
-                                                                            Stage stage = (Stage) idRetour.getScene().getWindow();
-                                                                            stage.close();
-
-                                                                            controller1.actualiser();
-                                                                            validationSaisie.notifConfirm("ok", "Evenement ajouté");
+                                                                       
+                                                                        if(!(txtNombre.getText().contentEquals("[0-9]"))){
+                                                                        validationSaisie.notifInfo("Nombre des participants", "Vous devez saisir un entier");
+                                                                        txtDate.setDefaultColor(rgb(255, 0, 0));
+                                                                        txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
                                                                         }
-                                                                    }
+                                                                    
+                                                                    else {
+                                                                            EvenementCRUD Ev = new EvenementCRUD();
+                                                                            if (Ev.verifierNom(txtNom.getText()) == true) {
+                                                                                System.out.println("+++++++++za3ma mch 9a3ed yodkhel lehna jemla???" + txtNom.getText());
+                                                                                txtNom.setFocusColor(rgb(255, 0, 0));
+                                                                                txtNom.setUnFocusColor(rgb(255, 0, 0));
+                                                                                txtNom.setStyle("-fx-text-fill: #C4151C");
+                                                                                
+                                                                                validationSaisie.notifInfo("Erreur", "Le nom de l'evenement existe deja");
+                                                                            } else {
+                                                                                if(txtNombre.getText().equals("")){
+                                                                                    EvenementCRUD Ec = new EvenementCRUD();
+                                                                                    System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
+                                                                                    Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                                                                                            getText(), pathE.getText(), ml.getId_u(),0);
+                                                                                    Ec.ajouterEvenement(e);
+                                                                                }
+                                                                                else{
+                                                                                    EvenementCRUD Ec = new EvenementCRUD();
+                                                                                    System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
+                                                                                    Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                                                                                            getText(), pathE.getText(), ml.getId_u(), Integer.parseInt(txtNombre.getText()));
+                                                                                    Ec.ajouterEvenement(e);}
+                                                                                txtNom.clear();
+                                                                                txtLieu.clear();
+                                                                                txtDate.setValue(null);
+                                                                                txtDescription.clear();
+                                                                                pathE.clear();
+                                                                                txtNombre.clear();
+                                                                                img.setVisible(false);
+                                                                                Stage stage = (Stage) idRetour.getScene().getWindow();
+                                                                                stage.close();
+                                                                                
+                                                                                controller1.actualiser();
+                                                                                validationSaisie.notifConfirm("ok", "Evenement ajouté");
+                                                                            }
+                                                                        }
                                                                 }
-                                                            }
+                                                            }}
                                                         }
                                                     }
                                                 }

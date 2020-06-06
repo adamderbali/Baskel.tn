@@ -119,7 +119,7 @@ public class EvenementCRUD {
         EvenementCRUD ev = new EvenementCRUD();
         try {
 
-            String requete = "SELECT * FROM evenement WHERE id_e=?";
+            String requete = "SELECT * FROM evenement WHERE id_u=?";
 
             System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
@@ -142,7 +142,8 @@ public class EvenementCRUD {
         return false;
 
     }
-
+      
+     
     /* verifier ken fama evenement nbr_max_e =0 ya3ni membre madakhelch nbr eli yheb aih mta3 participant*/
     public boolean verifierNbrMaxE(int id_e) {
         Evenement e = new Evenement();

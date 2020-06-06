@@ -84,9 +84,12 @@ public class GererController implements Initializable {
     private TableColumn<Evenement, String> colImage;
     @FXML
     private AnchorPane anchor;
-
+        @FXML
+    private ImageView imageVelo;
     @FXML
     private JFXButton valider;
+  @FXML
+    private Label label;
 
     @FXML
     private JFXButton supprimer;
@@ -102,11 +105,7 @@ public class GererController implements Initializable {
     @FXML
     private JFXCheckBox dateTrie;
     
-    @FXML
-    private AnchorPane pasEvent;
-
-    @FXML
-    private Label label;
+   
 
     public GererController() {
 
@@ -131,6 +130,34 @@ public class GererController implements Initializable {
 
     public TableView<Evenement> getTableAffichage() {
         return tableAffichage;
+    }
+    public void verification(){
+    EvenementCRUD ev = new EvenementCRUD();
+    if(ev.verifierGererEvent(ml.getId_u())==true){
+        detail.setVisible(true);
+        supprimer.setVisible(true);
+        valider.setVisible(true);
+        search.setVisible(true);
+        search.setVisible(true);
+        dateTrie.setVisible(true);
+        tableAffichage.setVisible(true);
+        imageVelo.setVisible(true);
+        label.setVisible(false);
+        
+        
+    }
+    else if(ev.verifierGererEvent(ml.getId_u())==false){
+        
+        detail.setVisible(false);
+        supprimer.setVisible(false);
+        valider.setVisible(false);
+        search.setVisible(false);
+        search.setVisible(false);
+        dateTrie.setVisible(false);
+        tableAffichage.setVisible(false);
+        imageVelo.setVisible(false);
+        label.setVisible(true);
+    }
     }
 
     public void affichageEvenement() {
@@ -419,6 +446,7 @@ public class GererController implements Initializable {
                     Pc.supprimerParticipationE(e.getId_e());
                       obser.removeAll(e);
                     System.out.println("ok--------------------");
+                    verification();
                     actualiser();
 
                 }
@@ -454,7 +482,7 @@ public class GererController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-       
+       verification();
         
         tableAffichage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
