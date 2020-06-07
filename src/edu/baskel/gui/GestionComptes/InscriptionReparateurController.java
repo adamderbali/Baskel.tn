@@ -105,6 +105,10 @@ public class InscriptionReparateurController implements Initializable {
     @FXML
     private JFXTextField txtadrlocal;
     @FXML
+    private JFXTextField txtadrlocal1;
+    @FXML
+    private JFXTextField txtadrlocal2;
+    @FXML
     private JFXButton btnConnexion;
     @FXML
     private FontAwesomeIconView chkCmotdepasi;
@@ -120,8 +124,6 @@ public class InscriptionReparateurController implements Initializable {
     private ResultSet res;
     Image image;
     EnvoiMail e = new EnvoiMail();
-    LatLong lm2;
-    GmapViewController gv = new GmapViewController();
 
     /**
      * Initializes the controller class.
@@ -200,11 +202,19 @@ public class InscriptionReparateurController implements Initializable {
             txtadrlocal.setFocusColor(rgb(255, 0, 0));
             txtadrlocal.setUnFocusColor(rgb(255, 0, 0));
             txtadrlocal.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtadrlocal1.setFocusColor(rgb(255, 0, 0));
+            txtadrlocal1.setUnFocusColor(rgb(255, 0, 0));
+            txtadrlocal1.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtadrlocal2.setFocusColor(rgb(255, 0, 0));
+            txtadrlocal2.setUnFocusColor(rgb(255, 0, 0));
+            txtadrlocal2.setStyle("-fx-prompt-text-fill: #C4151C");
+
             return false;
         } else if ((txtNom.getText().isEmpty()) | (txtPrenom.getText().isEmpty()) | (txtAdresse.getText().isEmpty())
                 | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
                 | (txtconfirmation.getText().isEmpty()) | (sexeMembre().equals("")) | (txttelpro.getText().isEmpty())
                 | (txtadrlocal.getText().isEmpty())) {
+            
             InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
 
             txtNom.setFocusColor(rgb(255, 0, 0));
@@ -240,6 +250,12 @@ public class InscriptionReparateurController implements Initializable {
             txtadrlocal.setFocusColor(rgb(255, 0, 0));
             txtadrlocal.setUnFocusColor(rgb(255, 0, 0));
             txtadrlocal.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtadrlocal1.setFocusColor(rgb(255, 0, 0));
+            txtadrlocal1.setUnFocusColor(rgb(255, 0, 0));
+            txtadrlocal1.setStyle("-fx-prompt-text-fill: #C4151C");
+            txtadrlocal2.setFocusColor(rgb(255, 0, 0));
+            txtadrlocal2.setUnFocusColor(rgb(255, 0, 0));
+            txtadrlocal2.setStyle("-fx-prompt-text-fill: #C4151C");
             Def();
             return false;
 
@@ -347,8 +363,10 @@ public class InscriptionReparateurController implements Initializable {
         String telpro = txttelpro.getText();
         String adrloc = txtadrlocal.getText();
         String imge = txtimage.getText();
+        String lat = txtadrlocal2.getText();
+        String lon = txtadrlocal1.getText();
 
-        Reparateur r = new Reparateur(adrloc, null, telpro, null, null, 2, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge, "A");
+        Reparateur r = new Reparateur(adrloc, null, telpro, lat, lon, 0, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge, "U");
         if (validerchamps() == true) {
             if (InputValidation.validTextField(txtNom.getText())) {
                 InputValidation.notificationError("Nom", "Saisissez votre nom");
@@ -534,17 +552,35 @@ public class InscriptionReparateurController implements Initializable {
         txtAdresse.setUnFocusColor(Paint.valueOf("#0096a4"));
     }
 
+    @FXML
     public void DefaultThemeTelPro(MouseEvent event) {
         txttelpro.setStyle("");
         txttelpro.setFocusColor(Paint.valueOf("#0096a4"));
         txttelpro.setUnFocusColor(Paint.valueOf("#0096a4"));
     }
 
+    @FXML
     public void DefaultThemeAdrloc(MouseEvent event) {
         txtadrlocal.setStyle("");
         txtadrlocal.setFocusColor(Paint.valueOf("#0096a4"));
         txtadrlocal.setUnFocusColor(Paint.valueOf("#0096a4"));
     }
+    
+      @FXML
+    public void DefaultThemelat(MouseEvent event) {
+        txtadrlocal2.setStyle("");
+        txtadrlocal2.setFocusColor(Paint.valueOf("#0096a4"));
+        txtadrlocal2.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+    
+      @FXML
+    public void DefaultThemelong(MouseEvent event) {
+        txtadrlocal1.setStyle("");
+        txtadrlocal1.setFocusColor(Paint.valueOf("#0096a4"));
+        txtadrlocal1.setUnFocusColor(Paint.valueOf("#0096a4"));
+    }
+
+
 
     @FXML
     public void DefaultThemeMotPass(MouseEvent event) {
@@ -638,6 +674,16 @@ public class InscriptionReparateurController implements Initializable {
             txtadrlocal.setFocusColor(Paint.valueOf("#0096a4"));
             txtadrlocal.setUnFocusColor(Paint.valueOf("#0096a4"));
         }
+        if (!txtadrlocal1.getText().isEmpty()) {
+            txtadrlocal1.setStyle("");
+            txtadrlocal1.setFocusColor(Paint.valueOf("#0096a4"));
+            txtadrlocal1.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
+        if (!txtadrlocal2.getText().isEmpty()) {
+            txtadrlocal2.setStyle("");
+            txtadrlocal2.setFocusColor(Paint.valueOf("#0096a4"));
+            txtadrlocal2.setUnFocusColor(Paint.valueOf("#0096a4"));
+        }
     }
 
     @FXML
@@ -648,13 +694,22 @@ public class InscriptionReparateurController implements Initializable {
         app_stage.setScene(redirection_scene);
         app_stage.show();*/
 
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("GmapView.fxml"));
-        anchorMap.getChildren().setAll(pane);
+        //AnchorPane pane = FXMLLoader.load(getClass().getResource("GmapView.fxml"));
+        //anchorMap.getChildren().setAll(pane);
+        FXMLLoader fxmll = new FXMLLoader(getClass().getResource("GmapView.fxml"));
+        Parent root = (Parent)fxmll.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
-    public void setTxtadrlocal(String txtadrlocal) {
-        this.txtadrlocal.setText(txtadrlocal);
+    public void setTxtadrlocal2(String txtadrlocal) {
+        this.txtadrlocal2.setText(txtadrlocal);
 
+    }
+
+    public void setTxtadrlocal1(String txtadrlocal1) {
+        this.txtadrlocal1.setText(txtadrlocal1);
     }
 
 }

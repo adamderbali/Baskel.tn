@@ -20,10 +20,7 @@ import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
@@ -52,11 +49,12 @@ public class GmapViewController implements Initializable, MapComponentInitialize
     @FXML
     private JFXButton longLati;
     public static String ff;
+    public static LatLong ll;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInializedListener(this);
-longLati.setOnAction(new EventHandler<ActionEvent>() {
+/*longLati.setOnAction(new EventHandler<ActionEvent>() {
     @Override public void handle(ActionEvent e) {
 
         try {
@@ -71,7 +69,7 @@ longLati.setOnAction(new EventHandler<ActionEvent>() {
         }
         
     }
-});
+});*/
     }
 
     @Override
@@ -105,10 +103,9 @@ longLati.setOnAction(new EventHandler<ActionEvent>() {
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
             longitude.setText(String.valueOf(ll.getLongitude()));
             latitude.setText(String.valueOf(ll.getLatitude()));
-            GmapViewController.setFf(String.valueOf(ll.getLongitude()));
             System.out.println(ff);
-            System.out.println("chnia feha za3ma" + latitude.getText());
-            System.out.println("chnia feha za3ma" + longitude.getText());
+            System.out.println("++" + latitude.getText());
+            System.out.println("++" + longitude.getText());
             Gmap.clearMarkers();
             LatLong joeSmithLocation = new LatLong(ll.getLatitude(), ll.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
@@ -122,25 +119,23 @@ longLati.setOnAction(new EventHandler<ActionEvent>() {
     
     
 
-    @FXML
+@FXML
     void longLat(ActionEvent event) throws IOException {
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("InscriptionReparateur.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InscriptionReparateur.fxml"));
         Parent root2 = loader.load();
         InscriptionReparateurController nmp = loader.getController();
-        nmp.setTxtadrlocal(latitude.getText());
-        latitude.getScene().setRoot(root2);*/
-        System.out.println("**********************");
-        InscriptionReparateurController ir = new InscriptionReparateurController();
-        ir.setTxtadrlocal(longitude.getText());
+        nmp.setTxtadrlocal2(latitude.getText());
+        nmp.setTxtadrlocal1(longitude.getText());
+        latitude.getScene().setRoot(root2);
+        
+            
+        
     }
 
-    public static String getFf() {
-        return ff;
-    }
 
-    public static void setFf(String ff) {
-        GmapViewController.ff = ff;
-    }
+    
+    
+    
 
    
 }
