@@ -366,7 +366,7 @@ public class InscriptionReparateurController implements Initializable {
         String lat = txtadrlocal2.getText();
         String lon = txtadrlocal1.getText();
 
-        Reparateur r = new Reparateur(adrloc, null, telpro, lat, lon, 0, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge, "U");
+        Reparateur r = new Reparateur(adrloc, null, telpro, lat, lon, 0, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge, "R");
         if (validerchamps() == true) {
             if (InputValidation.validTextField(txtNom.getText())) {
                 InputValidation.notificationError("Nom", "Saisissez votre nom");
@@ -696,11 +696,29 @@ public class InscriptionReparateurController implements Initializable {
 
         //AnchorPane pane = FXMLLoader.load(getClass().getResource("GmapView.fxml"));
         //anchorMap.getChildren().setAll(pane);
-        FXMLLoader fxmll = new FXMLLoader(getClass().getResource("GmapView.fxml"));
+        
+        /*FXMLLoader fxmll = new FXMLLoader(getClass().getResource("GmapView.fxml"));
         Parent root = (Parent)fxmll.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.show();*/
+        
+        /* GmapViewController controller2 = new GmapViewController(this);
+         controller2.showStage();*/
+           
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GmapView.fxml"));
+        Parent root2 = loader.load();
+        GmapViewController nmp = loader.getController();
+        nmp.setNom(txtNom.getText());
+        nmp.setPrenom(txtPrenom.getText());
+        nmp.setMail(txtemail.getText());
+        nmp.setAdresse(txtAdresse.getText());
+        nmp.setPasse(txtmotdepasse.getText());
+        nmp.setCpasse(txtconfirmation.getText());
+        nmp.setTele(txttelephone.getText());
+        nmp.setTelpro(txttelpro.getText());
+        System.out.println(txttelpro.getText());
+        txtNom.getScene().setRoot(root2);
     }
 
     public void setTxtadrlocal2(String txtadrlocal) {
@@ -711,5 +729,73 @@ public class InscriptionReparateurController implements Initializable {
     public void setTxtadrlocal1(String txtadrlocal1) {
         this.txtadrlocal1.setText(txtadrlocal1);
     }
+
+    public JFXTextField getTxtNom() {
+        return txtNom;
+    }
+
+    public void setTxtNom(String txtNom) {
+        this.txtNom.setText(txtNom);
+    }
+
+    public JFXTextField getTxtemail() {
+        return txtemail;
+    }
+
+    public void setTxtemail(String txtemail) {
+        this.txtemail.setText(txtemail);
+    }
+
+    public JFXPasswordField getTxtmotdepasse() {
+        return txtmotdepasse;
+    }
+
+    public void setTxtmotdepasse(String txtmotdepasse) {
+        this.txtmotdepasse.setText(txtmotdepasse);
+    }
+
+    public JFXPasswordField getTxtconfirmation() {
+        return txtconfirmation;
+    }
+
+    public void setTxtconfirmation(String txtconfirmation) {
+        this.txtconfirmation.setText(txtconfirmation);
+    }
+
+    public JFXTextField getTxtPrenom() {
+        return txtPrenom;
+    }
+
+    public void setTxtPrenom(String txtPrenom) {
+        this.txtPrenom.setText(txtPrenom);
+    }
+
+    public JFXTextField getTxttelephone() {
+        return txttelephone;
+    }
+
+    public void setTxttelephone(String txttelephone) {
+        this.txttelephone.setText(txttelephone);
+    }
+
+    public JFXTextField getTxttelpro() {
+        return txttelpro;
+    }
+
+    public void setTxttelpro(String txttelpro) {
+        this.txttelpro.setText(txttelpro);    }
+   
+
+    public JFXTextField getTxtAdresse() {
+        return txtAdresse;
+    }
+
+    public void setTxtAdresse(String txtAdresse) {
+        this.txtAdresse.setText(txtAdresse);
+    }
+    
+    
+    
+    
 
 }

@@ -108,12 +108,13 @@ public class AcceuilController implements Initializable {
     }
 
 //afficher page profil a partir de l acceuil
+    
     @FXML
     public void Profil(ActionEvent event) throws IOException {
-        if (mc.VerifReparateur() == false) {
+        if ((l.getType_u().equals("U"))) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
             ANchorProfil.getChildren().setAll(pane);
-        } else if (mc.VerifReparateur() == true) {
+        } else if ((l.getType_u().equals("R"))) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPageReparateur.fxml"));
             ANchorProfil.getChildren().setAll(pane);
         }

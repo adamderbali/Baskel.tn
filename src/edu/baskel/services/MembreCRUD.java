@@ -37,8 +37,8 @@ public class MembreCRUD {
 //ajouter membre
     public Membre ajouterMembres2(Membre m) {
         try {
-            String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?)";
+            String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u,type_u)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?)";
             //historique
             PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);//histo
             pst.setString(1, m.getNom_u());
@@ -50,13 +50,14 @@ public class MembreCRUD {
             pst.setString(7, m.getMot_passe_u());
             pst.setString(8, m.getNum_tel_u());
             pst.setString(9, m.getImage_u());
+            pst.setString(10, m.getType_u());
             
 
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 m.setId_u(rs.getInt(1));
-                m.setType_u("U");
+                //m.setType_u("U");
                 //get las id inserted for member
                 int last_inserted_id = rs.getInt(1);
                 HistoriqueCRUD hh = new HistoriqueCRUD();
@@ -455,7 +456,7 @@ public class MembreCRUD {
         }
         return false;
     }
-
+    
     //verif email mot de passe oublié
     public boolean VerifEmailMpOublié(String email) {
         try {

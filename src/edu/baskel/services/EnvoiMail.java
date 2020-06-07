@@ -93,7 +93,6 @@ public class EnvoiMail {
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
             System.out.println("Email envoyé");
-            InputValidation.notificationsucces("succés", "essage envoyé");
 
         } catch (Exception ex) {
 

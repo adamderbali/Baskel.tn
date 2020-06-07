@@ -321,7 +321,7 @@ public class InscriptionController implements Initializable {
         String conmotdepasse = InputValidation.HshPassword(txtconfirmation.getText(), "MD5");
         String imge = txtimage.getText();
 
-        Membre m = new Membre(nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge);
+        Membre m = new Membre(0,nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge,"U");
         if (validerchamps() == true) {
             if (InputValidation.validTextField(txtNom.getText())) {
                 InputValidation.notificationError("Nom", "Saisissez votre nom");

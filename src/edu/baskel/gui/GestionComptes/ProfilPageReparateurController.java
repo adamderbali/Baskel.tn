@@ -125,6 +125,12 @@ public class ProfilPageReparateurController implements Initializable {
     private JFXTextField txtEmailVerif;
     @FXML
     private JFXTextField txtNote;
+    @FXML
+    private Button btnMap;
+    @FXML
+    private JFXTextField txtLatitude;
+    @FXML
+    private JFXTextField txtLongitude;
 
     private String photo = null;
     private File file;
@@ -150,6 +156,7 @@ public class ProfilPageReparateurController implements Initializable {
         txtshow.setVisible(false);
         txtshowc.setVisible(false);
         txtEmailVerif.setVisible(false);
+        txtNote.setEditable(false);
 
         informationReparateur();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
@@ -199,6 +206,8 @@ public class ProfilPageReparateurController implements Initializable {
         adrloc.setText(r.getAdresse_lo());
         telpro.setText(r.getNum_pro());
         txtNote.setText(String.valueOf(avcrd.getavgAvisperDep(r)));
+        txtLatitude.setText(r.getLatitude());
+        txtLongitude.setText(r.getLongitude());
     }
 
     //charger infos de profil
@@ -298,7 +307,7 @@ public class ProfilPageReparateurController implements Initializable {
     public boolean validerchamps2() {
         String nvd = nvdate.getValue().toString();
         if ((profilnom.getText().isEmpty()) | (profilprenom.getText().isEmpty()) | (profiladresse.getText().isEmpty())
-                | (profilmail.getText().isEmpty()) | (profilteleph.getText().isEmpty()) | nvd == null) {
+                | (profilmail.getText().isEmpty()) | (profilteleph.getText().isEmpty()) |(txtLatitude.getText().isEmpty()) |(txtLongitude.getText().isEmpty()) | nvd == null) {
             InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
 
             return false;
@@ -350,7 +359,7 @@ public class ProfilPageReparateurController implements Initializable {
                                             InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                         } else {
 
-                                            Reparateur rr = new Reparateur(adrloc.getText(), null, telpro.getText(), null, null,
+                                            Reparateur rr = new Reparateur(adrloc.getText(), null, telpro.getText(), txtLatitude.getText(), txtLongitude.getText(),
                                                     profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
                                                     profilmail.getText(), r.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
                                             rr.setId_u(r.getId_u());
@@ -428,5 +437,79 @@ public class ProfilPageReparateurController implements Initializable {
         Membre l = SessionInfo.getLoggedM();
         mr1.supprimerMembre(l.getId_u());
     }
+    
+    @FXML
+    void Gmap(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MapProfil.fxml"));
+        Parent root2 = loader.load();
+        MapProfilController nmp = loader.getController();
+        nmp.setNom(profilnom.getText());
+        nmp.setPrenom(profilprenom.getText());
+        nmp.setMail(profilmail.getText());
+        nmp.setAdresse(profiladresse.getText());
+        nmp.setTele(profilteleph.getText());
+        
+        profilnom.getScene().setRoot(root2);
+  
+    }
+
+    public JFXTextField getProfilnom() {
+        return profilnom;
+    }
+
+    public void setProfilnom(String profilnom) {
+        this.profilnom.setText(profilnom);
+    }
+
+    public JFXTextField getProfilprenom() {
+        return profilprenom;
+    }
+
+    public void setProfilprenom(String profilprenom) {
+        this.profilprenom.setText(profilprenom);
+    }
+
+    public JFXTextField getProfilmail() {
+        return profilmail;
+    }
+
+    public void setProfilmail(String profilmail) {
+        this.profilmail.setText(profilmail);
+    }
+
+    public JFXTextField getProfiladresse() {
+        return profiladresse;
+    }
+
+    public void setProfiladresse(String profiladresse) {
+        this.profiladresse.setText(profiladresse);
+    }
+
+    public JFXTextField getProfilteleph() {
+        return profilteleph;
+    }
+
+    public void setProfilteleph(String profilteleph) {
+        this.profilteleph.setText(profilteleph);
+    }
+
+    public JFXTextField getTxtLatitude() {
+        return txtLatitude;
+    }
+
+    public void setTxtLatitude(String txtLatitude) {
+        this.txtLatitude.setText(txtLatitude);
+    }
+
+    public JFXTextField getTxtLongitude() {
+        return txtLongitude;
+    }
+
+    public void setTxtLongitude(String txtLongitude) {
+        this.txtLongitude.setText(txtLongitude);
+    }
+    
+    
+    
 
 }

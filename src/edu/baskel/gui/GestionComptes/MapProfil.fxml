@@ -9,7 +9,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="659" prefWidth="1043" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="edu.baskel.gui.GestionComptes.GmapViewController">
+<AnchorPane id="AnchorPane" prefHeight="659" prefWidth="1043" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="edu.baskel.gui.GestionComptes.MapProfilController">
     <children>
         <TabPane prefHeight="659" prefWidth="1043" tabClosingPolicy="UNAVAILABLE">
             <tabs>

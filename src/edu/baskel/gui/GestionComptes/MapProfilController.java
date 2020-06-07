@@ -31,7 +31,7 @@ import netscape.javascript.JSObject;
  *
  * @author dell
  */
-public class GmapViewController implements Initializable, MapComponentInitializedListener {
+public class MapProfilController implements Initializable, MapComponentInitializedListener {
 
     /**
      * Initializes the controller class.
@@ -113,20 +113,16 @@ public class GmapViewController implements Initializable, MapComponentInitialize
 
     @FXML
     void longLat(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("InscriptionReparateur.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfilPageReparateur.fxml"));
         Parent root2 = loader.load();
-        InscriptionReparateurController nmp = loader.getController();
-        nmp.setTxtadrlocal2(latitude.getText());
-        nmp.setTxtadrlocal1(longitude.getText());
-        nmp.setTxtNom(nom.getText());
-        nmp.setTxtPrenom(prenom.getText());
-        nmp.setTxtemail(mail.getText());
-        nmp.setTxtAdresse(adresse.getText());
-        nmp.setTxtmotdepasse(passe.getText());
-        nmp.setTxtconfirmation(Cpasse.getText());
-        nmp.setTxttelephone(tele.getText());
-        nmp.setTxttelpro(telpro.getText());
-        System.out.println(telpro.getText());
+        ProfilPageReparateurController nmp = loader.getController();
+        nmp.setTxtLatitude(latitude.getText());
+        nmp.setTxtLongitude(longitude.getText());
+        nmp.setProfilnom(nom.getText());
+        nmp.setProfilprenom(prenom.getText());
+        nmp.setProfilmail(mail.getText());
+        nmp.setProfiladresse(adresse.getText());
+        
         latitude.getScene().setRoot(root2);
         
 
