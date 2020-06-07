@@ -30,8 +30,8 @@ public class ReparateurCRUD {
 
     public void ajouterReparateur(Reparateur r) {
         try {
-            String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?)";
+            String requete = "INSERT INTO membre (nom_u, prenom_u, adresse_u,email_u,sexe_u,date_u, mot_passe_u,num_tel_u,image_u,type_u)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
             String requete2 = "INSERT INTO reparateur (id_u,adresse_loc, nom_local,num_pro,latitude,longitude)"
                     + "VALUES(?,?,?,?,?,?)";
@@ -45,6 +45,7 @@ public class ReparateurCRUD {
             pst.setString(7, r.getMot_passe_u());
             pst.setString(8, r.getNum_tel_u());
             pst.setString(9, r.getImage_u());
+            pst.setString(10, r.getType_u());
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
@@ -90,7 +91,7 @@ public class ReparateurCRUD {
             pst.setString(3, r.getNum_pro());
             pst.setString(4, r.getLatitude());
             pst.setString(5, r.getLongitude());
-            pst.setInt(5, r.getId_u());
+            pst.setInt(6, r.getId_u());
             pst.executeUpdate();
             System.out.println("Person added!");
         } catch (SQLException ex) {

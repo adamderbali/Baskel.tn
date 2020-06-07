@@ -157,6 +157,8 @@ public class ProfilPageReparateurController implements Initializable {
         txtshowc.setVisible(false);
         txtEmailVerif.setVisible(false);
         txtNote.setEditable(false);
+        txtLatitude.setEditable(false);
+        txtLongitude.setEditable(false);
 
         informationReparateur();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
@@ -355,7 +357,7 @@ public class ProfilPageReparateurController implements Initializable {
                                     if ((verifEmail.nb(profilmail.getText())) == false) {
                                         InputValidation.notificationError("Email", "Saisissez une adresse email existante");
                                     } else {
-                                        if (((!profilmail.getText().equals(txtEmailVerif.getText())) && (mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
+                                        if (((!profilmail.getText().equals(l.getEmail_u())) && (mrc.VerificationExistencePArEmail(profilmail.getText()) == false))) {
                                             InputValidation.notificationError("Email", "Un compte est deja créer avec cette adresse email");
                                         } else {
 
@@ -363,7 +365,7 @@ public class ProfilPageReparateurController implements Initializable {
                                                     profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
                                                     profilmail.getText(), r.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
                                             rr.setId_u(r.getId_u());
-                                            mrc.updateReparateurr2(rr);
+                                            rc.updateReparateur(rr);
 
                                             informationReparateur();
 
