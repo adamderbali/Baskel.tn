@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -116,7 +117,7 @@ public class InputValidation {
         output.close();
         inputStream.close();
     }
-
+/*
     //hash password
     public static String HshPassword(String password, String algorithme) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance(algorithe);
@@ -135,6 +136,21 @@ public class InputValidation {
         }
         return new String(hexChars);
     }
+    */
+     public static String md5(String input) throws NoSuchAlgorithmException {
+    String result = input;
+    if(input != null) {
+        MessageDigest md = MessageDigest.getInstance("MD5"); //or "SHA-1"
+        md.update(input.getBytes());
+        BigInteger hash = new BigInteger(1, md.digest());
+        result = hash.toString(16);
+        while(result.length() < 32) { //40 for SHA-1
+            result = "0" + result;
+        }
+    }
+    return result;
+}
+
 
     //api  notif erreur
     public static void notificationError(String title, String message) {

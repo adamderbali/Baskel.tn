@@ -94,7 +94,7 @@ public class AcceuilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        System.out.println("****************" +SessionInfo.loggedM);
         if (mc.TypeUser() == false) {
             btnAdmin.setVisible(true);
         } else {

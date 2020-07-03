@@ -412,14 +412,14 @@ public class ProfilPageReparateurController implements Initializable {
     //modifier mot de passe
     @FXML
     void ChangerPass(ActionEvent event) throws NoSuchAlgorithmException {
-        if (InputValidation.HshPassword(actuelPass.getText(), "MD5").equals(l.getMot_passe_u())) {
+        if (InputValidation.md5(actuelPass.getText()).equals(l.getMot_passe_u())) {
             if (InputValidation.validPwd(nvpass.getText()) == 0) {
                 InputValidation.notificationError("Mot de passe", "Saisissez un mot de passe valide.");
 
             } else {
 
-                if ((InputValidation.HshPassword(nvpass.getText(), "MD5")).equals(InputValidation.HshPassword(cnvpass.getText(), "MD5"))) {
-                    mrc.changerMP(l.getEmail_u(), InputValidation.HshPassword(nvpass.getText(), "MD5"));
+                if ((InputValidation.md5(nvpass.getText())).equals(InputValidation.md5(cnvpass.getText()))) {
+                    mrc.changerMP(l.getEmail_u(), InputValidation.md5(nvpass.getText()));
                     InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
                 } else {
                     InputValidation.notificationError("Mot de passe", "La confirmation du mot de passe doit correspondre à votre nouveau mot de passe.");
