@@ -125,7 +125,7 @@ public class ProfilPageController implements Initializable {
     private File file;
     private Image image;
     Connection cnx;
-    Membre l = SessionInfo.getLoggedM();
+    Membre l = SessionInfo.loggedM;
     MembreCRUD mrc = new MembreCRUD();
 
     //afficher la photo de profil
@@ -252,11 +252,15 @@ public class ProfilPageController implements Initializable {
         PaneMotpass.setVisible(false);
         imagev.setVisible(true);
         btnimage.setVisible(true);
+        informationMembre();
     }
 
     //affichage onglet de securité
     @FXML
     void afficherOngletSecurité(ActionEvent event) {
+        actuelPass.clear();
+        nvpass.clear();
+        cnvpass.clear();
         panePrincipale.setVisible(false);
         PaneMotpass.setVisible(true);
         imagev.setVisible(false);
@@ -392,6 +396,10 @@ public class ProfilPageController implements Initializable {
 
                 if ((InputValidation.md5(nvpass.getText())).equals(InputValidation.md5(cnvpass.getText()))) {
                     mrc.changerMP(l.getEmail_u(), InputValidation.md5(nvpass.getText()));
+                    actuelPass.clear();
+                    nvpass.clear();
+                    cnvpass.clear();
+                    lblfaible.setText("");
                     InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
                 } else {
                     InputValidation.notificationError("Mot de passe", "La confirmation du mot de passe doit correspondre à votre nouveau mot de passe.");
@@ -408,7 +416,7 @@ public class ProfilPageController implements Initializable {
     @FXML
     void supprimerCompte(ActionEvent event) {
         MembreCRUD mr1 = new MembreCRUD();
-        Membre l = SessionInfo.getLoggedM();
+        Membre l = SessionInfo.loggedM;
         mr1.supprimerMembre(l.getId_u());
     }
 

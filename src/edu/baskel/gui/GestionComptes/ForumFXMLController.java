@@ -83,7 +83,7 @@ public class ForumFXMLController implements Initializable {
     MembreCRUD mc = new MembreCRUD();
     ForumCRUD fs = new ForumCRUD();
     private List<Forum1> forum;
-    Membre m = SessionInfo.getLoggedM();
+    Membre m = SessionInfo.loggedM;
     private static final String DEFAULT_CONTROL_INNER_BACKGROUND = "derive(-fx-base,80%)";
     private static final String HIGHLIGHTED_CONTROL_INNER_BACKGROUND = "derive(#98E0FB, 50%)";
 

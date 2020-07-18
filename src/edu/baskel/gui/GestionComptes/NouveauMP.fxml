@@ -14,6 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.NouveauMPController">
    <children>
+      <ImageView fitHeight="579.0" fitWidth="893.0" pickOnBounds="true" preserveRatio="true" />
       <JFXButton fx:id="btnConfirmation" layoutX="259.0" layoutY="396.0" onAction="#changerMP" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #0096a4;" text="Enregistrer" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -47,6 +48,5 @@
       </ImageView>
       <FontAwesomeIconView glyphName="CIRCLE" layoutX="63.0" layoutY="288.0" size="12" />
       <FontAwesomeIconView glyphName="CIRCLE" layoutX="63.0" layoutY="350.0" />
-      <ImageView fitHeight="579.0" fitWidth="893.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

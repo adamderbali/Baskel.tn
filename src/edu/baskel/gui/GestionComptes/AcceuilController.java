@@ -87,7 +87,7 @@ public class AcceuilController implements Initializable {
     private Button btnEvaluez;
 
     MembreCRUD mc = new MembreCRUD();
-    Membre l = SessionInfo.getLoggedM();
+    Membre l = SessionInfo.loggedM;
 
     /**
      * Initializes the controller class.

@@ -28,7 +28,7 @@ public class MembreCRUD {
     private int val;
     private int last_inserted_id;
     ReparateurCRUD rc = new ReparateurCRUD();
-    Membre l = SessionInfo.getLoggedM();
+    Membre l = SessionInfo.loggedM;
 
     public MembreCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();
@@ -51,7 +51,6 @@ public class MembreCRUD {
             pst.setString(8, m.getNum_tel_u());
             pst.setString(9, m.getImage_u());
             pst.setString(10, m.getType_u());
-            
 
             pst.executeUpdate();
             ResultSet rs = pst.getGeneratedKeys();
@@ -63,7 +62,8 @@ public class MembreCRUD {
                 HistoriqueCRUD hh = new HistoriqueCRUD();
                 hh.ajouterHistorique(last_inserted_id);
                 System.out.println("Historrique added!");
-                SessionInfo.setLoggedM(m);
+                //SessionInfo.setLoggedM(m);
+                SessionInfo.loggedM = m;
                 System.out.println(m);
             }
         } catch (SQLException ex) {
@@ -193,7 +193,7 @@ public class MembreCRUD {
                 int validationm = res.getInt("validation_u");
                 int nbr_banm = res.getInt("nbr_ban_u");
 
-                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm,sexem , datem,
+                membreLogged = new Membre(iduser, nomm, prenomm, adressem, emailm, sexem, datem,
                         motdepasse, telm, imagem, typem, nbr_banm, validationm);
                 if (this.ValidationBan(emailm) != 0) {
                     SessionInfo.setLoggedM(membreLogged);
@@ -201,11 +201,11 @@ public class MembreCRUD {
                     //System.out.println(iduser);
                     //System.out.println(membreLogged.getType_u());
                 }
-                if(VerifReparateur()==true){
+                if (VerifReparateur() == true) {
                     Reparateur loggedRep = rc.getReparateurById(membreLogged.getId_u());
                     System.out.println(loggedRep);
-                    SessionInfo.setLoggedR(loggedRep);
-                }else{
+                    SessionInfo.loggedR = loggedRep;
+                } else {
                     System.out.println("instance membre");
                 }
             }
@@ -232,13 +232,13 @@ public class MembreCRUD {
         }
         return true;
     }
-    
+
     // verifaction s il ya deja un compte avec cette adresse mail au changement des information du profil
     public boolean VerificationExistencePArEmail(String email) {
         try {
             String sq1 = "SELECT * FROM membre where email_u=?";
             PreparedStatement prep = cnx.prepareStatement(sq1);
-            prep.setString(1,email);
+            prep.setString(1, email);
             ResultSet res = prep.executeQuery();
             if (res.next()) {
 
@@ -327,7 +327,7 @@ public class MembreCRUD {
         return m;
     }
 
-        //afficher un membre by id
+    //afficher un membre by id
     public Membre AfficherMembreByEmail(String emaill) {
         String requet = "SELECT * FROM membre WHERE email_u=?";
         Membre m = new Membre();
@@ -359,7 +359,7 @@ public class MembreCRUD {
         }
         return m;
     }
-    
+
     // veriffication par mot de passe avant la modif des info
     public boolean VerificationChgInfo(String mot_pas) {// ne9sa l hash********************
         try {
@@ -389,9 +389,13 @@ public class MembreCRUD {
             pst.setString(2, eml);
             pst.executeUpdate();
             System.out.println("reset done");
-            SessionInfo.setLoggedM(AfficherMembreByEmail(eml));
+            SessionInfo.loggedM = (AfficherMembreByEmail(eml));
+            Membre mm = AfficherMembreByEmail(eml);
             System.out.println(AfficherMembreByEmail(eml));
-            
+            Reparateur loggedRep = rc.getReparateurById(mm.getId_u());
+            System.out.println(loggedRep);
+            SessionInfo.loggedR = loggedRep;
+
         } catch (Exception ex) {
 
         }
@@ -456,7 +460,7 @@ public class MembreCRUD {
         }
         return false;
     }
-    
+
     //verif email mot de passe oublié
     public boolean VerifEmailMpOublié(String email) {
         try {
@@ -475,18 +479,18 @@ public class MembreCRUD {
         }
         return true;
     }
-    
-    public boolean TypeUser(){
-        if(l.getType_u().equals("A")){
+
+    public boolean TypeUser() {
+        if (l.getType_u().equals("A")) {
             System.out.println(l.getType_u());
             return false;
         }
         return true;
     }
-    
+
     //se decconecter
-    public void Deconnexion(){
-        SessionInfo.setLoggedM(null);
+    public void Deconnexion() {
+        SessionInfo.loggedM = null;
         SessionInfo.setIduser(0);
     }
 
