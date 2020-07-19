@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="event_admin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1209.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.Evenement_adminController">
+<AnchorPane fx:id="event_admin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.Evenement_adminController">
    <children>
       <Button fx:id="btn_supprimer" layoutX="513.0" layoutY="639.0" mnemonicParsing="false" onAction="#supprimerevent" prefHeight="53.0" prefWidth="183.0" stylesheets="@Button.css" text="Supprimer " />
       <JFXTextField fx:id="tf_ide" editable="false" layoutX="844.0" layoutY="650.0" opacity="0.0" promptText="ID_e" />

@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="639.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageReparateurController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageReparateurController">
    <children>
       <Pane fx:id="paneNomProfil" prefHeight="86.0" prefWidth="1042.0">
          <children>
@@ -44,8 +44,8 @@
             <Button fx:id="btnSécurité" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#afficherOngletSecurité" prefHeight="31.0" prefWidth="190.0" text="Sécurité" />
          </children>
       </VBox>
-      <Separator layoutX="174.0" layoutY="1.0" orientation="VERTICAL" prefHeight="590.0" prefWidth="7.0" style="-fx-background-color: #0096a4;" />
-      <Pane fx:id="panePrincipale" layoutX="200.0" layoutY="33.0" prefHeight="616.0" prefWidth="842.0">
+      <Separator layoutX="174.0" layoutY="1.0" orientation="VERTICAL" prefHeight="885.0" prefWidth="0.0" style="-fx-background-color: #0096a4;" />
+      <Pane fx:id="panePrincipale" layoutX="209.0" layoutY="125.0" prefHeight="616.0" prefWidth="842.0">
          <children>
             <JFXTextField fx:id="profilnom" editable="false" layoutX="243.0" layoutY="59.0" />
             <JFXTextField fx:id="profilprenom" editable="false" layoutX="243.0" layoutY="108.0" />
@@ -122,7 +122,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="PaneMotpass" layoutX="258.0" layoutY="196.0" prefHeight="474.0" prefWidth="828.0">
+      <Pane fx:id="PaneMotpass" layoutX="267.0" layoutY="288.0" prefHeight="474.0" prefWidth="828.0">
          <children>
             <Text layoutX="14.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau mot de passe">
                <font>

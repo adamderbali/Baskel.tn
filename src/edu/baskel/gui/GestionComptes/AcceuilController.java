@@ -143,6 +143,8 @@ public class AcceuilController implements Initializable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
         app_stage.show();
+       //  AnchorPane pane = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
+        //ANchorProfil.getChildren().setAll(pane);
     }
 
     //redirection forum

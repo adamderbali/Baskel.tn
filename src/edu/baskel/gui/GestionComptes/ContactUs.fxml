@@ -13,11 +13,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="756.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ContactUsController">
+<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ContactUsController">
    <children>
-      <Text layoutX="153.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contactez nous" wrappingWidth="290.6708984375">
+      <Text layoutX="438.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contactez nous" wrappingWidth="427.9999817311764">
          <font>
-            <Font name="System Bold Italic" size="36.0" />
+            <Font name="System Bold Italic" size="45.0" />
          </font>
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
@@ -28,8 +28,8 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Separator layoutX="3.0" layoutY="88.0" prefHeight="8.0" prefWidth="599.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Pane layoutX="34.0" layoutY="107.0" prefHeight="575.0" prefWidth="544.0">
+      <Separator layoutX="-1.0" layoutY="107.0" prefHeight="9.0" prefWidth="1235.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Pane layoutX="345.0" layoutY="155.0" prefHeight="575.0" prefWidth="544.0">
          <children>
             <JFXTextField fx:id="txtEmail" focusColor="#0096a4" layoutX="42.0" layoutY="36.0" prefHeight="31.0" prefWidth="428.0" promptText="Nom et prenom" />
             <JFXTextField fx:id="txtMP" focusColor="#0096a4" layoutX="42.0" layoutY="81.0" prefHeight="31.0" prefWidth="428.0" promptText="Votre adresse email " />
@@ -38,9 +38,12 @@
             <Text fill="#bf0000" layoutX="42.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos informations personnelles sont confidentielles et sécurisées." wrappingWidth="436.46142578125" />
             <FontAwesomeIconView glyphName="USER" layoutX="14.0" layoutY="62.0" size="20.0" text="" />
             <Icons525View glyphName="BULLET" layoutX="13.0" layoutY="565.0" size="20" />
-            <JFXButton fx:id="btnEnvoyer" layoutX="203.0" layoutY="473.0" onAction="#EnvoyerMail" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096a4;" text="Envoyer" textFill="WHITE" />
+            <JFXButton fx:id="btnEnvoyer" layoutX="203.0" layoutY="473.0" onAction="#EnvoyerMail" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096a4;" text="Envoyer" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font></JFXButton>
          </children>
       </Pane>
-      <Separator layoutX="7.0" layoutY="689.0" prefHeight="8.0" prefWidth="599.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutY="758.0" prefHeight="9.0" prefWidth="1235.0" style="-fx-background-color: #0096a4#0096a4;" />
    </children>
 </AnchorPane>

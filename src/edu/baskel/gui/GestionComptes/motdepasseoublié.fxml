@@ -13,15 +13,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.MotdepasseoubliéController">
+<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.MotdepasseoubliéController">
    <children>
-      <Button fx:id="btnenv" layoutX="515.0" layoutY="157.0" mnemonicParsing="false" onAction="#envoyerMail" prefHeight="31.0" prefWidth="104.0" style="-fx-background-color: #0096a4#0096a4;" text="envoyer" textFill="WHITE" />
-      <Label layoutX="155.0" layoutY="162.0" prefHeight="21.0" prefWidth="138.0" text="Votre adresse e-mail" />
-      <Label layoutX="158.0" layoutY="260.0" prefHeight="21.0" prefWidth="138.0" text="Code de verification" />
-      <TextField fx:id="txtentermail" layoutX="302.0" layoutY="157.0" />
-      <TextField fx:id="txtcode" layoutX="302.0" layoutY="255.0" />
-      <JFXButton fx:id="btnverifycode" layoutX="515.0" layoutY="252.0" onAction="#verifierCode" style="-fx-background-color: #0096a4#0096a4;" text="Verifier code" textFill="WHITE" />
-      <Text layoutX="195.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retrouvez votre compte" wrappingWidth="505.6708984375">
+      <Button fx:id="btnenv" layoutX="827.0" layoutY="322.0" mnemonicParsing="false" onAction="#envoyerMail" prefHeight="44.0" prefWidth="140.0" style="-fx-background-color: #0096a4#0096a4;" text="envoyer" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Label layoutX="274.0" layoutY="328.0" prefHeight="38.0" prefWidth="251.0" text="Votre adresse e-mail">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <Label layoutX="274.0" layoutY="425.0" prefHeight="38.0" prefWidth="241.0" text="Code de verification">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <TextField fx:id="txtentermail" layoutX="548.0" layoutY="328.0" />
+      <TextField fx:id="txtcode" layoutX="548.0" layoutY="425.0" />
+      <JFXButton fx:id="btnverifycode" layoutX="827.0" layoutY="419.0" onAction="#verifierCode" style="-fx-background-color: #0096a4#0096a4;" text="Verifier code" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></JFXButton>
+      <Text layoutX="365.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retrouvez votre compte" wrappingWidth="505.6708984375">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
@@ -34,14 +46,14 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Separator layoutX="5.0" layoutY="82.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Separator layoutX="4.0" layoutY="528.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="5.0" layoutY="82.0" prefHeight="5.0" prefWidth="1229.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="5.0" layoutY="793.0" prefHeight="5.0" prefWidth="1229.0" style="-fx-background-color: #0096a4#0096a4;" />
       <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="24.0" layoutY="17.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/001-exit-1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="802.0" layoutY="545.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="1146.0" layoutY="810.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/exitt.png" />
          </image>

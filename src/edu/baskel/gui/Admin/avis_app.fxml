@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.Avis_appController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.Avis_appController">
    <children>
       <Rating fx:id="avis_user" layoutX="239.0" layoutY="147.0" onMouseClicked="#afficher_rat" prefHeight="32.0" prefWidth="190.0" rating="1.0" />
       <Label alignment="CENTER" layoutX="134.0" layoutY="26.0" prefHeight="63.0" prefWidth="486.0" text="Votre avis nous interesse ">
