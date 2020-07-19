@@ -116,11 +116,11 @@ public class ReclamationController implements Initializable {
         ObservableList obser;
         obser = FXCollections.observableArrayList(arrayList2);
         Choix1 = FXCollections.observableArrayList();
-        Choix1.add("Traitée");
-        Choix1.add("Non traitée");
+        Choix1.add("Traiter");
+        Choix1.add("Non Traiter");
         Choix2 = FXCollections.observableArrayList();
-        Choix2.add("Valide");
-        Choix2.add("Non_Valide");
+        Choix2.add("Accepter");
+        Choix2.add("Refuser");
         T_id_rec.setCellValueFactory(new PropertyValueFactory<>("id_rec"));
         T_id_u.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getReclamateur().getNom_u() + " " + p.getValue().getReclamateur().getPrenom_u()));
         T_desc.setCellValueFactory(new PropertyValueFactory<>("desc_r"));

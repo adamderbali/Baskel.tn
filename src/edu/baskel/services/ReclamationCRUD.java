@@ -98,7 +98,7 @@ public class ReclamationCRUD {
         List<Reclamation> listeRec2 = new ArrayList<>();
 
         try {
-            String request = "SELECT * FROM reclamation where etat_rec='Valide' and cond=1 ";
+            String request = "SELECT * FROM reclamation where etat_rec='Accepter' and cond=1 ";
             Statement st = cnxs.createStatement();
             ResultSet re = st.executeQuery(request);
             while (re.next()) {
@@ -130,7 +130,7 @@ public class ReclamationCRUD {
         List<Reclamation> Listrec_trait = new ArrayList<>();
 
         try {
-            String request = "SELECT m.* , r.* ,mr.id_u as id_ur, mr.nom_u as nom_ur,mr.prenom_u as prenom_ur,mr.adresse_u as adresse_ur, mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur, mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur FROM membre m join reclamation r on m.id_u = r.id_u join membre mr on mr.id_u=r.id_ur where etat_rec2='Traitée'";
+            String request = "SELECT m.* , r.* ,mr.id_u as id_ur, mr.nom_u as nom_ur,mr.prenom_u as prenom_ur,mr.adresse_u as adresse_ur, mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur, mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur FROM membre m join reclamation r on m.id_u = r.id_u join membre mr on mr.id_u=r.id_ur where etat_rec2='Traiter'";
             Statement st = cnxs.createStatement();
             ResultSet re = st.executeQuery(request);
             while (re.next()) {
@@ -190,7 +190,7 @@ public class ReclamationCRUD {
         List<Reclamation> Listrec_non_trait = new ArrayList<>();
 
         try {
-            String request = "SELECT m.* , r.* ,mr.id_u as id_ur, mr.nom_u as nom_ur,mr.prenom_u as prenom_ur,mr.adresse_u as adresse_ur, mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur, mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur FROM membre m join reclamation r on m.id_u = r.id_u join membre mr on mr.id_u=r.id_ur where etat_rec2='Non traitée'";
+            String request = "SELECT m.* , r.* ,mr.id_u as id_ur, mr.nom_u as nom_ur,mr.prenom_u as prenom_ur,mr.adresse_u as adresse_ur, mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur, mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur FROM membre m join reclamation r on m.id_u = r.id_u join membre mr on mr.id_u=r.id_ur where etat_rec2='Non Traiter'";
             Statement st = cnxs.createStatement();
             ResultSet re = st.executeQuery(request);
             while (re.next()) {
