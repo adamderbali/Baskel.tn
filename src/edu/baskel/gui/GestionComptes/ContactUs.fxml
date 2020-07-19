@@ -29,7 +29,7 @@
          </fill>
       </Text>
       <Separator layoutX="-1.0" layoutY="107.0" prefHeight="9.0" prefWidth="1235.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Pane layoutX="345.0" layoutY="155.0" prefHeight="575.0" prefWidth="544.0">
+      <Pane layoutX="265.0" layoutY="155.0" prefHeight="575.0" prefWidth="697.0" style="-fx-border-color: #000000; -fx-background-color: #D3D3D3;">
          <children>
             <JFXTextField fx:id="txtEmail" focusColor="#0096a4" layoutX="42.0" layoutY="36.0" prefHeight="31.0" prefWidth="428.0" promptText="Nom et prenom" />
             <JFXTextField fx:id="txtMP" focusColor="#0096a4" layoutX="42.0" layoutY="81.0" prefHeight="31.0" prefWidth="428.0" promptText="Votre adresse email " />
@@ -38,9 +38,9 @@
             <Text fill="#bf0000" layoutX="42.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos informations personnelles sont confidentielles et sécurisées." wrappingWidth="436.46142578125" />
             <FontAwesomeIconView glyphName="USER" layoutX="14.0" layoutY="62.0" size="20.0" text="" />
             <Icons525View glyphName="BULLET" layoutX="13.0" layoutY="565.0" size="20" />
-            <JFXButton fx:id="btnEnvoyer" layoutX="203.0" layoutY="473.0" onAction="#EnvoyerMail" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096a4;" text="Envoyer" textFill="WHITE">
+            <JFXButton fx:id="btnEnvoyer" layoutX="279.0" layoutY="474.0" onAction="#EnvoyerMail" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096a4;" text="Envoyer" textFill="WHITE">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font></JFXButton>
          </children>
       </Pane>

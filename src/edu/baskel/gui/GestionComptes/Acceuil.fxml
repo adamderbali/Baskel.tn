@@ -20,7 +20,7 @@
          <children>
             <ImageView fitHeight="760.0" fitWidth="1246.0" opacity="0.8" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../images/bikeBG1.jpg" />
+                  <Image url="@../../../../images/2.jpg" />
                </image>
             </ImageView>
          </children></AnchorPane>
@@ -28,7 +28,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Separator layoutX="6.0" layoutY="816.0" prefHeight="5.0" prefWidth="1227.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutX="6.0" layoutY="816.0" prefHeight="5.0" prefWidth="1238.0" style="-fx-background-color: #0096a4#0096a4;" />
       <Separator layoutX="-1.0" layoutY="53.0" prefHeight="5.0" prefWidth="1247.0" style="-fx-background-color: #0096a4#0096a4;" />
       <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="1147.0" layoutY="835.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -80,11 +80,12 @@
                </font>
             </MenuButton>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <Button fx:id="btnReparateur" mnemonicParsing="false" onAction="#RedirectionReparateur" prefHeight="51.0" prefWidth="136.0" style="-fx-background-color: #0096a4;" text="Reparateurs" textFill="WHITE">
+            <Button fx:id="btnReparateur" mnemonicParsing="false" onAction="#RedirectionReparateur" prefHeight="51.0" prefWidth="154.0" style="-fx-background-color: #0096a4;" text="Reparateurs" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>
-            <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#RedirectionAdmin" prefHeight="53.0" prefWidth="247.0" style="-fx-background-color: #0096a4;" text="Admin" textFill="WHITE">
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#RedirectionAdmin" prefHeight="53.0" prefWidth="227.0" style="-fx-background-color: #0096a4;" text="Admin" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>

@@ -21,20 +21,29 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="760.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ProfilPageController">
    <children>
-      <Pane fx:id="paneNomProfil" layoutX="195.0" layoutY="36.0" prefHeight="209.0" prefWidth="190.0">
+      <Pane fx:id="paneNomProfil" layoutX="943.0" layoutY="141.0" prefHeight="283.0" prefWidth="265.0">
          <children>
-            <ImageView fx:id="imagev" fitHeight="160.0" fitWidth="162.0" layoutX="14.0" pickOnBounds="true" />
-            <Button fx:id="btnimage" layoutX="56.0" layoutY="164.0" mnemonicParsing="false" onAction="#filephoto" text="Photo de profil" />
+            <ImageView fx:id="imagev" fitHeight="230.0" fitWidth="243.0" layoutX="14.0" pickOnBounds="true" />
+            <Button fx:id="btnimage" layoutX="83.0" layoutY="238.0" mnemonicParsing="false" onAction="#filephoto" style="-fx-background-color: #0096a4;" text="Photo de profil" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
          </children>
       </Pane>
       <VBox layoutY="-2.0" prefHeight="200.0" prefWidth="178.0">
          <children>
-            <Button fx:id="btnGenerale" mnemonicParsing="false" onAction="#afficherOngletGenrale" prefHeight="31.0" prefWidth="190.0" text="Générale" />
-            <Button fx:id="btnSécurité" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#afficherOngletSecurité" prefHeight="31.0" prefWidth="190.0" text="Sécurité" />
+            <Button fx:id="btnGenerale" mnemonicParsing="false" onAction="#afficherOngletGenrale" prefHeight="31.0" prefWidth="190.0" style="-fx-background-color: #0096a4; -fx-border-color: #ffffff;" text="Générale" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button fx:id="btnSécurité" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#afficherOngletSecurité" prefHeight="31.0" prefWidth="190.0" style="-fx-background-color: #0096a4; -fx-border-color: #ffffff;" text="Sécurité" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
          </children>
       </VBox>
-      <Separator layoutX="175.0" orientation="VERTICAL" prefHeight="760.0" prefWidth="6.0" style="-fx-background-color: #0096a4;" />
-      <Label fx:id="lblprofil" layoutX="465.0" layoutY="64.0" prefHeight="77.0" prefWidth="467.0" text="adam derbali">
+      <Separator layoutX="177.0" orientation="VERTICAL" prefHeight="652.0" prefWidth="6.0" style="-fx-background-color: #0096a4;" />
+      <Label fx:id="lblprofil" layoutX="465.0" layoutY="64.0" prefHeight="77.0" prefWidth="467.0">
          <font>
             <Font name="System Bold Italic" size="53.0" />
          </font>
@@ -82,7 +91,7 @@
             <FontAwesomeIconView glyphName="KEY" layoutX="35.0" layoutY="37.0" size="22" wrappingWidth="20.000000596046448" />
             <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="390.0" layoutY="184.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
             <FontAwesomeIconView fx:id="chkmotdepasse2" glyphName="EYE" layoutX="390.0" layoutY="235.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" />
-            <Button fx:id="btnSupprimer" layoutX="605.0" layoutY="351.0" mnemonicParsing="false" onAction="#supprimerCompte" text="Supprimer mon Compte">
+            <Button fx:id="btnSupprimer" layoutX="605.0" layoutY="351.0" mnemonicParsing="false" onAction="#supprimerCompte" style="-fx-background-color: #0096a4;" text="Supprimer mon Compte" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,6 +99,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
             </Button>
          </children>
       </Pane>
@@ -132,8 +144,14 @@
                </font>
             </Text>
             <TextField fx:id="thximage" layoutX="524.0" layoutY="231.0" prefHeight="31.0" prefWidth="162.0" />
-            <Button fx:id="btnconfirmer1" layoutX="308.0" layoutY="380.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #0096a4;" text="Enregistrer les modifications" textFill="#fffefe" />
-            <Button fx:id="btnmodifier1" layoutX="38.0" layoutY="380.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #0096a4;" text="Modifier les informations" textFill="WHITE" />
+            <Button fx:id="btnconfirmer1" layoutX="308.0" layoutY="380.0" mnemonicParsing="false" onAction="#confirmermodif" prefHeight="31.0" prefWidth="226.0" style="-fx-background-color: #0096a4;" text="Enregistrer les modifications" textFill="#fffefe">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button fx:id="btnmodifier1" layoutX="38.0" layoutY="380.0" mnemonicParsing="false" onAction="#chagerInfos2" prefHeight="31.0" prefWidth="226.0" style="-fx-background-color: #0096a4;" text="Modifier les informations" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
             <JFXTextField fx:id="profildate" editable="false" layoutX="490.0" layoutY="395.0" />
             <JFXTextField fx:id="txtEmailVerif" layoutX="243.0" layoutY="159.0" />
          </children>

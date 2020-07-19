@@ -143,7 +143,7 @@ public class SidentifierController implements Initializable {
                 stage.setIconified(false);
                 stage.centerOnScreen();
                 stage.setResizable(true);
-                stage.setMaximized(false);
+               // stage.setMaximized(true);
                 stage.show();
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();

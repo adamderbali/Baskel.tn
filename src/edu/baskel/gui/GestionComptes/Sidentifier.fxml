@@ -35,7 +35,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txtmotdepasse" focusColor="#0096a4" layoutX="97.0" layoutY="184.0" prefHeight="31.0" prefWidth="209.0" promptText="Mot de passe" />
+            <JFXPasswordField fx:id="txtmotdepasse" focusColor="#0096a4" layoutX="97.0" layoutY="184.0" prefHeight="31.0" prefWidth="306.0" promptText="Mot de passe" />
             <Text layoutX="73.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'identifier" wrappingWidth="261.779296875">
                <font>
                   <Font name="System Bold" size="48.0" />
