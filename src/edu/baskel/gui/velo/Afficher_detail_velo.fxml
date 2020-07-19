@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" style="-fx-background-color: #a8b7ee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0"  stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.51" pickOnBounds="true">
+       <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.24" pickOnBounds="true">
          <image>
-            <Image url="@../../../../images/pexels-photo-1595483.jpeg" />
+            <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
       <Label layoutX="461.0" layoutY="23.0" prefHeight="61.0" prefWidth="411.0" text="Détails du vélo">
@@ -112,8 +112,9 @@
          </font>
       </Label>
       <TextArea fx:id="lbldsc" editable="false" focusTraversable="false" layoutX="671.0" layoutY="681.0" prefHeight="177.0" prefWidth="513.0" />
-     <Button fx:id="bachbutt" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" text="&lt; Retour" />
-      <Button fx:id="resbut" layoutX="157.0" layoutY="769.0" mnemonicParsing="false" onAction="#reserverVélo" text="Réserver vélo" visible="false">
+     <Button fx:id="bachbutt" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" text="&lt; Retour" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+       
+      <Button fx:id="resbut" layoutX="157.0" layoutY="769.0" mnemonicParsing="false" onAction="#reserverVélo" text="Réserver vélo" visible="false" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;">
          <font>
             <Font size="23.0" />
          </font>

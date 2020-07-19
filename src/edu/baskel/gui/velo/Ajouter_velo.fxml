@@ -19,6 +19,7 @@
       </ImageView>
    <Pane layoutX="207.0" layoutY="34.0" prefHeight="822.0" prefWidth="870.0" style="-fx-border-color: #353535; -fx-background-color: transparent;">
       <children>
+       
          <Label layoutX="89.0" layoutY="48.0" text="Numéro de série :">
             <font>
                <Font size="23.0" />

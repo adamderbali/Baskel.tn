@@ -74,7 +74,7 @@ public class Afficher_mes_velosController implements Initializable {
 
      @FXML
     private Button allresbv;
-     
+        
      @FXML
     private Button ajbut;
      Membre m = SessionInfo.getLoggedM();
@@ -138,7 +138,7 @@ public class Afficher_mes_velosController implements Initializable {
     public Afficher_mes_velosController() {
     }
     
-    
+   
     
    
     
