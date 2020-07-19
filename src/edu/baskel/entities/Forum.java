@@ -4,7 +4,7 @@ import java.sql.Date;
  *
  * @author gammar
  */
-public class Forum1 {
+public class Forum {
 private int id_f;
 private int id_u;
 private String text;
@@ -12,10 +12,10 @@ private String date_f;
 private int valid_f;
 private String image_uf;
 
-    public Forum1() {
+    public Forum() {
     }
 
-    public Forum1(int id_f, int id_u, String text, String date_f, int valid_f) {
+    public Forum(int id_f, int id_u, String text, String date_f, int valid_f) {
         this.id_f = id_f;
         this.id_u = id_u;
         this.text = text;
@@ -23,14 +23,14 @@ private String image_uf;
         this.valid_f = valid_f;
     }
 
-    public Forum1(int id_f, int id_u, String text, String date_f) {
+    public Forum(int id_f, int id_u, String text, String date_f) {
         this.id_f = id_f;
         this.id_u = id_u;
         this.text = text;
         this.date_f = date_f;
     }
 
-    public Forum1(String text, String date_f) {
+    public Forum(String text, String date_f) {
         this.text = text;
         this.date_f = date_f;
     }
@@ -85,7 +85,7 @@ private String image_uf;
         this.image_uf = image_uf;
     }
 
-    public Forum1(int id_f, int id_u, String text, String date_f, String image_uf) {
+    public Forum(int id_f, int id_u, String text, String date_f, String image_uf) {
         this.id_f = id_f;
         this.id_u = id_u;
         this.text = text;

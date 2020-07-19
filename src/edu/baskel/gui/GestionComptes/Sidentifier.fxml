@@ -15,22 +15,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.SidentifierController">
+<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.SidentifierController">
    <children>
-      <ImageView fitHeight="639.0" fitWidth="1042.0" opacity="0.51" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="885.0" fitWidth="1235.0" opacity="0.51" pickOnBounds="true">
          <image>
             <Image url="@../../../../images/2.jpg" />
          </image>
       </ImageView>
-      <Pane layoutX="593.0" layoutY="55.0" prefHeight="530.0" prefWidth="408.0" style="-fx-border-color: #ffffff; -fx-border-width: 2;">
+      <Pane layoutX="725.0" layoutY="107.0" prefHeight="643.0" prefWidth="478.0" style="-fx-border-color: #ffffff; -fx-border-width: 2;">
          <children>
-            <JFXButton fx:id="btnconnexion" layoutX="101.0" layoutY="312.0" onAction="#loggin1" prefHeight="37.0" prefWidth="209.0" style="-fx-background-color: #0096a4#0096a4;" text="Connexion" textFill="SNOW">
+            <JFXButton fx:id="btnconnexion" layoutX="135.0" layoutY="313.0" onAction="#loggin1" prefHeight="37.0" prefWidth="209.0" style="-fx-background-color: #0096a4#0096a4;" text="Connexion" textFill="SNOW">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXTextField fx:id="txtutilisateur" focusColor="#0096a4" layoutX="97.0" layoutY="121.0" prefHeight="31.0" prefWidth="209.0" promptText="Adresse-email" unFocusColor="BLACK" />
-            <Label fx:id="lblpassoublié" layoutX="183.0" layoutY="225.0" onMouseClicked="#motdepasseOubliéid" text="Mot de passe oublié?">
+            <JFXTextField fx:id="txtutilisateur" focusColor="#0096a4" layoutX="97.0" layoutY="121.0" prefHeight="31.0" prefWidth="306.0" promptText="Adresse-email" unFocusColor="BLACK" />
+            <Label fx:id="lblpassoublié" layoutX="280.0" layoutY="229.0" onMouseClicked="#motdepasseOubliéid" text="Mot de passe oublié?">
                <font>
                   <Font size="13.0" />
                </font>
@@ -49,29 +49,29 @@
                   </LinearGradient>
                </fill>
             </Text>
-            <JFXButton fx:id="btnsinscrire" layoutX="145.0" layoutY="387.0" onAction="#RedirectionRegistration" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Membre" textFill="SNOW">
+            <JFXButton fx:id="btnsinscrire" layoutX="179.0" layoutY="416.0" onAction="#RedirectionRegistration" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Membre" textFill="SNOW">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
             <Label fx:id="lblreponse" layoutX="311.0" layoutY="200.0" prefHeight="21.0" prefWidth="26.0" />
-            <CheckBox fx:id="rememberMe" layoutX="106.0" layoutY="272.0" mnemonicParsing="false" text="Se souvenir de moi" />
-            <JFXTextField fx:id="txtshowmp" layoutX="97.0" layoutY="184.0" prefHeight="31.0" prefWidth="209.0" promptText="Mot de passe" />
-            <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="288.0" layoutY="207.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
-            <Text layoutX="137.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'incrire en tant que">
+            <CheckBox fx:id="rememberMe" layoutX="97.0" layoutY="268.0" mnemonicParsing="false" text="Se souvenir de moi" />
+            <JFXTextField fx:id="txtshowmp" layoutX="97.0" layoutY="184.0" prefHeight="31.0" prefWidth="306.0" promptText="Mot de passe" />
+            <FontAwesomeIconView fx:id="chkmotdepasse" glyphName="EYE" layoutX="369.0" layoutY="206.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
+            <Text layoutX="179.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'incrire en tant que">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text layoutX="198.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
-            <JFXButton fx:id="btnsinscrire1" layoutX="147.0" layoutY="445.0" onAction="#RedirectionRegistrationRep" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Reparateur" textFill="SNOW">
+            <Text layoutX="230.0" layoutY="487.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
+            <JFXButton fx:id="btnsinscrire1" layoutX="179.0" layoutY="515.0" onAction="#RedirectionRegistrationRep" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0096a4#0096a4;" text="Reparateur" textFill="SNOW">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
             <FontAwesomeIconView glyphName="USER" layoutX="70.0" layoutY="148.0" size="20.0" />
             <FontAwesomeIconView glyphName="LOCK" layoutX="71.0" layoutY="207.0" size="20.0" />
-            <Label fx:id="CDutil" layoutX="108.0" layoutY="495.0" onMouseClicked="#LireCondUtil" text="Lire les conditions d'utilisation" />
+            <Label fx:id="CDutil" layoutX="151.0" layoutY="574.0" onMouseClicked="#LireCondUtil" text="Lire les conditions d'utilisation" />
          </children>
       </Pane>
    </children>

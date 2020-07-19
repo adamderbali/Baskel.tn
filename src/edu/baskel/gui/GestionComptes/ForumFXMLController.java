@@ -3,7 +3,7 @@ package edu.baskel.gui.GestionComptes;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import edu.baskel.entities.Forum1;
+import edu.baskel.entities.Forum;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
@@ -50,7 +50,7 @@ import javafx.stage.Stage;
 public class ForumFXMLController implements Initializable {
 
     @FXML
-    private JFXListView<Forum1> listeforum;
+    private JFXListView<Forum> listeforum;
     @FXML
     private JFXTextArea message;
     @FXML
@@ -82,7 +82,7 @@ public class ForumFXMLController implements Initializable {
 
     MembreCRUD mc = new MembreCRUD();
     ForumCRUD fs = new ForumCRUD();
-    private List<Forum1> forum;
+    private List<Forum> forum;
     Membre m = SessionInfo.loggedM;
     private static final String DEFAULT_CONTROL_INNER_BACKGROUND = "derive(-fx-base,80%)";
     private static final String HIGHLIGHTED_CONTROL_INNER_BACKGROUND = "derive(#98E0FB, 50%)";
@@ -93,11 +93,11 @@ public class ForumFXMLController implements Initializable {
         PaneProfilCom.setVisible(false);
         forum = fs.displayAll();
         if (forum != null) {
-            ObservableList<Forum1> list = FXCollections.observableArrayList(forum);
-            listeforum.setCellFactory((ListView<Forum1> arg0) -> {
-                ListCell<Forum1> cell = new ListCell<Forum1>() {
+            ObservableList<Forum> list = FXCollections.observableArrayList(forum);
+            listeforum.setCellFactory((ListView<Forum> arg0) -> {
+                ListCell<Forum> cell = new ListCell<Forum>() {
                     @Override
-                    protected void updateItem(Forum1 e, boolean btl) {
+                    protected void updateItem(Forum e, boolean btl) {
                         super.updateItem(e, btl);
                         if (e != null) {
 
@@ -142,7 +142,7 @@ public class ForumFXMLController implements Initializable {
                                 @Override
                                 public void handle(MouseEvent event) {
                                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-                                        Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+                                        Forum M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
                                         Membre mp = mc.AfficherMembreById(M.getId_u());
                                         String d = mp.getDate_u().toString();
                                         LocalDate l = LocalDate.parse(d);
@@ -212,7 +212,7 @@ public class ForumFXMLController implements Initializable {
         if (!message.getText().isEmpty()) {
             if (AutoCompleteAdresse.nb(message.getText()) == true) {
                 
-                Forum1 f = new Forum1(0, m.getId_u(), message.getText(), InputValidation.dateCalendar(), m.getImage_u());
+                Forum f = new Forum(0, m.getId_u(), message.getText(), InputValidation.dateCalendar(), m.getImage_u());
                 fs.ajouterForum(f);
                 InputValidation.notificationsucces("Commentaire", "Votre commentaire a été ajouter avec succés");
                 message.clear();
@@ -230,7 +230,7 @@ public class ForumFXMLController implements Initializable {
     @FXML
     void SupprimerCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         if (listeforum.getSelectionModel().getSelectedItem() != null) {
-            Forum1 M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+            Forum M = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
             if (m.getId_u() == M.getId_u()) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation ");
@@ -260,11 +260,11 @@ public class ForumFXMLController implements Initializable {
 
         forum = fs.displayAll();
         if (forum != null) {
-            ObservableList<Forum1> list = FXCollections.observableArrayList(forum);
-            listeforum.setCellFactory((ListView<Forum1> arg0) -> {
-                ListCell<Forum1> cell = new ListCell<Forum1>() {
+            ObservableList<Forum> list = FXCollections.observableArrayList(forum);
+            listeforum.setCellFactory((ListView<Forum> arg0) -> {
+                ListCell<Forum> cell = new ListCell<Forum>() {
                     @Override
-                    protected void updateItem(Forum1 e, boolean btl) {
+                    protected void updateItem(Forum e, boolean btl) {
                         super.updateItem(e, btl);
                         if (e != null) {
                             Image IMAGE_RUBY = null;
@@ -331,11 +331,11 @@ public class ForumFXMLController implements Initializable {
     public void actua() {
         forum = fs.displayAll();
         if (forum != null) {
-            ObservableList<Forum1> list = FXCollections.observableArrayList(forum);
-            listeforum.setCellFactory((ListView<Forum1> arg0) -> {
-                ListCell<Forum1> cell = new ListCell<Forum1>() {
+            ObservableList<Forum> list = FXCollections.observableArrayList(forum);
+            listeforum.setCellFactory((ListView<Forum> arg0) -> {
+                ListCell<Forum> cell = new ListCell<Forum>() {
                     @Override
-                    protected void updateItem(Forum1 e, boolean btl) {
+                    protected void updateItem(Forum e, boolean btl) {
                         super.updateItem(e, btl);
                         if (e != null) {
                             Image IMAGE_RUBY = null;
@@ -406,7 +406,7 @@ public class ForumFXMLController implements Initializable {
     @FXML
     void modifierCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         if (listeforum.getSelectionModel().getSelectedItem() != null) {
-            Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+            Forum f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
             if (f.getId_u() == m.getId_u()) {
                 if (InputValidation.dat(f.getDate_f(), InputValidation.dateCalendar()) < 3) {
                     message.setText(f.getText());
@@ -429,8 +429,8 @@ public class ForumFXMLController implements Initializable {
     void EngmodifierCom(MouseEvent event) throws NoSuchAlgorithmException, IOException {
         if (MessageVide() == true) {
 
-            Forum1 f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
-            Forum1 f2 = new Forum1(message.getText(), InputValidation.dateCalendar());
+            Forum f = listeforum.getItems().get(listeforum.getSelectionModel().getSelectedIndex());
+            Forum f2 = new Forum(message.getText(), InputValidation.dateCalendar());
 
             if (f.getId_u() == m.getId_u()) {
 

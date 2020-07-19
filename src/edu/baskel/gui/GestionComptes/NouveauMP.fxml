@@ -12,41 +12,46 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="893.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.NouveauMPController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.NouveauMPController">
    <children>
-      <ImageView fitHeight="579.0" fitWidth="893.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton fx:id="btnConfirmation" layoutX="259.0" layoutY="396.0" onAction="#changerMP" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #0096a4;" text="Enregistrer" textFill="WHITE">
+      <JFXButton fx:id="btnConfirmation" layoutX="546.0" layoutY="530.0" onAction="#changerMP" prefHeight="31.0" prefWidth="207.0" style="-fx-background-color: #0096a4;" text="Enregistrer" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="20.0" />
          </font></JFXButton>
-      <JFXTextField fx:id="txtm" editable="false" layoutX="666.0" layoutY="457.0" prefHeight="31.0" prefWidth="193.0" />
-      <Text layoutX="84.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau mot de passe" />
-      <Text layoutX="84.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmer mot de passe" />
-      <JFXTextField fx:id="txtshowpass" layoutX="259.0" layoutY="253.0" prefHeight="31.0" prefWidth="286.0" />
-      <JFXTextField fx:id="txtshowcpass" layoutX="259.0" layoutY="315.0" prefHeight="31.0" prefWidth="286.0" />
-      <JFXPasswordField fx:id="txtNvMp" layoutX="259.0" layoutY="253.0" prefHeight="31.0" prefWidth="286.0" />
-      <JFXPasswordField fx:id="txtCnvMp" layoutX="259.0" layoutY="315.0" onMouseClicked="#passStrength" prefHeight="31.0" prefWidth="286.0" />
-      <Label fx:id="lblfaible" layoutX="481.0" layoutY="257.0" prefHeight="21.0" prefWidth="43.0" />
-      <FontAwesomeIconView fx:id="chkmotdepasi" glyphName="EYE" layoutX="530.0" layoutY="275.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
-      <FontAwesomeIconView fx:id="chkCmotdepasi" glyphName="EYE" layoutX="530.0" layoutY="337.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" wrappingWidth="19.99999901652336" />
-      <Separator layoutX="11.0" layoutY="66.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Separator layoutX="11.0" layoutY="499.0" prefHeight="5.0" prefWidth="872.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Text layoutX="194.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez un nouveau mot de passe">
+      <JFXTextField fx:id="txtm" editable="false" layoutX="1021.0" layoutY="751.0" prefHeight="31.0" prefWidth="193.0" />
+      <Text layoutX="122.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau mot de passe">
+         <font>
+            <Font size="26.0" />
+         </font></Text>
+      <Text layoutX="117.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmer le mot de passe">
+         <font>
+            <Font size="26.0" />
+         </font></Text>
+      <JFXTextField fx:id="txtshowpass" layoutX="488.0" layoutY="383.0" prefHeight="31.0" prefWidth="286.0" />
+      <JFXTextField fx:id="txtshowcpass" layoutX="488.0" layoutY="445.0" prefHeight="31.0" prefWidth="286.0" />
+      <JFXPasswordField fx:id="txtNvMp" layoutX="488.0" layoutY="383.0" prefHeight="31.0" prefWidth="286.0" />
+      <JFXPasswordField fx:id="txtCnvMp" layoutX="488.0" layoutY="445.0" onMouseClicked="#passStrength" prefHeight="31.0" prefWidth="286.0" />
+      <Label fx:id="lblfaible" layoutX="710.0" layoutY="387.0" prefHeight="21.0" prefWidth="43.0" />
+      <FontAwesomeIconView fx:id="chkmotdepasi" glyphName="EYE" layoutX="759.0" layoutY="405.0" onMousePressed="#VisualiserMP" onMouseReleased="#hideMP" size="20.0" />
+      <FontAwesomeIconView fx:id="chkCmotdepasi" glyphName="EYE" layoutX="759.0" layoutY="467.0" onMousePressed="#VisualiserCMP" onMouseReleased="#hideCMP" size="20.0" wrappingWidth="19.99999901652336" />
+      <Separator layoutY="87.0" prefHeight="5.0" prefWidth="1235.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Separator layoutY="796.0" prefHeight="5.0" prefWidth="1235.0" style="-fx-background-color: #0096a4#0096a4;" />
+      <Text layoutX="325.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisissez un nouveau mot de passe">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Text>
-      <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="24.0" layoutY="14.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Logout" fitHeight="44.0" fitWidth="51.0" layoutX="19.0" layoutY="24.0" onMouseClicked="#Deconnexion2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/001-exit-1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="816.0" layoutY="523.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exit" fitHeight="44.0" fitWidth="51.0" layoutX="1163.0" layoutY="816.0" onMouseClicked="#Quitter" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/exitt.png" />
          </image>
       </ImageView>
-      <FontAwesomeIconView glyphName="CIRCLE" layoutX="63.0" layoutY="288.0" size="12" />
-      <FontAwesomeIconView glyphName="CIRCLE" layoutX="63.0" layoutY="350.0" />
+      <FontAwesomeIconView glyphName="CIRCLE" layoutX="96.0" layoutY="409.0" size="12" />
+      <FontAwesomeIconView glyphName="CIRCLE" layoutX="96.0" layoutY="474.0" />
    </children>
 </AnchorPane>

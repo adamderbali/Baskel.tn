@@ -139,7 +139,7 @@ public class SidentifierController implements Initializable {
                 }
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setAlwaysOnTop(true);
+                //stage.setAlwaysOnTop(true);
                 stage.setIconified(false);
                 stage.centerOnScreen();
                 stage.setResizable(false);
