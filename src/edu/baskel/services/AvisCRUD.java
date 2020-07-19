@@ -155,7 +155,7 @@ public class AvisCRUD {
                     + "mr.email_u as email_ur,mr.sexe_u as sexe_ur,mr.date_u as date_ur,mr.mot_passe_u as mot_passe_ur,"
                     + "mr.num_tel_u as num_tel_ur,mr.image_u as image_ur,mr.type_u as image_ur,mr.type_u as type_ur"
                     + " FROM Avis a join membre m on a.id_u = m.id_u join reparateur r on a.id_r=r.id_u"
-                    + " join membre mr on r.id_u = mr.id_u where a.id_r=?";
+                    + " join membre mr on r.id_u = mr.id_u where r.id_r=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1, rep.getId_u());
             ResultSet rs = pst.executeQuery();
