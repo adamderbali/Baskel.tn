@@ -317,8 +317,8 @@ public class InscriptionController implements Initializable {
         Date datenais = java.sql.Date.valueOf(txtnaissance.getValue());
         String tel = txttelephone.getText();
         String sexe = sexeMembre();
-        String motdepasse = InputValidation.HshPassword(txtmotdepasse.getText(), "MD5");
-        String conmotdepasse = InputValidation.HshPassword(txtconfirmation.getText(), "MD5");
+        String motdepasse = InputValidation.md5(txtmotdepasse.getText());
+        String conmotdepasse = InputValidation.md5(txtconfirmation.getText());
         String imge = txtimage.getText();
 
         Membre m = new Membre(0,nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge,"U");

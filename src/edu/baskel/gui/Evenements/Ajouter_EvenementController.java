@@ -300,13 +300,13 @@ public class Ajouter_EvenementController implements Initializable {
                                                                         validationSaisie.notifInfo("Date", "La date saisie doit etre au dela de" + date_system);
                                                                         txtDate.setDefaultColor(rgb(255, 0, 0));
                                                                         txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
-                                                                    } else {
+                                                                    }/* else {
                                                                        
                                                                         if(!(txtNombre.getText().contentEquals("[0-9]"))){
                                                                         validationSaisie.notifInfo("Nombre des participants", "Vous devez saisir un entier");
                                                                         txtDate.setDefaultColor(rgb(255, 0, 0));
                                                                         txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
-                                                                        }
+                                                                        }*/
                                                                     
                                                                     else {
                                                                             EvenementCRUD Ev = new EvenementCRUD();
@@ -321,15 +321,16 @@ public class Ajouter_EvenementController implements Initializable {
                                                                                 if(txtNombre.getText().equals("")){
                                                                                     EvenementCRUD Ec = new EvenementCRUD();
                                                                                     System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
-                                                                                    Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                                            getText(), pathE.getText(), ml.getId_u(),0);
+                                                                                    Evenement e = new Evenement(txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                                                                                            getText(), pathE.getText(),ml.getId_u(),0);
                                                                                     Ec.ajouterEvenement(e);
                                                                                 }
                                                                                 else{
+                                                                                    System.out.println("+++++id id id"+ml.getId_u());
                                                                                     EvenementCRUD Ec = new EvenementCRUD();
                                                                                     System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
-                                                                                    Evenement e = new Evenement(0, txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
-                                                                                            getText(), pathE.getText(), ml.getId_u(), Integer.parseInt(txtNombre.getText()));
+                                                                                    Evenement e = new Evenement(txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.
+                                                                                            getText(), pathE.getText(),ml.getId_u(),Integer.parseInt(txtNombre.getText()));
                                                                                     Ec.ajouterEvenement(e);}
                                                                                 txtNom.clear();
                                                                                 txtLieu.clear();
@@ -345,7 +346,7 @@ public class Ajouter_EvenementController implements Initializable {
                                                                                 validationSaisie.notifConfirm("ok", "Evenement ajouté");
                                                                             }
                                                                         }
-                                                                }
+                                                                
                                                             }}
                                                         }
                                                     }

@@ -24,7 +24,7 @@ import java.util.List;
 public class ForumCRUD {
 
     Connection cnx;
-    Membre m = SessionInfo.getLoggedM();
+    Membre m = SessionInfo.loggedM;
 
     public ForumCRUD() {
         cnx = ConnectionBD.getInstance().getCnx();

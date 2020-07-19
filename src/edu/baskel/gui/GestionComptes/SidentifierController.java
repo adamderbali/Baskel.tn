@@ -118,7 +118,7 @@ public class SidentifierController implements Initializable {
     @FXML
     public void loggin1(ActionEvent event) throws DocumentException, Exception {
 
-        if (mr.Verification(txtutilisateur.getText(), InputValidation.HshPassword(txtmotdepasse.getText(), "MD5")) != null) {
+        if (mr.Verification(txtutilisateur.getText(), InputValidation.md5(txtmotdepasse.getText())) != null) {
             if (mr.ValidationBan(txtutilisateur.getText()) != 0) {
 
                 if (rememberMe.isSelected()) {

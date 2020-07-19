@@ -12,6 +12,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -89,10 +90,10 @@ public class NouveauMPController implements Initializable {
     //verifier la correspondance et reinitialiser le mot de passe
     @FXML
     public void changerMP(ActionEvent event) throws NoSuchAlgorithmException, IOException {
-        if (InputValidation.HshPassword(txtNvMp.getText(), "MD5").equals(InputValidation.HshPassword(txtCnvMp.getText(), "MD5"))) {
-            r.changerMP(txtm.getText(), InputValidation.HshPassword(txtNvMp.getText(), "MD5"));
+        if (InputValidation.md5(txtNvMp.getText()).equals(InputValidation.md5(txtCnvMp.getText()))) {
+            r.changerMP(txtm.getText(), InputValidation.md5(txtNvMp.getText()));
             InputValidation.notificationsucces("Mot de passe", "Votre mot de passe a été réinitialisé !");
-
+            //SessionInfo.loggedM = 
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -60,7 +60,7 @@ public class MotdepasseoubliéController implements Initializable {
     private String question;
     private String motdepasse;
     int ran;
-    Membre m = SessionInfo.getLoggedM();
+    Membre m = SessionInfo.loggedM;
     MembreCRUD mc = new MembreCRUD();
     EnvoiMail e = new EnvoiMail();
 

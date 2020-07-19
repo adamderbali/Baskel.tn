@@ -358,8 +358,8 @@ public class InscriptionReparateurController implements Initializable {
         Date datenais = java.sql.Date.valueOf(txtnaissance.getValue());
         String tel = txttelephone.getText();
         String sexe = sexeMembre();
-        String motdepasse = InputValidation.HshPassword(txtmotdepasse.getText(), "MD5");
-        String conmotdepasse = InputValidation.HshPassword(txtconfirmation.getText(), "MD5");
+        String motdepasse = InputValidation.md5(txtmotdepasse.getText());
+        String conmotdepasse = InputValidation.md5(txtconfirmation.getText());
         String telpro = txttelpro.getText();
         String adrloc = txtadrlocal.getText();
         String imge = txtimage.getText();

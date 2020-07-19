@@ -14,13 +14,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.Rating;
@@ -113,12 +111,13 @@ public class ParticipationCrud {
 
     }
  /* suppression tous les participation de l'evenement supp*/
-      public boolean supprimerParticipationE(int id_e) {
+      public boolean supprimerParticipationE(int id_e,int id_u) {
 
         try {
-            String requete2 = "DELETE FROM participation where id_e=?";
+            String requete2 = "DELETE FROM participation where id_e=? AND id_u=?";
             PreparedStatement pst1 = cnx.prepareStatement(requete2);
             pst1.setInt(1,id_e);
+            pst1.setInt(2,id_u);
             pst1.executeUpdate();
             System.out.println("Tous la participation de ce evenement sont annulées!");
             return true;
@@ -129,6 +128,23 @@ public class ParticipationCrud {
 
     }
     
+      
+       public boolean supprimerParticipationET(int id_e) {
+
+        try {
+            String requete2 = "DELETE FROM participation where id_e=?";
+            PreparedStatement pst1 = cnx.prepareStatement(requete2);
+            pst1.setInt(1,id_e);
+           
+            pst1.executeUpdate();
+            System.out.println("Tous la participation de ce evenement sont annulées!");
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+    }
 /*Affichage liste des eveenements par user*/
     public List<Participation> displayByUser(int id_u) {
 

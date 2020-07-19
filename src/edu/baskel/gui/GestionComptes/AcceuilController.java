@@ -87,14 +87,14 @@ public class AcceuilController implements Initializable {
     private Button btnEvaluez;
 
     MembreCRUD mc = new MembreCRUD();
-    Membre l = SessionInfo.getLoggedM();
+    Membre l = SessionInfo.loggedM;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        System.out.println("****************" +SessionInfo.loggedM);
         if (mc.TypeUser() == false) {
             btnAdmin.setVisible(true);
         } else {

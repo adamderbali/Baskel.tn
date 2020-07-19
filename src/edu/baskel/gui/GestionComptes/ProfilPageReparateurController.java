@@ -136,14 +136,12 @@ public class ProfilPageReparateurController implements Initializable {
     private File file;
     private Image image;
     Connection cnx;
-    Membre l = SessionInfo.getLoggedM();
+    Membre l = SessionInfo.loggedM;
     MembreCRUD mrc = new MembreCRUD();
     ReparateurCRUD rc = new ReparateurCRUD();
     //Reparateur r = rc.getReparateurById(l.getId_u());
-    Reparateur r = SessionInfo.getLoggedR();
+    Reparateur r = SessionInfo.loggedR;
     AvisCRUD avcrd = new AvisCRUD();
-
-    
 
     //afficher la photo de profil
     @Override
@@ -276,13 +274,18 @@ public class ProfilPageReparateurController implements Initializable {
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
+        informationReparateur();
     }
 
     //afficher onglet securité
     @FXML
     void afficherOngletSecurité(ActionEvent event) {
+        actuelPass.clear();
+        nvpass.clear();
+        cnvpass.clear();
         panePrincipale.setVisible(false);
         PaneMotpass.setVisible(true);
+
     }
 
     //changer la photo de profil
@@ -309,7 +312,7 @@ public class ProfilPageReparateurController implements Initializable {
     public boolean validerchamps2() {
         String nvd = nvdate.getValue().toString();
         if ((profilnom.getText().isEmpty()) | (profilprenom.getText().isEmpty()) | (profiladresse.getText().isEmpty())
-                | (profilmail.getText().isEmpty()) | (profilteleph.getText().isEmpty()) |(txtLatitude.getText().isEmpty()) |(txtLongitude.getText().isEmpty()) | nvd == null) {
+                | (profilmail.getText().isEmpty()) | (profilteleph.getText().isEmpty()) | (txtLatitude.getText().isEmpty()) | (txtLongitude.getText().isEmpty()) | nvd == null) {
             InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
 
             return false;
@@ -412,14 +415,19 @@ public class ProfilPageReparateurController implements Initializable {
     //modifier mot de passe
     @FXML
     void ChangerPass(ActionEvent event) throws NoSuchAlgorithmException {
-        if (InputValidation.HshPassword(actuelPass.getText(), "MD5").equals(l.getMot_passe_u())) {
+        if (InputValidation.md5(actuelPass.getText()).equals(l.getMot_passe_u())) {
             if (InputValidation.validPwd(nvpass.getText()) == 0) {
                 InputValidation.notificationError("Mot de passe", "Saisissez un mot de passe valide.");
 
             } else {
 
-                if ((InputValidation.HshPassword(nvpass.getText(), "MD5")).equals(InputValidation.HshPassword(cnvpass.getText(), "MD5"))) {
-                    mrc.changerMP(l.getEmail_u(), InputValidation.HshPassword(nvpass.getText(), "MD5"));
+                if ((InputValidation.md5(nvpass.getText())).equals(InputValidation.md5(cnvpass.getText()))) {
+                    mrc.changerMP(l.getEmail_u(), InputValidation.md5(nvpass.getText()));
+                    actuelPass.clear();
+                    nvpass.clear();
+                    cnvpass.clear();
+                    lblfaible.setText("");
+
                     InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
                 } else {
                     InputValidation.notificationError("Mot de passe", "La confirmation du mot de passe doit correspondre à votre nouveau mot de passe.");
@@ -436,10 +444,10 @@ public class ProfilPageReparateurController implements Initializable {
     @FXML
     void supprimerCompte(ActionEvent event) {
         MembreCRUD mr1 = new MembreCRUD();
-        Membre l = SessionInfo.getLoggedM();
+        Membre l = SessionInfo.loggedM;
         mr1.supprimerMembre(l.getId_u());
     }
-    
+
     @FXML
     void Gmap(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MapProfil.fxml"));
@@ -450,9 +458,9 @@ public class ProfilPageReparateurController implements Initializable {
         nmp.setMail(profilmail.getText());
         nmp.setAdresse(profiladresse.getText());
         nmp.setTele(profilteleph.getText());
-        
+
         profilnom.getScene().setRoot(root2);
-  
+
     }
 
     public JFXTextField getProfilnom() {
@@ -510,8 +518,5 @@ public class ProfilPageReparateurController implements Initializable {
     public void setTxtLongitude(String txtLongitude) {
         this.txtLongitude.setText(txtLongitude);
     }
-    
-    
-    
 
 }
