@@ -18,7 +18,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Label;
-import javafx.scene.control.SkinBase;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -173,6 +172,7 @@ public class EvenementCRUD {
         return false;
     }
     
+    
      public boolean verifierNom(String nom_e) {
         Evenement e = new Evenement();
         EvenementCRUD ev = new EvenementCRUD();
@@ -183,6 +183,35 @@ public class EvenementCRUD {
             System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, nom_e);
+         
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                return true;
+
+            }
+            System.out.println("resultat trouvé");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("++++++++++++++++");
+            System.out.println("resultat non trouvé");
+        }
+        return false;
+    }
+     public boolean verifierNomUpdate(String nom_e,int id_e) {
+        Evenement e = new Evenement();
+        EvenementCRUD ev = new EvenementCRUD();
+        try {
+
+            String requete = "SELECT * FROM evenement WHERE nom_e=? AND id_e!=?";
+
+            System.out.println("+++++++++++" + requete);
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, nom_e);
+            pst.setInt(2, id_e);
 
             ResultSet rs = pst.executeQuery();
 
@@ -293,8 +322,8 @@ public class EvenementCRUD {
     /* Update */
     public boolean updateEvenement(Evenement e) {
 
-        try {
-            String requete2 = "UPDATE evenement SET nom_e=?,lieu_e=?,date_e=?,description_e=?,image_e=?,nbr_max_e=?"
+        try { 
+            String requete2 = "UPDATE evenement SET nom_e=?,lieu_e=?,date_e=?,description_e=?,image_e=?,nbr_max_e=?,nbr_participant=?"
                     + " WHERE id_e=?";
             PreparedStatement pst2 = cnx.prepareStatement(requete2);
 
@@ -304,7 +333,8 @@ public class EvenementCRUD {
             pst2.setString(4, e.getDescription_e());
             pst2.setString(5, e.getImage_e());
             pst2.setInt(6, e.getNbr_max_e());
-            pst2.setInt(7, e.getId_e());
+            pst2.setInt(7, e.getNbr_participant());
+            pst2.setInt(8, e.getId_e());
 
             pst2.executeUpdate();
             System.out.println("Evenement modifie");
@@ -370,7 +400,7 @@ public class EvenementCRUD {
 
         List<Evenement> Listevent = new ArrayList<Evenement>();
         try {
-            String requete = "select * from evenement where( STR_TO_DATE(date_e, '%d/%m/%Y'))> SYSDATE()";
+            String requete = "select * from evenement where( STR_TO_DATE(date_e,'%d/%m/%Y'))> SYSDATE()";
             PreparedStatement pst = cnx.prepareStatement(requete);
             // pst.setInt(1,id_u);
             ResultSet rs = pst.executeQuery();
@@ -394,11 +424,11 @@ public class EvenementCRUD {
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 }
-                else{
+               else{
                     e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
-                }
+               }
                 
                 
               if(ev.listEventParMembre(ml.getId_u(),e.getId_e())==true){
@@ -583,6 +613,7 @@ public class EvenementCRUD {
                 e.setImage_e(rs.getString("image_e"));
 
                 System.out.println("----------------------moyAvis affiché" +ev.moyAvis(e.getId_e()));
+                
                  
                  e.setRa(new Rating((int)ev.moyAvis(e.getId_e())));
                  e.getRa().setRating(ev.moyAvis(e.getId_e()));
@@ -724,7 +755,10 @@ public class EvenementCRUD {
                 e.setDate_e(rs.getString("date_e"));
                 e.setDescription_e(rs.getString("description_e"));
                 e.setImage_e(rs.getString("image_e"));
-                e.setNbr_max_e(rs.getInt("nbr_max_e"));
+              
+           
+                    e.setNbr_max_e(rs.getInt("nbr_max_e"));
+              
                  if (e.getImage_e().equals("")) {
                     e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
@@ -804,7 +838,7 @@ public class EvenementCRUD {
         float moy = 0;
 
         try { 
-            String req1 = "select avg(note_avis) from participation where  IFNULL(note_avis, 0) AND id_e="+id_e;
+            String req1 = "select avg(note_avis) from participation where (IFNULL(note_avis, 0)) AND id_e="+id_e;
             System.out.println("+++++++++++" + req1);
             PreparedStatement pst = cnx.prepareStatement(req1);
 

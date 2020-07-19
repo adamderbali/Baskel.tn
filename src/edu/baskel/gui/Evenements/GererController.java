@@ -173,6 +173,7 @@ public class GererController implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
+      
         colNom.setCellFactory(tc -> {
             TableCell cell = new TableCell<>();
             Text text = new Text();
@@ -443,7 +444,7 @@ public class GererController implements Initializable {
                 }
                     Ec.supprimerEvenement(e);
                   
-                    Pc.supprimerParticipationE(e.getId_e());
+                    Pc.supprimerParticipationET(e.getId_e());
                       obser.removeAll(e);
                     System.out.println("ok--------------------");
                     verification();

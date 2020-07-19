@@ -88,6 +88,27 @@ public class Evenement {
     public void setRa(Rating ra) {
         this.ra = ra;
     }
+    
+      public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e,String image_e, int nbr_max_e, int nbr_participant) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+         this.image_e = image_e;
+        this.nbr_max_e = nbr_max_e;
+        this.nbr_participant = nbr_participant;
+    }
+
+    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, int nbr_max_e, int nbr_participant) {
+        this.id_e = id_e;
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.nbr_max_e = nbr_max_e;
+        this.nbr_participant = nbr_participant;
+    }
 
   
 
@@ -102,6 +123,17 @@ public class Evenement {
         this.id_u = id_u;
         this.part = part;
     }
+
+    public Evenement(String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e) {
+        this.nom_e = nom_e;
+        this.lieu_e = lieu_e;
+        this.date_e = date_e;
+        this.description_e = description_e;
+        this.image_e = image_e;
+        this.id_u = id_u;
+        this.nbr_max_e = nbr_max_e;
+    }
+    
 
     public Button getBtn() {
         return btn;
@@ -254,7 +286,9 @@ public class Evenement {
         this.etat_p = etat_p;
     }
 
-    public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e) {
+    
+    
+ /*   public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int id_u, int nbr_max_e) {
         this.id_e = id_e;
         this.nom_e = nom_e;
         this.lieu_e = lieu_e;
@@ -263,7 +297,7 @@ public class Evenement {
         this.image_e = image_e;
         this.id_u = id_u;
         this.nbr_max_e = nbr_max_e;
-    }
+    }*/
     
      public Evenement(int id_e, String nom_e, String lieu_e, String date_e, String description_e, String image_e, int nbr_max_e) {
         this.id_e = id_e;

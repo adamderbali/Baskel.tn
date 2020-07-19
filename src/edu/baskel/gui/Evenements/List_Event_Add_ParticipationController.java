@@ -243,6 +243,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
                                         try {
                                             ma.envoiMailQrcode(ml.getEmail_u(), ee.getNom_e());
+                                            System.out.println(ml.getEmail_u());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -288,7 +289,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                 btn.setOnAction(event -> {
 
                                     if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
-                                        if (pc.supprimerParticipationE(ee.getId_e()) == true) {
+                                        if (pc.supprimerParticipationE(ee.getId_e(),ml.getId_u()) == true) {
                                             if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
                                                 System.out.println("++++++OK oK");
                                                 // tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
@@ -542,7 +543,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                             btn.setOnAction(event -> {
 
                                 if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
-                                    if (pc.supprimerParticipationE(ee.getId_e()) == true) {
+                                    if (pc.supprimerParticipationE(ee.getId_e(),ml.getId_u()) == true) {
                                         if (Ec.verifierNbrMaxE(ee.getId_e()) == true) {
                                             System.out.println("++++++OK oK");
                                             // tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
@@ -822,7 +823,7 @@ desactiverButtonConsulterPar();
 
         if (list.isSelected()) {
             try {
-                affichageEvenementOkP();
+              affichageEvenementOkP();
             } catch (Exception ex) {
                 Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
             }
