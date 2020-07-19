@@ -148,19 +148,22 @@ public class validationSaisie {
     }
 
     public static boolean verifiNumberPart(String nombre) {
-          
-        try {
-            
-            int i = Integer.parseInt(nombre);
-            System.out.println("C'est un entier");
-            return true;
-           
-        } catch (Exception e) {
-            System.out.println("Je ne suis pas un entier, et alors ca te derange ?");
-        }
         
-    
-             return false;
+        
+        int p=1;
+        try
+        {
+            p=Integer.parseInt(nombre);//le chifre est stoquer dans p
+                      System.out.println("okkk");
+                 return true ;
+        }
+        catch(NumberFormatException e)
+        {
+            e.printStackTrace();
+            System.out.println("pas ok");
+        }
+       return false  ; 
+       
     }
     
       public static int validNumberParticipant(String ch) {

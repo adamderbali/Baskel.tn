@@ -123,7 +123,7 @@ public class Ajouter_EvenementController implements Initializable {
     /* Ajout evenement*/
     @FXML
     void ajouterEvenement(ActionEvent event) {
-       
+
         String date_system = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String date = txtDate.getEditor().getText();
         /* test sur les champs vides ou non*/
@@ -306,18 +306,17 @@ public class Ajouter_EvenementController implements Initializable {
                                                                         validationSaisie.notifInfo("Nombre des participants", "Vous devez saisir un entier");
                                                                         txtDate.setDefaultColor(rgb(255, 0, 0));
                                                                         txtDate.setStyle("-fx-prompt-text-fill: #C4151C");
-                                                                        }*/
-                                                                    
-                                                                    else {
-                                                                            EvenementCRUD Ev = new EvenementCRUD();
-                                                                            if (Ev.verifierNom(txtNom.getText()) == true) {
-                                                                                System.out.println("+++++++++za3ma mch 9a3ed yodkhel lehna jemla???" + txtNom.getText());
-                                                                                txtNom.setFocusColor(rgb(255, 0, 0));
-                                                                                txtNom.setUnFocusColor(rgb(255, 0, 0));
-                                                                                txtNom.setStyle("-fx-text-fill: #C4151C");
-                                                                                
-                                                                                validationSaisie.notifInfo("Erreur", "Le nom de l'evenement existe deja");
-                                                                            } else {
+                                                                        }*/ else {
+                                                                        EvenementCRUD Ev = new EvenementCRUD();
+                                                                        if (Ev.verifierNom(txtNom.getText()) == true) {
+                                                                            System.out.println("+++++++++za3ma mch 9a3ed yodkhel lehna jemla???" + txtNom.getText());
+                                                                            txtNom.setFocusColor(rgb(255, 0, 0));
+                                                                            txtNom.setUnFocusColor(rgb(255, 0, 0));
+                                                                            txtNom.setStyle("-fx-text-fill: #C4151C");
+
+                                                                            validationSaisie.notifInfo("Erreur", "Le nom de l'evenement existe deja");
+                                                                        } 
+                                                                                else {
                                                                                 if(txtNombre.getText().equals("")){
                                                                                     EvenementCRUD Ec = new EvenementCRUD();
                                                                                     System.out.println("za3ma nombre chnia ya3ti trah:"+txtNombre.getText());
@@ -345,9 +344,11 @@ public class Ajouter_EvenementController implements Initializable {
                                                                                 controller1.actualiser();
                                                                                 validationSaisie.notifConfirm("ok", "Evenement ajouté");
                                                                             }
+                                                                            }
                                                                         }
-                                                                
-                                                            }}
+                                                                    }
+                                                                }
+                                                            
                                                         }
                                                     }
                                                 }
@@ -361,76 +362,94 @@ public class Ajouter_EvenementController implements Initializable {
                 }
             }
         }
-    }
 
-    @FXML
-    void date(MouseEvent event) {
+        @FXML
+        void date
+        (MouseEvent event
+        
+            ) {
 
         txtDate.setDefaultColor(rgb(0, 150, 164));
-        txtDate.setStyle("-fx-prompt-text-fill: #000000");
+            txtDate.setStyle("-fx-prompt-text-fill: #000000");
 
-    }
+        }
 
-    @FXML
-    void description(MouseEvent event) {
+        @FXML
+        void description
+        (MouseEvent event
+        
+            ) {
 
         txtDescription.setFocusColor(rgb(0, 150, 164));
-        txtDescription.setUnFocusColor(rgb(77, 77, 77));
-        txtDescription.setStyle("-fx-prompt-text-fill: #000000");
+            txtDescription.setUnFocusColor(rgb(77, 77, 77));
+            txtDescription.setStyle("-fx-prompt-text-fill: #000000");
 
-    }
+        }
 
-    @FXML
-    void lieu(MouseEvent event) {
+        @FXML
+        void lieu
+        (MouseEvent event
+        
+            ) {
 
         txtLieu.setFocusColor(rgb(0, 150, 164));
-        txtLieu.setUnFocusColor(rgb(77, 77, 77));
-        txtLieu.setStyle("-fx-prompt-text-fill: #000000");
+            txtLieu.setUnFocusColor(rgb(77, 77, 77));
+            txtLieu.setStyle("-fx-prompt-text-fill: #000000");
 
-    }
+        }
 
-    @FXML
-    void nom(MouseEvent event) {
+        @FXML
+        void nom
+        (MouseEvent event
+        
+            ) {
 
         txtNom.setFocusColor(rgb(0, 150, 164));
-        txtNom.setUnFocusColor(rgb(77, 77, 77));
-        txtNom.setStyle("-fx-prompt-text-fill: #000000");
+            txtNom.setUnFocusColor(rgb(77, 77, 77));
+            txtNom.setStyle("-fx-prompt-text-fill: #000000");
 
-    }
+        }
 
-    @FXML
+        @FXML
 
-    void telecharger(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        final Stage stage = new Stage();
-        File file = fileChooser.showOpenDialog(stage);
-        if (file != null) {
-            String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
-            image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
+        void telecharger
+        (ActionEvent event) throws IOException {
+            FileChooser fileChooser = new FileChooser();
+            final Stage stage = new Stage();
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+                String photo = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+                image = new Image(file.getAbsoluteFile().toURI().toString(), img.getFitWidth(), img.getFitHeight(), true, true);
 
-            pathE.setText(photo);
-            InputValidation u = new InputValidation();
-            String photo1;
-            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
-            System.out.println(photo);
-            u.CopyImage(photo1, file.toPath().toString());
-            img.setImage(image);
+                pathE.setText(photo);
+                InputValidation u = new InputValidation();
+                String photo1;
+                photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+                System.out.println(photo);
+                u.CopyImage(photo1, file.toPath().toString());
+                img.setImage(image);
+
+            }
+
+        }
+
+        @FXML
+        void retour
+        (ActionEvent event
+        
+            ) {
+        Stage stage = (Stage) idRetour.getScene().getWindow();
+            stage.close();
+            //  controller1.actualiser();
+        }
+
+        @Override
+        public void initialize
+        (URL url, ResourceBundle rb
+        
+            ) {
+        TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
 
         }
 
     }
-
-    @FXML
-    void retour(ActionEvent event) {
-        Stage stage = (Stage) idRetour.getScene().getWindow();
-        stage.close();
-        //  controller1.actualiser();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
-
-    }
-
-}
