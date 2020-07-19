@@ -5,7 +5,7 @@
  */
 package edu.baskel.services;
 
-import edu.baskel.entities.Forum1;
+import edu.baskel.entities.Forum;
 import edu.baskel.entities.Membre;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.SessionInfo;
@@ -31,7 +31,7 @@ public class ForumCRUD {
     }
 
     //ajouter commentaire
-    public void ajouterForum(Forum1 f) {
+    public void ajouterForum(Forum f) {
         String req = "INSERT INTO forum (id_f, id_u ,text, date_f , image_uf) VALUES (?,?,?,?,?)";
 
         try {
@@ -50,7 +50,7 @@ public class ForumCRUD {
     }
 
     //supprimer commentaire
-    public void supprimerForum(Forum1 f) {
+    public void supprimerForum(Forum f) {
         try {
             String requete = "DELETE FROM forum WHERE id_f=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
@@ -63,7 +63,7 @@ public class ForumCRUD {
     }
 
     //modifier commentaire
-    public void updateForum(Forum1 f ,int id) {
+    public void updateForum(Forum f ,int id) {
         try {
             String requete = "UPDATE forum SET text=? ,date_f=? WHERE id_f=? ";
             PreparedStatement pst = cnx.prepareStatement(requete);
@@ -77,15 +77,15 @@ public class ForumCRUD {
         }
     }
 
-    public List<Forum1> displayAll() {
-        List<Forum1> listeForum = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
+    public List<Forum> displayAll() {
+        List<Forum> listeForum = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
 
         try {
             String requete = "SELECT* FROM forum";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                Forum1 p = new Forum1();
+                Forum p = new Forum();
                 p.setId_f(rs.getInt(1));
                 p.setId_u(rs.getInt(2));
                 p.setValid_f(rs.getInt(3));
@@ -103,15 +103,15 @@ public class ForumCRUD {
     }
 
     //liste commentaires
-    public List<Forum1> displayAllText() {
-        List<Forum1> listeText = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
+    public List<Forum> displayAllText() {
+        List<Forum> listeText = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
 
         try {
             String requete = "SELECT* FROM forum";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                Forum1 p = new Forum1();
+                Forum p = new Forum();
                 p.setId_f(rs.getInt(1));
                 p.setId_u(rs.getInt(2));
                 p.setText(rs.getString(4));
@@ -127,7 +127,7 @@ public class ForumCRUD {
     }
     
     //siganler un commentaire
-    public  boolean signalerforum (Forum1 f){
+    public  boolean signalerforum (Forum f){
              String Requette = "UPDATE `forum` SET `Valid_f` = '0' WHERE `forum`.`id_f` = ?;";
               try {
              
