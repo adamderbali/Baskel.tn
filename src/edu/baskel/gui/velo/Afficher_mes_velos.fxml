@@ -6,6 +6,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.velo.Afficher_mes_velosController">
    <children>
@@ -14,7 +18,7 @@
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <TableView fx:id="TabAffVelo" layoutX="97.0" layoutY="106.0" onMouseClicked="#chargerDonnee" prefHeight="602.0" prefWidth="1087.0" stylesheets="@AffichageList.css">
+      <TableView fx:id="TabAffVelo" layoutX="106.0" layoutY="178.0" onMouseClicked="#chargerDonnee" prefHeight="602.0" prefWidth="1087.0" stylesheets="@AffichageList.css">
         <columns>
           <TableColumn fx:id="Colnums" minWidth="1.0" prefWidth="196.0" text="Num série" />
             <TableColumn fx:id="Colmarque" minWidth="1.0" prefWidth="191.0" text="Marque" />
@@ -25,9 +29,22 @@
             <TableColumn fx:id="ColButt" minWidth="1.0" prefWidth="124.0" />
         </columns>
       </TableView>
-      <Button fx:id="butTout" layoutX="127.0" layoutY="46.0" mnemonicParsing="false" onAction="#consultertout" prefHeight="33.0" prefWidth="190.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Consulter tout les vélos" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
-      <Button fx:id="resbut" layoutX="362.0" layoutY="46.0" mnemonicParsing="false" onAction="#consulterReservation" prefHeight="33.0" prefWidth="218.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Consulter mes réservations" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
-      <Button fx:id="allresbv" layoutX="622.0" layoutY="46.0" mnemonicParsing="false" onAction="#consultertouteReservation" prefHeight="33.0" prefWidth="344.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Consulter toutes les réservations de mes vélos" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
-      <Button fx:id="ajbut" layoutX="573.0" layoutY="758.0" mnemonicParsing="false" onAction="#ajouterVelo" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Ajouter un vélo" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+       <Text layoutX="364.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de mes vélos" wrappingWidth="533.779296875">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="0.820388349514563" endY="1.0" startX="0.8495145631067962" startY="0.5">
+                     <stops>
+                        <Stop color="#514e4e" />
+                        <Stop color="#007782f5" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+      <Button fx:id="butTout" layoutX="136.0" layoutY="118.0" mnemonicParsing="false" onAction="#consultertout" prefHeight="33.0" prefWidth="190.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Consulter tout les vélos" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+      <Button fx:id="resbut" layoutX="371.0" layoutY="118.0" mnemonicParsing="false" onAction="#consulterReservation" prefHeight="33.0" prefWidth="218.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Consulter mes réservations" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+      <Button fx:id="allresbv" layoutX="631.0" layoutY="118.0" mnemonicParsing="false" onAction="#consultertouteReservation" prefHeight="33.0" prefWidth="344.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Consulter toutes les réservations de mes vélos" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+      <Button fx:id="ajbut" layoutX="582.0" layoutY="830.0" mnemonicParsing="false" onAction="#ajouterVelo" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Ajouter un vélo" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
    </children>
 </AnchorPane>

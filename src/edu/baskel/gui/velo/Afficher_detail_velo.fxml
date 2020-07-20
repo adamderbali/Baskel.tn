@@ -7,20 +7,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0"  stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
        <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.24" pickOnBounds="true">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <Label layoutX="461.0" layoutY="23.0" prefHeight="61.0" prefWidth="411.0" text="Détails du vélo">
-         <font>
-            <Font size="44.0" />
-         </font>
-      </Label>
       <ImageView fx:id="Imgvelo" fitHeight="293.0" fitWidth="277.0" layoutX="65.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" />
       <Label layoutX="86.0" layoutY="121.0" text="Numéro série :">
          <font>
@@ -112,18 +110,31 @@
          </font>
       </Label>
       <TextArea fx:id="lbldsc" editable="false" focusTraversable="false" layoutX="671.0" layoutY="681.0" prefHeight="177.0" prefWidth="513.0" />
-     <Button fx:id="bachbutt" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" text="&lt; Retour" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+     <Button fx:id="bachbutt" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="&lt; Retour" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
        
-      <Button fx:id="resbut" layoutX="157.0" layoutY="769.0" mnemonicParsing="false" onAction="#reserverVélo" text="Réserver vélo" visible="false" textFill="#007782" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;">
+      <Button fx:id="resbut" layoutX="157.0" layoutY="769.0" mnemonicParsing="false" onAction="#reserverVélo" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Réserver vélo" textFill="#007782" visible="false">
          <font>
             <Font size="23.0" />
          </font>
       </Button>
-      <Button fx:id="achatbut" layoutX="162.0" layoutY="769.0" mnemonicParsing="false" onAction="#acheterVelo" text="Acheter vélo" visible="false" textFill="#007782" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;">
+      <Button fx:id="achatbut" layoutX="162.0" layoutY="769.0" mnemonicParsing="false" onAction="#acheterVelo" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Acheter vélo" textFill="#007782" visible="false">
          <font>
             <Font size="23.0" />
          </font>
       </Button>
+       <Text layoutX="416.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Détails vélos" wrappingWidth="355.779296875">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="0.820388349514563" endY="1.0" startX="0.8495145631067962" startY="0.5">
+                     <stops>
+                        <Stop color="#514e4e" />
+                        <Stop color="#007782f5" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
       <StackPane layoutX="65.0" layoutY="195.0" prefHeight="208.0" prefWidth="277.0" style="-fx-border-color: blue;" />
    </children>
 </AnchorPane>

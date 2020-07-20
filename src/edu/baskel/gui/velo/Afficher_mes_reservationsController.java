@@ -90,6 +90,7 @@ public class Afficher_mes_reservationsController implements Initializable {
              Scene redirection_scene = new Scene(redirection_parent);
              Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
              app_stage.setScene(redirection_scene);
+             app_stage.setTitle("Liste de mes vélos");
              app_stage.show();
          } catch (IOException ex) {
              ex.printStackTrace();

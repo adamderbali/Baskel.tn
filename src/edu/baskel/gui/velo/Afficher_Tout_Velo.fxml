@@ -7,6 +7,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="760.0" prefWidth="1122.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.velo.Afficher_Tout_VeloController">
    <children>
@@ -26,6 +30,19 @@
             <TableColumn fx:id="ColButt" minWidth="0.0" prefWidth="0.0" />
         </columns>
       </TableView>
+      <Text layoutX="402.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des vélos" wrappingWidth="364.99997928738594">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="0.820388349514563" endY="1.0" startX="0.8495145631067962" startY="0.5">
+                     <stops>
+                        <Stop color="#514e4e" />
+                        <Stop color="#007782f5" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
       <Button fx:id="myvbutt" layoutX="178.0" layoutY="52.0" mnemonicParsing="false" onAction="#afficherMesVelos" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Mes vélos" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
       <TextField fx:id="search" layoutX="826.0" layoutY="52.0" onKeyTyped="#searchBox" prefHeight="31.0" prefWidth="365.0" promptText=" Rechercher par marque, model et numéro de série" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" />
       <Button fx:id="myvbutt1" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Accueil" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
