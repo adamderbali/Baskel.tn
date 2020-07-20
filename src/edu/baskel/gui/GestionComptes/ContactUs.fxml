@@ -4,8 +4,6 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.icons525.Icons525View?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -13,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ContactUsController">
+<AnchorPane id="AnchorPane" prefHeight="760.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ContactUsController">
    <children>
-      <Text layoutX="438.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contactez nous" wrappingWidth="427.9999817311764">
+      <Text layoutX="434.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contactez nous" wrappingWidth="427.9999817311764">
          <font>
             <Font name="System Bold Italic" size="45.0" />
          </font>
@@ -28,22 +26,18 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Separator layoutX="-1.0" layoutY="107.0" prefHeight="9.0" prefWidth="1235.0" style="-fx-background-color: #0096a4#0096a4;" />
-      <Pane layoutX="265.0" layoutY="155.0" prefHeight="575.0" prefWidth="697.0" style="-fx-border-color: #000000; -fx-background-color: #D3D3D3;">
+      <Pane layoutX="268.0" layoutY="136.0" prefHeight="496.0" prefWidth="697.0" style="-fx-border-color: #000000; -fx-background-color: #D3D3D3;">
          <children>
-            <JFXTextField fx:id="txtEmail" focusColor="#0096a4" layoutX="42.0" layoutY="36.0" prefHeight="31.0" prefWidth="428.0" promptText="Nom et prenom" />
-            <JFXTextField fx:id="txtMP" focusColor="#0096a4" layoutX="42.0" layoutY="81.0" prefHeight="31.0" prefWidth="428.0" promptText="Votre adresse email " />
-            <JFXTextField fx:id="txtSujet" focusColor="#0096a4" layoutX="42.0" layoutY="125.0" prefHeight="31.0" prefWidth="428.0" promptText="Sujet" />
-            <JFXTextArea fx:id="txtDescription" focusColor="#0096a4" layoutX="42.0" layoutY="190.0" prefHeight="257.0" prefWidth="428.0" promptText="Description" />
-            <Text fill="#bf0000" layoutX="42.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos informations personnelles sont confidentielles et sécurisées." wrappingWidth="436.46142578125" />
+            <JFXTextField fx:id="txtEmail" focusColor="#0096a4" layoutX="42.0" layoutY="36.0" prefHeight="31.0" prefWidth="484.0" promptText="Nom et prenom" />
+            <JFXTextField fx:id="txtMP" focusColor="#0096a4" layoutX="42.0" layoutY="81.0" prefHeight="31.0" prefWidth="484.0" promptText="Votre adresse email " />
+            <JFXTextField fx:id="txtSujet" focusColor="#0096a4" layoutX="42.0" layoutY="125.0" prefHeight="31.0" prefWidth="484.0" promptText="Sujet" />
+            <JFXTextArea fx:id="txtDescription" focusColor="#0096a4" layoutX="42.0" layoutY="190.0" prefHeight="190.0" prefWidth="484.0" promptText="Description" />
             <FontAwesomeIconView glyphName="USER" layoutX="14.0" layoutY="62.0" size="20.0" text="" />
-            <Icons525View glyphName="BULLET" layoutX="13.0" layoutY="565.0" size="20" />
-            <JFXButton fx:id="btnEnvoyer" layoutX="279.0" layoutY="474.0" onAction="#EnvoyerMail" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096a4;" text="Envoyer" textFill="WHITE">
+            <JFXButton fx:id="btnEnvoyer" layoutX="279.0" layoutY="404.0" onAction="#EnvoyerMail" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096a4;" text="Envoyer" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font></JFXButton>
          </children>
       </Pane>
-      <Separator layoutY="758.0" prefHeight="9.0" prefWidth="1235.0" style="-fx-background-color: #0096a4#0096a4;" />
    </children>
 </AnchorPane>

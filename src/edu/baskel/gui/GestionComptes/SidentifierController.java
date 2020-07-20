@@ -133,7 +133,6 @@ public class SidentifierController implements Initializable {
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
-                    
 
                 } catch (IOException ex) {
                 }
@@ -143,7 +142,7 @@ public class SidentifierController implements Initializable {
                 stage.setIconified(false);
                 stage.centerOnScreen();
                 stage.setResizable(true);
-               // stage.setMaximized(true);
+                // stage.setMaximized(true);
                 stage.show();
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
@@ -182,6 +181,7 @@ public class SidentifierController implements Initializable {
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Inscription membre");
         app_stage.show();
 
     }
@@ -193,6 +193,7 @@ public class SidentifierController implements Initializable {
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Inscription reparateur");
         app_stage.show();
 
     }
@@ -205,9 +206,9 @@ public class SidentifierController implements Initializable {
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Mot de passe oublié");
         app_stage.show();
 
     }
 
-   
 }
