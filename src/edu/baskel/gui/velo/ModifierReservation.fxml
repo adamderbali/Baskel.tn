@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="885.0" fitWidth="1235.0" opacity="0.42" pickOnBounds="true">
+      <ImageView fitHeight="885.0" fitWidth="1235.0" opacity="0.24" pickOnBounds="true">
          <image>
-            <Image url="@../../../../images/pexels-photo-1595483.jpeg" />
+            <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
       <Pane layoutX="108.0" layoutY="100.0" prefHeight="645.0" prefWidth="1027.0" style="-fx-border-color: black;">
@@ -36,12 +36,12 @@
             </Label>
             <DatePicker fx:id="datepick" layoutX="367.0" layoutY="167.0" prefHeight="34.0" prefWidth="232.0" />
             <TextField fx:id="txtnbrh" layoutX="367.0" layoutY="272.0" />
-            <Button fx:id="modifbut" layoutX="329.0" layoutY="418.0" mnemonicParsing="false" onAction="#modifierReservation" text="Modifier">
+            <Button fx:id="modifbut" layoutX="329.0" layoutY="418.0" mnemonicParsing="false" onAction="#modifierReservation" text="Modifier" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" >
                <font>
                   <Font size="23.0" />
                </font>
             </Button>
-            <Button fx:id="annbut" layoutX="578.0" layoutY="418.0" mnemonicParsing="false" onAction="#annuler" text="Annuler">
+            <Button fx:id="annbut" layoutX="578.0" layoutY="418.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" >
                <font>
                   <Font size="23.0" />
                </font>

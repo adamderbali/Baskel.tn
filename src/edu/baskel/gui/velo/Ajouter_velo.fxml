@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.velo.Ajouter_veloController">
-    <ImageView fitHeight="906.0" fitWidth="1298.0" opacity="0.51" pickOnBounds="true">
+<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.velo.Ajouter_veloController">
+    <ImageView fitHeight="906.0" fitWidth="1298.0" opacity="0.24" pickOnBounds="true">
          <image>
-            <Image url="@../../../../images/pexels-photo-1595483.jpeg" />
+            <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
    <Pane layoutX="207.0" layoutY="34.0" prefHeight="822.0" prefWidth="870.0" style="-fx-border-color: #353535; -fx-background-color: transparent;">
@@ -73,18 +73,18 @@
          <TextField fx:id="txtann" layoutX="289.0" layoutY="352.0" />
          <TextField fx:id="txtim" layoutX="278.0" layoutY="654.0" />
          <TextArea fx:id="txtdesc" layoutX="289.0" layoutY="462.0" prefHeight="112.0" prefWidth="457.0" />
-         <Button fx:id="txtbutajout" layoutX="289.0" layoutY="740.0" mnemonicParsing="false" onAction="#ajouterVelo" text="Ajouter">
+         <Button fx:id="txtbutajout" layoutX="289.0" layoutY="740.0" mnemonicParsing="false" onAction="#ajouterVelo" text="Ajouter" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" >
             <font>
                <Font size="18.0" />
             </font>
          </Button>
-         <Button fx:id="txtannul" layoutX="464.0" layoutY="740.0" mnemonicParsing="false" onAction="#annulerVelo" text="Annuler">
+         <Button fx:id="txtannul" layoutX="464.0" layoutY="740.0" mnemonicParsing="false" onAction="#annulerVelo" text="Annuler" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" >
             <font>
                <Font size="18.0" />
             </font>
          </Button>
          <ChoiceBox fx:id="statusbox" layoutX="289.0" layoutY="407.0" prefHeight="31.0" prefWidth="186.0" />
-         <Button fx:id="fileChoose" layoutX="484.0" layoutY="654.0" mnemonicParsing="false" onAction="#telecharger" prefHeight="31.0" prefWidth="158.0" text="Charger une image" />
+         <Button fx:id="fileChoose" layoutX="484.0" layoutY="654.0" mnemonicParsing="false" onAction="#telecharger"  text="Charger une image" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
          <ImageView fx:id="img" fitHeight="146.0" fitWidth="186.0" layoutX="656.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true" />
             
       </children>

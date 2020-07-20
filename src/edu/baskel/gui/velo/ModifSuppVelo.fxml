@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" style="-fx-background-color: #a8b7ee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.51" pickOnBounds="true">
+       <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.24" pickOnBounds="true">
          <image>
-            <Image url="@../../../../images/pexels-photo-1595483.jpeg" />
+            <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
       <Label layoutX="461.0" layoutY="23.0" prefHeight="61.0" prefWidth="411.0" text="Détails du vélo">
@@ -85,18 +85,18 @@
       <TextField fx:id="txtann" layoutX="678.0" layoutY="458.0" />
       <ChoiceBox fx:id="statbox" layoutX="678.0" layoutY="531.0" prefHeight="31.0" prefWidth="207.0" />
       <ChoiceBox fx:id="etatbox" layoutX="679.0" layoutY="596.0" prefHeight="31.0" prefWidth="214.0" />
-      <Button fx:id="fileChoose" layoutX="34.0" layoutY="564.0" mnemonicParsing="false" onAction="#telecharger" text="Charger une autre image" />
-      <Button fx:id="editbutt" layoutX="138.0" layoutY="810.0" mnemonicParsing="false" onAction="#editerVelo" text="Editer">
+      <Button fx:id="fileChoose" layoutX="34.0" layoutY="564.0" mnemonicParsing="false" onAction="#telecharger" text="Charger une autre image" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS"  />
+      <Button fx:id="editbutt" layoutX="138.0" layoutY="810.0" mnemonicParsing="false" onAction="#editerVelo" text="Editer" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" >
          <font>
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="suppbutt" layoutX="256.0" layoutY="810.0" mnemonicParsing="false" onAction="#supprimervelo" text="Supprimer">
+      <Button fx:id="suppbutt" layoutX="256.0" layoutY="810.0" mnemonicParsing="false" onAction="#supprimervelo" text="Supprimer" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" >
          <font>
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="annbut" layoutX="411.0" layoutY="810.0" mnemonicParsing="false" onAction="#annuler" text="Annuler">
+      <Button fx:id="annbut" layoutX="411.0" layoutY="810.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;"  textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" >
          <font>
             <Font size="21.0" />
          </font>
