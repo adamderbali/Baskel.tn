@@ -8,22 +8,22 @@
 
 <AnchorPane fx:id="Stat_pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.Statistique_interfaceController">
    <children>
-      <Label layoutX="168.0" layoutY="427.0" prefHeight="47.0" prefWidth="166.0" text="  TOP  USER " textAlignment="JUSTIFY" wrapText="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="140.0" layoutY="554.0" prefHeight="55.0" prefWidth="332.0" text="TOP Utilisateur " textAlignment="JUSTIFY" wrapText="true">
          <font>
-            <Font name="MV Boli" size="22.0" />
+            <Font name="MV Boli" size="34.0" />
          </font>
       </Label>
-      <Label layoutX="553.0" layoutY="427.0" prefHeight="47.0" prefWidth="208.0" text="TOP INTERFACE " textAlignment="JUSTIFY" wrapText="true">
+      <Label alignment="CENTER" layoutX="709.0" layoutY="554.0" prefHeight="59.0" prefWidth="307.0" text="TOP INTERFACE " textAlignment="JUSTIFY" wrapText="true">
          <font>
-            <Font name="MV Boli" size="22.0" />
+            <Font name="MV Boli" size="34.0" />
          </font>
       </Label>
-      <Label layoutX="300.0" layoutY="55.0" prefHeight="55.0" prefWidth="345.0" text="Statistique Interface " textAlignment="JUSTIFY" wrapText="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="377.0" layoutY="81.0" prefHeight="127.0" prefWidth="471.0" text="Statistique Interface " textAlignment="CENTER" textFill="#00aaff" wrapText="true">
          <font>
-            <Font name="Agency FB" size="45.0" />
+            <Font name="Agency FB Bold" size="60.0" />
          </font>
       </Label>
-      <ImageView fitHeight="248.0" fitWidth="250.0" layoutX="131.0" layoutY="140.0" onKeyPressed="#Top_user" onMouseClicked="#Top_user">
+      <ImageView fitHeight="248.0" fitWidth="250.0" layoutX="181.0" layoutY="276.0" onKeyPressed="#Top_user" onMouseClicked="#Top_user">
          <image>
             <Image url="@../../../../images/Group-icon.png" />
          </image>
@@ -33,7 +33,7 @@
             <Image url="@../../../../images/go_back_80px.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="239.0" fitWidth="237.0" layoutX="527.0" layoutY="149.0" onKeyPressed="#Top_interface" onMouseClicked="#Top_interface">
+      <ImageView fitHeight="248.0" fitWidth="250.0" layoutX="744.0" layoutY="280.0" onKeyPressed="#Top_interface" onMouseClicked="#Top_interface">
          <image>
             <Image url="@../../../../images/101318766_823095818218279_6111267708022554624_n.png" />
          </image>

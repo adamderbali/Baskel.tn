@@ -4,13 +4,15 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anch_stat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.User_statController">
    <children>
-      <BarChart fx:id="bar_chart" layoutX="51.0" layoutY="75.0" prefHeight="557.0" prefWidth="833.0" stylesheets="@Barchart.css">
+      <BarChart fx:id="bar_chart" layoutX="21.0" layoutY="106.0" prefHeight="751.0" prefWidth="1165.0" stylesheets="@Barchart.css">
          <xAxis>
             <CategoryAxis fx:id="ID_user" label="Membres" side="BOTTOM" />
          </xAxis>
@@ -23,10 +25,15 @@
             <String fx:value="default-color1" />
          </styleClass>
       </BarChart>
-      <ImageView fx:id="back" fitHeight="53.0" fitWidth="49.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#Goback" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="back" fitHeight="76.0" fitWidth="78.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#Goback" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/go_back_80px.png" />
          </image>
       </ImageView>
+      <Label fx:id="titre" alignment="CENTER" layoutX="388.0" layoutY="14.0" prefHeight="58.0" prefWidth="488.0" text="Top Utilisateur " textFill="#0bb3e1">
+         <font>
+            <Font name="Agency FB Bold" size="67.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
