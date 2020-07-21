@@ -167,7 +167,7 @@ public class ParticipationCrud {
                 e.setImage_e(rs.getString("image_e"));
                 e.setNbr_max_e(rs.getInt("nbr_max_e"));
                   if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 } else {
@@ -184,7 +184,7 @@ public class ParticipationCrud {
                 p.setId_u(rs.getInt("id_u"));
                 p.setDate_insc(rs.getDate("date_insc"));
                  if (e.getImage_e().equals("")) {
-                    p.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     p.getImage().setFitWidth(220);
                     p.getImage().setFitHeight(110);
                 } else {

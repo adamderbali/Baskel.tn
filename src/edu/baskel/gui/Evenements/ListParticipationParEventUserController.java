@@ -13,9 +13,11 @@ import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -261,6 +263,12 @@ public class ListParticipationParEventUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         affichageParticip();
+        StatCRUD sc  = new StatCRUD();
+        try {
+            sc.Stat_methode("List des participant par evenement", ml.getId_u());
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoriqueDesEvenementsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // TODO
     }

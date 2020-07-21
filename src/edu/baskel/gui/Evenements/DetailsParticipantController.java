@@ -9,10 +9,14 @@ import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,6 +103,13 @@ public class DetailsParticipantController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+               StatCRUD sc  = new StatCRUD();
+        try {
+            sc.Stat_methode("Details Participants", ml.getId_u());
+        } catch (SQLException ex) {
+            Logger.getLogger(DetailsParticipantController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

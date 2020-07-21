@@ -11,12 +11,16 @@ import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -124,9 +128,16 @@ Membre ml = SessionInfo.getLoggedM();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         comoboxNom();
-       /*  rate.ratingProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+        
+               StatCRUD sc  = new StatCRUD();
+        try {
+            sc.Stat_methode("Avis Evenement", ml.getId_u());
+            /*  rate.ratingProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             msg.setText("Rating : " + newValue);
-        });*/
+            });*/
+        } catch (SQLException ex) {
+            Logger.getLogger(AvisEvenementController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

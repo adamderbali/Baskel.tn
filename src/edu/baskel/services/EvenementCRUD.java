@@ -65,7 +65,7 @@ public class EvenementCRUD {
     }
 
     /* supprimer evenement*/
-    public boolean supprimerEvenement(Evenement e) {
+    public void supprimerEvenement(Evenement e) {
 
         try {
             String requete1 = "DELETE FROM `evenement` WHERE `id_e`=" + e.getId_e();
@@ -75,9 +75,10 @@ public class EvenementCRUD {
             /* pst1.setInt(1,e.getId_e());*/
             pst1.executeUpdate();
             System.out.println("Evenement supprimé");
-            return true;
+           
         } catch (SQLException ex) {
-            return false;
+            ex.printStackTrace();
+          
         }
 
     }
@@ -420,7 +421,7 @@ public class EvenementCRUD {
                 //  e.setEtat_e(rs.getString("etat_e"));
 
                 if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 }
@@ -531,7 +532,7 @@ public class EvenementCRUD {
                 //  e.setEtat_e(rs.getString("etat_e"));
 
                if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                   e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 } else {
@@ -683,7 +684,7 @@ public class EvenementCRUD {
                 //  e.setEtat_e(rs.getString("etat_e"));
 
                if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 } else {
@@ -760,7 +761,7 @@ public class EvenementCRUD {
                     e.setNbr_max_e(rs.getInt("nbr_max_e"));
               
                  if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 } else {
@@ -795,7 +796,7 @@ public class EvenementCRUD {
                 e.setImage_e(rs.getString("image_e"));
                 e.setNbr_max_e(rs.getInt("nbr_max_e"));
                  if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 } else {
@@ -876,7 +877,7 @@ public class EvenementCRUD {
                 e.setImage_e(rs.getString("image_e"));
                 e.setNbr_max_e(rs.getInt("nbr_max_e"));
                  if (e.getImage_e().equals("")) {
-                    e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\veloParDefaut.jpg")));
+                    e.setImage(new ImageView(new Image("images\\veloParDefaut.jpg")));
                     e.getImage().setFitWidth(220);
                     e.getImage().setFitHeight(110);
                 } else {
