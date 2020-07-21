@@ -167,8 +167,8 @@ public class ModifSuppVeloController implements Initializable {
             pathE.setText(photo);
             InputValidation u = new InputValidation();
             String photo1;
-            //photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
-            photo1 = "C:\\xampp\\htdocs\\Baskel\\images\\" + photo;
+            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+            //photo1 = "C:\\xampp\\htdocs\\Baskel\\images\\" + photo;
             System.out.println(photo);
             u.CopyImage(photo1, file.toPath().toString());
             Imgvelo.setImage(im);
