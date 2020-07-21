@@ -162,7 +162,7 @@ public class ProfilPageReparateurController implements Initializable {
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         TextFields.bindAutoCompletion(adrloc, AutoCompleteAdresse.getAdrGov());
 
-        if (r.getImage_u() != null) {
+        if (r.getImage_u().equals("")) {
             System.out.println(r.getImage_u());
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());

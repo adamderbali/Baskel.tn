@@ -29,6 +29,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -54,6 +55,8 @@ public class User_statController implements Initializable {
     @FXML
     private ImageView back;
     Membre ml = SessionInfo.getLoggedM();
+    @FXML
+    private Label titre;
    
 
     public void conxstat() {

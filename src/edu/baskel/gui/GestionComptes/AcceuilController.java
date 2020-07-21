@@ -94,7 +94,7 @@ public class AcceuilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("****************" +SessionInfo.loggedM);
+        System.out.println("****************" + SessionInfo.loggedM);
         if (mc.TypeUser() == false) {
             btnAdmin.setVisible(true);
         } else {
@@ -108,7 +108,6 @@ public class AcceuilController implements Initializable {
     }
 
 //afficher page profil a partir de l acceuil
-    
     @FXML
     public void Profil(ActionEvent event) throws IOException {
         if ((l.getType_u().equals("U"))) {
@@ -127,24 +126,20 @@ public class AcceuilController implements Initializable {
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) btnCompte).getScene().getWindow();
         app_stage.setScene(redirection_scene);
+        app_stage.setTitle("S'identifier");
+
         app_stage.show();
         mc.Deconnexion();
-        /*
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
-        ANchorProfil.getChildren().setAll(pane);
-         */
+
     }
 
     //redirection contact us
     @FXML
     public void RedirectionContactezNs(MouseEvent event) throws IOException {
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
-        Scene redirection_scene = new Scene(redirection_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(redirection_scene);
-        app_stage.show();
-       //  AnchorPane pane = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
-        //ANchorProfil.getChildren().setAll(pane);
+        
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
+        ANchorProfil.getChildren().setAll(pane);
+
     }
 
     //redirection forum
@@ -152,12 +147,7 @@ public class AcceuilController implements Initializable {
     void forum(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
         ANchorProfil.getChildren().setAll(pane);
-        /*
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("ForumFXML.fxml"));
-        Scene redirection_scene = new Scene(redirection_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(redirection_scene);
-        app_stage.show();*/
+
     }
 
     //se decconnecter
@@ -167,6 +157,7 @@ public class AcceuilController implements Initializable {
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
+        app_stage.setTitle("S'identifier");
         app_stage.show();
         mc.Deconnexion();
     }
@@ -177,6 +168,8 @@ public class AcceuilController implements Initializable {
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Page admin");
+
         app_stage.show();
     }
 
@@ -197,14 +190,13 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void RedirectionGererEvenemn(ActionEvent event) throws IOException {
-       
+
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../Evenements/Gerer.fxml"));
         ANchorProfil.getChildren().setAll(pane);
     }
 
     @FXML
     void RedirectionVelos(ActionEvent event) throws IOException {
-        // AnchorPane pane = (AnchorPane)FXMLLoader.load(getClass().getResource("/edu.baskel.gui.velo/Afficher_Tout_Velo.fxml"));
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../velo/Afficher_Tout_Velo.fxml"));
         ANchorProfil.getChildren().setAll(pane);
 
@@ -212,15 +204,10 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void PageFB(MouseEvent event) {
-        /*    WebView vieww = new WebView();
-        final WebEngine web = vieww.getEngine();
-        String urlweb = "https://facebook.com/";
-        web.load(urlweb);
-        ANchorProfil.getChildren().setAll(vieww);*/
+      
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\dell\\Pictures\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.facebook.com/Baskel395/");
-        //driver.manage().window().maximize();
 
     }
 

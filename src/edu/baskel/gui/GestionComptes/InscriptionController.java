@@ -263,7 +263,7 @@ public class InscriptionController implements Initializable {
         }
         if (chkfemme.isSelected()) {
             message += chkfemme.getText();
-            
+
         }
         return message;
     }
@@ -321,7 +321,7 @@ public class InscriptionController implements Initializable {
         String conmotdepasse = InputValidation.md5(txtconfirmation.getText());
         String imge = txtimage.getText();
 
-        Membre m = new Membre(0,nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge,"U");
+        Membre m = new Membre(0, nom, prenom, adresse, email, sexe, datenais, motdepasse, tel, imge, "U");
         if (validerchamps() == true) {
             if (InputValidation.validTextField(txtNom.getText())) {
                 InputValidation.notificationError("Nom", "Saisissez votre nom");
@@ -424,6 +424,7 @@ public class InscriptionController implements Initializable {
                                                     Scene redirection_scene = new Scene(redirection_parent);
                                                     Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                                     app_stage.setScene(redirection_scene);
+                                                    app_stage.setTitle("Page d'acceuil");
                                                     app_stage.show();
 
                                                 } else {
@@ -468,6 +469,7 @@ public class InscriptionController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
+            app_stage.setTitle("S'identifier");
             app_stage.show();
 
         } catch (IOException ex) {

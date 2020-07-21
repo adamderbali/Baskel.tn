@@ -119,6 +119,7 @@ public class MotdepasseoubliéController implements Initializable {
         Scene redirection_scene = new Scene(redirection_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(redirection_scene);
+        app_stage.setTitle("S'identifier");
         app_stage.show();
     }
 

@@ -93,18 +93,15 @@ public class NouveauMPController implements Initializable {
         if (InputValidation.md5(txtNvMp.getText()).equals(InputValidation.md5(txtCnvMp.getText()))) {
             r.changerMP(txtm.getText(), InputValidation.md5(txtNvMp.getText()));
             InputValidation.notificationsucces("Mot de passe", "Votre mot de passe a été réinitialisé !");
-            //SessionInfo.loggedM = 
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.show();
-            /*Alert alertnum = new InputValidation().getAlert("mot de passe", "Votre mot de passe a été réinitialisé !");
-            alertnum.showAndWait();*/
+            
         } else {
             InputValidation.notificationError("Mot de passe", "Verifier vos données !");
-            //Alert alertnum = new InputValidation().getAlert("mot de passe", "Verifier vos données !");
-            //alertnum.showAndWait();
+            
             System.out.println("Erreur ");
         }
     }

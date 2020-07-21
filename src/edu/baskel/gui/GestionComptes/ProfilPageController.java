@@ -143,7 +143,7 @@ public class ProfilPageController implements Initializable {
         informationMembre();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         //Photo de profil
-        if (l.getImage_u() != null) {
+        if (l.getImage_u().equals("")) {
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
             //aspect 3D avec ombre pour l image

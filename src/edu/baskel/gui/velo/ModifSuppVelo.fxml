@@ -8,20 +8,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" style="-fx-background-color: #a8b7ee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.51" pickOnBounds="true">
+       <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.24" pickOnBounds="true">
          <image>
-            <Image url="@../../../../images/pexels-photo-1595483.jpeg" />
+            <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <Label layoutX="461.0" layoutY="23.0" prefHeight="61.0" prefWidth="411.0" text="Détails du vélo">
-         <font>
-            <Font size="44.0" />
-         </font>
-      </Label>
       <ImageView fx:id="Imgvelo" fitHeight="293.0" fitWidth="277.0" layoutX="65.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="86.0" layoutY="121.0" text="Numéro série :">
          <font>
@@ -85,22 +83,35 @@
       <TextField fx:id="txtann" layoutX="678.0" layoutY="458.0" />
       <ChoiceBox fx:id="statbox" layoutX="678.0" layoutY="531.0" prefHeight="31.0" prefWidth="207.0" />
       <ChoiceBox fx:id="etatbox" layoutX="679.0" layoutY="596.0" prefHeight="31.0" prefWidth="214.0" />
-      <Button fx:id="fileChoose" layoutX="34.0" layoutY="564.0" mnemonicParsing="false" onAction="#telecharger" text="Charger une autre image" />
-      <Button fx:id="editbutt" layoutX="138.0" layoutY="810.0" mnemonicParsing="false" onAction="#editerVelo" text="Editer">
+      <Button fx:id="fileChoose" layoutX="34.0" layoutY="564.0" mnemonicParsing="false" onAction="#telecharger" prefHeight="33.0" prefWidth="207.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Charger une autre image" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+      <Button fx:id="editbutt" layoutX="88.0" layoutY="809.0" mnemonicParsing="false" onAction="#editerVelo" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Editer" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="suppbutt" layoutX="256.0" layoutY="810.0" mnemonicParsing="false" onAction="#supprimervelo" text="Supprimer">
+      <Button fx:id="suppbutt" layoutX="256.0" layoutY="810.0" mnemonicParsing="false" onAction="#supprimervelo" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Supprimer" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="annbut" layoutX="411.0" layoutY="810.0" mnemonicParsing="false" onAction="#annuler" text="Annuler">
+      <Button fx:id="annbut" layoutX="418.0" layoutY="810.0" mnemonicParsing="false" onAction="#annuler" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Annuler" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font size="21.0" />
          </font>
       </Button>
+        <Text layoutX="431.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion vélos" wrappingWidth="365.779296875">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="0.820388349514563" endY="1.0" startX="0.8495145631067962" startY="0.5">
+                     <stops>
+                        <Stop color="#514e4e" />
+                        <Stop color="#007782f5" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
       <TextField fx:id="pathE" layoutX="33.0" layoutY="523.0" />
    </children>
 </AnchorPane>

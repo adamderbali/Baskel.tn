@@ -8,27 +8,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.AdminController">
    <children>
-      <ImageView fx:id="img_stat" fitHeight="200.0" fitWidth="236.0" layoutX="161.0" layoutY="385.0" onKeyPressed="#event" onMouseClicked="#event" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img_stat" fitHeight="200.0" fitWidth="236.0" layoutX="198.0" layoutY="385.0" onKeyPressed="#event" onMouseClicked="#event" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/event-icon.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="361.0" layoutY="14.0" prefHeight="124.0" prefWidth="432.0" text="BASKEL.TN" textFill="#5192ee">
+      <Label alignment="CENTER" layoutX="398.0" layoutY="47.0" prefHeight="164.0" prefWidth="439.0" text="BASKEL.TN" textFill="#5192ee">
          <font>
             <Font name="Agency FB Bold" size="96.0" />
          </font>
       </Label>
-      <ImageView fx:id="reclama" fitHeight="200.0" fitWidth="200.0" layoutX="820.0" layoutY="385.0" onMouseClicked="#rec_admin">
+      <ImageView fx:id="reclama" fitHeight="200.0" fitWidth="200.0" layoutX="837.0" layoutY="385.0" onMouseClicked="#rec_admin">
          <image>
             <Image url="@../../../../images/clipboard-file-document-paste-files-1-18886.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="velo" fitHeight="178.0" fitWidth="189.0" layoutX="501.0" layoutY="199.0" onMouseClicked="#avis_Stat">
-         <image>
-            <Image url="@../../../../images/bikeshare_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="statis" fitHeight="178.0" fitWidth="200.0" layoutX="496.0" layoutY="585.0" onMouseClicked="#stat">
+      <ImageView fx:id="statis" fitHeight="200.0" fitWidth="244.0" layoutX="496.0" layoutY="385.0" onMouseClicked="#stat">
          <image>
             <Image url="@../../../../images/analytics_icon3.png" />
          </image>

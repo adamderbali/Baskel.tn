@@ -214,7 +214,7 @@ public class InscriptionReparateurController implements Initializable {
                 | (txtemail.getText().isEmpty()) | (txttelephone.getText().isEmpty()) | (txtmotdepasse.getText().isEmpty())
                 | (txtconfirmation.getText().isEmpty()) | (sexeMembre().equals("")) | (txttelpro.getText().isEmpty())
                 | (txtadrlocal.getText().isEmpty())) {
-            
+
             InputValidation.notificationError("Erreur d'ajout", "Les champs doivent etre tout remplis svp.");
 
             txtNom.setFocusColor(rgb(255, 0, 0));
@@ -466,6 +466,7 @@ public class InscriptionReparateurController implements Initializable {
                                                         Scene redirection_scene = new Scene(redirection_parent);
                                                         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                                         app_stage.setScene(redirection_scene);
+                                                        app_stage.setTitle("Page d'acceuil");
                                                         app_stage.show();
 
                                                     } else {
@@ -510,6 +511,7 @@ public class InscriptionReparateurController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
+            app_stage.setTitle("S'identifier");
             app_stage.show();
 
         } catch (IOException ex) {
@@ -565,22 +567,20 @@ public class InscriptionReparateurController implements Initializable {
         txtadrlocal.setFocusColor(Paint.valueOf("#0096a4"));
         txtadrlocal.setUnFocusColor(Paint.valueOf("#0096a4"));
     }
-    
-      @FXML
+
+    @FXML
     public void DefaultThemelat(MouseEvent event) {
         txtadrlocal2.setStyle("");
         txtadrlocal2.setFocusColor(Paint.valueOf("#0096a4"));
         txtadrlocal2.setUnFocusColor(Paint.valueOf("#0096a4"));
     }
-    
-      @FXML
+
+    @FXML
     public void DefaultThemelong(MouseEvent event) {
         txtadrlocal1.setStyle("");
         txtadrlocal1.setFocusColor(Paint.valueOf("#0096a4"));
         txtadrlocal1.setUnFocusColor(Paint.valueOf("#0096a4"));
     }
-
-
 
     @FXML
     public void DefaultThemeMotPass(MouseEvent event) {
@@ -696,16 +696,13 @@ public class InscriptionReparateurController implements Initializable {
 
         //AnchorPane pane = FXMLLoader.load(getClass().getResource("GmapView.fxml"));
         //anchorMap.getChildren().setAll(pane);
-        
         /*FXMLLoader fxmll = new FXMLLoader(getClass().getResource("GmapView.fxml"));
         Parent root = (Parent)fxmll.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();*/
-        
-        /* GmapViewController controller2 = new GmapViewController(this);
+ /* GmapViewController controller2 = new GmapViewController(this);
          controller2.showStage();*/
-           
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GmapView.fxml"));
         Parent root2 = loader.load();
         GmapViewController nmp = loader.getController();
@@ -783,8 +780,8 @@ public class InscriptionReparateurController implements Initializable {
     }
 
     public void setTxttelpro(String txttelpro) {
-        this.txttelpro.setText(txttelpro);    }
-   
+        this.txttelpro.setText(txttelpro);
+    }
 
     public JFXTextField getTxtAdresse() {
         return txtAdresse;
@@ -793,9 +790,5 @@ public class InscriptionReparateurController implements Initializable {
     public void setTxtAdresse(String txtAdresse) {
         this.txtAdresse.setText(txtAdresse);
     }
-    
-    
-    
-    
 
 }

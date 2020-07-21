@@ -346,7 +346,7 @@ public class ReclamationController implements Initializable {
             }
             if (result.get() == ButtonType.CANCEL) {
                 Notifications notificationBuilder3 = Notifications.create()
-                        .text("  Votre Modification est annulée ").title("Modification").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
+                        .text("Votre Modification est annulée ").title("Modification").graphic(null).hideAfter(Duration.seconds(6)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
 
