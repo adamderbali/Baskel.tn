@@ -180,7 +180,7 @@ public class ProfilPageReparateurController implements Initializable {
         if (!r.getImage_u().equals("")) {
             System.out.println(r.getImage_u());
             Image imagelog;
-            imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
+            imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + r.getImage_u());
             //aspect 3D avec ombre pour l image
             SnapshotParameters parameters = new SnapshotParameters();
             parameters.setFill(Color.TRANSPARENT);
@@ -398,7 +398,7 @@ public class ProfilPageReparateurController implements Initializable {
                                                 SessionInfo.loggedR = rr;
                                                 fc.updateImageForum(mm, l.getId_u());
 
-                                                informationReparateur();
+                                                //informationReparateur();
 
                                                 InputValidation.notificationsucces("Profil", "Vos modifications sont enregistrés");
 
