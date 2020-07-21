@@ -245,7 +245,7 @@ public class ForumFXMLController implements Initializable {
                     System.out.println("Rien");
                 }
             } else {
-                InputValidation.notificationError("Commentaire", "Vous ne pouver pas supprimer les commentaires des autres membres");
+                InputValidation.notificationError("Commentaire", "Vous pouvez ne supprimer que vos commentaires ");
             }
         } else {
             InputValidation.notificationError("Commentaire", "Vous devez selectionner le commentaire a supprimer");
@@ -470,6 +470,7 @@ public class ForumFXMLController implements Initializable {
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             app_stage.setScene(redirection_scene);
             app_stage.setAlwaysOnTop(false);
+            app_stage.setTitle("Acceuil");
             app_stage.show();
 
         } catch (IOException ex) {

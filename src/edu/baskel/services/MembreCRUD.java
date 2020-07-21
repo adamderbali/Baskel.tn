@@ -62,7 +62,6 @@ public class MembreCRUD {
                 HistoriqueCRUD hh = new HistoriqueCRUD();
                 hh.ajouterHistorique(last_inserted_id);
                 System.out.println("Historrique added!");
-                //SessionInfo.setLoggedM(m);
                 SessionInfo.loggedM = m;
                 System.out.println(m);
             }

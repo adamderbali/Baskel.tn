@@ -74,7 +74,7 @@
             <JFXTextField fx:id="txtshowpass" layoutX="44.0" layoutY="247.0" prefHeight="31.0" prefWidth="318.0" promptText="Mot de passe" />
             <Label fx:id="lblfaible" layoutX="280.0" layoutY="251.0" prefHeight="21.0" prefWidth="48.0" />
             <JFXTextField fx:id="txtshowcpass" layoutX="44.0" layoutY="297.0" prefHeight="31.0" prefWidth="318.0" promptText="Confirmer mot de passe" />
-            <JFXButton fx:id="btnConnexion" layoutX="246.0" layoutY="534.0" onAction="#SidentifierPage" prefHeight="41.0" prefWidth="168.0" style="-fx-background-color: #0096a4;" text="Connexion" textFill="WHITE">
+            <JFXButton fx:id="btnConnexion" layoutX="246.0" layoutY="534.0" onAction="#SidentifierPage" prefHeight="41.0" prefWidth="168.0" style="-fx-background-color: #0096a4;" text="S'identifier" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.lynden.gmapsfx.javascript.object.LatLong;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reparateur;
@@ -23,6 +22,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import javafx.event.ActionEvent;
@@ -33,7 +33,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
@@ -139,13 +141,13 @@ public class ProfilPageReparateurController implements Initializable {
     Membre l = SessionInfo.loggedM;
     MembreCRUD mrc = new MembreCRUD();
     ReparateurCRUD rc = new ReparateurCRUD();
-    //Reparateur r = rc.getReparateurById(l.getId_u());
     Reparateur r = SessionInfo.loggedR;
     AvisCRUD avcrd = new AvisCRUD();
 
     //afficher la photo de profil
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println(SessionInfo.loggedR);
         thximage.setVisible(false);
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
@@ -162,7 +164,7 @@ public class ProfilPageReparateurController implements Initializable {
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         TextFields.bindAutoCompletion(adrloc, AutoCompleteAdresse.getAdrGov());
 
-        if (r.getImage_u().equals("")) {
+        if (!r.getImage_u().equals("")) {
             System.out.println(r.getImage_u());
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
@@ -367,19 +369,34 @@ public class ProfilPageReparateurController implements Initializable {
                                             Reparateur rr = new Reparateur(adrloc.getText(), null, telpro.getText(), txtLatitude.getText(), txtLongitude.getText(),
                                                     profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
                                                     profilmail.getText(), r.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
-                                            rr.setId_u(r.getId_u());
-                                            rc.updateReparateur(rr);
 
-                                            informationReparateur();
+                                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                            alert.setTitle("Confirmation ");
+                                            alert.setHeaderText("Enregistrer les modifications  !?");
+                                            alert.setContentText("OK?");
+                                            Optional<ButtonType> result = alert.showAndWait();
+                                            if (result.get() == ButtonType.OK) {
 
-                                            InputValidation.notificationsucces("Profil", "Vos modifications sont enregistrés");
+                                                rr.setId_u(r.getId_u());
+                                                rc.updateReparateur(rr);
+                                                InputValidation.notificationsucces("Modifications", "Modification réussite");
+                                                //informationReparateur();
+                                                SessionInfo.loggedR = rr;
+                                                informationReparateur();
 
-                                            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
-                                            Scene redirection_scene = new Scene(redirection_parent);
-                                            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                            app_stage.setScene(redirection_scene);
-                                            app_stage.show();
-                                            System.out.println("modifie");
+                                                InputValidation.notificationsucces("Profil", "Vos modifications sont enregistrés");
+
+                                                Parent redirection_parent = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
+                                                Scene redirection_scene = new Scene(redirection_parent);
+                                                Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                                app_stage.setScene(redirection_scene);
+                                                app_stage.setTitle("Acceuil");
+                                                app_stage.show();
+                                                System.out.println("modifie");
+
+                                            } else {
+                                                System.out.println("Rien");
+                                            }
 
                                         }
 
@@ -422,15 +439,24 @@ public class ProfilPageReparateurController implements Initializable {
             } else {
 
                 if ((InputValidation.md5(nvpass.getText())).equals(InputValidation.md5(cnvpass.getText()))) {
-                    mrc.changerMP(l.getEmail_u(), InputValidation.md5(nvpass.getText()));
-                    actuelPass.clear();
-                    nvpass.clear();
-                    cnvpass.clear();
-                    lblfaible.setText("");
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation ");
+                    alert.setHeaderText("Etes vous sur de vouloir enregistrer les modifications  !?");
+                    alert.setContentText("OK?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        mrc.changerMP(l.getEmail_u(), InputValidation.md5(nvpass.getText()));
+                        actuelPass.clear();
+                        nvpass.clear();
+                        cnvpass.clear();
+                        lblfaible.setText("");
+                        InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
+                    } else {
+                        System.out.println("Rien");
+                    }
 
-                    InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
                 } else {
-                    InputValidation.notificationError("Mot de passe", "La confirmation du mot de passe doit correspondre à votre nouveau mot de passe.");
+                    InputValidation.notificationError("Mot de passe", "Verifier le mot de passe entré");
 
                 }
             }
@@ -442,10 +468,17 @@ public class ProfilPageReparateurController implements Initializable {
 
     //supprimer son compte
     @FXML
-    void supprimerCompte(ActionEvent event) {
+    void supprimerCompte(ActionEvent event) throws IOException {
         MembreCRUD mr1 = new MembreCRUD();
         Membre l = SessionInfo.loggedM;
         mr1.supprimerMembre(l.getId_u());
+
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Acceuil");
+        app_stage.show();
     }
 
     @FXML

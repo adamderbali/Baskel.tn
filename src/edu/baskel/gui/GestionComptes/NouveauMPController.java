@@ -90,19 +90,25 @@ public class NouveauMPController implements Initializable {
     //verifier la correspondance et reinitialiser le mot de passe
     @FXML
     public void changerMP(ActionEvent event) throws NoSuchAlgorithmException, IOException {
-        if (InputValidation.md5(txtNvMp.getText()).equals(InputValidation.md5(txtCnvMp.getText()))) {
-            r.changerMP(txtm.getText(), InputValidation.md5(txtNvMp.getText()));
-            InputValidation.notificationsucces("Mot de passe", "Votre mot de passe a été réinitialisé !");
-            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
-            Scene redirection_scene = new Scene(redirection_parent);
-            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            app_stage.setScene(redirection_scene);
-            app_stage.show();
-            
+        if (txtNvMp.getText().isEmpty() || txtCnvMp.getText().isEmpty()) {
+            InputValidation.notificationError("Mot de passe", "Champ(s) vides(s)!");
+
         } else {
-            InputValidation.notificationError("Mot de passe", "Verifier vos données !");
-            
-            System.out.println("Erreur ");
+            if (InputValidation.md5(txtNvMp.getText()).equals(InputValidation.md5(txtCnvMp.getText()))) {
+                r.changerMP(txtm.getText(), InputValidation.md5(txtNvMp.getText()));
+                InputValidation.notificationsucces("Mot de passe", "Votre mot de passe a été réinitialisé !");
+                Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+                Scene redirection_scene = new Scene(redirection_parent);
+                Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                app_stage.setScene(redirection_scene);
+                app_stage.setTitle("Acceuil");
+                app_stage.show();
+
+            } else {
+                InputValidation.notificationError("Mot de passe", "Verifier vos données !");
+
+                System.out.println("Erreur ");
+            }
         }
     }
 
