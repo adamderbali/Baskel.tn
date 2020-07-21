@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EnvoiMail;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
@@ -17,6 +18,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -38,7 +40,8 @@ import javafx.stage.Stage;
  * @author dell
  */
 public class MotdepasseoubliéController implements Initializable {
-
+    
+   
     @FXML
     private Button btnenv;
     @FXML
@@ -80,26 +83,36 @@ public class MotdepasseoubliéController implements Initializable {
     //envoyer le mail de reinitilisation mp
     @FXML
     public void envoyerMail(ActionEvent event) {
-        if (mc.VerifEmailMpOublié(txtentermail.getText()) == true) {
-            e.envoyerMail1(txtentermail.getText());
+        if (txtentermail.getText().isEmpty()) {
+            InputValidation.notificationError("Adresse Email", "entrer votre adresse email");
+
         } else {
-            InputValidation.notificationError("Adresse Email", "verifier votre adresse email");
+            if (mc.VerifEmailMpOublié(txtentermail.getText()) == true) {
+                e.envoyerMail1(txtentermail.getText());
+            } else {
+                InputValidation.notificationError("Adresse Email", "verifier votre adresse email");
+            }
         }
     }
 
     //varification code envoyé par mail
     @FXML
     public void verifierCode(ActionEvent event) throws IOException {
-        if ((e.verifierCode1(txtcode.getText()) == true)) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NouveauMP.fxml"));
-            Parent root2 = loader.load();
-            NouveauMPController nmp = loader.getController();
-            nmp.setTxtm(txtentermail.getText());
-            txtentermail.getScene().setRoot(root2);
-        } else {
-            System.out.println("code erroné");
-            InputValidation.notificationError("Code", "verifier le code envoyer");
+        if (txtcode.getText().isEmpty()) {
+            InputValidation.notificationError("Code", "entrer le code");
 
+        } else {
+            if ((e.verifierCode1(txtcode.getText()) == true)) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("NouveauMP.fxml"));
+                Parent root2 = loader.load();
+                NouveauMPController nmp = loader.getController();
+                nmp.setTxtm(txtentermail.getText());
+                txtentermail.getScene().setRoot(root2);
+            } else {
+                System.out.println("code erroné");
+                InputValidation.notificationError("Code erroné", "verifier le code envoyer");
+
+            }
         }
 
     }

@@ -138,28 +138,20 @@ public class SidentifierController implements Initializable {
                 }
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                //stage.setAlwaysOnTop(true);
                 stage.setIconified(false);
                 stage.centerOnScreen();
                 stage.setResizable(true);
-                // stage.setMaximized(true);
                 stage.show();
                 SessionInfo.getInstance(iduser);
                 SessionInfo.getLoggedM();
                 hh.UpdateLastCnx(iduser);
-                //System.out.println(mr.getlistMembre());
-                //hh.LastCnx2();
+            
             } else {
                 InputValidation.notificationError("Erreur d'authentification", "Vous Etes banni a cause de reclamation");
-
-                //Alert alertn = new InputValidation().getAlert(" Erreur d'authentification", "vous etes banni s");
-                //alertn.showAndWait();
             }
         } else {
             InputValidation.notificationError("Erreur d'authentification", "veuillez  verifier vos données");
 
-            //Alert alertnum = new InputValidation().getAlert(" Erreur d'authentification", "veuillez  verifier vos données");
-            //alertnum.showAndWait();
         }
     }
 

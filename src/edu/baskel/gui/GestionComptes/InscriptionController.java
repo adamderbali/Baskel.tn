@@ -117,6 +117,7 @@ public class InscriptionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         txtmotdepasse.setVisible(true);
         txtconfirmation.setVisible(true);
         txtshowpass.setVisible(false);

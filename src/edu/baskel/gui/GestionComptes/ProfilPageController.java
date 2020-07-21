@@ -6,7 +6,9 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
+import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
@@ -19,7 +21,9 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import javafx.event.ActionEvent;
@@ -30,7 +34,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
@@ -75,7 +81,7 @@ public class ProfilPageController implements Initializable {
     @FXML
     private Button btnconfirmer1;
     @FXML
-    private ImageView imagev;
+    private ImageView imagev, cc;
     @FXML
     private Button btnimage;
     @FXML
@@ -116,10 +122,7 @@ public class ProfilPageController implements Initializable {
     private Button btnSupprimer;
     @FXML
     private JFXTextField txtEmailVerif;
-    /*@FXML
-    private ImageView Logout;
-    @FXML
-    private ImageView exit;*/
+
 
     private String photo = null;
     private File file;
@@ -127,10 +130,19 @@ public class ProfilPageController implements Initializable {
     Connection cnx;
     Membre l = SessionInfo.loggedM;
     MembreCRUD mrc = new MembreCRUD();
+    ForumCRUD fc = new ForumCRUD();
 
     //afficher la photo de profil
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        try{
+            StatCRUD sc = new StatCRUD();
+
+            sc.Stat_methode("profil membre", l.getId_u());
+        } catch (SQLException ex) {
+        }
+        
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
         actuelPass.setVisible(true);
@@ -143,10 +155,10 @@ public class ProfilPageController implements Initializable {
         informationMembre();
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         //Photo de profil
-        if (l.getImage_u().equals("")) {
+
+        if (!(l.getImage_u().equals(""))) {
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
-            //aspect 3D avec ombre pour l image
             SnapshotParameters parameters = new SnapshotParameters();
             parameters.setFill(Color.TRANSPARENT);
             WritableImage image = imagev.snapshot(parameters, null);
@@ -344,17 +356,30 @@ public class ProfilPageController implements Initializable {
 
                                         Membre m1 = new Membre(profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
                                                 profilmail.getText(), l.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
-
-                                        m1.setId_u(iduser);
-                                        mrc.updateMembre(m1);
+                                        m1.setType_u("U");
+                                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                        alert.setTitle("Confirmation ");
+                                        alert.setHeaderText("Enregistrer les modifications  !?");
+                                        alert.setContentText("OK?");
+                                        Optional<ButtonType> result = alert.showAndWait();
+                                        if (result.get() == ButtonType.OK) {
+                                            m1.setId_u(iduser);
+                                            mrc.updateMembre(m1);
+                                            SessionInfo.loggedM = m1;
+                                            fc.updateImageForum(m1, l.getId_u());
+                                             //informationMembre();
+                                            InputValidation.notificationsucces("Modifications", "Modification réussite");
 
                                         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
                                         Scene redirection_scene = new Scene(redirection_parent);
                                         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                         app_stage.setScene(redirection_scene);
+                                        app_stage.setTitle("Acceuil");
                                         app_stage.show();
-                                        System.out.println("modifie");
-
+                                        } else {
+                                            System.out.println("Rien");
+                                        }
+                                       
                                     }
 
                                 }
@@ -395,14 +420,24 @@ public class ProfilPageController implements Initializable {
             } else {
 
                 if ((InputValidation.md5(nvpass.getText())).equals(InputValidation.md5(cnvpass.getText()))) {
-                    mrc.changerMP(l.getEmail_u(), InputValidation.md5(nvpass.getText()));
-                    actuelPass.clear();
-                    nvpass.clear();
-                    cnvpass.clear();
-                    lblfaible.setText("");
-                    InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation ");
+                    alert.setHeaderText("Etes vous sur de vouloir enregistrer les modifications  !?");
+                    alert.setContentText("OK?");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        mrc.changerMP(l.getEmail_u(), InputValidation.md5(nvpass.getText()));
+                        actuelPass.clear();
+                        nvpass.clear();
+                        cnvpass.clear();
+                        lblfaible.setText("");
+                        InputValidation.notificationsucces("Mot de passe", "Mot de passe modifier avec succées");
+                    } else {
+                        System.out.println("Rien");
+                    }
+
                 } else {
-                    InputValidation.notificationError("Mot de passe", "La confirmation du mot de passe doit correspondre à votre nouveau mot de passe.");
+                    InputValidation.notificationError("Mot de passe", "Verifier le mot de passe entré");
 
                 }
             }
@@ -414,28 +449,22 @@ public class ProfilPageController implements Initializable {
 
     //supprimer son compte
     @FXML
-    void supprimerCompte(ActionEvent event) {
+    void supprimerCompte(ActionEvent event) throws IOException {
         MembreCRUD mr1 = new MembreCRUD();
         Membre l = SessionInfo.loggedM;
-        mr1.supprimerMembre(l.getId_u());
+       
+                        mr1.supprimerMembre(l.getId_u());
+
+            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
+            Scene redirection_scene = new Scene(redirection_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(redirection_scene);
+            app_stage.setTitle("S'identifier");
+            app_stage.show();
+            
+            
+            InputValidation.notificationsucces("Compte", "Votre compte a été supprimer");
+        
     }
 
-    /*
-     @FXML
-    void Deconnexion2(MouseEvent event) throws IOException {
-        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
-        Scene redirection_scene = new Scene(redirection_parent);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(redirection_scene);
-        app_stage.show();
-        mrc.Deconnexion();
-    }
-    
-    //fermer l application
-    @FXML
-    void Quitter(MouseEvent event) {
-        Platform.exit();
-        mrc.Deconnexion();
-
-    }*/
 }

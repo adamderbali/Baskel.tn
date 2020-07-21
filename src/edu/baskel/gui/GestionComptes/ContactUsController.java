@@ -8,8 +8,13 @@ package edu.baskel.gui.GestionComptes;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import edu.baskel.entities.Membre;
 import edu.baskel.services.EnvoiMail;
+import edu.baskel.services.StatCRUD;
+import edu.baskel.utils.InputValidation;
+import edu.baskel.utils.SessionInfo;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,21 +39,33 @@ public class ContactUsController implements Initializable {
     private JFXButton btnEnvoyer;
 
     EnvoiMail e = new EnvoiMail();
-
+    Membre l = SessionInfo.loggedM;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO try {
+        try{
+            StatCRUD sc = new StatCRUD();
+
+            sc.Stat_methode("contact", l.getId_u());
+        } catch (SQLException ex) {
+        }
     }
 
     //mail de la part du membre 
     @FXML
     public void EnvoyerMail(ActionEvent event) {
-        e.envoyerMailAdmin("Nom et prenom : " + txtEmail.getText() + "///" + "Adresse email : " + txtMP.getText()
-                + "///" + "Sujet : " + txtSujet.getText(), txtDescription.getText());
-    }
+        if (txtSujet.getText().isEmpty() || txtDescription.getText().isEmpty()) {
+            InputValidation.notificationError("Erreur", "Les champs doivent etre tout remplis svp.");
 
+        } else {
+            e.envoyerMailAdmin(l.getNom_u() + " " + l.getPrenom_u() + " " + l.getEmail_u()
+                    + "///" + "Sujet : " + txtSujet.getText(), txtDescription.getText());
+            txtSujet.clear();
+            txtDescription.clear();
+        }
+    }
 }

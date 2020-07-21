@@ -76,6 +76,19 @@ public class ForumCRUD {
             System.out.println(ex.getMessage());
         }
     }
+    //modifier commentaire
+    public void updateImageForum(Membre m ,int id) {
+        try {
+            String requete = "UPDATE forum SET image_uf=? WHERE id_u=? ";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setString(1, m.getImage_u());
+            pst.setInt(2, id);
+            pst.executeUpdate();
+            System.out.println("forum modifié");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     public List<Forum> displayAll() {
         List<Forum> listeForum = new ArrayList<>(); //lezemha hné bech ywalli ychouf return
