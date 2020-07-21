@@ -8,6 +8,7 @@ package edu.baskel.gui.reparateurGUI;
 import edu.baskel.entities.Alerte;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.AlerteCRUD;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,10 +19,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -40,6 +48,8 @@ public class ListeAlerteController implements Initializable {
     private TableColumn<Alerte, Date> colDate;
     @FXML
     private TableColumn<Alerte, String> colDescription;
+    @FXML
+    private ImageView retour;
 
     /**
      * Initializes the controller class.
@@ -71,6 +81,16 @@ public class ListeAlerteController implements Initializable {
             alrtcrd.supprimerAlert(alerte.getId_alert());
             this.getlistealert();
         }
+    }
+
+    @FXML
+    private void Goback(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("../reparateurGUI/MenuReparateur.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Acceuil");
+        app_stage.show();
     }
 
 }

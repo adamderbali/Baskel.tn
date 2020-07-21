@@ -10,6 +10,7 @@ import edu.baskel.entities.Alerte;
 import edu.baskel.entities.Avis;
 import edu.baskel.services.AlerteCRUD;
 import edu.baskel.services.AvisCRUD;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -20,10 +21,17 @@ import javafx.beans.property.adapter.ReadOnlyJavaBeanObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -42,6 +50,8 @@ public class ListeAvisController implements Initializable {
     private TableColumn<Avis, String> colDescription;
     @FXML
     private TableColumn<Avis, Date> colDate;
+    @FXML
+    private ImageView retour;
 
     /**
      * Initializes the controller class.
@@ -62,5 +72,15 @@ public class ListeAvisController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<Avis, Date>("date_avis"));
         colDescription.setCellValueFactory(new PropertyValueFactory<Avis, String>("desc_av"));
         tableAffichage.setItems(obser);
+    }
+
+    @FXML
+    private void Goback(MouseEvent event) throws IOException {
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("../reparateurGUI/MenuReparateur.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("Acceuil");
+        app_stage.show();
     }
 }
