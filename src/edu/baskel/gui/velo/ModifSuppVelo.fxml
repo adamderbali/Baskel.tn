@@ -26,7 +26,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblnums" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="118.0" prefHeight="45.0" prefWidth="137.0" style="-fx-font-style: bold;" textAlignment="CENTER" textFill="#101368" textOverrun="CENTER_ELLIPSIS">
+      <Label fx:id="lblnums" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="118.0" prefHeight="45.0" prefWidth="137.0" style="-fx-font-style: bold;" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font></Label>

@@ -18,7 +18,7 @@
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <TableView fx:id="TabAffVelo" layoutX="106.0" layoutY="178.0" onMouseClicked="#chargerDonnee" prefHeight="602.0" prefWidth="1087.0" stylesheets="@AffichageList.css">
+      <TableView fx:id="TabAffVelo" layoutX="106.0" layoutY="178.0" style="-fx-fixed-cell-size: 110;" onMouseClicked="#chargerDonnee" prefHeight="602.0" prefWidth="1087.0" stylesheets="@AffichageList.css">
         <columns>
           <TableColumn fx:id="Colnums" minWidth="1.0" prefWidth="196.0" text="Num série" />
             <TableColumn fx:id="Colmarque" minWidth="1.0" prefWidth="191.0" text="Marque" />

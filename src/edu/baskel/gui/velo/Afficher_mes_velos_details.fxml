@@ -25,7 +25,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblnums" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="118.0" prefHeight="45.0" prefWidth="137.0" style="-fx-font-style: bold;" textAlignment="CENTER" textFill="#101368" textOverrun="CENTER_ELLIPSIS">
+      <Label fx:id="lblnums" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="118.0" prefHeight="45.0" prefWidth="137.0" style="-fx-font-style: bold;" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font></Label>
@@ -74,37 +74,37 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblmarq" alignment="CENTER" layoutX="683.0" layoutY="178.0" textFill="#101368">
+      <Label fx:id="lblmarq" alignment="CENTER" layoutX="683.0" layoutY="178.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblmodl" alignment="CENTER" layoutX="683.0" layoutY="259.0" textFill="#101368">
+      <Label fx:id="lblmodl" alignment="CENTER" layoutX="683.0" layoutY="259.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblprx" alignment="CENTER" layoutX="689.0" layoutY="342.0" textFill="#101368">
+      <Label fx:id="lblprx" alignment="CENTER" layoutX="689.0" layoutY="342.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbltyp" alignment="CENTER" layoutX="684.0" layoutY="409.0" textFill="#101368">
+      <Label fx:id="lbltyp" alignment="CENTER" layoutX="684.0" layoutY="409.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblann" alignment="CENTER" layoutX="677.0" layoutY="471.0" textFill="#101368">
+      <Label fx:id="lblann" alignment="CENTER" layoutX="677.0" layoutY="471.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblstt" alignment="CENTER" layoutX="680.0" layoutY="546.0" textFill="#101368">
+      <Label fx:id="lblstt" alignment="CENTER" layoutX="680.0" layoutY="546.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbletat" alignment="CENTER" layoutX="689.0" layoutY="611.0" textFill="#101368">
+      <Label fx:id="lbletat" alignment="CENTER" layoutX="689.0" layoutY="611.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
