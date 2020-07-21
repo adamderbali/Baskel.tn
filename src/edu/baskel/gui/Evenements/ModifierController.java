@@ -395,7 +395,8 @@ public class ModifierController implements Initializable {
                                                                                     controller1.actualiser();
                                                                                     validationSaisie.notifConfirm("ok", "Evenement Modifié");
                                                                                     System.out.println("Nafes date matbadel chay");
-                                                                                } else {
+                                                                                } 
+                                                                                else {
                                                                                     int i = Integer.parseInt(controller1.getIdEvent());
                                                                                      int nbrPart = Pc.nombreParticipation(i);
                                                                                      if(nbrPart>Integer.parseInt(txtNombre.getText())){
@@ -435,7 +436,7 @@ public class ModifierController implements Initializable {
                                                                                 if (txtNombre.getText().isEmpty()) {
                                                                                     int i = Integer.parseInt(controller1.getIdEvent());
                                                                                     Evenement e = new Evenement(i,
-                                                                                            txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText(), 0
+                                                                                            txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText(),0,0
                                                                                     );
                                                                                     Ec.updateEvenement(e);
                                                                                     Pc.displayEmailParticipant(i);
@@ -486,12 +487,22 @@ public class ModifierController implements Initializable {
 
                                                                                     //   Stage stage = (Stage) idValider.getScene().getWindow();
                                                                                     //   stage.close();
-                                                                                } else {
+                                                                                } 
+                                                                                
+                                                                                else {
                                                                                     
-                                                                                    int i = Integer.parseInt(controller1.getIdEvent());
+                                                                                     int i = Integer.parseInt(controller1.getIdEvent());
+                                                                                     int nbrPart = Pc.nombreParticipation(i);
+                                                                                     if(nbrPart>Integer.parseInt(txtNombre.getText())){
+                                                                                         validationSaisie.notifInfo("Erreur","Vous devez saisir un nombre superieur à "+nbrPart+"car deja il y'a"+nbrPart+" de participant");
+                                                                                     }
+                                                                                    
+                                                                                     else{
+                                                                                  //  int i = Integer.parseInt(controller1.getIdEvent());
+                                                                                   //   int nbrPart = Pc.nombreParticipation(i);
                                                                                     Evenement e = new Evenement(i,
-                                                                                            txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText(), Integer.parseInt(txtNombre.getText())
-                                                                                    );
+                                                                                            txtNom.getText(), txtLieu.getText(), txtDate.getEditor().getText(), txtDescription.getText(), pathE.getText(),Integer.parseInt(txtNombre.getText()),nbrPart);
+                                                                                   
                                                                                     Ec.updateEvenement(e);
                                                                                     Pc.displayEmailParticipant(i);
                                                                                     MembreCRUD mc = new MembreCRUD();
@@ -541,7 +552,7 @@ public class ModifierController implements Initializable {
                                                                                     
                                                                                 }//   controller1.actualiser();
                                                                             }
-                                                                        }}
+                                                                        }}}
                                                                     }
                                                                 }
                                                             }

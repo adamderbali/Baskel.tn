@@ -243,13 +243,14 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
                                         try {
                                             ma.envoiMailQrcode(ml.getEmail_u(), ee.getNom_e());
+                                            System.out.println("+++"+ml.getEmail_u());
                                             System.out.println(ml.getEmail_u());
                                         } catch (Exception ex) {
                                             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
                                         validationSaisie.notifConfirm("ok", "Votre participation à l'evenement" + ee.getNom_e() + " a été bien confirmée. "
-                                                + "<br> Vous recevrez ultérieurement un message contenant le QR code de l'événement"
-                                                + " <br> auquel vous avez participé.");
+                                                + "Vous recevrez ultérieurement un message contenant le QR code de l'événement"
+                                                + "auquel vous avez participé.");
                                         System.out.println("okok++++okokok");
 
                                         actualiser();
@@ -262,7 +263,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
                                         qr.Create("nom= " + ee.getNom_e() + "Date= " + ee.getDate_e(), ee.getNom_e());
                                         // System.out.println("++++++++++++++mail shih?" + ml.getEmail_u);
                                         try {
-                                            validationSaisie.notifInfo("ok", "Mail en cours");
+                                           
                                             ma.envoiMailQrcode(ml.getEmail_u(), ee.getNom_e());
                                             //  System.out.println("++++++++++++++mail shih?" + ml.getEmail_u());
                                         } catch (Exception ex) {
@@ -350,7 +351,7 @@ public class List_Event_Add_ParticipationController implements Initializable {
         });*/
     @FXML
     void consultarPar(ActionEvent event) {
-
+/*
         try {
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("Annulation_participation.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
@@ -362,7 +363,10 @@ public class List_Event_Add_ParticipationController implements Initializable {
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }
+        }*/
+
+Annulation_participationController controller2 = new Annulation_participationController(this);
+            controller2.showStage();
 
     }
 

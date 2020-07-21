@@ -84,10 +84,36 @@ public class ListParticipationParEventUserController implements Initializable {
       @FXML
     private TableColumn<Evenement, String> colPourcentage;
       
-        @FXML
-    private JFXButton idRetour;
+    /*    @FXML
+    private JFXButton idRetour;*/
 
-   
+    private Stage thisStage;
+    
+    private final GererController controller1;
+    
+    public ListParticipationParEventUserController(GererController controller1) {
+        this.controller1 = controller1;
+        thisStage = new Stage();
+        // Load the FXML file
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListParticipationParEventUser.fxml"));
+
+            // Set this class as the controller
+            loader.setController(this);
+
+            // Load the scene
+            thisStage.setScene(new Scene(loader.load()));
+            thisStage.setTitle("Details des evenements");
+            // Setup the window/stage
+            //thisStage.setTitle("Passing Controllers Example - Layout2");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void showStage() {
+        thisStage.showAndWait();
+    }
 
     public void affichageParticip() {
 
@@ -167,7 +193,7 @@ public class ListParticipationParEventUserController implements Initializable {
 
     }
     
-     @FXML
+  /*   @FXML
     void retour(ActionEvent event) {
         
         try {
@@ -184,7 +210,7 @@ public class ListParticipationParEventUserController implements Initializable {
         }
 
 
-    }
+    }*/
     
     
     @FXML

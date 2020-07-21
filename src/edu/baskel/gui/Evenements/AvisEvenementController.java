@@ -78,7 +78,7 @@ Membre ml = SessionInfo.getLoggedM();
     public void comoboxNom() {
 
         ParticipationCrud parList = new ParticipationCrud();
-        List<String> partListU = parList.ListNom(9);
+        List<String> partListU = parList.ListNom(ml.getId_u());
         Participation p = new Participation();
         obser = FXCollections.observableArrayList(partListU);
         comobox.setItems(obser);
@@ -106,6 +106,7 @@ Membre ml = SessionInfo.getLoggedM();
         Participation p = new Participation (d,ml.getId_u(),(int)rate.getRating());
         System.out.println(p.toString());
         pc.ajouterAvisEvent(p);
+           validationSaisie.notifConfirm("ok", "Avis ajouté");
       
         
     }

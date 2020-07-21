@@ -91,15 +91,16 @@ public class ParticipationCrud {
     /*
 
  /* suppression participation*/
-    public void supprimerParticipationP(Participation p) {
+    public void supprimerParticipationP(int id_e,int id_u) {
 
         try {
            
-          String requete2 = "DELETE FROM participation where id_e=?";
+          String requete2 = "DELETE FROM participation where id_e=? and id_u=?";
        
             PreparedStatement pst1 = cnx.prepareStatement(requete2);
          //   pst1.setInt(2, p.getId_u());
-            pst1.setInt(1, p.getId_e());
+            pst1.setInt(1,id_e);
+            pst1.setInt(2,id_u);
 
             pst1.executeUpdate();
             System.out.println("Participation annulé!");

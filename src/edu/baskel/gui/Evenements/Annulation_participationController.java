@@ -11,6 +11,7 @@ import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
 import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,7 +22,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
@@ -33,6 +36,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -79,14 +83,38 @@ public class Annulation_participationController implements Initializable {
      @FXML
     private JFXButton donnerAvis;
      Membre ml = SessionInfo.getLoggedM();
-    public Annulation_participationController() {
+     private Stage thisStage;
+    
+    private final List_Event_Add_ParticipationController controller1;
+    
+    public Annulation_participationController(List_Event_Add_ParticipationController controller1) {
+        this.controller1 = controller1;
+        thisStage = new Stage();
+        // Load the FXML file
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Annulation_participation.fxml"));
+
+            // Set this class as the controller
+            loader.setController(this);
+
+            // Load the scene
+            thisStage.setScene(new Scene(loader.load()));
+            thisStage.setTitle("Vos historique de participation");
+            // Setup the window/stage
+            //thisStage.setTitle("Passing Controllers Example - Layout2");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-   
+    
+    public void showStage() {
+        thisStage.showAndWait();
+    }
  
     public void affichageEvenementP() {
 
         ParticipationCrud parList = new ParticipationCrud();
-        List<Participation> partListU = parList.displayByUser(9);
+        List<Participation> partListU = parList.displayByUser(ml.getId_u());
 
         obser = FXCollections.observableArrayList(partListU);
         TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
@@ -161,7 +189,7 @@ public class Annulation_participationController implements Initializable {
     void annulerParticipation(ActionEvent event) {
 
         ParticipationCrud parList = new ParticipationCrud();
-        List<Participation> partListU = parList.displayByUser(9);
+        List<Participation> partListU = parList.displayByUser(ml.getId_u());
         Participation pe = new Participation();
         ObservableList<Participation> dataListRemove = FXCollections.observableArrayList();
         obser = FXCollections.observableArrayList(partListU);
@@ -183,15 +211,17 @@ public class Annulation_participationController implements Initializable {
 
                         }
 
-                        parList.supprimerParticipationP(p);
-                        obser.removeAll(p);
-                        System.out.println("ok--------------------");
-                        actualiser();
                        
 
                     }
+                
+                    
+                        parList.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),ml.getId_u());
+                        tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
+                        System.out.println("ok--------------------");
+                        actualiser();
                     validationSaisie.notifConfirm("ok", "Participation annulée");
-                    actualiser();
+                
                  
                 }
             }
@@ -202,7 +232,7 @@ public class Annulation_participationController implements Initializable {
     private void actualiser() {
 
         ParticipationCrud parList = new ParticipationCrud();
-        List<Participation> partListU = parList.displayByUser(9);
+        List<Participation> partListU = parList.displayByUser(ml.getId_u());
         ObservableList obser;
         obser = FXCollections.observableArrayList(partListU);
         TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
@@ -220,7 +250,7 @@ public class Annulation_participationController implements Initializable {
     @FXML
     private void searchBox(KeyEvent event) {
         ParticipationCrud parList = new ParticipationCrud();
-        List<Participation> partListU = parList.displayByUser(9);
+        List<Participation> partListU = parList.displayByUser(ml.getId_u());
         ObservableList obser;
         obser = FXCollections.observableArrayList(partListU);
         FilteredList<Participation> filterData = new FilteredList<>(obser, p -> true);

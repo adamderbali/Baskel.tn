@@ -63,8 +63,8 @@ public class HistoriqueDesEvenementsController implements Initializable {
     @FXML
     private TableColumn<Evenement, String> colNomE;
 
-    @FXML
-    private JFXButton idRetour;
+  /*  @FXML
+    private JFXButton idRetour;*/
 
     @FXML
     private JFXTextField search;

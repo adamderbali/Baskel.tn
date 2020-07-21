@@ -131,35 +131,7 @@ public class GererController implements Initializable {
     public TableView<Evenement> getTableAffichage() {
         return tableAffichage;
     }
-    public void verification(){
-    EvenementCRUD ev = new EvenementCRUD();
-    if(ev.verifierGererEvent(ml.getId_u())==true){
-        detail.setVisible(true);
-        supprimer.setVisible(true);
-        valider.setVisible(true);
-        search.setVisible(true);
-        search.setVisible(true);
-        dateTrie.setVisible(true);
-        tableAffichage.setVisible(true);
-        imageVelo.setVisible(true);
-        label.setVisible(false);
-        
-        
-    }
-    else if(ev.verifierGererEvent(ml.getId_u())==false){
-        
-        detail.setVisible(false);
-        supprimer.setVisible(false);
-        valider.setVisible(false);
-        search.setVisible(false);
-        search.setVisible(false);
-        dateTrie.setVisible(false);
-        tableAffichage.setVisible(false);
-        imageVelo.setVisible(false);
-        label.setVisible(true);
-    }
-    }
-
+  
     public void affichageEvenement() {
         EvenementCRUD Ec = new EvenementCRUD();
         Evenement e = new Evenement();
@@ -442,12 +414,12 @@ public class GererController implements Initializable {
                         ex.printStackTrace();
                     }
                 }
-                    Ec.supprimerEvenement(e);
+                    Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
                   
-                    Pc.supprimerParticipationET(e.getId_e());
-                      obser.removeAll(e);
+                    Pc.supprimerParticipationET(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+                      tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
                     System.out.println("ok--------------------");
-                    verification();
+                
                     actualiser();
 
                 }
@@ -465,7 +437,11 @@ public class GererController implements Initializable {
 
     @FXML
     void detailEvent(ActionEvent event) {
-        try {
+        
+        
+         ListParticipationParEventUserController controller2 = new ListParticipationParEventUserController(this);
+            controller2.showStage();
+      /*  try {
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("ListParticipationParEventUser.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -476,14 +452,14 @@ public class GererController implements Initializable {
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }
+        }*/
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-       verification();
+ 
         
         tableAffichage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 

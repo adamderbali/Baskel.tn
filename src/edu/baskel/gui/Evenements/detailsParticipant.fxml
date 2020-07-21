@@ -5,11 +5,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Evenements.DetailsParticipantController">
+<AnchorPane id="AnchorPane" prefHeight="358.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Evenements.DetailsParticipantController">
    <children>
-      <TableView fx:id="tableAffichage1" layoutY="78.0" prefHeight="195.0" prefWidth="421.0" style="-fx-fixed-cell-size: 70;" stylesheets="@AffichageList.css">
+      <ImageView fitHeight="358.0" fitWidth="423.0" opacity="0.24" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../images/2.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableAffichage1" layoutY="78.0" opacity="0.63" prefHeight="195.0" prefWidth="421.0" style="-fx-fixed-cell-size: 70; -fx-background-color: #FFFFFF;" stylesheets="@AffichageList.css">
         <columns>
           <TableColumn fx:id="colNom" prefWidth="228.0" text="Nom et prenom de participant" />
             <TableColumn fx:id="colEmail" prefWidth="192.0" text="Email de participant" />
@@ -17,6 +24,6 @@
       </TableView>
       <Label layoutX="123.0" layoutY="58.0" prefHeight="17.0" prefWidth="190.0" text="Nombre de participants :" />
       <JFXTextField fx:id="nbreP" editable="false" focusColor="#00747f" layoutX="270.0" layoutY="46.0" prefHeight="25.0" prefWidth="24.0" />
-      <JFXButton layoutX="157.0" layoutY="286.0" onAction="#ok" prefHeight="27.0" prefWidth="84.0" style="-fx-background-radius: 100px; -fx-border-radius: 100ox; -fx-border-color: #00747f;" text="OK" textFill="#00747f" />
+      <JFXButton layoutX="165.0" layoutY="286.0" onAction="#ok" prefHeight="27.0" prefWidth="66.0" style="-fx-border-color: #C0C0C0; -fx-border-radius: 100px; -fx-background-radius: 100px;" stylesheets="@AffichageList.css" text="ok" textFill="#00747f" />
    </children>
 </AnchorPane>
