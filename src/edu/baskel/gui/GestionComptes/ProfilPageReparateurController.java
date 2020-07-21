@@ -11,6 +11,7 @@ import edu.baskel.services.AvisCRUD;
 import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
@@ -22,6 +23,7 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -149,6 +151,15 @@ public class ProfilPageReparateurController implements Initializable {
     //afficher la photo de profil
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        try{
+            StatCRUD sc = new StatCRUD();
+
+            sc.Stat_methode("profil reparateur", l.getId_u());
+        } catch (SQLException ex) {
+        }
+        
+        
         System.out.println(SessionInfo.loggedR);
         thximage.setVisible(false);
         panePrincipale.setVisible(true);

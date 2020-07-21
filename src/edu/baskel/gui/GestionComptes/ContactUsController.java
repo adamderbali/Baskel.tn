@@ -10,9 +10,11 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EnvoiMail;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +46,13 @@ public class ContactUsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO try {
+        try{
+            StatCRUD sc = new StatCRUD();
+
+            sc.Stat_methode("contact", l.getId_u());
+        } catch (SQLException ex) {
+        }
     }
 
     //mail de la part du membre 

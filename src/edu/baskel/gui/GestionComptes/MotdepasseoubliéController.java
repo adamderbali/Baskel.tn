@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EnvoiMail;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
@@ -17,6 +18,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -38,7 +40,8 @@ import javafx.stage.Stage;
  * @author dell
  */
 public class MotdepasseoubliéController implements Initializable {
-
+    
+   
     @FXML
     private Button btnenv;
     @FXML

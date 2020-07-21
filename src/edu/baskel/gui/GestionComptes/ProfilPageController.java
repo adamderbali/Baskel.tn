@@ -8,6 +8,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
 import edu.baskel.utils.InputValidation;
@@ -20,6 +21,7 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -133,6 +135,14 @@ public class ProfilPageController implements Initializable {
     //afficher la photo de profil
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        try{
+            StatCRUD sc = new StatCRUD();
+
+            sc.Stat_methode("profil membre", l.getId_u());
+        } catch (SQLException ex) {
+        }
+        
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
         actuelPass.setVisible(true);
@@ -146,7 +156,7 @@ public class ProfilPageController implements Initializable {
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         //Photo de profil
 
-        if (!l.getImage_u().equals("")) {
+        if (!(l.getImage_u().equals(""))) {
             Image imagelog;
             imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + l.getImage_u());
             SnapshotParameters parameters = new SnapshotParameters();
@@ -357,7 +367,7 @@ public class ProfilPageController implements Initializable {
                                             mrc.updateMembre(m1);
                                             SessionInfo.loggedM = m1;
                                             fc.updateImageForum(m1, l.getId_u());
-                                             informationMembre();
+                                             //informationMembre();
                                             InputValidation.notificationsucces("Modifications", "Modification réussite");
 
                                         Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));

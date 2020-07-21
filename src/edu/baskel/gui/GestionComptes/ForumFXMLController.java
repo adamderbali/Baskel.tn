@@ -7,6 +7,7 @@ import edu.baskel.entities.Forum;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.InputValidation;
 import edu.baskel.utils.SessionInfo;
@@ -14,11 +15,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -89,6 +93,12 @@ public class ForumFXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        StatCRUD sc = new StatCRUD();
+        try {
+            sc.Stat_methode("contact", m.getId_u());
+        } catch (SQLException ex) {
+        }
         
         PaneProfilCom.setVisible(false);
         forum = fs.displayAll();

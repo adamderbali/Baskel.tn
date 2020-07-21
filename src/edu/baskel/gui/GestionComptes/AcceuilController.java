@@ -9,10 +9,14 @@ import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.icons525.Icons525View;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.MembreCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,6 +98,12 @@ public class AcceuilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            StatCRUD sc = new StatCRUD();
+
+            sc.Stat_methode("Acceuil", l.getId_u());
+        } catch (SQLException ex) {
+        }
         System.out.println("****************" + SessionInfo.loggedM);
         if (mc.TypeUser() == false) {
             btnAdmin.setVisible(true);
@@ -136,7 +146,7 @@ public class AcceuilController implements Initializable {
     //redirection contact us
     @FXML
     public void RedirectionContactezNs(MouseEvent event) throws IOException {
-        
+
         AnchorPane pane = FXMLLoader.load(getClass().getResource("ContactUs.fxml"));
         ANchorProfil.getChildren().setAll(pane);
 
@@ -204,7 +214,7 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void PageFB(MouseEvent event) {
-      
+
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\dell\\Pictures\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.facebook.com/Baskel395/");
