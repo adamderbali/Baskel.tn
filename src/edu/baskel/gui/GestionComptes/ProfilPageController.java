@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
+import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 import edu.baskel.utils.ConnectionBD;
@@ -119,10 +120,7 @@ public class ProfilPageController implements Initializable {
     private Button btnSupprimer;
     @FXML
     private JFXTextField txtEmailVerif;
-    /*@FXML
-    private ImageView Logout;
-    @FXML
-    private ImageView exit;*/
+
 
     private String photo = null;
     private File file;
@@ -130,6 +128,7 @@ public class ProfilPageController implements Initializable {
     Connection cnx;
     Membre l = SessionInfo.loggedM;
     MembreCRUD mrc = new MembreCRUD();
+    ForumCRUD fc = new ForumCRUD();
 
     //afficher la photo de profil
     @Override
@@ -357,6 +356,7 @@ public class ProfilPageController implements Initializable {
                                             m1.setId_u(iduser);
                                             mrc.updateMembre(m1);
                                             SessionInfo.loggedM = m1;
+                                            fc.updateImageForum(m1, l.getId_u());
                                              informationMembre();
                                             InputValidation.notificationsucces("Modifications", "Modification réussite");
 

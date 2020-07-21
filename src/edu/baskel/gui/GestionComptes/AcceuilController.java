@@ -110,7 +110,7 @@ public class AcceuilController implements Initializable {
 //afficher page profil a partir de l acceuil
     @FXML
     public void Profil(ActionEvent event) throws IOException {
-        if ((l.getType_u().equals("U"))) {
+        if ((l.getType_u().equals("U")) || (l.getType_u().equals("A"))) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
             ANchorProfil.getChildren().setAll(pane);
         } else if ((l.getType_u().equals("R"))) {

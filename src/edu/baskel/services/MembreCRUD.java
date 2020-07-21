@@ -197,16 +197,16 @@ public class MembreCRUD {
                 if (this.ValidationBan(emailm) != 0) {
                     SessionInfo.setLoggedM(membreLogged);
                     System.out.println(membreLogged);
-                    //System.out.println(iduser);
-                    //System.out.println(membreLogged.getType_u());
-                }
-                if (VerifReparateur() == true) {
+                    if (VerifReparateur() == true) {
                     Reparateur loggedRep = rc.getReparateurById(membreLogged.getId_u());
                     System.out.println(loggedRep);
                     SessionInfo.loggedR = loggedRep;
                 } else {
                     System.out.println("instance membre");
                 }
+                    
+                }
+           
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

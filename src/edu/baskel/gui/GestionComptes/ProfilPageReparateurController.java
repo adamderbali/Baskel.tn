@@ -8,6 +8,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reparateur;
 import edu.baskel.services.AvisCRUD;
+import edu.baskel.services.ForumCRUD;
 import edu.baskel.services.MembreCRUD;
 import edu.baskel.services.ReparateurCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
@@ -143,6 +144,7 @@ public class ProfilPageReparateurController implements Initializable {
     ReparateurCRUD rc = new ReparateurCRUD();
     Reparateur r = SessionInfo.loggedR;
     AvisCRUD avcrd = new AvisCRUD();
+    ForumCRUD fc = new ForumCRUD();
 
     //afficher la photo de profil
     @Override
@@ -369,6 +371,8 @@ public class ProfilPageReparateurController implements Initializable {
                                             Reparateur rr = new Reparateur(adrloc.getText(), null, telpro.getText(), txtLatitude.getText(), txtLongitude.getText(),
                                                     profilnom.getText(), profilprenom.getText(), profiladresse.getText(),
                                                     profilmail.getText(), r.getSexe_u(), nvd, profilteleph.getText(), thximage.getText());
+                                            Membre mm = new Membre();
+                                            mm.setImage_u(thximage.getText());
 
                                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                             alert.setTitle("Confirmation ");
@@ -380,8 +384,9 @@ public class ProfilPageReparateurController implements Initializable {
                                                 rr.setId_u(r.getId_u());
                                                 rc.updateReparateur(rr);
                                                 InputValidation.notificationsucces("Modifications", "Modification réussite");
-                                                //informationReparateur();
                                                 SessionInfo.loggedR = rr;
+                                                fc.updateImageForum(mm, l.getId_u());
+
                                                 informationReparateur();
 
                                                 InputValidation.notificationsucces("Profil", "Vos modifications sont enregistrés");

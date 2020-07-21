@@ -11,6 +11,8 @@ private String text;
 private String date_f;
 private int valid_f;
 private String image_uf;
+public  Membre ForumMembre;
+
 
     public Forum() {
     }
