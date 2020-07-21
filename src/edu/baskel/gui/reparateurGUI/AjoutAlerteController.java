@@ -64,7 +64,7 @@ public class AjoutAlerteController implements Initializable, MapComponentInitial
         a.setLatitude_a("1221");
         a.setLongitude_a("1151");
         a.setDescription_a(descalrt.getText());
-        Membre m = new Membre(1);
+        Membre m = new Membre(3);
         a.setMembre(m);
         alrtcrd.ajouterAlert(a);
     }
