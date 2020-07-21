@@ -187,7 +187,7 @@ public class Afficher_detail_veloController implements Initializable {
         lbldsc.setText(v.getDescription_v());
         
         System.out.println(controller1.getClickedVelo());
-        Image im =new Image("file:\\C:\\xampp\\htdocs\\Baskel\\images\\"+controller1.getClickedVelo().getImage_v());
+        Image im =new Image("file:\\C:\\wamp\\www\\Baskel\\images\\"+controller1.getClickedVelo().getImage_v());
         Imgvelo.setImage(im);
     }
     
