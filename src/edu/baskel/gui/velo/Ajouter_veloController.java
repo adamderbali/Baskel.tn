@@ -185,8 +185,8 @@ public class Ajouter_veloController implements Initializable {
             txtim.setText(photo);
             InputValidation u = new InputValidation();
             String photo1;
-            //photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
-            photo1 = "C:\\xampp\\htdocs\\Baskel\\images\\" + photo;
+            photo1 = "C:\\wamp\\www\\Baskel\\images\\" + photo;
+            //photo1 = "C:\\xampp\\htdocs\\Baskel\\images\\" + photo;
             System.out.println(photo);
             u.CopyImage(photo1, file.toPath().toString());
             img.setImage(image);
