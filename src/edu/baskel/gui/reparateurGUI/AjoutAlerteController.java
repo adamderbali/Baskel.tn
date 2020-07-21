@@ -5,8 +5,6 @@
  */
 package edu.baskel.gui.reparateurGUI;
 
-
-
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
@@ -19,15 +17,21 @@ import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import edu.baskel.entities.Alerte;
 import edu.baskel.entities.Membre;
+import edu.baskel.entities.Reparateur;
 import edu.baskel.services.AlerteCRUD;
+import edu.baskel.services.MailAlerte;
+import edu.baskel.services.MailReservation;
+import edu.baskel.services.ReparateurCRUD;
+import edu.baskel.utils.SessionInfo;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-
-
 
 /**
  * FXML Controller class
@@ -40,17 +44,18 @@ public class AjoutAlerteController implements Initializable, MapComponentInitial
     private TextField descalrt;
     @FXML
     private TextField adrss;
-    
+
     private GoogleMap Gmap;
     @FXML
     private GoogleMapView mapView;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            
+
         } catch (Exception e) {
         }
 
@@ -64,19 +69,29 @@ public class AjoutAlerteController implements Initializable, MapComponentInitial
         a.setLatitude_a("1221");
         a.setLongitude_a("1151");
         a.setDescription_a(descalrt.getText());
-        Membre m = new Membre(3);
+        Membre m = SessionInfo.loggedM;
         a.setMembre(m);
-        alrtcrd.ajouterAlert(a);
+        ReparateurCRUD rcrd = new ReparateurCRUD();
+        List<Reparateur> lstrep = rcrd.getListeReparateur();
+        for (Reparateur r : lstrep) {
+            MailAlerte mr = new MailAlerte();
+            try {
+                mr.envoyerMail(r.getEmail_u(), "une alerte à " + a.getAdresse_a() + "par "+ m.getNom_u());
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
     }
 
     @Override
     public void mapInitialized() {
-        
-       LatLong joeSmithLocation = new LatLong(36.8009, 10.1786);
+
+        LatLong joeSmithLocation = new LatLong(36.8009, 10.1786);
         LatLong joshAndersonLocation = new LatLong(47.6297, -122.3431);
         LatLong bobUnderwoodLocation = new LatLong(47.6397, -122.3031);
         LatLong tomChoiceLocation = new LatLong(47.6497, -122.3325);
-        LatLong fredWilkieLocation = new LatLong(47.6597, -122.3357); 
+        LatLong fredWilkieLocation = new LatLong(47.6597, -122.3357);
 
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
@@ -128,8 +143,7 @@ public class AjoutAlerteController implements Initializable, MapComponentInitial
 
         InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
         fredWilkeInfoWindow.open(Gmap, fredWilkieMarker);
-        
-       
+
     }
 
 }
