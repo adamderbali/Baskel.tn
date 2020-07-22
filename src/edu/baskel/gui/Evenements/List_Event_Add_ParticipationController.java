@@ -32,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
@@ -803,13 +804,21 @@ Annulation_participationController controller2 = new Annulation_participationCon
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        StatCRUD sc = new StatCRUD();
+        
 desactiverButtonConsulterPar();
         actualiser();
         try {
             affichageEvenement();
         } catch (Exception ex) {
             Logger.getLogger(List_Event_Add_ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          
+        try {
+           StatCRUD sc = new StatCRUD();
+            sc.Stat_methode("List des evenements", ml.getId_u());
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoriqueDesEvenementsController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

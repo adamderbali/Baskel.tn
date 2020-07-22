@@ -9,12 +9,16 @@ import com.jfoenix.controls.JFXButton;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -301,6 +305,13 @@ public class Annulation_participationController implements Initializable {
         tableAffichage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         affichageEvenementP();
         actualiser();
+        
+               StatCRUD sc  = new StatCRUD();
+        try {
+            sc.Stat_methode("Annulation participation", ml.getId_u());
+        } catch (SQLException ex) {
+            Logger.getLogger(Annulation_participationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
 
     }

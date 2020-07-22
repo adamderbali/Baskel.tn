@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.AutoCompleteAdresse;
 
 import edu.baskel.utils.InputValidation;
@@ -37,6 +38,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import edu.baskel.utils.validationSaisie;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
@@ -433,6 +437,10 @@ public class Ajouter_EvenementController implements Initializable {
 
         }
 
+ 
+        
+        
+        
         @FXML
         void retour
         (ActionEvent event
@@ -449,6 +457,13 @@ public class Ajouter_EvenementController implements Initializable {
         
             ) {
         TextFields.bindAutoCompletion(txtLieu, AutoCompleteAdresse.getAdrGov());
+        
+               StatCRUD sc  = new StatCRUD();
+        try {
+            sc.Stat_methode("Ajouter Evenement", ml.getId_u());
+        } catch (SQLException ex) {
+            Logger.getLogger(Ajouter_EvenementController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         }
 

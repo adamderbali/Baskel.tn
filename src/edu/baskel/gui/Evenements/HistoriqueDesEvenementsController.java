@@ -10,8 +10,11 @@ import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
 import edu.baskel.services.EvenementCRUD;
+import edu.baskel.services.StatCRUD;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -178,6 +181,13 @@ public class HistoriqueDesEvenementsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       affichageEventAvis();
+      Membre ml = SessionInfo.getLoggedM();
+             StatCRUD sc  = new StatCRUD();
+        try {
+            sc.Stat_methode("Historique des evenements", ml.getId_u());
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoriqueDesEvenementsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
