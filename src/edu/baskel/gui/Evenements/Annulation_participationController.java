@@ -122,15 +122,12 @@ public class Annulation_participationController implements Initializable {
 
         obser = FXCollections.observableArrayList(partListU);
         TableColumn<Participation, String> c1 = new TableColumn<Participation, String>("first");
-        //afficher le non du membre dnas la classe alerte
         colNom.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
         colLieu.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
         colDate.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));
         colDescription.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDescription_e()));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
-        // colAction.setCellValueFactory(new PropertyValueFactory<>("chb"));
         colDatePar.setCellValueFactory(new PropertyValueFactory<>("date_insc"));
-        // colAvis.setCellValueFactory(new PropertyValueFactory<>("ra"));
          colDescription.setCellFactory(tc -> {
             TableCell cell = new TableCell<>();
             Text text = new Text();
@@ -171,22 +168,7 @@ public class Annulation_participationController implements Initializable {
 
         tableAffichage.setItems(obser);
 
-        /*    tableAffichage.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-
-            public void handle(MouseEvent click) {
-                if ((click.getClickCount() == 1)&&(!(tableAffichage.getSelectionModel().getSelectedItem().getChb().isSelected()))){
-
-                    tableAffichage.getSelectionModel().getSelectedItem().getChb().setSelected(true);
-                }
-                else 
-                 tableAffichage.getSelectionModel().getSelectedItem().getChb().setSelected(false);
-            
-              
-
-            }
-
-        });*/
+      
     }
 
     @FXML
@@ -202,34 +184,30 @@ public class Annulation_participationController implements Initializable {
             annuler.setDisable(true);
         } else {
             if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
-                validationSaisie.notifInfo("Erreur", "Vous devez selectionné une participation à supprimer");
+                validationSaisie.notif("Erreur", "Vous devez selectionné une participation à supprimer");
             } else {
                 if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cette participation")) {
                     for (Participation p : partListU) {
 
                         if (p.getId_e() != 0) {
-                            System.out.println("Marhbeeeeeeeeeeeeeeeeeeeeeeee");
-
                             dataListRemove.add(p);
-                            System.out.println("sousou tahfouna" + p);
 
                         }
 
                        
 
                     }
-                
-                    
+
                         parList.supprimerParticipationP(tableAffichage.getSelectionModel().getSelectedItem().getId_e(),ml.getId_u());
                         tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
-                        System.out.println("ok--------------------");
+                       
                         actualiser();
-                    validationSaisie.notifConfirm("ok", "Participation annulée");
+                    validationSaisie.notifConfirm("ok", "Participation supprimée");
                 
                  
                 }
             }
-            System.out.println("makouchit chay");
+   
         }
     }
 

@@ -7,8 +7,6 @@ package edu.baskel.gui.Evenements;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
@@ -20,7 +18,6 @@ import static edu.baskel.services.ParticipationCrud.cnx;
 import edu.baskel.services.SendMail;
 import edu.baskel.utils.SessionInfo;
 import edu.baskel.utils.validationSaisie;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,25 +31,19 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -84,11 +75,11 @@ public class GererController implements Initializable {
     private TableColumn<Evenement, String> colImage;
     @FXML
     private AnchorPane anchor;
-        @FXML
+    @FXML
     private ImageView imageVelo;
     @FXML
     private JFXButton valider;
-  @FXML
+    @FXML
     private Label label;
 
     @FXML
@@ -104,8 +95,6 @@ public class GererController implements Initializable {
     ObservableList obser;
     @FXML
     private JFXCheckBox dateTrie;
-    
-   
 
     public GererController() {
 
@@ -131,7 +120,7 @@ public class GererController implements Initializable {
     public TableView<Evenement> getTableAffichage() {
         return tableAffichage;
     }
-  
+
     public void affichageEvenement() {
         EvenementCRUD Ec = new EvenementCRUD();
         Evenement e = new Evenement();
@@ -145,7 +134,7 @@ public class GererController implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description_e"));
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nbr_max_e"));
-      
+
         colNom.setCellFactory(tc -> {
             TableCell cell = new TableCell<>();
             Text text = new Text();
@@ -197,25 +186,7 @@ public class GererController implements Initializable {
         });
 
         tableAffichage.setItems(obser);
-        /*  displayByUser(m.getId_u()*/
-
- /*   tableAffichage.setRowFactory( tv -> {
-       TableRow<Evenement> row = new TableRow<>();
-          row.setOnMouseClicked(event -> {
-             if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                Evenement rowData = row.getItem();
-                //System.out.println("mdkgd"+rowData);
-                 System.out.println(rowData.getId_e());
-                Parent root;
-                 //try {
-                      
-                     ModifierController controller2 = new ModifierController(this);
-                     controller2.showStage();
-   
-            }
-         });
-          return row ;
-         });*/
+  
     }
 
     public void affichageEvenementParDate() {
@@ -351,84 +322,57 @@ public class GererController implements Initializable {
         EvenementCRUD Ec = new EvenementCRUD();
         List<Evenement> partListU = Ec.displayByUser(ml.getId_u());
         ObservableList<Evenement> dataListRemove = FXCollections.observableArrayList();
-          obser = FXCollections.observableArrayList(partListU);
+        obser = FXCollections.observableArrayList(partListU);
         // System.out.println("22222" + tableAffichage.getSelectionModel().getSelectedItem().getId_e());
         if (tableAffichage.getSelectionModel().getSelectedItem() == null) {
-            validationSaisie.notifInfo("Erreur", "Vous devez selectionner un evenement à supprimer");
+            validationSaisie.notif("Erreur", "Vous devez selectionner un evenement à supprimer");
         } else {
             if (validationSaisie.confrimSuppression("Information", "Voulez vous supprimer cet evenement")) {
 
                 Pc.displayEmailParticipant(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
                 MembreCRUD mc = new MembreCRUD();
                 SendMail Sm = new SendMail();
-/*
-                for (Participation p : Pc.displayEmailParticipant(tableAffichage.getSelectionModel().getSelectedItem().getId_e())) {
-
-                    try {
-                        String sq1 = "SELECT * FROM membre WHERE id_u=?";
-                        PreparedStatement prep = cnx.prepareStatement(sq1);
-                        prep.setInt(1, p.getId_u());
-                        ResultSet res = prep.executeQuery();
-
-                        if (res.next()) {
-
-                            String em = res.getString("email_u");
-                            Sm.envoiMail(em, "Nous vous informons que l'evenement :" + tableAffichage.getSelectionModel().getSelectedItem().getNom_e() + " auquel vous avez participé et qui est prévu le :" + tableAffichage.getSelectionModel().getSelectedItem().getDate_e() + "a été annulé");
-                            System.out.println(em);
-                        } else {
-                            System.out.println("Aucun participant");
-
-                        }
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                }*/
+               
                 for (Evenement e : partListU) {
 
                     if (e.getId_e() != 0) {
-                        System.out.println("Marhbeeeeeeeeeeeeeeeeeeeeeeee");
-
                         dataListRemove.add(e);
-                        System.out.println("sousou tahfouna" + e);
 
                     }
 
-                     for (Participation p : Pc.displayEmailParticipant(e.getId_e())) {
+                    for (Participation p : Pc.displayEmailParticipant(e.getId_e())) {
 
-                    try {
-                        String sq1 = "SELECT * FROM membre WHERE id_u=?";
-                        PreparedStatement prep = cnx.prepareStatement(sq1);
-                        prep.setInt(1, p.getId_u());
-                        ResultSet res = prep.executeQuery();
+                        try {
+                            String sq1 = "SELECT * FROM membre WHERE id_u=?";
+                            PreparedStatement prep = cnx.prepareStatement(sq1);
+                            prep.setInt(1, p.getId_u());
+                            ResultSet res = prep.executeQuery();
 
-                        if (res.next()) {
+                            if (res.next()) {
 
-                            String em = res.getString("email_u");
-                            Sm.envoiMail(em, "Nous vous informons que l'evenement :" + e.getNom_e() + " auquel vous avez participé et qui est prévu le :" + e.getDate_e() + "a été annulé");
-                            System.out.println(em);
-                        } else {
-                            System.out.println("Aucun participant");
+                                String em = res.getString("email_u");
+                                Sm.envoiMail(em, "Nous vous informons que l'evenement :" + e.getNom_e() + " auquel vous avez participé et qui est prévu le :" + e.getDate_e() + "a été annulé");
+                                System.out.println(em);
+                            } else {
+                                System.out.println("Aucun participant");
 
+                            }
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
                         }
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
                     }
-                }
                     Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-                  
+
                     Pc.supprimerParticipationET(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-                      tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
-                    System.out.println("ok--------------------");
-                
+                    tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());
                     actualiser();
 
                 }
 
-               // Pc.eventAnnuler(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
-               /* Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
+                // Pc.eventAnnuler(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+                /* Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
                 Pc.supprimerParticipationE(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
                 tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());*/
-
                 validationSaisie.notifConfirm("ok", "Evenement supprimé");
             }
         }
@@ -437,11 +381,10 @@ public class GererController implements Initializable {
 
     @FXML
     void detailEvent(ActionEvent event) {
-        
-        
-         ListParticipationParEventUserController controller2 = new ListParticipationParEventUserController(this);
-            controller2.showStage();
-      /*  try {
+
+        ListParticipationParEventUserController controller2 = new ListParticipationParEventUserController(this);
+        controller2.showStage();
+        /*  try {
             Parent redirection_parent = FXMLLoader.load(getClass().getResource("ListParticipationParEventUser.fxml"));
             Scene redirection_scene = new Scene(redirection_parent);
             Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -458,9 +401,7 @@ public class GererController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
- 
-        
+
         tableAffichage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         actualiser();

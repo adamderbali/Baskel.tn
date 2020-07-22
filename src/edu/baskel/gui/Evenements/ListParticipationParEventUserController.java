@@ -5,14 +5,11 @@
  */
 package edu.baskel.gui.Evenements;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Evenement;
 import edu.baskel.entities.Membre;
-import edu.baskel.entities.Participation;
 import edu.baskel.services.EvenementCRUD;
-import edu.baskel.services.ParticipationCrud;
 import edu.baskel.services.StatCRUD;
 import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
@@ -23,18 +20,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
@@ -58,16 +52,7 @@ public class ListParticipationParEventUserController implements Initializable {
     private JFXTextField search;
     @FXML
     private TableView<Evenement> tableAffichage;
-  /*  @FXML
-    private TableColumn<Participation, String> colNom;
-
-    @FXML
-    private TableColumn<Participation, String> colPrenom;
-
-    @FXML
-    private TableColumn<Participation, String> colEmail;*/
-    
-    
+  
     @FXML
     private JFXCheckBox listeP;
 
@@ -85,9 +70,6 @@ public class ListParticipationParEventUserController implements Initializable {
     private TableColumn<Evenement, String> colDateE;
       @FXML
     private TableColumn<Evenement, String> colPourcentage;
-      
-    /*    @FXML
-    private JFXButton idRetour;*/
 
     private Stage thisStage;
     
@@ -119,20 +101,14 @@ public class ListParticipationParEventUserController implements Initializable {
 
     public void affichageParticip() {
 
-      //  ParticipationCrud Pc = new ParticipationCrud();
         EvenementCRUD ev = new EvenementCRUD();
-     //   List<Evenement> partlst = Pc.displayParticipant(7);
      List<Evenement> partlst = ev.displayParticipant(ml.getId_u());
         ObservableList obser;
         obser = FXCollections.observableArrayList(partlst);
-      //  TableColumn<Evenement, String> c1 = new TableColumn<Evenement, String>("first");
         colNomE.setCellValueFactory(new PropertyValueFactory<>("nom_e"));
         colLieuE.setCellValueFactory(new PropertyValueFactory<>("lieu_e"));
         colDateE.setCellValueFactory(new PropertyValueFactory<>("date_e"));
         colPourcentage.setCellValueFactory(new PropertyValueFactory<>("pourcentage"));
-        /*colNomE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getNom_e()));
-        colLieuE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getLieu_e()));
-        colDateE.setCellValueFactory((p) -> new ReadOnlyStringWrapper(p.getValue().getEvent().getDate_e()));*/
         tableAffichage.setItems(obser);
         
         colNomE.setCellFactory(tc -> {
