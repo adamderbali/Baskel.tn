@@ -159,13 +159,14 @@ public void Reactive_ban(){
         if(d.compareTo(d2)>3)
         {
             rc.desactiverbannerUtilisateur(b.getId_u());
-            System.out.println(d.compareTo(d2));
-            System.out.println("ok Done ");
+            //System.out.println(d.compareTo(d2));
+            System.out.println("Reactive de Compte effectué avc succes "
+                    + "");
                     }
         else  {
-            System.out.println(d.compareTo(d2));
-            System.out.println("pas encore");
-            System.out.println(b.getDate_ban());
+            //System.out.println(d.compareTo(d2));
+            System.out.println("le utilisateur est encore banné ");
+            //System.out.println(b.getDate_ban());
         }
     }
     

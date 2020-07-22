@@ -259,7 +259,7 @@ public class ReclamationCRUD {
         String query = null;
         try {
 
-            query = "UPDATE membre SET nbr_ban_u=nbr_ban_u+1 WHERE id_u=?;";
+            query = "UPDATE membre SET nbr_ban_u=nbr_ban_u+1 WHERE id_u=? and date_ban-sysdate>0;";
             PreparedStatement pstmt = cnxs.prepareStatement(query);
 
             pstmt.setInt(1, id);

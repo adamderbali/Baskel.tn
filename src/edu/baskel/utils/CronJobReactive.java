@@ -18,15 +18,13 @@ import org.quartz.impl.StdSchedulerFactory;
  *
  * @author Skander
  */
-public class CronJobAdmin {
+public class CronJobReactive {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)  {
-        
-    try{
-         JobDetail jobAdmin = JobBuilder.newJob(BanAuto.class).withIdentity("Cron", "group1").build();
+    public static void main(String[] args) throws SchedulerException {
+        JobDetail jobAdmin = JobBuilder.newJob(BanAuto.class).withIdentity("Cron", "group1").build();
             Trigger trigger1 = TriggerBuilder.newTrigger()
                     .withIdentity("CronTrigger", "group1")
                     .withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * *"))
@@ -36,13 +34,7 @@ public class CronJobAdmin {
             Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
             scheduler1.start();
             scheduler1.scheduleJob(jobAdmin, trigger1);
-            Thread.sleep(100000);
-            
-    
-    }catch(Exception e){
-            e.printStackTrace();
+        // TODO code application logic here
     }
-    }}
-
     
-
+}
