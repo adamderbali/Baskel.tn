@@ -101,6 +101,7 @@ Membre ml = SessionInfo.getLoggedM();
                 comobox.setUnFocusColor(rgb(255, 0, 0));
                 comobox.setStyle("-fx-prompt-text-fill: #C4151C");
         }
+        else{
         System.out.println("++++++" + c);
         int d = parList.displayEventParId(c);
         System.out.println("+++++++++++++++++++++++++++++++za3ma chnia id" + d);
@@ -111,7 +112,7 @@ Membre ml = SessionInfo.getLoggedM();
         System.out.println(p.toString());
         pc.ajouterAvisEvent(p);
            validationSaisie.notifConfirm("ok", "Avis ajouté");
-      
+        }
         
     }
     
