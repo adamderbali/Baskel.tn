@@ -414,7 +414,7 @@ public class GererController implements Initializable {
                         ex.printStackTrace();
                     }
                 }
-                    Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem());
+                    Ec.supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
                   
                     Pc.supprimerParticipationET(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
                       tableAffichage.getItems().removeAll(tableAffichage.getSelectionModel().getSelectedItem());

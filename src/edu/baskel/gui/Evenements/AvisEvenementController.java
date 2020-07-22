@@ -96,7 +96,7 @@ Membre ml = SessionInfo.getLoggedM();
         ParticipationCrud parList = new ParticipationCrud();
         String c = comobox.getValue();
         if(c==null){
-            validationSaisie.notifInfo("Erreur", "Vous devez selectionner un evenement");
+            validationSaisie.notifInfo("Erreur", "saisir le nom de l'evenement");
              comobox.setFocusColor(rgb(255, 0, 0));
                 comobox.setUnFocusColor(rgb(255, 0, 0));
                 comobox.setStyle("-fx-prompt-text-fill: #C4151C");
