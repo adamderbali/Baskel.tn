@@ -144,7 +144,71 @@ public class StatCRUD {
         }
         return n2;
     }
+    public double Acceuil() {
+        int n2 = 0;
+        int t=0;
+        try {
+            PreparedStatement statement = cnxs.prepareStatement("SELECT SUM(nbr_visite) as nbr_aff_user FROM `statistique` WHERE id_interface='Acceuil' ");
+            ResultSet result = statement.executeQuery();
+            result.next();
+            n2 = result.getInt("nbr_aff_user");
+            //String sum = result.getString(1);
+            System.out.println(n2);
+            PreparedStatement statement2 = cnxs.prepareStatement("SELECT SUM(nbr_visite) as total FROM `statistique`");
+            ResultSet result2 = statement2.executeQuery();
+            result2.next();
+            t = result2.getInt("total");
+            n2=(n2*100)/t;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n2;
+    }
     
+      public double contact() {
+        int n2 = 0;
+        int t=0;
+        try {
+            PreparedStatement statement = cnxs.prepareStatement("SELECT SUM(nbr_visite) as nbr_aff_user FROM `statistique` WHERE id_interface='contact' ");
+            ResultSet result = statement.executeQuery();
+            result.next();
+            n2 = result.getInt("nbr_aff_user");
+            //String sum = result.getString(1);
+            System.out.println(n2);
+            PreparedStatement statement2 = cnxs.prepareStatement("SELECT SUM(nbr_visite) as total FROM `statistique`");
+            ResultSet result2 = statement2.executeQuery();
+            result2.next();
+            t = result2.getInt("total");
+            n2=(n2*100)/t;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n2;
+    }
+      public double profil_membre() {
+        int n2 = 0;
+        int t=0;
+        try {
+            PreparedStatement statement = cnxs.prepareStatement("SELECT SUM(nbr_visite) as nbr_aff_user FROM `statistique` WHERE id_interface='Profil membre' ");
+            ResultSet result = statement.executeQuery();
+            result.next();
+            n2 = result.getInt("nbr_aff_user");
+            //String sum = result.getString(1);
+            System.out.println(n2);
+            PreparedStatement statement2 = cnxs.prepareStatement("SELECT SUM(nbr_visite) as total FROM `statistique`");
+            ResultSet result2 = statement2.executeQuery();
+            result2.next();
+            t = result2.getInt("total");
+            n2=(n2*100)/t;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return n2;
+    }
+      
     }
    
 

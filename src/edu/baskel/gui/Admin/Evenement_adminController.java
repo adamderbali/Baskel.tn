@@ -133,7 +133,7 @@ public class Evenement_adminController implements Initializable {
     public void supprimerEvenement(int id) {
         try {
             conxstat();
-            String requete1 = "DELETE FROM evenement WHERE `id_e`=" + e.getId_e() + "";
+            String requete1 = "DELETE FROM evenement WHERE `id_e`=" + tableAffichage.getSelectionModel().getSelectedItem().getId_e();
             PreparedStatement pst1 = cnxs.prepareStatement(requete1);
             /* pst1.setInt(1,e.getId_e());*/
             pst1.executeUpdate();
@@ -185,7 +185,8 @@ public class Evenement_adminController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            supprimerEvenement(n);
+            System.out.println(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
+            supprimerEvenement(tableAffichage.getSelectionModel().getSelectedItem().getId_e());
             Notifications notificationBuilder = Notifications.create()
                     .text(" Votre Suppression a été effectuée").title("Evenement").graphic(new ImageView(image)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
                 @Override

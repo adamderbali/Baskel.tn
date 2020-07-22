@@ -109,6 +109,7 @@ public class Affichage_userController implements Initializable {
     @FXML
     private AnchorPane Reclamation_user;
     Membre ml = SessionInfo.getLoggedM();
+    
     @FXML
     private ImageView retour;
     /**
@@ -163,6 +164,11 @@ public class Affichage_userController implements Initializable {
                         notificationBuilder.showError();
         }
         else{
+            if((textarea_rec.getText().isEmpty())&&(tf_objet_rec.getText().isEmpty()) )
+            {
+                 Alert alertDesc = new InputValidation().getAlert("Description", "Saisissez Les deux champs Description et l'objet de Reclamation ");
+            alertDesc.showAndWait();
+            }
         if (textarea_rec.getText().isEmpty()) {
             Alert alertDesc = new InputValidation().getAlert("Description", "Saisissez votre Description de Reclamation ");
             alertDesc.showAndWait();
@@ -180,12 +186,12 @@ public class Affichage_userController implements Initializable {
                     alert.setX(bounds.getMaxX() - alert.getWidth());
                     alert.setY(bounds.getMaxY() - pane.getPrefHeight());
                     alert.setTitle("Confirmation");
-                    alert.setHeaderText(" Vous voulez envoyer cette reclamation ?");
+                    alert.setHeaderText(" Voulez-Vous envoyer cette reclamation ?");
                     alert.setContentText(" Appuyez vous sur OK si vous etes d'accord ");
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
-                        Reclamation reclamation = new Reclamation(textarea_rec.getText(), tf_objet_rec.getText(), 8, user.getId_u());
+                        Reclamation reclamation = new Reclamation(textarea_rec.getText(), tf_objet_rec.getText(), ml.getId_u(), user.getId_u());
                         s_rec.ajouterReclamation(reclamation);
                         MembreCRUD s_mem = new MembreCRUD();
                         Membre mem = new Membre(user.getId_u(), user.getNbr_rec_u());
@@ -219,7 +225,8 @@ public class Affichage_userController implements Initializable {
                         notificationBuilder2.showError();
                     }
 
-                } else {
+                } 
+                else {
                     Image image2 = new Image("/images/iconfinder_Error_381599.png", true);
                     Notifications notificationBuilder3 = Notifications.create()
                             .text("Votre Reclamation deja existe ").title("Reclamation").graphic(new ImageView(image2)).hideAfter(Duration.seconds(3)).position(Pos.CENTER).onAction(new EventHandler<ActionEvent>() {
