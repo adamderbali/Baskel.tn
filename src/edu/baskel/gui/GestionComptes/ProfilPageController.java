@@ -123,26 +123,26 @@ public class ProfilPageController implements Initializable {
     @FXML
     private JFXTextField txtEmailVerif;
 
-
     private String photo = null;
     private File file;
     private Image image;
     Connection cnx;
-    Membre l = SessionInfo.loggedM;
+    Membre ll = SessionInfo.loggedM;
     MembreCRUD mrc = new MembreCRUD();
     ForumCRUD fc = new ForumCRUD();
+    Membre l = mrc.AfficherMembreByEmail(ll.getEmail_u());
 
     //afficher la photo de profil
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        try{
+
+        try {
             StatCRUD sc = new StatCRUD();
 
             sc.Stat_methode("profil membre", l.getId_u());
         } catch (SQLException ex) {
         }
-        
+
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
         actuelPass.setVisible(true);
@@ -152,7 +152,7 @@ public class ProfilPageController implements Initializable {
         profildate.setVisible(false);
         thximage.setVisible(false);
         txtEmailVerif.setVisible(false);
-        informationMembre();
+        informationMembre(l);
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         //Photo de profil
 
@@ -186,7 +186,7 @@ public class ProfilPageController implements Initializable {
     }
 
     //information du membre a afficher ds le profil
-    public void informationMembre() {
+    public void informationMembre(Membre l) {
         lblprofil.setText(l.getNom_u() + " " + l.getPrenom_u());
         profilnom.setText(l.getNom_u());
         profilprenom.setText(l.getPrenom_u());
@@ -264,7 +264,7 @@ public class ProfilPageController implements Initializable {
         PaneMotpass.setVisible(false);
         imagev.setVisible(true);
         btnimage.setVisible(true);
-        informationMembre();
+        informationMembre(SessionInfo.loggedM);
     }
 
     //affichage onglet de securité
@@ -366,20 +366,22 @@ public class ProfilPageController implements Initializable {
                                             m1.setId_u(iduser);
                                             mrc.updateMembre(m1);
                                             SessionInfo.loggedM = m1;
+                                            System.out.println(SessionInfo.loggedM);
                                             fc.updateImageForum(m1, l.getId_u());
-                                             //informationMembre();
+                                            l.setEmail_u(m1.getEmail_u());
+                                            informationMembre(m1);
                                             InputValidation.notificationsucces("Modifications", "Modification réussite");
 
-                                        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
-                                        Scene redirection_scene = new Scene(redirection_parent);
-                                        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                        app_stage.setScene(redirection_scene);
-                                        app_stage.setTitle("Acceuil");
-                                        app_stage.show();
+                                            /*Parent redirection_parent = FXMLLoader.load(getClass().getResource("Acceuil.fxml"));
+                                            Scene redirection_scene = new Scene(redirection_parent);
+                                            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                            app_stage.setScene(redirection_scene);
+                                            app_stage.setTitle("Acceuil");
+                                            app_stage.show();*/
                                         } else {
                                             System.out.println("Rien");
                                         }
-                                       
+
                                     }
 
                                 }
@@ -452,19 +454,18 @@ public class ProfilPageController implements Initializable {
     void supprimerCompte(ActionEvent event) throws IOException {
         MembreCRUD mr1 = new MembreCRUD();
         Membre l = SessionInfo.loggedM;
-       
-                        mr1.supprimerMembre(l.getId_u());
 
-            Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
-            Scene redirection_scene = new Scene(redirection_parent);
-            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            app_stage.setScene(redirection_scene);
-            app_stage.setTitle("S'identifier");
-            app_stage.show();
-            
-            
-            InputValidation.notificationsucces("Compte", "Votre compte a été supprimer");
-        
+        mr1.supprimerMembre(l.getId_u());
+
+        Parent redirection_parent = FXMLLoader.load(getClass().getResource("Sidentifier.fxml"));
+        Scene redirection_scene = new Scene(redirection_parent);
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(redirection_scene);
+        app_stage.setTitle("S'identifier");
+        app_stage.show();
+
+        InputValidation.notificationsucces("Compte", "Votre compte a été supprimer");
+
     }
 
 }

@@ -492,5 +492,6 @@ public class MembreCRUD {
         SessionInfo.loggedM = null;
         SessionInfo.setIduser(0);
     }
-
+    
+    
 }

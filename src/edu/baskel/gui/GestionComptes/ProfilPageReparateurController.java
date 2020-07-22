@@ -147,6 +147,8 @@ public class ProfilPageReparateurController implements Initializable {
     Reparateur r = SessionInfo.loggedR;
     AvisCRUD avcrd = new AvisCRUD();
     ForumCRUD fc = new ForumCRUD();
+        Reparateur rep = rc.getReparateurById(r.getId_u());
+
 
     //afficher la photo de profil
     @Override
@@ -173,14 +175,14 @@ public class ProfilPageReparateurController implements Initializable {
         txtLatitude.setEditable(false);
         txtLongitude.setEditable(false);
 
-        informationReparateur();
+        informationReparateur(rep);
         TextFields.bindAutoCompletion(profiladresse, AutoCompleteAdresse.getAdrGov());
         TextFields.bindAutoCompletion(adrloc, AutoCompleteAdresse.getAdrGov());
 
-        if (!r.getImage_u().equals("")) {
-            System.out.println(r.getImage_u());
+        if (!rep.getImage_u().equals("")) {
+            System.out.println(rep.getImage_u());
             Image imagelog;
-            imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + r.getImage_u());
+            imagelog = new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + rep.getImage_u());
             //aspect 3D avec ombre pour l image
             SnapshotParameters parameters = new SnapshotParameters();
             parameters.setFill(Color.TRANSPARENT);
@@ -189,13 +191,13 @@ public class ProfilPageReparateurController implements Initializable {
             imagev.setEffect(new DropShadow(20, Color.BLACK));
             imagev.setImage(imagelog);
         }
-        if (l.getImage_u().equals("")) {
+        if (rep.getImage_u().equals("")) {
             Image defaultt;
-            if (l.getSexe_u().equals("Femme")) {
+            if (rep.getSexe_u().equals("Femme")) {
                 defaultt = new Image("images\\femme.png");
                 imagev.setImage(defaultt);
             }
-            if (l.getSexe_u().equals("Homme")) {
+            if (rep.getSexe_u().equals("Homme")) {
                 defaultt = new Image("images\\homme.png");
                 imagev.setImage(defaultt);
             }
@@ -208,7 +210,7 @@ public class ProfilPageReparateurController implements Initializable {
     }
 
     //information du membre a afficher ds le profil
-    public void informationReparateur() {
+    public void informationReparateur(Reparateur r) {
 
         lblprofil.setText(r.getNom_u() + " " + r.getPrenom_u());
         profilnom.setText(r.getNom_u());
@@ -289,7 +291,7 @@ public class ProfilPageReparateurController implements Initializable {
     void afficherOngletGenrale(ActionEvent event) {
         panePrincipale.setVisible(true);
         PaneMotpass.setVisible(false);
-        informationReparateur();
+        informationReparateur(SessionInfo.loggedR);
     }
 
     //afficher onglet securité
@@ -398,17 +400,17 @@ public class ProfilPageReparateurController implements Initializable {
                                                 SessionInfo.loggedR = rr;
                                                 fc.updateImageForum(mm, l.getId_u());
 
-                                                //informationReparateur();
+                                                informationReparateur(rr);
 
                                                 InputValidation.notificationsucces("Profil", "Vos modifications sont enregistrés");
 
-                                                Parent redirection_parent = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
+                                                /*Parent redirection_parent = FXMLLoader.load(getClass().getResource("acceuil.fxml"));
                                                 Scene redirection_scene = new Scene(redirection_parent);
                                                 Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                                 app_stage.setScene(redirection_scene);
                                                 app_stage.setTitle("Acceuil");
                                                 app_stage.show();
-                                                System.out.println("modifie");
+                                                System.out.println("modifie");*/
 
                                             } else {
                                                 System.out.println("Rien");

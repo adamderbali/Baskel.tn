@@ -20,7 +20,7 @@ public class verifEmail {
 
     private static final String ApiUrl = "http://api.emailverifyapi.com/api/a/v1";
     private static final String QueryFormatString = "%1$s?email=%2$s&key=%3$s";
-    private static final String YourAPIKey = "DA854655FD303B08";//"35AE5C00DCE45C8F";
+    private static final String YourAPIKey = "568E9D1C705C0799"; //"DA854655FD303B08";//"35AE5C00DCE45C8F";
     private static String res;
 
     public static String check(String email) {

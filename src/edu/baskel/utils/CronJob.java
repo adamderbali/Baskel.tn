@@ -18,7 +18,7 @@ import org.quartz.impl.StdSchedulerFactory;
  * @author dell
  */
 public class CronJob {
-    public static void jobs(){
+  public static void jobs(){
         
         try{
             JobDetail job1 = JobBuilder.newJob(TacheHisto.class)
@@ -26,8 +26,8 @@ public class CronJob {
             
             Trigger trigger1 = TriggerBuilder.newTrigger()
                     .withIdentity("CronTrigger", "group1")
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * *"))//chaque minute  0 * * ? * *	// chaue heure 0 0 * ? * *	
-                    .build(); // chaue jr a 12pm 0 0 12 * * ?	//
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * *"))//chaque minute  0 * * ? * *	// chaque heure 0 0 * ? * *	
+                    .build(); // chaque jr a 12pm 0 0 12 * * ?	//
             
             Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
             scheduler1.start();
@@ -42,6 +42,33 @@ public class CronJob {
     }
     }
     
+   /* public static void main(String args[]){
+        
+       
+        try {
+            JobDetail job1 = JobBuilder.newJob(TacheHisto.class)
+                    .withIdentity("job1","group1").build();
+            
+            Trigger trigger1 = TriggerBuilder.newTrigger()
+                    .withIdentity("cronTrigger1","group1")
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * *"))
+                    .build();
+            
+            Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
+            scheduler1.start();
+            scheduler1.scheduleJob(job1,trigger1);
+           
+                Thread.sleep(100000);
+            
+            scheduler1.shutdown();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        
+        }
+                
+    */
    // public static void main(String[] args) {
         //jobs();
     //}
