@@ -46,7 +46,7 @@ public class BanCRUD {
     }
     public void insertionByID(int id_u){
         try {
-            String reqa2 = "insert into ban (id_u) (Select id_u from membre where id_u='"+id_u+"')";
+            String reqa2 = "insert into ban (id_u,date_ban) VALUES((Select id_u from membre where id_u='"+id_u+"'),sysdate())";
             Statement pstmt = cnxs.createStatement();
             //pstmt.setInt(1,id_u);
             pstmt.executeUpdate(reqa2);

@@ -53,7 +53,10 @@ public class Stat_chartController implements Initializable {
                 = FXCollections.observableArrayList(
                         new PieChart.Data("Reclamation_admin",sc.Reclamation_admin_nbr()),
                         new PieChart.Data("Reclamation_user",sc.Reclamation_user_nbr()),
-                        new PieChart.Data("Affichage_user",sc.affichage_user_nbr())               
+                        new PieChart.Data("List Membre ",sc.affichage_user_nbr()),
+                        new PieChart.Data("Acceuil",sc.Acceuil()),
+                        new PieChart.Data("Tchat",sc.contact())
+
                 );
         pie_chart.setData(pieChartData);
         

@@ -385,7 +385,7 @@ public List<Membre> getlistMembre_ban() {
         List<Membre> listeMembre_ban = new ArrayList<>();
 
         try {
-            String requete = "SELECT id_u FROM membre where nbr_ban_u>=3 and type_u='U' ";
+            String requete = "SELECT id_u FROM membre where nbr_ban_u>=3 and type_u='U' or type_u='R' ";
             Statement st = cnxs.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
