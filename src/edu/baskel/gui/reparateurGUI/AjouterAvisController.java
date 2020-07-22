@@ -9,6 +9,7 @@ import edu.baskel.entities.Avis;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Reparateur;
 import edu.baskel.services.AvisCRUD;
+import edu.baskel.utils.SessionInfo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,8 +58,8 @@ public class AjouterAvisController implements Initializable {
     private void lancerAjoutAvis(ActionEvent event) {
         Avis av = new Avis();
         Reparateur R = new Reparateur();
-        R.setId_u(4);
-        Membre m = new Membre(4);
+        R.setId_u(46);
+        Membre m = SessionInfo.loggedM;
         AvisCRUD avcrd = new AvisCRUD();
         av.setReparateur(R);
         av.setMembre(m);

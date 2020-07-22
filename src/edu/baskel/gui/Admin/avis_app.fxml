@@ -3,33 +3,40 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.Avis_appController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1235.0" stylesheets="@Button.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.Admin.Avis_appController">
    <children>
-      <Rating fx:id="avis_user" layoutX="239.0" layoutY="147.0" onMouseClicked="#afficher_rat" prefHeight="32.0" prefWidth="190.0" rating="1.0" />
-      <Label alignment="CENTER" layoutX="134.0" layoutY="26.0" prefHeight="63.0" prefWidth="486.0" text="Votre avis nous interesse ">
+      <Rating fx:id="avis_user" layoutX="432.0" layoutY="226.0" onMouseClicked="#afficher_rat" prefHeight="32.0" prefWidth="190.0" rating="1.0" />
+      <Label alignment="CENTER" layoutX="289.0" layoutY="30.0" prefHeight="140.0" prefWidth="639.0" text="Votre avis nous interesse " textFill="#00ccff">
          <font>
-            <Font name="Agency FB Bold" size="46.0" />
+            <Font name="Agency FB Bold" size="68.0" />
          </font>
       </Label>
-      <TextArea fx:id="commentaire_user" layoutX="120.0" layoutY="269.0" prefHeight="219.0" prefWidth="531.0" />
-      <Label layoutX="18.0" layoutY="211.0" text="Ajouter Commentaire">
+      <TextArea fx:id="commentaire_user" layoutX="313.0" layoutY="348.0" prefHeight="219.0" prefWidth="531.0" />
+      <Label layoutX="211.0" layoutY="290.0" text="Ajouter Commentaire">
          <font>
             <Font name="Agency FB Bold" size="28.0" />
          </font>
       </Label>
-      <Button fx:id="bt_envoie" layoutX="314.0" layoutY="505.0" mnemonicParsing="false" onAction="#btn_envoie" prefHeight="31.0" prefWidth="126.0" stylesheets="@Button.css" text="Envoyer" />
-      <Label layoutX="18.0" layoutY="145.0" prefHeight="31.0" prefWidth="176.0" text="Donnez votre avis">
+      <Button fx:id="bt_envoie" layoutX="516.0" layoutY="641.0" mnemonicParsing="false" onAction="#btn_envoie" prefHeight="31.0" prefWidth="126.0" stylesheets="@Button.css" text="Envoyer" />
+      <Label layoutX="211.0" layoutY="224.0" prefHeight="31.0" prefWidth="176.0" text="Donnez votre avis">
          <font>
             <Font name="Agency FB" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="comm_note" alignment="CENTER" layoutX="486.0" layoutY="150.0" prefHeight="34.0" prefWidth="126.0">
+      <Label fx:id="comm_note" alignment="CENTER" layoutX="679.0" layoutY="229.0" prefHeight="34.0" prefWidth="126.0">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font></Label>
+      <ImageView fx:id="img_back" fitHeight="73.0" fitWidth="65.0" layoutX="35.0" layoutY="51.0" onMouseClicked="#Goback" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/go_back_80px.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

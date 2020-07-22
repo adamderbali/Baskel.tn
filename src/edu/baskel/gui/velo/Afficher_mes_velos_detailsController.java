@@ -160,7 +160,7 @@ public class Afficher_mes_velos_detailsController implements Initializable {
         lbldsc.setText(v.getDescription_v());
         
         System.out.println("image"+controller1.getClickedVelo().getImage_v());
-        Image im =new Image("file:\\C:\\xampp\\htdocs\\Baskel\\images\\"+controller1.getClickedVelo().getImage_v());
+        Image im =new Image("file:\\C:\\wamp\\www\\Baskel\\images\\"+controller1.getClickedVelo().getImage_v());
         Imgvelo.setImage(im);
     }
     /**
