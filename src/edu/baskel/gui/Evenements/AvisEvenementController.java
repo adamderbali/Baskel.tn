@@ -7,7 +7,6 @@ package edu.baskel.gui.Evenements;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
 import edu.baskel.entities.Membre;
 import edu.baskel.entities.Participation;
 import edu.baskel.services.ParticipationCrud;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +30,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import static javafx.scene.paint.Color.rgb;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
@@ -96,16 +93,13 @@ Membre ml = SessionInfo.getLoggedM();
         ParticipationCrud parList = new ParticipationCrud();
         String c = comobox.getValue();
         if(c==null){
-            validationSaisie.notifInfo("Erreur", "saisir le nom de l'evenement");
+            validationSaisie.notif("Erreur", "saisir le nom de l'evenement");
              comobox.setFocusColor(rgb(255, 0, 0));
                 comobox.setUnFocusColor(rgb(255, 0, 0));
                 comobox.setStyle("-fx-prompt-text-fill: #C4151C");
         }
         else{
-        System.out.println("++++++" + c);
         int d = parList.displayEventParId(c);
-        System.out.println("+++++++++++++++++++++++++++++++za3ma chnia id" + d);
-
         int r = (int) rate.getRating();
         ParticipationCrud pc = new ParticipationCrud();
         Participation p = new Participation (d,ml.getId_u(),(int)rate.getRating());
@@ -133,9 +127,7 @@ Membre ml = SessionInfo.getLoggedM();
                StatCRUD sc  = new StatCRUD();
         try {
             sc.Stat_methode("Avis Evenement", ml.getId_u());
-            /*  rate.ratingProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-            msg.setText("Rating : " + newValue);
-            });*/
+
         } catch (SQLException ex) {
             Logger.getLogger(AvisEvenementController.class.getName()).log(Level.SEVERE, null, ex);
         }

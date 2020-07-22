@@ -43,21 +43,11 @@ public class ParticipationCrud {
             String req = "INSERT INTO participation (id_u,id_e)"
                     + "VALUES (?,?)";
             PreparedStatement pst = cnx.prepareStatement(req);
-            /*    pst.setInt(1,p.getId_user());*/
             pst.setInt(1, p.getId_u());
             pst.setInt(2, p.getId_e());
             pst.executeUpdate();
             System.out.println("Participation added!"); 
-            
-          /*  String req1="UPDATE participation SET etat_p=? WHERE id_e=? AND id_u=?";
-            System.out.println("-----"+req1);
-            PreparedStatement pst1 = cnx.prepareStatement(req1);
-            pst1.setString(1,"Vous etes deja participant");
-            pst1.setInt(2,p.getId_e());
-            pst1.setInt(3,p.getId_u());
-            pst1.executeUpdate();
-            System.out.println("-----------okokok");*/
-           
+        
 
         } catch (SQLException ex) {
             System.err.println("Erreur d'insertion");
@@ -67,7 +57,6 @@ public class ParticipationCrud {
     }
 
       public void ajouterAvisEvent(Participation p) {
-        // Evenement e = new Evenement();
         try {
             String req = "UPDATE participation SET note_avis=?"
                     + " WHERE id_e=? AND id_u=?";
@@ -78,9 +67,6 @@ public class ParticipationCrud {
 
             pst1.executeUpdate();
             System.out.println("nbr participant modifié");
-       
-           
-
         } catch (SQLException ex) {
             System.err.println("Erreur d'insertion");
             ex.printStackTrace();
@@ -138,7 +124,6 @@ public class ParticipationCrud {
             pst1.setInt(1,id_e);
            
             pst1.executeUpdate();
-            System.out.println("Tous la participation de ce evenement sont annulées!");
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -152,12 +137,10 @@ public class ParticipationCrud {
         List<Participation> Listparticipation = new ArrayList<Participation>();
         try {
             String requete = "SELECT * FROM evenement e join participation p on e.id_e = p.id_e WHERE( STR_TO_DATE(e.date_e,'%d/%m/%Y'))< SYSDATE() AND p.id_u=" + id_u;
-            System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                System.out.println("1-------------" + rs.getString("nom_e"));
                 Evenement e = new Evenement();
                 e.setId_e(rs.getInt("id_e"));
                 e.setNom_e(rs.getString("nom_e"));
@@ -218,13 +201,11 @@ public class ParticipationCrud {
           
             ResultSet rs = pst.executeQuery();
             if (rs.next()){
-                System.out.println("mawjoud hal user");
                 return true;
                 
             }
             
             else {
-                System.out.println("hal user mch mawjoud");
                 return false;
             }
         } catch (SQLException ex) {
@@ -239,12 +220,10 @@ public class ParticipationCrud {
         List<Participation> Listparticipation = new ArrayList<Participation>();
         try {
             String requete = "SELECT * FROM evenement e join participation p on e.id_e = p.id_e WHERE p.id_e="+id_e;
-            System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                System.out.println("1-------------" + rs.getString("nom_e"));
                 Evenement e = new Evenement();
                 e.setId_e(rs.getInt("id_e"));
                 e.setNom_e(rs.getString("nom_e"));
@@ -290,7 +269,6 @@ public class ParticipationCrud {
                 m.setNom_u(rs.getString("nom_u"));
                 m.setPrenom_u(rs.getString("prenom_u"));
                 m.setEmail_u(rs.getString("email_u"));
-                System.out.println("1-------------" + rs.getString("nom_u"));
 
                 Evenement e = new Evenement();
                 e.setId_e(rs.getInt("id_e"));
@@ -298,17 +276,9 @@ public class ParticipationCrud {
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
 
-            /*    Participation p = new Participation();
-
-                p.setId_e(rs.getInt("id_e"));
-                p.setId_u(rs.getInt("id_u"));
-                p.setDate_insc(rs.getDate("date_insc"));
-                System.out.println("1-------------" + rs.getString("id_e"));
-                p.setMbre(m);*/
                 e.setMbre(m);
 
                 ListEventPaticipation.add(e);
-                System.out.println("-----------" + ListEventPaticipation);
 
             }
 
@@ -324,7 +294,6 @@ public class ParticipationCrud {
         try {
 
             String requete = "SELECT * FROM participation WHERE id_u=? AND id_e=?";
-            System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1, id_u);
             pst.setInt(2, id_e);
@@ -346,7 +315,6 @@ public class ParticipationCrud {
         try {
          
             String requete = "SELECT * FROM evenement WHERE nom_e=?";
-            System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1,nom_e);
             ResultSet rs = pst.executeQuery();
@@ -356,15 +324,10 @@ public class ParticipationCrud {
               Evenement e = new Evenement();
                      di = rs.getInt("id_e");
               
-                
-               // ListNomEvent.add(id);
-               
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
-      //  System.out.println("-------------"+ListNomEvent.toString());
         return di;
   
     }
@@ -377,7 +340,6 @@ public class ParticipationCrud {
         try {
            
             String requete = "SELECT * FROM Participation WHERE id_u=?";
-            System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1,i);
             ResultSet rs = pst.executeQuery();
@@ -389,12 +351,10 @@ public class ParticipationCrud {
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 ListNomEventPart.add(p);
-                //System.out.println("-------------"+ListNomEventPart.toString());
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        System.out.println("-------------"+ListNomEventPart.toString());
         return ListNomEventPart;
   
     }
@@ -416,9 +376,7 @@ public class ParticipationCrud {
                              
                              String em = res.getString("nom_e");
                            
-                             System.out.println("za3ma lehne"+em);
                              ListNomEvent.add(em);
-                             System.out.println("tawa chnia lahkeya"+ListNomEvent);
                          } 
                            
                              
@@ -427,7 +385,6 @@ public class ParticipationCrud {
                      }
                      
                 }
-                System.out.println("+++++++++++++++++++++++++++++++"+ListNomEvent);
         return ListNomEvent;
 
    }
@@ -440,7 +397,7 @@ public class ParticipationCrud {
             MembreCRUD mc = new MembreCRUD();
             SendMail Sm = new SendMail();
             String requete = "SELECT * FROM Participation WHERE id_e=?";
-            System.out.println("+++++++++++" + requete);
+       
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setInt(1,i);
             ResultSet rs = pst.executeQuery();
@@ -452,7 +409,6 @@ public class ParticipationCrud {
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 ListEmail.add(p);
-                System.out.println("-------------"+ListEmail.toString());
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -461,63 +417,23 @@ public class ParticipationCrud {
         return ListEmail;
   
     }
-    
-    
-    /*  public void eventAnnuler(int id_e) throws Exception {
-     
-        MembreCRUD mc = new MembreCRUD();
-        SendMail Sm = new SendMail();
-  
-        for (Participation p : displayEmailParticipant(id_e)) {
-            
-           
-                String sq1 = "SELECT * FROM membre WHERE id_u=?";
-                PreparedStatement prep = cnx.prepareStatement(sq1);
-                prep.setInt(1, p.getId_u());
-                ResultSet res = prep.executeQuery();
-
-                if (res.next()) {
-           
-                    String em = res.getString("email_u");
-                    Sm.envoiMail(em);
-                    System.out.println(em);
-                
-
-                } else {
-                    System.out.println("Aucun participant");
-                
-                }
-
-            } 
-   
-        }
-      */
-    
-    
-    
-    
-    
-    
-    
+ 
     /*nombre des participant par evenement*/
     public float pourcentageEvent(int id_e){
         float pe=(float) 0.0;
         
           try { 
             String req1 = "SELECT nbr_participant * 100 / nbr_max_e FROM evenement WHERE id_e=? AND nbr_max_e!=0";
-            System.out.println("+++++++++++" + req1);
             PreparedStatement pst = cnx.prepareStatement(req1);
             pst.setInt(1, id_e);
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
             pe = rs.getInt(1);
             
-            System.out.println("----------"+pe);
             } 
         } catch (SQLException ex) {
              ex.printStackTrace();
         }
-          System.out.println("-------------"+pe);
           return pe;
         
     }
@@ -527,19 +443,16 @@ public class ParticipationCrud {
               
         try { 
             String req1 = "SELECT count(*) AS nombreParticipant From participation WHERE id_e=?";
-            System.out.println("+++++++++++" + req1);
             PreparedStatement pst = cnx.prepareStatement(req1);
             pst.setInt(1, id_e);
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
             nb = rs.getInt(1);
             
-            System.out.println("----------"+nb);
             } 
         } catch (SQLException ex) {
              ex.printStackTrace();
         }
-          System.out.println("-------------"+nb);
           return nb;
           
       }
@@ -565,36 +478,21 @@ public class ParticipationCrud {
                 m.setPrenom_u(rs.getString("prenom_u"));
                 m.setEmail_u(rs.getString("email_u"));
                 m.setImage_u(rs.getString("image_u"));
-                 /*  if ((m.getImage_u().equals(""))&&(m.getSexe_u().equals("Femme"))) {
-                    m.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\femme.png")));
-                    m.getImage().setFitWidth(200);
-                    m.getImage().setFitHeight(110);
-                    
-                } else if ((m.getImage_u().equals(""))&&(m.getSexe_u().equals("Homme"))) {
-                    m.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\Homme.png")));
-                    m.getImage().setFitWidth(50);
-                    m.getImage().setFitHeight(60);
-                   
-                }*/
+            
                    
                     m.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + m.getImage_u())));
                     m.getImage().setFitWidth(200);
                     m.getImage().setFitHeight(110);
                 
-                System.out.println("1-------------" + rs.getString("nom_u"));
 
                
                   Participation p = new Participation();
                 p.setId_e(rs.getInt("id_e"));
                 p.setId_u(rs.getInt("id_u"));
                 p.setDate_insc(rs.getDate("date_insc"));
-                System.out.println("1-------------" + rs.getString("id_e"));
-
                 p.setMbre(m);
-              //  p.setEvent(e);
 
                 ListEventPaticipation.add(p);
-                System.out.println("-----------" + ListEventPaticipation);
 
             }
 
@@ -613,7 +511,6 @@ public class ParticipationCrud {
             EvenementCRUD ec = new EvenementCRUD();
            
             String requete = "SELECT * from participation p JOIN evenement e on p.id_e=e.id_e where date_e-(DATE_FORMAT(SYSDATE(), '%d/%m/%y')) =1";
-            System.out.println("+++++++++++" + requete);
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
            
@@ -625,11 +522,7 @@ public class ParticipationCrud {
                 e.setLieu_e(rs.getString("lieu_e"));
                 e.setDate_e(rs.getString("date_e"));
                 e.setDescription_e(rs.getString("description_e"));
-               // e.setImage(new ImageView(new Image("file:/C:\\wamp\\www\\Baskel\\images\\" + e.getImage_e())));
-               // e.getImage().setFitWidth(200);
-               // e.getImage().setFitHeight(110);
-                
-                
+           
                 Participation p = new Participation();
                 
                 p.setId_e(rs.getInt("id_e"));
@@ -638,7 +531,6 @@ public class ParticipationCrud {
                
                 
                 ListEmailEventDay.add(p);
-                System.out.println("-------------"+ListEmailEventDay.toString());
                 
             }
             

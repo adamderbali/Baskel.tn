@@ -26,7 +26,7 @@
       <JFXTextField fx:id="txtLieu" focusColor="#007782" layoutX="343.0" layoutY="125.0" onMouseClicked="#lieu" prefHeight="25.0" prefWidth="199.0" promptText="Saisie lieu de l'evenement" />
       <JFXTextArea fx:id="txtDescription" focusColor="#007782" layoutX="341.0" layoutY="165.0" onMouseClicked="#description" prefHeight="36.0" prefWidth="199.0" promptText="Description de  l'evenement" />
       <JFXDatePicker fx:id="txtDate" defaultColor="#007782" layoutX="341.0" layoutY="267.0" onMouseClicked="#date" prefHeight="25.0" prefWidth="240.0" promptText="Date de l'evenement" />
-      <JFXTextField fx:id="txtNombre" focusColor="#007782" layoutX="341.0" layoutY="223.0" prefHeight="25.0" prefWidth="199.0" promptText="Nombre des participants" />
+      <JFXTextField fx:id="txtNombre" focusColor="#007782" layoutX="341.0" layoutY="223.0" onMouseClicked="#nombre" prefHeight="25.0" prefWidth="199.0" promptText="Nombre des participants" />
       <TextField fx:id="pathE" layoutX="453.0" layoutY="320.0" prefHeight="25.0" prefWidth="118.0" promptText="Url" style="-fx-border-color: #COCOCO; -fx-background-radius: 100px; -fx-border-radius: 100px;" stylesheets="@AjoutEvenement.css" />
       <JFXButton fx:id="fileChoose" layoutX="470.0" layoutY="367.0" onAction="#telecharger" prefHeight="27.0" prefWidth="84.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px;" text="Parcourir" textFill="#007782" />
       <Text layoutX="342.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un evenement" wrappingWidth="221.818359375">
