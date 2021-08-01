@@ -120,13 +120,9 @@ public class AcceuilController implements Initializable {
 //afficher page profil a partir de l acceuil
     @FXML
     public void Profil(ActionEvent event) throws IOException {
-        if ((l.getType_u().equals("U")) || (l.getType_u().equals("A"))) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPage.fxml"));
             ANchorProfil.getChildren().setAll(pane);
-        } else if ((l.getType_u().equals("R"))) {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("ProfilPageReparateur.fxml"));
-            ANchorProfil.getChildren().setAll(pane);
-        }
+       
     }
 
     //se deconnecter a partir de l acceuil
@@ -207,7 +203,7 @@ public class AcceuilController implements Initializable {
 
     @FXML
     void RedirectionVelos(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../velo/Afficher_Tout_Velo.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Afficher_Tout_Velo.fxml"));
         ANchorProfil.getChildren().setAll(pane);
 
     }

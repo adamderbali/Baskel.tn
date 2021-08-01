@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.ModifSuppVeloController">
    <children>
        <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.24" pickOnBounds="true">
          <image>

@@ -90,7 +90,7 @@ public class GmapViewController implements Initializable, MapComponentInitialize
                 .zoomControl(false)
                 .zoom(12);
 
-        Gmap = mapView.createMap(mapOptions, false);
+       // Gmap = mapView.createMap(mapOptions, false);
 
        
         Gmap.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
@@ -100,7 +100,7 @@ public class GmapViewController implements Initializable, MapComponentInitialize
             latitude.setText(String.valueOf(ll.getLatitude()));
             System.out.println("++" + latitude.getText());
             System.out.println("++" + longitude.getText());
-            Gmap.clearMarkers();
+           // Gmap.clearMarkers();
             LatLong joeSmithLocation = new LatLong(ll.getLatitude(), ll.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
             markerOptions1.position(joeSmithLocation);

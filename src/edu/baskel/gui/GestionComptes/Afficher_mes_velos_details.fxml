@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -12,14 +18,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="detailWin" prefHeight="885.0" prefWidth="1235.0" stylesheets="@AffichageList.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.baskel.gui.GestionComptes.Afficher_mes_velos_detailsController">
    <children>
        <ImageView fitHeight="887.0" fitWidth="1294.0" opacity="0.24" pickOnBounds="true">
          <image>
             <Image url="@../../../../images/image.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="Imgvelo" fitHeight="293.0" fitWidth="277.0" layoutX="65.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" />
+      <ImageView fx:id="Imgvelo" fitHeight="293.0" fitWidth="277.0" layoutX="65.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="86.0" layoutY="121.0" text="Numéro série :">
          <font>
             <Font size="24.0" />
@@ -44,7 +50,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="872.0" layoutY="342.0" text="TND">
+      <Label layoutX="856.0" layoutY="342.0" text="TND">
          <font>
             <Font size="24.0" />
          </font>
@@ -74,22 +80,22 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblmarq" alignment="CENTER" layoutX="670.0" layoutY="178.0" textFill="#007782">
+      <Label fx:id="lblmarq" alignment="CENTER" layoutX="683.0" layoutY="178.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblmodl" alignment="CENTER" layoutX="663.0" layoutY="259.0" textFill="#007782">
+      <Label fx:id="lblmodl" alignment="CENTER" layoutX="683.0" layoutY="259.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblprx" alignment="CENTER" layoutX="670.0" layoutY="342.0" textFill="#007782">
+      <Label fx:id="lblprx" alignment="CENTER" layoutX="689.0" layoutY="342.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbltyp" alignment="CENTER" layoutX="677.0" layoutY="409.0" textFill="#007782">
+      <Label fx:id="lbltyp" alignment="CENTER" layoutX="684.0" layoutY="409.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
@@ -99,30 +105,24 @@
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblstt" alignment="CENTER" layoutX="678.0" layoutY="538.0" textFill="#007782">
+      <Label fx:id="lblstt" alignment="CENTER" layoutX="680.0" layoutY="546.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbletat" alignment="CENTER" layoutX="671.0" layoutY="601.0" textFill="#007782">
+      <Label fx:id="lbletat" alignment="CENTER" layoutX="689.0" layoutY="611.0" textFill="#007782">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <TextArea fx:id="lbldsc" editable="false" focusTraversable="false" layoutX="671.0" layoutY="681.0" prefHeight="177.0" prefWidth="513.0" />
-     <Button fx:id="bachbutt" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="&lt; Retour" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
-       
-      <Button fx:id="resbut" layoutX="157.0" layoutY="769.0" mnemonicParsing="false" onAction="#reserverVélo" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Réserver vélo" textFill="#007782" visible="false">
+      <TextArea fx:id="lbldsc" editable="false" focusTraversable="false" layoutX="689.0" layoutY="678.0" prefHeight="177.0" prefWidth="513.0" />
+       <Button fx:id="bachbutt" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="&lt; Retour" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS" />
+      <Button fx:id="gererbut" layoutX="117.0" layoutY="794.0" mnemonicParsing="false" onAction="#gererVelo" prefHeight="24.0" prefWidth="152.0" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Gérer vélo" textAlignment="CENTER" textFill="#007782" textOverrun="CENTER_ELLIPSIS">
          <font>
-            <Font size="23.0" />
+            <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="achatbut" layoutX="162.0" layoutY="769.0" mnemonicParsing="false" onAction="#acheterVelo" style="-fx-background-radius: 100px; -fx-border-color: #007782; -fx-border-radius: 100px; -fx-background-color: transparent;" text="Acheter vélo" textFill="#007782" visible="false">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Button>
-       <Text layoutX="416.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Détails vélos" wrappingWidth="355.779296875">
+       <Text layoutX="417.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Détails vélos" wrappingWidth="375.779296875">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>

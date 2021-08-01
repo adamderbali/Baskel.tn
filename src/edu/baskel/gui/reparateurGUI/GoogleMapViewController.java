@@ -66,7 +66,7 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
                 .zoomControl(false)
                 .zoom(12);
 
-        Gmap = mapView.createMap(mapOptions, false);
+       // Gmap = mapView.createMap(mapOptions, false);
 
         //Add markers to the map
         /* InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
@@ -80,7 +80,7 @@ public class GoogleMapViewController implements Initializable, MapComponentIniti
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
           
-            Gmap.clearMarkers();
+           // Gmap.clearMarkers();
             LatLong joeSmithLocation = new LatLong(ll.getLatitude(), ll.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
             markerOptions1.position(joeSmithLocation);
